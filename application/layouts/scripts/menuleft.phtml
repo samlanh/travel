@@ -1,0 +1,47 @@
+	<?php
+	$request=Zend_Controller_Front::getInstance()->getRequest();
+	$action = $request->getActionName();
+	$baseurl  = $this->baseUrl();
+	
+	/*--------------------URLs link display--------------------------*/
+		  $tr=Application_Form_FrmLanguages::getCurrentlanguage();
+		  $session_user=new Zend_Session_Namespace('authstu');
+		  $arr_module = $session_user->arr_acl;
+// 		  print_r($arr_module);exit();
+		  $menu = array();
+		  $module = '';
+		  $controller=array();
+		  $newarray=array();
+		  if(!empty($arr_module)){
+		  	foreach ($arr_module as $key => $rs){
+		  		
+		  		$lblcontroller = $rs['label'];
+		  		if($module!=$rs['module']){
+		  			$newarray= array($rs['controller']=>'<li><a href="">'.$tr->translate(($lblcontroller)).'</a></li>');
+		  			$menu[$rs['module']]= $newarray;
+		  			$old_module=$rs['module'];
+		  		}else{
+		  			$newarray= array_merge($newarray,array($rs['controller']=>'<li><a href="">'.$tr->translate(($lblcontroller)).'</a></li>'));
+		  			$menu[$rs['module']] = $newarray;
+		  		}
+		  		$module=$rs['module'];
+		  	}
+		  }
+		  $arr_param_menu = $menu;
+
+	?>
+	<div id="header-left">
+		<ul>
+			<?php 
+				if($request->getModuleName()!='report'){
+					if($request->getModuleName()!='default' AND $action!='changepassword' ){
+						$dc=new Application_Model_Decorator();					
+						$class="current-left";					
+						$menu=@$dc->getMenuLeft($arr_param_menu[$request->getModuleName()],$request->getControllerName(),$request->getModuleName());
+						//print_r($arr_param_menu[$request->getModuleName()]);
+						if($menu) echo $menu;	
+					 }		
+				}				
+			?>
+		</ul>																
+	</div>
