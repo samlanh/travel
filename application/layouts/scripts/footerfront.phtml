@@ -1,0 +1,257 @@
+<?php 
+$request=Zend_Controller_Front::getInstance()->getRequest();
+$action=$request->getActionName();
+$controller=$request->getControllerName();
+$module=$request->getModuleName();
+
+	$session_lang=new Zend_Session_Namespace('lang');
+	$currentlang = $session_lang->lang_id;
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$db = new Application_Model_DbTable_DbGlobalSelect();
+	$row = $db->getWebsiteSetting('logo');
+	$email = $db->getWebsiteSetting('email');
+	$tel = $db->getWebsiteSetting('tel');
+	$address = $db->getWebsiteSetting('address');
+	$facebook = $db->getWebsiteSetting('facebook');
+	$youtube = $db->getWebsiteSetting('youtube');
+	$twitter = $db->getWebsiteSetting('twitter');
+	$googleplus = $db->getWebsiteSetting('googleplus');
+	
+	$vdgb = new Application_Model_DbTable_DbVdGlobal();
+	$alllang =  $vdgb->getLaguage();
+	
+?>
+        <!--// Footer \\-->
+        <footer id="automobile-footer" class="automobile-footer-one">
+            
+            <!--// Footer Slider \\-->
+            <div class="automobile-footer-slider">
+
+                <div class="automobile-footer-slider-layer">
+                    <figure>
+                        <img src="<?php echo $this->baseUrl();?>/templates/extra-images/footer-slider-1.jpg" alt="">
+                        <figcaption>
+                            <div class="automobile-footer-slider-inner">
+                                <h5>2013 Honda Civic Highlights</h5>
+                                <a href="listing-detail.html" class="automobile-color">View This Car</a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="automobile-footer-slider-layer">
+                    <figure>
+                        <img src="<?php echo $this->baseUrl();?>/templates/extra-images/footer-slider-2.jpg" alt="">
+                        <figcaption>
+                            <div class="automobile-footer-slider-inner">
+                                <h5>2013 Honda Civic Highlights</h5>
+                                <a href="listing-detail.html" class="automobile-color">View This Car</a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="automobile-footer-slider-layer">
+                    <figure>
+                        <img src="<?php echo $this->baseUrl();?>/templates/extra-images/footer-slider-3.jpg" alt="">
+                        <figcaption>
+                            <div class="automobile-footer-slider-inner">
+                                <h5>2013 Honda Civic Highlights</h5>
+                                <a href="listing-detail.html" class="automobile-color">View This Car</a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="automobile-footer-slider-layer">
+                    <figure>
+                        <img src="<?php echo $this->baseUrl();?>/templates/extra-images/footer-slider-4.jpg" alt="">
+                        <figcaption>
+                            <div class="automobile-footer-slider-inner">
+                                <h5>2013 Honda Civic Highlights</h5>
+                                <a href="listing-detail.html" class="automobile-color">View This Car</a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="automobile-footer-slider-layer">
+                    <figure>
+                        <img src="<?php echo $this->baseUrl();?>/templates/extra-images/footer-slider-5.jpg" alt="">
+                        <figcaption>
+                            <div class="automobile-footer-slider-inner">
+                                <h5>2013 Honda Civic Highlights</h5>
+                                <a href="listing-detail.html" class="automobile-color">View This Car</a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="automobile-footer-slider-layer">
+                    <figure>
+                        <img src="<?php echo $this->baseUrl();?>/templates/extra-images/footer-slider-6.jpg" alt="">
+                        <figcaption>
+                            <div class="automobile-footer-slider-inner">
+                                <h5>2013 Honda Civic Highlights</h5>
+                                <a href="listing-detail.html" class="automobile-color">View This Car</a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="automobile-footer-slider-layer">
+                    <figure>
+                        <img src="<?php echo $this->baseUrl();?>/templates/extra-images/footer-slider-7.jpg" alt="">
+                        <figcaption>
+                            <div class="automobile-footer-slider-inner">
+                                <h5>2013 Honda Civic Highlights</h5>
+                                <a href="listing-detail.html" class="automobile-color">View This Car</a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+
+            </div>
+            <!--// Footer Slider \\-->
+
+            <!--// Footer Widget \\-->
+            <div class="automobile-footer-widget">
+                <span class="footer-widget-transparent"></span>
+                <div class="container">
+                    <div class="row">
+
+                        <!--// Widget Recent Listing \\-->
+                        <aside class="col-md-4 widget widget_recent_listing">
+                            <h2 class="automobile-footer-title">Recent Listings</h2>
+                            <ul>
+                                <li>
+                                    <figure><a href="listing-detail.html"><img src="<?php echo $this->baseUrl();?>/templates/extra-images/widget-recent-listing-1.jpg" alt=""></a>
+                                        <figcaption>
+                                            <h6><a href="listing-detail.html">2.0L I4, Automatic, Gasoline, FWD 69,175 Miles</a></h6>
+                                            <span class="automobile-color">$34.920</span>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                                <li>
+                                    <figure><a href="listing-detail.html"><img src="<?php echo $this->baseUrl();?>/templates/extra-images/widget-recent-listing-2.jpg" alt=""></a>
+                                        <figcaption>
+                                            <h6><a href="listing-detail.html">3.5L V6, Cvt, 18 city / 23 hwy, Gasoline, FWD, New Tires</a></h6>
+                                            <span class="automobile-color">$34.920</span>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                                <li>
+                                    <figure><a href="listing-detail.html"><img src="<?php echo $this->baseUrl();?>/templates/extra-images/widget-recent-listing-3.jpg" alt=""></a>
+                                        <figcaption>
+                                            <h6><a href="listing-detail.html">3.5L V6, Cvt, 18 city / 23 hwy, Gasoline, FWD, New Tires</a></h6>
+                                            <span class="automobile-color">$34.920</span>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                            </ul>
+                        </aside>
+                        <!--// Widget Recent Listing \\-->
+                        <!--// Widget Financing Calculator \\-->
+                        <aside class="col-md-4 widget widget_financing_calculator">
+                            <h2 class="automobile-footer-title">financing calculator</h2>
+                            <form>
+                                <ul>
+                                    <li> <span>Cost of Vehicle ($):</span> </li>
+                                    <li> <input type="text" value="10000" onblur="if(this.value == '') { this.value ='10000'; }" onfocus="if(this.value =='10000') { this.value = ''; }"> </li>
+                                    <li> <span>Down Payment ($):</span> </li>
+                                    <li> <input type="text" value="10000" onblur="if(this.value == '') { this.value ='10000'; }" onfocus="if(this.value =='10000') { this.value = ''; }"> </li>
+                                    <li> <span>Annual Interest Rate (%):</span> </li>
+                                    <li> <input type="text" value="7" onblur="if(this.value == '') { this.value ='7'; }" onfocus="if(this.value =='7') { this.value = ''; }"> </li>
+                                    <li> <span>Term of Loan In Years:</span> </li>
+                                    <li> <input type="text" value="5" onblur="if(this.value == '') { this.value ='5'; }" onfocus="if(this.value =='5') { this.value = ''; }"> </li>
+                                    <li> <span>Frequency of Payments:</span> </li>
+                                    <li>
+                                        <div class="automobile-select"><select> <option>Bi-Weekly</option> <option>Bi-Weekly</option> </select> </div>
+                                    </li>
+                                    <li> <label> <i class="icon-calculator2"></i> <input type="submit" value="calculate" class="automobile-bgcolor"> </label> </li>
+                                </ul>
+                            </form>
+                        </aside>
+                        <!--// Widget Financing Calculator \\-->
+                        <!--// Widget Contact Form \\-->
+                        <aside class="col-md-4 widget widget_contact_form">
+                            <h2 class="automobile-footer-title">contact us direclty</h2>
+                            <form>
+                                <p>Do you have questions? Don’t hesitate to let us know about everything that concerns you:</p>
+                                <input type="text" value="Your E-mail" onblur="if(this.value == '') { this.value ='Your E-mail'; }" onfocus="if(this.value =='Your E-mail') { this.value = ''; }">
+                                <textarea placeholder="Your Message"></textarea>
+                                <input type="submit" value="contact us" class="automobile-bgcolor">
+                            </form>
+                        </aside>
+                        <!--// Widget Contact Form \\-->
+
+                        <aside class="col-md-12"> <div class="automobile-copyright"> <p>Copyright 2017. All Rights Reserved By Webmarce.</p> </div> </aside>
+
+                    </div>
+                </div>
+            </div>
+            <!--// Footer Widget \\-->
+
+
+        </footer>
+        <!--// Footer \\-->
+
+	<div class="clearfix"></div>
+    </div>
+    <!--// Main Wrapper \\-->
+
+    <!-- Modal -->
+    <div class="modal fade automobile-account-modal" id="accountmodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            
+            <div class="modal-section">
+                <h5 class="automobile-color">Login to Your Account</h5>
+                <form>
+                    <input type="text" value="Your Username" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }">
+                    <input type="password" value="Password" onblur="if(this.value == '') { this.value ='Password'; }" onfocus="if(this.value =='Password') { this.value = ''; }">
+                    <a href="#" class="automobile-colorhover">Forgot Password?</a>
+                    <input type="submit" value="Login" class="automobile-bgcolor">
+                </form>
+                <div class="clearfix"></div>
+                <h5 class="automobile-color">Or Try Our Socials</h5>
+                <ul class="automobile-social-modal">
+                    <li><a href="https://www.facebook.com/" data-original-title="Facebook"><i class="icon-social23"></i> Facebook</a></li>
+                    <li><a href="https://twitter.com/login?lang=en" data-original-title="Twitter"><i class="icon-social43"></i> twitter</a></li>
+                    <li><a href="https://plus.google.com/" data-original-title="GooglePlus"><i class="icon-social12"></i> Google+</a></li>
+                </ul>
+                <p>Not a member yet? <a href="#" class="automobile-color">Sign-up Now</a></p>
+            </div>
+            <span class="automobile-ortag automobile-bgcolor">Or</span>
+            <div class="automobile-account-register">
+                <div class="modal-section">
+                    <h5 class="automobile-color">Create Your Account Today</h5>
+                    <form>
+                        <input type="text" value="Your Username" onblur="if(this.value == '') { this.value ='Your Username'; }" onfocus="if(this.value =='Your Username') { this.value = ''; }">
+                        <input type="text" value="Your E-mail" onblur="if(this.value == '') { this.value ='Your E-mail'; }" onfocus="if(this.value =='Your E-mail') { this.value = ''; }">
+                        <input type="text" value="Password" onblur="if(this.value == '') { this.value ='Password'; }" onfocus="if(this.value =='Password') { this.value = ''; }">
+                        <input type="text" value="Confirm Password" onblur="if(this.value == '') { this.value ='Confirm Password'; }" onfocus="if(this.value =='Confirm Password') { this.value = ''; }">
+                        <input type="submit" value="Register" class="automobile-bgcolor">
+                    </form>
+                    <div class="clearfix"></div>
+                    <h5 class="automobile-color">Or Signup With Your Socials:</h5>
+                    <ul class="automobile-social-modal">
+                        <li><a href="https://www.facebook.com/" data-original-title="Facebook"><i class="icon-social23"></i> Facebook</a></li>
+                        <li><a href="https://twitter.com/login?lang=en" data-original-title="Twitter"><i class="icon-social43"></i> twitter</a></li>
+                        <li><a href="https://plus.google.com/" data-original-title="GooglePlus"><i class="icon-social12"></i> Google+</a></li>
+                    </ul>
+                    <p>Already a member? <a href="#" class="automobile-color">Sign-in Here</a></p>
+                </div>
+            </div>
+        <div class="clearfix"></div>
+        </div>
+    </div>
+
+	<!-- jQuery (necessary for JavaScript plugins) -->
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/templates/script/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/templates/script/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/templates/script/slick.slider.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/templates/script/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/templates/script/fancybox.pack.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/templates/script/isotope.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/templates/script/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/templates/build/mediaelement-and-player.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/templates/script/functions.js"></script>
+
+  </body>
+</html>

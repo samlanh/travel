@@ -1,0 +1,267 @@
+<?php 
+$request=Zend_Controller_Front::getInstance()->getRequest();
+$action=$request->getActionName();
+$controller=$request->getControllerName();
+$module=$request->getModuleName();
+
+	$session_lang=new Zend_Session_Namespace('lang');
+	//if(empty($lang_id)){
+		//$session_lang->lang_id=2;
+	//}
+	$currentlang = $session_lang->lang_id;
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$db = new Application_Model_DbTable_DbGlobalSelect();
+	$slide = $db->getWebsiteSetting("slideshow");
+	$row = $db->getWebsiteSetting('logo');
+	$headerbg = $db->getWebsiteSetting('headebackground');
+	$slides = explode(",", $slide['value']);
+	$menu_items = $db->getMenuItems();
+	
+	$vdgb = new Application_Model_DbTable_DbVdGlobal();
+	$alllang =  $vdgb->getLaguage();
+	
+	$client_session=new Zend_Session_Namespace('client');
+	$cus_id =$client_session->client_id;
+	$user_name = $client_session->client_name;
+	
+	$para=Zend_Controller_Front::getInstance()->getRequest()->getParam("param");
+	$param = explode('.',$para);
+	
+	$indexparam=Zend_Controller_Front::getInstance()->getRequest()->getParams();
+	//echo $db->getCurrentLang();
+	$searchtxt = empty($indexparam['textsearch'])?'':$indexparam['textsearch'];
+	$facebook = $db->getWebsiteSetting('facebook');
+	$youtube = $db->getWebsiteSetting('youtube');
+	$twitter = $db->getWebsiteSetting('twitter');
+	$googleplus = $db->getWebsiteSetting('googleplus');
+	$tel = $db->getWebsiteSetting('tel');
+	$email = $db->getWebsiteSetting('email');
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Cam App Car Rental Home Page</title>
+
+    <!-- Css Files -->
+    <link href="<?php echo $this->baseUrl();?>/templates/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl();?>/templates/css/font-awesome.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl();?>/templates/css/flaticon.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl();?>/templates/css/slick-slider.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl();?>/templates/css/fancybox.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl();?>/templates/build/mediaelementplayer.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl();?>/templates/style.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl();?>/templates/css/color.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl();?>/templates/css/datepicker.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl();?>/templates/css/responsive.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	
+    <!--// Main Wrapper \\-->
+    <div class="automobile-main-wrapper">
+        <!--// Header \\-->
+        <header id="automobile-header" class="automobile-header-one">
+            <div class="container">
+                <div class="row">
+                    <aside class="col-md-2"> <a href="<?php echo $this->baseUrl();?>" class="automobile-logo"><img src="<?php echo $this->baseUrl();?>/templates/images/logo.png" alt=""></a> </aside>
+                    <aside class="col-md-10">
+                        <!--// Navigation \\-->
+                        <nav class="navbar navbar-default">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class="active"><a href="<?php echo $this->baseUrl();?>"><?php echo $tr->translate("HOME");?></a></li>
+                                    <li><a href="#">Blogs</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Blog Classic</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="blog-classic.html">Blog Classic WLS</a></li>
+                                                    <li><a href="blog-classic-wrs.html">Blog Classic WRS</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Blog Medium</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="blog-medium.html">Blog Medium WLS</a></li>
+                                                    <li><a href="blog-medium-wrs.html">Blog Medium WRS</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Blog Detail</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="blog-detail.html">Blog Detail WLS</a></li>
+                                                    <li><a href="blog-detail-wrs.html">Blog Detail WRS</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="automobile-megamenu-li"><a href="#">Pages</a>
+                                        <ul class="automobile-megamenu">
+                                            <li class="row">
+                                                <div class="col-md-2">
+                                                    <h4>Link 1</h4>
+                                                    <ul class="automobile-megalist">
+                                                        <li><a href="about-us.html">About Us</a></li>
+                                                        <li><a href="account-favorite-list.html">Account Favorite List</a></li>
+                                                        <li><a href="account-package.html">Account Package</a></li>
+                                                        <li><a href="account-payment.html">Account Payment</a></li>
+                                                        <li><a href="account-profile.html">Account Profile</a></li>
+                                                        <li><a href="account-vehicle.html">Account Vehicle</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h4>Link 2</h4>
+                                                    <ul class="automobile-megalist">
+                                                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                                                        <li><a href="compare.html">Compare</a></li>
+                                                        <li><a href="services.html">Services</a></li>
+                                                        <li><a href="vehicle.html">Vehicle</a></li>
+                                                        <li><a href="search-result-wrs.html">Search Result WRS</a></li>
+                                                        <li><a href="search-result.html">Search Result</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h4>Link 3</h4>
+                                                    <ul class="automobile-megalist">
+                                                        <li><a href="typography.html">Typography</a></li>
+                                                        <li><a href="faq.html">Our FAQ</a></li>
+                                                        <li><a href="priceplan.html">Price Plan</a></li>
+                                                        <li><a href="404.html">404 Error Page</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <a href="#" class="automobile-thumbnail">
+                                                        <img src="<?php echo $this->baseUrl();?>/templates/extra-images/megamenu-frame.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Listing</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Listing Dealer</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="listing-dealer.html">Listing Dealer WLS</a></li>
+                                                    <li><a href="listing-dealer-wrs.html">Listing Dealer WRS</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Listing Grid</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="listing-grid.html">Listing Grid WLS</a></li>
+                                                    <li><a href="listing-grid-wrs.html">Listing Grid WRS</a></li>
+                                                    <li><a href="listing-grid-wos.html">Listing Grid WOS</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Listing List</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="listing-list.html">Listing List WLS</a></li>
+                                                    <li><a href="listing-list-wrs.html">Listing List WRS</a></li>
+                                                    <li><a href="listing-list-wos.html">Listing List WOS</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Listing Detail</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="listing-detail.html">Listing Detail WLS</a></li>
+                                                    <li><a href="listing-detail-wrs.html">Listing Detail WRS</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Our Shop</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Shop Grid</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="shop-grid.html">Shop Grid WLS</a></li>
+                                                    <li><a href="shop-grid-wrs.html">Shop Grid WRS</a></li>
+                                                    <li><a href="shop-grid-wos.html">Shop Grid WOS</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Shop List</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="shop-list.html">Shop List WLS</a></li>
+                                                    <li><a href="shop-list-wrs.html">Shop List WRS</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Shop Detail</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="shop-detail.html">Shop Detail WLS</a></li>
+                                                    <li><a href="shop-detail-wrs.html">Shop Detail WRS</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Contact Us</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="contact-us.html">Contact Us WRS</a></li>
+                                            <li><a href="contact-us-wls.html">Contact Us WLS</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <!--// Navigation \\-->
+                        <div class="automobile-right-section">
+                            <ul class="automobile-user-section">
+                                <li><a href="#" data-toggle="modal" data-target="#accountmodal"><i class="automobile-color icon-avatar3"></i> Account</a></li>
+                                <li><a href="#" class="automobile-shoppingcart-btn"><i class="automobile-color icon-interface5"></i> Cart</a>
+                                    <div class="automobile-cartbox"> No products in the cart. </div>
+                                </li>
+                            </ul>
+                            <a href="vehicle.html" class="automobile-sell-btn automobile-bgcolor">Sell My Car</a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </header>
+        <!--// Header \\-->
+        <script>		
+			var url_changelang = '<?php echo $this->url(array('module'=>'default','controller'=>'index','action'=>'changelange'));?> ';
+			function changeLange(lang){
+				jQuery.ajax({
+					url: url_changelang,
+					type: "post",
+					data:{'lange':lang},
+					success: function(data){
+						location.reload();
+					},
+					error:function(err){
+						
+					}
+				});
+			}
+			<?php if ($currentlang==1){?>
+				var monthNames = [
+				                  "Jan", "Feb", "Mar",
+				                  "Apr", "May", "Jun", "Jul",
+				                  "Aug", "September", "Oct",
+				                  "Nov", "Dec"
+				                ];
+		      <?php }else{?>
+		     var monthNames = [
+			                  "មករា", "កុម្ភៈ", "មិនា",
+			                  "មេសា", "ឧសភា", "មិថុនា", "កក្កដា",
+			                  "សីហា", "កញ្ញា", "តុលា",
+			                  "វិច្ឆិការ", "ធ្នូ"
+			                ];
+		      <?php }?>
+		      var baseurl = '<?php echo $this->baseUrl();?>';
+		      var currentlanguage='<?php echo $currentlang;?>';
+	</script>
+        

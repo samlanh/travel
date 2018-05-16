@@ -1,47 +1,263 @@
 	<?php
+	$tr=Application_Form_FrmLanguages::getCurrentlanguage();
 	$request=Zend_Controller_Front::getInstance()->getRequest();
 	$action = $request->getActionName();
+	$moduless = $request->getModuleName();
+	$controllersss=$request->getControllerName();
 	$baseurl  = $this->baseUrl();
 	
-	/*--------------------URLs link display--------------------------*/
-		  $tr=Application_Form_FrmLanguages::getCurrentlanguage();
-		  $session_user=new Zend_Session_Namespace('authstu');
-		  $arr_module = $session_user->arr_acl;
-// 		  print_r($arr_module);exit();
-		  $menu = array();
-		  $module = '';
-		  $controller=array();
-		  $newarray=array();
-		  if(!empty($arr_module)){
-		  	foreach ($arr_module as $key => $rs){
-		  		
-		  		$lblcontroller = $rs['label'];
-		  		if($module!=$rs['module']){
-		  			$newarray= array($rs['controller']=>'<li><a href="">'.$tr->translate(($lblcontroller)).'</a></li>');
-		  			$menu[$rs['module']]= $newarray;
-		  			$old_module=$rs['module'];
-		  		}else{
-		  			$newarray= array_merge($newarray,array($rs['controller']=>'<li><a href="">'.$tr->translate(($lblcontroller)).'</a></li>'));
-		  			$menu[$rs['module']] = $newarray;
-		  		}
-		  		$module=$rs['module'];
-		  	}
-		  }
-		  $arr_param_menu = $menu;
-
+	$dbuser = new Application_Model_DbTable_DbUsers();
+	$glob = new Application_Model_DbTable_DbGlobal();
+	$alert = $glob->getAlertBookingBefor2hour(12);
+	$countAlert = count($alert);
+	
+	$session_user=new Zend_Session_Namespace('authcar');
+	$arr_module = $session_user->arr_acl;
+	
+	
+	
+	$username = $session_user->first_name;
+	$userinfo="";
+	if (!empty($session_user->user_id)){
+	$userinfo = $dbuser->getUserInfomation($session_user->user_id);
+	}
+	$menu = array();
+	$module = '';
+	$controller=array();
+	$newarray=array();
+	if(!empty($arr_module)){
+		foreach ($arr_module as $key => $rs){
+			
+			$lblcontroller = $rs['controller'];
+			if($rs['module']=='report' AND $rs['controller']!='index'){
+				$lblcontroller='REPORT';
+				continue;
+			}
+			if($rs['controller']=='index' AND $rs['module']=='group' ){
+				$lblcontroller='CLIENT_INFO';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='booking' ){
+				$lblcontroller='carrentalbooking';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='location' ){
+				$lblcontroller='Province';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='other' ){
+				$lblcontroller='province';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='vehicle' ){
+				$lblcontroller='VEHICLE';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='stuff' ){
+				$lblcontroller='product';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='driverguide' ){
+				$lblcontroller='DRIVER';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='product' ){
+				$lblcontroller='product';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='agreement' ){
+				$lblcontroller='VEHICLERENTALAGREEMENT';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='agreement' ){
+				$lblcontroller='VEHICLERENTALAGREEMENT';
+			}
+			if($rs['controller']=='stuffrental' AND $rs['module']=='agreement' ){
+				$lblcontroller='STUFFRENTAL_AGREEMENT';
+			}
+			if($rs['controller']=='driver' AND $rs['module']=='agreement' ){
+				$lblcontroller='DRIVER_GUIDE_AGREEMENT';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='report' ){
+				$lblcontroller='REPORT_LIST';
+			}
+			if($rs['controller']=='tax' AND $rs['module']=='other' ){
+				$lblcontroller='TAX_SETTING';
+			}
+			if($rs['controller']=='day' AND $rs['module']=='other' ){
+				$lblcontroller='RANK_DAY';
+			}
+			
+			if($rs['controller']=='index' AND $rs['module']=='agency' ){
+				$lblcontroller='AGENCY';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='bookings' ){
+				$lblcontroller='CARBOOKING';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='expense' ){
+				$lblcontroller='EXPENSE';
+			}
+			if($rs['controller']=='index' AND $rs['module']=='income' ){
+				$lblcontroller='INCOME';
+			}
+			if($module!=$rs['module']){
+				$newarray= array($rs['controller']=>$tr->translate(strtoupper($lblcontroller)));
+				$menu[$rs['module']]= $newarray;
+				$old_module=$rs['module'];
+			}else{
+				$newarray= array_merge($newarray,array($rs['controller']=>$tr->translate(strtoupper($lblcontroller))));
+			    $menu[$rs['module']] = $newarray;
+			}
+			$module=$rs['module'];
+		}
+	}
+	$arr_param_menu = $menu;
+	$dc=new Application_Model_Decorator();
 	?>
-	<div id="header-left">
-		<ul>
-			<?php 
-				if($request->getModuleName()!='report'){
-					if($request->getModuleName()!='default' AND $action!='changepassword' ){
-						$dc=new Application_Model_Decorator();					
-						$class="current-left";					
-						$menu=@$dc->getMenuLeft($arr_param_menu[$request->getModuleName()],$request->getControllerName(),$request->getModuleName());
-						//print_r($arr_param_menu[$request->getModuleName()]);
-						if($menu) echo $menu;	
-					 }		
-				}				
-			?>
-		</ul>																
-	</div>
+	<?php 
+	$array_icon = array(
+			'home'=>'<i class="fa  fa-home" aria-hidden="true"></i>',
+			'other'=>'<i class="fa  fa-info-circle" aria-hidden="true"></i>',
+			'booking'=>'<i class="fa fa-book" aria-hidden="true"></i>',
+			'bookings'=>'<i class="fa fa-book" aria-hidden="true"></i>',
+			'agreement'=>'<i class="fa fa-file-text" aria-hidden="true"></i>',
+			'group'=>'<i class="fa  fa-users" aria-hidden="true"></i>',
+			'vehicle'=>'<i class="fa fa-automobile" aria-hidden="true"></i>',
+			'driverguide'=>'<i class="fa  fa-bus" aria-hidden="true"></i>',
+			'stuff'=>'<i class="fa  fa-cubes" aria-hidden="true"></i>',
+			'report'=>'<i class="fa  fa-file-text" aria-hidden="true"></i>',
+			'rsvacl'=>'<i class="fa  fa-cog" aria-hidden="true"></i>',
+			'setting'=>'<i class="fa  fa-cogs" aria-hidden="true"></i>',
+			'menu-manager'=>'<i class="fa fa-list" aria-hidden="true"></i>',
+			'product'=>'<i class="fa fa-cubes" aria-hidden="true"></i>',
+			'location'=>'<i class="fa fa-crosshairs" aria-hidden="true"></i>',
+			'field-manager'=>'<i class="fa fa-window-restore" aria-hidden="true"></i>',
+			'agency'=>'<i class="fa fa-users" aria-hidden="true"></i>',
+			'expense'=>'<i class="fa fa-pencil-square" aria-hidden="true"></i>',
+			'income'=>'<i class="fa fa-pencil-square" aria-hidden="true"></i>',
+	);
+	
+	$arr_module = $session_user->arr_module;
+	$arr_acl = $session_user->arr_acl;
+	?>
+	<style>
+		span.message span.bookstatus {
+		    color: #ff1605;
+		    font-weight: 600;
+		}
+	</style>
+		<!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                
+                <ul class="nav side-menu">
+                	<?php if(!empty($arr_module)){ foreach ($arr_module as $rs){
+                		$url =$this->url(array('module'=>$rs,'controller'=>'index','action'=>'index'), null, true);
+                		if ($rs=="group"){
+                			$title=$tr->translate("CUSTOMER");
+                		}else{
+                			$title=$tr->translate(strtoupper($rs));
+                		}
+                	?>
+                	<li><a><?php echo $array_icon[$rs];?> <?php echo $title;?> <?php if (!empty($arr_param_menu[$rs])){?><span class="fa fa-chevron-down"></span><?php }?></a>
+                		<?php if (!empty($arr_param_menu[$rs])){?>
+	                    <ul class="nav child_menu">
+	                       <?php  foreach ($arr_param_menu[$rs] as $key => $sub){
+	                       	
+	                        
+	                       	
+	                       	$urlsub = $this->url(array('module'=>$rs,'controller'=>$key,'action'=>'index'), null, true);
+	                       	?>
+	                      <li><a href="<?php echo $urlsub;?>"><?php echo $sub;?></a></li>
+	                       <?php }?>
+	                    </ul>
+	                    <?php }?>
+                 	 </li>
+                	<?php }
+                	}?>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" onClick="toggleFullScreen(document.body)" title="<?php echo $tr->translate("FullScreen");?>">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="<?php echo $tr->translate("SIGN_OUT");?>" href="<?php echo $this->url(array('module'=>'','controller'=>'index','action'=>'logout','value'=>'1')); ?>">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+              	<li>
+              	<?php if($action=='index' AND $moduless!='report' AND $moduless!='home'){?>
+              		<a href="<?php echo $this->url(array('module'=>$moduless,'controller'=>$controllersss,'action'=>'add'),null,true); ?>"><?php echo $tr->translate('ADD');?> <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+              	<?php }elseif($action=='add' OR $action=='edit' OR $action=='bookview'){?>
+              		<a href="<?php echo $this->url(array('module'=>$moduless,'controller'=>$controllersss,'action'=>'index'),null,true); ?>"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> <?php echo $tr->translate('GO_BACK');?></a>
+              	<?php }else {?>
+              
+              	<?php }?>
+              	</li>
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <?php if (!empty($userinfo['profile_img'])){$imagepro="/images/profile/".$userinfo['profile_img'];}else{$imagepro="/images/user.png";}?>
+                    <img src="<?php echo $this->baseUrl().$imagepro;?>" alt="">
+                    
+                    <?php echo $username;?>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                 	<li><a href="<?php echo $this->url(array('module'=>'rsvacl','controller'=>'user','action'=>'profile')); ?>"> <i class="fa fa-user pull-right"></i> <?php echo $tr->translate("Profile");?></a></li>
+                    <li><a href="<?php echo $this->url(array('module'=>'rsvacl','controller'=>'user','action'=>'changepassword')); ?>"> <i class="fa fa-key pull-right"></i> <?php echo $tr->translate("Change Password");?></a></li>
+                    <li><a href="<?php echo $this->url(array('module'=>'','controller'=>'index','action'=>'logout','value'=>'1')); ?>"><i class="fa fa-sign-out pull-right"></i> <?php echo $tr->translate("SIGN_OUT");?></a></li>
+                  </ul>
+                </li>
+				<li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span id="countAlertTop" class="badge bg-green"><?php echo $countAlert;?></span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  	<?php if (!empty($alert)) foreach ($alert as $key => $sr){ 
+                  		if(!empty($sr['photo'])){
+                  			$photo=$this->baseUrl()."/images/profile/".$sr['photo'];
+                  		}else{
+                  			$photo =$this->baseUrl()."/images/user.png";
+                  		}
+                  		?>
+                    <li>
+                      <a href="<?php echo $this->baseUrl()."/bookings/index/bookview/id/".$sr['id'];?>">
+                        <span class="image"><img src="<?php echo $photo;?>" alt="Profile Image" /></span>
+                        <span>
+                          <span><?php echo $sr['cus_name'];?></span>
+                          <span class="time"><?php echo $sr['delivey_time'];?></span>
+                        </span>
+                        <span class="message">
+                         <?php echo $sr['from_location']." to ".$sr['to_location'];?>
+                         <span class="bookstatus"><?php echo $sr['book_status'];?></span>
+                        </span>
+                      </a>
+                    </li>
+                    <?php if ($key==9){break;} }?>
+                    <?php if ($countAlert>10){?>
+                    <li>
+                      <div class="text-center">
+                        <a href="<?php echo $this->baseUrl()."/report/bookingpayment/rpt-customer-alert-time";?>">
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                    <?php }?>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
