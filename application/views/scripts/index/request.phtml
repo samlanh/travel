@@ -1,0 +1,191 @@
+<?php 
+$dbselect = new Application_Model_DbTable_DbGlobalSelect();
+$facebook = $dbselect->getWebsiteSetting("facebook");
+$twitter = $dbselect->getWebsiteSetting("twitter");
+$instagram = $dbselect->getWebsiteSetting("instagram");
+$youtube = $dbselect->getWebsiteSetting("youtube");
+
+$scholarship = $this->scholarship;
+$profile = $this->baseUrl()."/images/no-profile.png";
+if (!empty($scholarship['photo'])){
+	$profile = $this->baseUrl()."/images/all/".$scholarship['photo'];
+}
+$gender = "";
+if ($scholarship['gender']=="m"){
+	$gender = "ប្រុស";
+}else if ($scholarship['gender']=="f"){
+	$gender = "ស្រី";
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ពាក្យស្នើសុំ អាហារូបករណ៍ - វិទ្យាស្ថានបច្ចេកទេស ឧស្សាហកម្ម</title>
+	<link rel="វិទ្យាស្ថានបច្ចេកទេស ឧស្សាហកម្ម icon" href="<?php echo $this->baseUrl();?>/images/icon.ico" type="image/x-icon"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="<?php echo $this->baseUrl()."/templates/front/"?>assets/css/imports.css" media="screen">
+	<link rel="stylesheet" href="<?php echo $this->baseUrl()."/templates/front/"?>assets/css/bootstrap.min.css" media="screen">
+	<link rel="stylesheet" href="<?php echo $this->baseUrl()."/templates/front/"?>assets/chosen/chosen.css">
+	
+	<link rel="stylesheet" href="<?php echo $this->baseUrl()."/templates/front/"?>assets/kendo/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="<?php echo $this->baseUrl()."/templates/front/"?>assets/kendo/kendo.material.min.css" />
+    <link rel="stylesheet" href="<?php echo $this->baseUrl()."/templates/front/"?>assets/kendo/kendo.material.mobile.min.css" />
+    
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body class="contact">
+
+	<div id="header" class="header-nav-top">
+
+		<!-- main navigation -->
+		<div class="header-inner menu-container">
+			<div class="navbar-wrapper">
+				<nav class="navbar navbar-default mheader" id="nav-main">
+					<div class="container-fluid">
+
+						<div class="navbar-header">
+								<!---
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								-->
+								<a href="<?php echo $this->baseUrl();?>" class=""><img src="<?php echo $this->baseUrl()."/images/headerlogo.jpg"?>" alt="វិទ្យាស្ថានបច្ចេកទេស ឧស្សាហកម្ម"></a>
+							</div>
+
+							<div class="collapse navbar-collapse" id="navbar-main">
+								
+							</div>
+					</div>
+				</nav>  <!-- end default nav -->
+			</div>  <!-- end navbar-wrapper -->
+		</div>  <!-- end header-inner -->
+	</div> <!-- end header -->
+
+
+	<!-- Main Content
+	================================================== -->
+	<div class="main-content container">
+		<div class="row">
+			<div class="page-title">
+				<header class="page-header">
+					<h1 class="page-title">ព័ត៌មានសិស្ស</h1>
+				</header>
+			</div>
+			<div class="col-md-2">
+			</div>
+			<div class="studentinfo col-md-8">
+				<div class="blogImages">
+					<img class="profile" src="<?php echo $profile;?>" />
+				</div>
+				<div class="content info">
+					<ul class="infoList">
+						<li>
+							<div class="col-md-3"><span class="title">នាមត្រកូល-នាមខ្លួន</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo $scholarship['fullName'];?></span></div>
+						</li>
+						<li>
+							<div class="col-md-3"><span class="title">ជាអក្សរឡាតាំង</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo $scholarship['latinName'];?></span></div>
+						</li>
+						<li>
+							<div class="col-md-3"><span class="title">ភេទ</span></div>
+							<div class="col-md-9"><span>:&nbsp;<?php echo $gender;?></span></div>
+						</li>
+						
+						<li>
+							<div class="col-md-3"><span class="title">ថ្ងៃ-ខែ-ឆ្នាំកំណើត</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo date("d/m/Y",strtotime($scholarship['dob']));?></span></div>
+						</li>
+						<li>
+							<div class="col-md-3"><span class="title">ទីកន្លែងកំណើត</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo empty($scholarship['pobVillage'])?"":$scholarship['pobVillage']; echo empty($scholarship['pobCommune'])?"":" , ".$scholarship['pobCommune']; echo empty($scholarship['pobDistrict'])?"":" , ".$scholarship['pobDistrict']; echo empty($scholarship['pobProvinceTitle'])?"":" , ".$scholarship['pobProvinceTitle'];//$scholarship['pob'];?></span></div>
+						</li>
+						<li>
+							<div class="col-md-3"><span class="title">សញ្ជាតិ</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo $scholarship['nationality'];?></span></div>
+						</li>
+						<li>
+							<div class="col-md-3"><span class="title">កម្រិតវប្បធម៌</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo $scholarship['education'];?></span></div>
+						</li>
+						<li>
+							<div class="col-md-12"><i class="fa fa-hand-o-right" aria-hidden="true"></i> <span class="title">ស្នើសុំចូលរៀនកម្មវិធីសិក្សាដូចខាងក្រោម</span></div>
+						</li>
+						<li>
+							<div class="col-md-3"><span class="title">ដេប៉ាតឺម៉ង</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo $scholarship['facultyTitle'];?></span></div>
+						</li>
+						<li>
+							<div class="col-md-3"><span class="title">កម្រិតសិក្សា</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo $scholarship['degreeTitle'];?></span></div>
+						</li>
+						<li>
+							<div class="col-md-3"><span class="title">ជំនាញ/វីជ្ជាជីវៈ</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo $scholarship['skillTitle'];?></span></div>
+						</li>
+						<li>
+							<div class="col-md-3"><span class="title">ថ្ងៃទទួលសំណើរ</span></div>
+							<div class="col-md-9">:&nbsp;<span><?php echo date("d M Y",strtotime($scholarship['approvedDate']));?></span></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div> <!-- end container -->
+	</div> <!-- end main-content -->
+
+
+	<!-- Footer
+	================================================== -->
+	<footer id="footer" class="wrapper with-overlap">
+
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<ul class="footer-social icon-blocks">
+						<li><a href="<?php echo $facebook['value'];?>" target="_blank"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="<?php echo $twitter['value'];?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="<?php echo $instagram['value'];?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
+						<li><a href="<?php echo $youtube['value'];?>" target="_blank"><i class="fa fa-youtube"></i></a></li>
+					</ul>
+
+					<div class="copyright">
+						<p>&copy; វិទ្យាស្ថានបច្ចេកទេស ឧស្សាហកម្ម 2018.<br>ភ្នំពេញ, ព្រះរាជាណាចក្រកម្ពុជា</p>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</footer>
+	<div class="overlay">
+		<div class="overlay-load">
+			<div class="overlay-msg">
+		    </div>
+		</div>
+	</div>
+	<script src="<?php echo $this->baseUrl()."/templates/front/"?>assets/js/jquery-1.11.3.min.js"></script>
+	<script src="<?php echo $this->baseUrl()."/templates/front/"?>assets/js/bootstrap.min.js"></script>
+	<script src="<?php echo $this->baseUrl()."/templates/front/"?>assets/chosen/chosen.jquery.js" type="text/javascript"></script>
+	<script src="<?php echo $this->baseUrl()."/templates/front/"?>assets/chosen/init.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<?php echo $this->baseUrl()."/templates/front/"?>assets/js/custom.js"></script>
+	
+	
+	
+
+    
+</body>
+</html>

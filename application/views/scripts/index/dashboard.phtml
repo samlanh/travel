@@ -1,497 +1,627 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<!-- BEGIN HEAD -->
-<head>
-   <meta charset="utf-8" />
-   <title>Metro view</title>
-   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-   <meta content="" name="description" />
-   <meta content="" name="author" />
-   <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-   <link href="assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
-   <link href="assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
-   <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-   <link href="csss/style.css" rel="stylesheet" />
-   <link href="csss/style-responsive.css" rel="stylesheet" />
-   <link href="csss/style-default.css" rel="stylesheet" id="style_color" />
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-</head>
-<!-- END HEAD -->
-<!-- BEGIN BODY -->
-<body class="fixed-top">
-   <!-- BEGIN HEADER -->
-   <div id="header" class="navbar navbar-inverse navbar-fixed-top">
-       <!-- BEGIN TOP NAVIGATION BAR -->
-       <div class="navbar-inner">
-           <div class="container-fluid">
-               <!--BEGIN SIDEBAR TOGGLE-->
-               <div class="sidebar-toggle-box hidden-phone">
-                   <div class="icon-reorder"></div>
-               </div>
-               <!--END SIDEBAR TOGGLE-->
-               <!-- BEGIN LOGO -->
-               <a class="brand" href="index.html">
-                   <img src="img/logo.png" alt="Metro Lab" />
-               </a>
-               <!-- END LOGO -->
-               <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-               <a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
-                   <span class="icon-bar"></span>
-                   <span class="icon-bar"></span>
-                   <span class="icon-bar"></span>
-                   <span class="arrow"></span>
-               </a>
-               <!-- END RESPONSIVE MENU TOGGLER -->
-               <div id="top_menu" class="nav notify-row">
-                   <!-- BEGIN NOTIFICATION -->
-                   <ul class="nav top-menu">
-                       <!-- BEGIN SETTINGS -->
-                       <li class="dropdown">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                               <i class="icon-tasks"></i>
-                               <span class="badge badge-important">6</span>
-                           </a>
-                           <ul class="dropdown-menu extended tasks-bar">
-                               <li>
-                                   <p>You have 6 pending tasks</p>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <div class="task-info">
-                                         <div class="desc">Dashboard v1.3</div>
-                                         <div class="percent">44%</div>
-                                       </div>
-                                       <div class="progress progress-striped active no-margin-bot">
-                                           <div class="bar" style="width: 44%;"></div>
-                                       </div>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <div class="task-info">
-                                           <div class="desc">Database Update</div>
-                                           <div class="percent">65%</div>
-                                       </div>
-                                       <div class="progress progress-striped progress-success active no-margin-bot">
-                                           <div class="bar" style="width: 65%;"></div>
-                                       </div>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <div class="task-info">
-                                           <div class="desc">Iphone Development</div>
-                                           <div class="percent">87%</div>
-                                       </div>
-                                       <div class="progress progress-striped progress-info active no-margin-bot">
-                                           <div class="bar" style="width: 87%;"></div>
-                                       </div>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <div class="task-info">
-                                           <div class="desc">Mobile App</div>
-                                           <div class="percent">33%</div>
-                                       </div>
-                                       <div class="progress progress-striped progress-warning active no-margin-bot">
-                                           <div class="bar" style="width: 33%;"></div>
-                                       </div>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <div class="task-info">
-                                           <div class="desc">Dashboard v1.3</div>
-                                           <div class="percent">90%</div>
-                                       </div>
-                                       <div class="progress progress-striped progress-danger active no-margin-bot">
-                                           <div class="bar" style="width: 90%;"></div>
-                                       </div>
-                                   </a>
-                               </li>
-                               <li class="external">
-                                   <a href="#">See All Tasks</a>
-                               </li>
-                           </ul>
-                       </li>
-                       <!-- END SETTINGS -->
-                       <!-- BEGIN INBOX DROPDOWN -->
-                       <li class="dropdown" id="header_inbox_bar">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                               <i class="icon-envelope-alt"></i>
-                               <span class="badge badge-important">5</span>
-                           </a>
-                           <ul class="dropdown-menu extended inbox">
-                               <li>
-                                   <p>You have 5 new messages</p>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <span class="photo"><img src="img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Jonathan Smith</span>
-									<span class="time">Just now</span>
-									</span>
-									<span class="message">
-									    Hello, this is an example msg.
-									</span>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <span class="photo"><img src="img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Jhon Doe</span>
-									<span class="time">10 mins</span>
-									</span>
-									<span class="message">
-									 Hi, Jhon Doe Bhai how are you ?
-									</span>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <span class="photo"><img src="img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Jason Stathum</span>
-									<span class="time">3 hrs</span>
-									</span>
-									<span class="message">
-									    This is awesome dashboard.
-									</span>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <span class="photo"><img src="img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Jondi Rose</span>
-									<span class="time">Just now</span>
-									</span>
-									<span class="message">
-									    Hello, this is metrolab
-									</span>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">See all messages</a>
-                               </li>
-                           </ul>
-                       </li>
-                       <!-- END INBOX DROPDOWN -->
-                       <!-- BEGIN NOTIFICATION DROPDOWN -->
-                       <li class="dropdown" id="header_notification_bar">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <link rel="shortcut icon" href="<?php echo $this->baseUrl()."/templates/";?>assets/images/favicon.ico">
 
-                               <i class="icon-bell-alt"></i>
-                               <span class="badge badge-warning">7</span>
-                           </a>
-                           <ul class="dropdown-menu extended notification">
-                               <li>
-                                   <p>You have 7 new notifications</p>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <span class="label label-important"><i class="icon-bolt"></i></span>
-                                       Server #3 overloaded.
-                                       <span class="small italic">34 mins</span>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <span class="label label-warning"><i class="icon-bell"></i></span>
-                                       Server #10 not respoding.
-                                       <span class="small italic">1 Hours</span>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <span class="label label-important"><i class="icon-bolt"></i></span>
-                                       Database overloaded 24%.
-                                       <span class="small italic">4 hrs</span>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <span class="label label-success"><i class="icon-plus"></i></span>
-                                       New user registered.
-                                       <span class="small italic">Just now</span>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <span class="label label-info"><i class="icon-bullhorn"></i></span>
-                                       Application error.
-                                       <span class="small italic">10 mins</span>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">See all notifications</a>
-                               </li>
-                           </ul>
-                       </li>
-                       <!-- END NOTIFICATION DROPDOWN -->
+        <!--Morris Chart CSS -->
+		<link rel="stylesheet" href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/morris/morris.css">
+        <!-- Bootstrap core CSS -->
+        <link href="<?php echo $this->baseUrl()."/templates/";?>assets/css/bootstrap.min.css" rel="stylesheet">
+        <!-- MetisMenu CSS -->
+        <link href="<?php echo $this->baseUrl()."/templates/";?>assets/css/metisMenu.min.css" rel="stylesheet">
+        <!-- Icons CSS -->
+        <link href="<?php echo $this->baseUrl()."/templates/";?>assets/css/icons.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="<?php echo $this->baseUrl()."/templates/";?>assets/css/style.css" rel="stylesheet">
 
-                   </ul>
-               </div>
-               <!-- END  NOTIFICATION -->
-               <div class="top-nav ">
-                   <ul class="nav pull-right top-menu" >
-                       <!-- BEGIN SUPPORT -->
-                       <li class="dropdown mtop5">
+    </head>
 
-                           <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Chat">
-                               <i class="icon-comments-alt"></i>
-                           </a>
-                       </li>
-                       <li class="dropdown mtop5">
-                           <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Help">
-                               <i class="icon-headphones"></i>
-                           </a>
-                       </li>
-                       <!-- END SUPPORT -->
-                       <!-- BEGIN USER LOGIN DROPDOWN -->
-                       <li class="dropdown">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                               <img src="img/avatar1_small.jpg" alt="">
-                               <span class="username">Jhon Doe</span>
-                               <b class="caret"></b>
-                           </a>
-                           <ul class="dropdown-menu extended logout">
-                               <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
-                               <li><a href="#"><i class="icon-cog"></i> My Settings</a></li>
-                               <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
-                           </ul>
-                       </li>
-                       <!-- END USER LOGIN DROPDOWN -->
-                   </ul>
-                   <!-- END TOP NAVIGATION MENU -->
-               </div>
-           </div>
-       </div>
-       <!-- END TOP NAVIGATION BAR -->
-   </div>
-   <!-- END HEADER -->
-   <!-- BEGIN CONTAINER -->
-   <div id="container" class="row-fluid">
-     
-      <!-- BEGIN PAGE -->  
-      <div id="main-content">
-         <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid">
-            <!-- BEGIN PAGE HEADER-->   
-            <div class="row-fluid">
-               <div class="span12">
-                   <!-- BEGIN THEME CUSTOMIZER-->
-                   <div id="theme-change" class="hidden-phone">
-                       <i class="icon-cogs"></i>
-                        <span class="settings">
-                            <span class="text">Theme Color:</span>
-                            <span class="colors">
-                                <span class="color-default" data-style="default"></span>
-                                <span class="color-green" data-style="green"></span>
-                                <span class="color-gray" data-style="gray"></span>
-                                <span class="color-purple" data-style="purple"></span>
-                                <span class="color-red" data-style="red"></span>
-                            </span>
-                        </span>
-                   </div>
-                   <!-- END THEME CUSTOMIZER-->
-                  <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                   <h3 class="page-title">
-                     Metro View
-                   </h3>
-                   <ul class="breadcrumb">
-                       <li>
-                           <a href="#">Home</a>
-                           <span class="divider">/</span>
-                       </li>
-                       <li>
-                           <a href="#">UI Elements</a>
-                           <span class="divider">/</span>
-                       </li>
-                       <li class="active">
-                           Metro View
-                       </li>
-                       <li class="pull-right search-wrap">
-                           <form action="http://thevectorlab.net/metrolab/search_result.html" class="hidden-phone">
-                               <div class="input-append search-input-area">
-                                   <input class="" id="appendedInputButton" type="text">
-                                   <button class="btn" type="button"><i class="icon-search"></i> </button>
-                               </div>
-                           </form>
-                       </li>
-                   </ul>
-                   <!-- END PAGE TITLE & BREADCRUMB-->
-               </div>
-            </div>
-            <!-- END PAGE HEADER-->
-            <!-- BEGIN PAGE CONTENT-->
-            <div class="row-fluid">
-                <!--BEGIN METRO STATES-->
-                <div class="metro-nav metro-fix-view">
-                    <div class="metro-nav-block nav-block-green long">
-                        <a href="#" class="text-center" data-original-title="">
-                            <span class="value">
-                                <i class="icon-user"></i>
-                                329
-                            </span>
-                            <div class="status">New User</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-orange">
-                        <a href="#" data-original-title="">
-                            <i class="icon-envelope"></i>
-                            <div class="info">321</div>
-                            <div class="status">Mail</div>
-                        </a>
-                    </div>
 
-                   <div class="metro-nav-block nav-block-green">
-                       <a href="#" data-original-title="">
-                           <i class="icon-comments-alt"></i>
-                           <div class="info">49</div>
-                           <div class="status">Comments</div>
-                       </a>
-                   </div>
-                    <div class="metro-nav-block nav-block-blue double">
-                        <a href="#" data-original-title="">
-                            <i class="icon-tasks"></i>
-                            <div class="info">$37624</div>
-                            <div class="status">Stock</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-yellow">
-                        <a href="#" data-original-title="">
-                            <i class="icon-tags"></i>
-                            <div class="info">+970</div>
-                            <div class="status">Sales</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-grey">
-                        <a href="#" class="text-center" data-original-title="">
-                            <i class="icon-phone"></i>
-                            <div class="status">Phone</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-red double">
-                        <a href="#" data-original-title="">
-                            <i class="icon-bar-chart"></i>
-                            <div class="info">+288</div>
-                            <div class="status">Update</div>
-                        </a>
-                    </div>
+    <body>
 
-                    <div class="metro-nav-block nav-block-orange">
-                        <a href="#" data-original-title="" class="text-center">
-                            <i class="icon-star-empty"></i>
-                            <div class="status">Rattings</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-purple double">
-                        <a href="#" data-original-title="">
-                            <i class="icon-eye-open"></i>
-                            <div class="info">+8914</div>
-                            <div class="status">Unique Visitor</div>
-                        </a>
-                    </div>
+        <div id="page-wrapper">
 
-                    <div class="metro-nav-block nav-block-red">
-                        <a href="#" data-original-title="">
-                            <i class="icon-shopping-cart"></i>
-                            <div class="info">29</div>
-                            <div class="status">New Order</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-grey">
-                        <a href="#" data-original-title="">
-                            <i class="icon-remove-sign"></i>
-                            <div class="info">34 </div>
-                            <div class="status">Cancelled</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-purple">
-                        <a href="#" data-original-title="" class="text-center">
-                            <i class="icon-cogs"></i>
-                            <div class="status">Settings</div>
-                        </a>
-                    </div>
+            <!-- Top Bar Start -->
+            <div class="topbar">
 
-                    <div class="metro-nav-block nav-block-blue">
-                        <a href="#" data-original-title="">
-                            <i class="icon-shopping-cart"></i>
-                            <div class="info">29</div>
-                            <div class="status">New Order</div>
-                        </a>
-                    </div>
-
-                    <div class="metro-nav-block nav-block-green double">
-                        <a href="#" data-original-title="">
-                            <i class="icon-external-link"></i>
-                            <div class="info">$53412</div>
-                            <div class="status">Total Profit</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-grey">
-                        <a href="#" class="text-center" data-original-title="">
-                            <i class="icon-dashboard"></i>
-                            <div class="status">Dashboard</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-orange">
-                        <a href="#" class="text-center" data-original-title="">
-                            <i class="icon-signout"></i>
-                            <div class="status">Sign Out</div>
-                        </a>
-                    </div>
-                    <div class="metro-nav-block nav-block-yellow">
-                        <a href="#" class="text-center" data-original-title="">
-                            <i class=" icon-puzzle-piece"></i>
-                            <div class="status">Warning</div>
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="">
+                        <a href="index.html" class="logo">
+                            <img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/logo.png" alt="logo" class="logo-lg" />
+                            <img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/logo_sm.png" alt="logo" class="logo-sm hidden" />
                         </a>
                     </div>
                 </div>
 
-                <div class="space10"></div>
-                <!--END METRO STATES-->
+                <!-- Top navbar -->
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container">
+                        <div class="">
 
-             
-               
+                            <!-- Mobile menu button -->
+                            <div class="pull-left">
+                                <button type="button" class="button-menu-mobile visible-xs visible-sm">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                                <span class="clearfix"></span>
+                            </div>
+
+                            <!-- Top nav left menu -->
+                            <ul class="nav navbar-nav hidden-sm hidden-xs top-navbar-items">
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+
+                            <!-- Top nav Right menu -->
+                            <ul class="nav navbar-nav navbar-right top-navbar-items-right pull-right">
+                                <li class="hidden-xs">
+                                    <form role="search" class="navbar-left app-search pull-left">
+                                         <input type="text" placeholder="Search..." class="form-control">
+                                         <a href=""><i class="fa fa-search"></i></a>
+                                    </form>
+                                </li>
+                                <li class="dropdown top-menu-item-xs">
+                                    <a href="#" data-target="#" class="dropdown-toggle menu-right-item" data-toggle="dropdown" aria-expanded="true">
+                                        <i class="mdi mdi-bell"></i> <span class="label label-danger">3</span>
+                                    </a>
+                                    <ul class="dropdown-menu p-0 dropdown-menu-lg">
+                                        <!--<li class="notifi-title"><span class="label label-default pull-right">New 3</span>Notification</li>-->
+                                        <li class="list-group notification-list" style="height: 267px;">
+                                           <div class="slimscroll">
+                                               <!-- list item-->
+                                               <a href="javascript:void(0);" class="list-group-item">
+                                                  <div class="media">
+                                                     <div class="media-left p-r-10">
+                                                        <em class="fa fa-diamond bg-primary"></em>
+                                                     </div>
+                                                     <div class="media-body">
+                                                        <h5 class="media-heading">A new order has been placed A new order has been placed</h5>
+                                                        <p class="m-0">
+                                                            <small>There are new settings available</small>
+                                                        </p>
+                                                     </div>
+                                                  </div>
+                                               </a>
+
+                                               <!-- list item-->
+                                               <a href="javascript:void(0);" class="list-group-item">
+                                                  <div class="media">
+                                                     <div class="media-left p-r-10">
+                                                        <em class="fa fa-cog bg-warning"></em>
+                                                     </div>
+                                                     <div class="media-body">
+                                                        <h5 class="media-heading">New settings</h5>
+                                                        <p class="m-0">
+                                                            <small>There are new settings available</small>
+                                                        </p>
+                                                     </div>
+                                                  </div>
+                                               </a>
+
+                                               <!-- list item-->
+                                               <a href="javascript:void(0);" class="list-group-item">
+                                                  <div class="media">
+                                                     <div class="media-left p-r-10">
+                                                        <em class="fa fa-bell-o bg-custom"></em>
+                                                     </div>
+                                                     <div class="media-body">
+                                                        <h5 class="media-heading">Updates</h5>
+                                                        <p class="m-0">
+                                                            <small>There are <span class="text-primary font-600">2</span> new updates available</small>
+                                                        </p>
+                                                     </div>
+                                                  </div>
+                                               </a>
+
+                                               <!-- list item-->
+                                               <a href="javascript:void(0);" class="list-group-item">
+                                                  <div class="media">
+                                                     <div class="media-left p-r-10">
+                                                        <em class="fa fa-user-plus bg-danger"></em>
+                                                     </div>
+                                                     <div class="media-body">
+                                                        <h5 class="media-heading">New user registered</h5>
+                                                        <p class="m-0">
+                                                            <small>You have 10 unread messages</small>
+                                                        </p>
+                                                     </div>
+                                                  </div>
+                                               </a>
+
+                                                <!-- list item-->
+                                               <a href="javascript:void(0);" class="list-group-item">
+                                                  <div class="media">
+                                                     <div class="media-left p-r-10">
+                                                        <em class="fa fa-diamond bg-primary"></em>
+                                                     </div>
+                                                     <div class="media-body">
+                                                        <h5 class="media-heading">A new order has been placed A new order has been placed</h5>
+                                                        <p class="m-0">
+                                                            <small>There are new settings available</small>
+                                                        </p>
+                                                     </div>
+                                                  </div>
+                                               </a>
+
+                                               <!-- list item-->
+                                               <a href="javascript:void(0);" class="list-group-item">
+                                                  <div class="media">
+                                                     <div class="media-left p-r-10">
+                                                        <em class="fa fa-cog bg-warning"></em>
+                                                     </div>
+                                                     <div class="media-body">
+                                                        <h5 class="media-heading">New settings</h5>
+                                                        <p class="m-0">
+                                                            <small>There are new settings available</small>
+                                                        </p>
+                                                     </div>
+                                                  </div>
+                                               </a>
+                                           </div>
+                                        </li>
+                                        <!--<li>-->
+                                            <!--<a href="javascript:void(0);" class="list-group-item text-right">-->
+                                                <!--<small class="font-600">See all notifications</small>-->
+                                            <!--</a>-->
+                                        <!--</li>-->
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown top-menu-item-xs">
+                                    <a href="" class="dropdown-toggle menu-right-item profile" data-toggle="dropdown" aria-expanded="true"><img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="javascript:void(0)"><i class="ti-user m-r-10"></i> Profile</a></li>
+                                        <li><a href="javascript:void(0)"><i class="ti-settings m-r-10"></i> Settings</a></li>
+                                        <li><a href="javascript:void(0)"><i class="ti-lock m-r-10"></i> Lock screen</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="javascript:void(0)"><i class="ti-power-off m-r-10"></i> Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> <!-- end container -->
+                </div> <!-- end navbar -->
+            </div>
+            <!-- Top Bar End -->
+
+
+            <!-- Page content start -->
+            <div class="page-contentbar">
+
+                <!--left navigation start-->
+                <aside class="sidebar-navigation">
+                    <div class="scrollbar-wrapper">
+                        <div>
+                            <button type="button" class="button-menu-mobile btn-mobile-view visible-xs visible-sm">
+                                <i class="mdi mdi-close"></i>
+                            </button>
+                            <!-- User Detail box -->
+                            <div class="user-details">
+                                <div class="pull-left">
+                                    <img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
+                                </div>
+                                <div class="user-info">
+                                    <a href="#">Stanley Jones</a>
+                                    <p class="text-muted m-0">Administrator</p>
+                                </div>
+                            </div>
+                            <!--- End User Detail box -->
+
+                            <!-- Left Menu Start -->
+                            <ul class="metisMenu nav" id="side-menu">
+                                <li><a href="index.html"><i class="ti-home"></i> Dashboard </a></li>
+
+                                <li><a href="ui-elements.html"><span class="label label-custom pull-right">11</span> <i class="ti-paint-bucket"></i> UI Elements </a></li>
+
+                                <li>
+                                    <a href="javascript: void(0);" aria-expanded="true"><i class="ti-light-bulb"></i> Components <span class="fa arrow"></span></a>
+                                    <ul class="nav-second-level nav" aria-expanded="true">
+                                        <li><a href="components-range-slider.html">Range Slider</a></li>
+                                        <li><a href="components-alerts.html">Alerts</a></li>
+                                        <li><a href="components-icons.html">Icons</a></li>
+                                        <li><a href="components-widgets.html">Widgets</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><a href="typography.html"><i class="ti-spray"></i> Typography </a></li>
+
+                                <li>
+                                    <a href="javascript: void(0);" aria-expanded="true"><i class="ti-pencil-alt"></i> Forms <span class="fa arrow"></span></a>
+                                    <ul class="nav-second-level nav" aria-expanded="true">
+                                        <li><a href="forms-general.html">General Elements</a></li>
+                                        <li><a href="forms-advanced.html">Advanced Form</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript: void(0);" aria-expanded="true"><i class="ti-menu-alt"></i> Tables <span class="fa arrow"></span></a>
+                                    <ul class="nav-second-level nav" aria-expanded="true">
+                                        <li><a href="tables-basic.html">Basic tables</a></li>
+                                        <li><a href="tables-advanced.html">Advanced tables</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><a href="charts.html"><span class="label label-custom pull-right">5</span> <i class="ti-pie-chart"></i> Charts </a></li>
+
+                                <li><a href="maps.html"><i class="ti-location-pin"></i> Maps </a></li>
+
+                                <li>
+                                    <a href="javascript: void(0);" aria-expanded="true"><i class="ti-files"></i> Pages <span class="fa arrow"></span></a>
+                                    <ul class="nav-second-level nav" aria-expanded="true">
+                                        <li><a href="pages-login.html">Login</a></li>
+                                        <li><a href="pages-register.html">Register</a></li>
+                                        <li><a href="pages-forget-password.html">Forget Password</a></li>
+                                        <li><a href="pages-lock-screen.html">Lock-screen</a></li>
+                                        <li><a href="pages-blank.html">Blank page</a></li>
+                                        <li><a href="pages-404.html">Error 404</a></li>
+                                        <li><a href="pages-confirm-mail.html">Confirm Mail</a></li>
+                                        <li><a href="pages-session-expired.html">Session Expired</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript: void(0);" aria-expanded="true"><i class="ti-widget"></i> Extra Pages <span class="fa arrow"></span></a>
+                                    <ul class="nav-second-level nav" aria-expanded="true">
+                                        <li><a href="extras-timeline.html">Timeline</a></li>
+                                        <li><a href="extras-invoice.html">Invoice</a></li>
+                                        <li><a href="extras-profile.html">Profile</a></li>
+                                        <li><a href="extras-calendar.html">Calendar</a></li>
+                                        <li><a href="extras-faqs.html">FAQs</a></li>
+                                        <li><a href="extras-pricing.html">Pricing</a></li>
+                                        <li><a href="extras-contacts.html">Contacts</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript: void(0);" aria-expanded="true"><i class="ti-share"></i> Multi Level <span class="fa arrow"></span></a>
+                                    <ul class="nav-second-level nav" aria-expanded="true">
+                                        <li><a href="javascript: void(0);">Level 1.1</a></li>
+                                        <li><a href="javascript: void(0);" aria-expanded="true">Level 1.2 <span class="fa arrow"></span></a>
+                                            <ul class="nav-third-level nav" aria-expanded="true">
+                                                <li><a href="javascript: void(0);">Level 2.1</a></li>
+                                                <li><a href="javascript: void(0);">Level 2.2</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!--Scrollbar wrapper-->
+                </aside>
+                <!--left navigation end-->
+
+                <!-- START PAGE CONTENT -->
+                <div id="page-right-content">
+
+                    <div class="container">
+                        <div class="row">
+							<div class="col-sm-12">
+								<div class="card-box widget-inline">
+									<div class="row">
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-primary mdi mdi-access-point-network"></i> <b data-plugin="counterup">8954</b></h3>
+												<p class="text-muted">Lifetime total sales</p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-custom mdi mdi-airplay"></i> <b data-plugin="counterup">7841</b></h3>
+												<p class="text-muted">Income amounts</p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-info mdi mdi-black-mesa"></i> <b data-plugin="counterup">6521</b></h3>
+												<p class="text-muted">Total users</p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center b-0">
+												<h3 class="m-t-10"><i class="text-danger mdi mdi-cellphone-link"></i> <b data-plugin="counterup">325</b></h3>
+												<p class="text-muted">Total visits</p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+                        <!--end row -->
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card-box">
+                                    <h4 class="m-t-0">Total Revenue</h4>
+                                    <div class="text-center">
+                                        <ul class="list-inline chart-detail-list">
+                                            <li>
+                                                <h5 class="font-normal"><i class="fa fa-circle m-r-10 text-primary"></i>Series A</h5>
+                                            </li>
+                                            <li>
+                                                <h5 class="font-normal"><i class="fa fa-circle m-r-10 text-muted"></i>Series B</h5>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="dashboard-bar-stacked" style="height: 300px;"></div>
+                                </div>
+                            </div> <!-- end col -->
+
+                            <div class="col-lg-6">
+                                <div class="card-box">
+                                    <h4 class="m-t-0">Sales Analytics</h4>
+                                    <div class="text-center">
+                                        <ul class="list-inline chart-detail-list">
+                                            <li>
+                                                <h5 class="font-normal"><i class="fa fa-circle m-r-10 text-primary"></i>Mobiles</h5>
+                                            </li>
+                                            <li>
+                                                <h5 class="font-normal"><i class="fa fa-circle m-r-10 text-info"></i>Tablets</h5>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="dashboard-line-chart" style="height: 300px;"></div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box">
+                                    <h4 class="m-t-0">Contacts</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover mails m-0 table table-actions-bar">
+                                            <thead>
+                                                <tr>
+                                                    <th style="min-width: 95px;">
+                                                        <div class="checkbox checkbox-primary checkbox-single m-r-15">
+                                                            <input id="action-checkbox" type="checkbox">
+                                                            <label for="action-checkbox"></label>
+                                                        </div>
+                                                        <!--<div class="btn-group dropdown">-->
+                                                            <!--<button type="button" class="btn btn-default btn-xs dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="caret"></i></button>-->
+                                                            <!--<ul class="dropdown-menu" role="menu">-->
+                                                                <!--<li><a href="#">Action</a></li>-->
+                                                                <!--<li><a href="#">Another action</a></li>-->
+                                                                <!--<li><a href="#">Something else here</a></li>-->
+                                                                <!--<li class="divider"></li>-->
+                                                                <!--<li><a href="#">Separated link</a></li>-->
+                                                            <!--</ul>-->
+                                                        <!--</div>-->
+                                                    </th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Products</th>
+                                                    <th>Start Date</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="checkbox checkbox-primary m-r-15">
+                                                            <input id="checkbox2" type="checkbox">
+                                                            <label for="checkbox2"></label>
+                                                        </div>
+
+                                                        <img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/users/avatar-2.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+                                                    </td>
+
+                                                    <td>
+                                                        Tomaslau
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="#" class="text-muted">tomaslau@dummy.com</a>
+                                                    </td>
+
+                                                    <td>
+                                                        <b><a href="" class="text-dark"><b>356</b></a> </b>
+                                                    </td>
+
+                                                    <td>
+                                                        01/11/2003
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="checkbox checkbox-primary m-r-15">
+                                                            <input id="checkbox1" type="checkbox">
+                                                            <label for="checkbox1"></label>
+                                                        </div>
+
+                                                        <img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/users/avatar-1.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+                                                    </td>
+
+                                                    <td>
+                                                        Chadengle
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="#" class="text-muted">chadengle@dummy.com</a>
+                                                    </td>
+
+                                                    <td>
+                                                        <b><a href="" class="text-dark"><b>568</b></a> </b>
+                                                    </td>
+
+                                                    <td>
+                                                        01/11/2003
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="checkbox checkbox-primary m-r-15">
+                                                            <input id="checkbox3" type="checkbox">
+                                                            <label for="checkbox3"></label>
+                                                        </div>
+
+                                                        <img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/users/avatar-3.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+                                                    </td>
+
+                                                    <td>
+                                                        Stillnotdavid
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="#" class="text-muted">stillnotdavid@dummy.com</a>
+                                                    </td>
+                                                    <td>
+                                                        <b><a href="" class="text-dark"><b>201</b></a> </b>
+                                                    </td>
+
+                                                    <td>
+                                                        12/11/2003
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="checkbox checkbox-primary m-r-15">
+                                                            <input id="checkbox4" type="checkbox">
+                                                            <label for="checkbox4"></label>
+                                                        </div>
+
+                                                        <img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/users/avatar-4.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+                                                    </td>
+
+                                                    <td>
+                                                        Kurafire
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="#" class="text-muted">kurafire@dummy.com</a>
+                                                    </td>
+
+                                                    <td>
+                                                        <b><a href="" class="text-dark"><b>56</b></a> </b>
+                                                    </td>
+
+                                                    <td>
+                                                        14/11/2003
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="checkbox checkbox-primary m-r-15">
+                                                            <input id="checkbox5" type="checkbox">
+                                                            <label for="checkbox5"></label>
+                                                        </div>
+
+                                                        <img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/users/avatar-5.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+                                                    </td>
+
+                                                    <td>
+                                                        Shahedk
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="#" class="text-muted">shahedk@dummy.com</a>
+                                                    </td>
+
+                                                    <td>
+                                                        <b><a href="" class="text-dark"><b>356</b></a> </b>
+                                                    </td>
+
+                                                    <td>
+                                                        20/11/2003
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="checkbox checkbox-primary m-r-15">
+                                                            <input id="checkbox6" type="checkbox">
+                                                            <label for="checkbox6"></label>
+                                                        </div>
+
+                                                        <img src="<?php echo $this->baseUrl()."/templates/";?>assets/images/users/avatar-6.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+                                                    </td>
+
+                                                    <td>
+                                                        Adhamdannaway
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="#" class="text-muted">adhamdannaway@dummy.com</a>
+                                                    </td>
+
+                                                    <td>
+                                                        <b><a href="" class="text-dark"><b>956</b></a> </b>
+                                                    </td>
+
+                                                    <td>
+                                                        24/11/2003
+                                                    </td>
+
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- end container -->
+
+                    <div class="footer">
+                        <div class="pull-right hidden-xs">
+                            Project Completed <strong class="text-custom">39%</strong>.
+                        </div>
+                        <div>
+                            <strong>Simple Admin</strong> - Copyright &copy; 2017
+                        </div>
+                    </div> <!-- end footer -->
+
+                </div>
+                <!-- End #page-right-content -->
 
             </div>
-            <!-- END PAGE CONTENT-->
-         </div>
-         <!-- END PAGE CONTAINER-->
-      </div>
-      <!-- END PAGE -->  
-   </div>
-   <!-- END CONTAINER -->
+            <!-- end .page-contentbar -->
+        </div>
+        <!-- End #page-wrapper -->
 
-   <!-- BEGIN FOOTER -->
-   <div id="footer">
-       2013 &copy; Metro Lab Dashboard.
-   </div>
-   <!-- END FOOTER -->
 
-   <!-- BEGIN JAVASCRIPTS -->
-   <!-- Load javascripts at bottom, this will reduce page load time -->
-   <script src="js/jquery-1.8.3.min.js"></script>
-   <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
-   <!-- ie8 fixes -->
-   <!--[if lt IE 9]>
-   <script src="js/excanvas.js"></script>
-   <script src="js/respond.js"></script>
-   <![endif]-->
+        <!-- js placed at the end of the document so the pages load faster -->
+        <script src="<?php echo $this->baseUrl()."/templates/";?>assets/js/jquery-2.1.4.min.js"></script>
+        <script src="<?php echo $this->baseUrl()."/templates/";?>assets/js/bootstrap.min.js"></script>
+        <script src="<?php echo $this->baseUrl()."/templates/";?>assets/js/metisMenu.min.js"></script>
+        <script src="<?php echo $this->baseUrl()."/templates/";?>assets/js/jquery.slimscroll.min.js"></script>
 
-   <!--common script for all pages-->
-   <script src="js/common-scripts.js"></script>
+        <!--Morris Chart-->
+		<script src="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/morris/morris.min.js"></script>
+		<script src="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/raphael/raphael-min.js"></script>
 
-   <!-- END JAVASCRIPTS -->   
-</body>
-<!-- END BODY -->
+        <!-- Dashboard init -->
+		<script src="<?php echo $this->baseUrl()."/templates/";?>assets/pages/jquery.dashboard.js"></script>
+
+        <!-- App Js -->
+        <script src="<?php echo $this->baseUrl()."/templates/";?>assets/js/jquery.app.js"></script>
+
+    </body>
 </html>
