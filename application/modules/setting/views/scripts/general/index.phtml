@@ -1,0 +1,90 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$this->headTitle($tr->translate('Card Background')); 
+echo $this->headTitle();
+$frm = $this->frm_general;
+$countlang = count($this->lang);
+
+if(!empty($this->cardBackground['value'])){
+	$profile="card/".$this->cardBackground['value'];
+}else{
+	$profile ="card/card-sample.png";
+}
+?>
+<style>
+
+img.image_view {
+        width: 50%;
+    height: auto;
+}
+img#image_viewbg {
+    height: 50px;
+}
+.button_browse {
+   margin-top:0 !important;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    width: 54%;
+    height: 38px;
+    background: #fbf9f9;
+    border: 1px solid #e8e8e8;
+}
+.button_browse span {
+    padding: 0 5px;
+    line-height: 32px;
+}
+</style>
+<!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+	    		<div class="col-sm-12 border-botom">
+	    			<div class="col-sm-8">
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Card Background")?></h4>
+	    			</div>
+	    			<div class="col-sm-4 text-right">
+	    			</div>
+	    		</div>
+    		
+			<div class="col-sm-8">
+				<div class="form-group">
+					<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                    	<div class=" member-thumb m-b-10 center-block">
+                            <img id="profile-img-tag" src="<?php echo $this->baseUrl()."/images/".$profile;?>" class=" img-thumbnail" alt="profile-image" style="width: 100%;">
+	                        </div>
+                        </div>
+                 </div>
+                 <div class="form-group text-center">
+                       <div class="col-md-4 col-sm-4 col-xs-4 text-center browe_photo">
+                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('BROWSE_PHOTO')?>">
+                  	  	 </div>
+                  	  <div class="col-md-8 col-sm-8 col-xs-8">
+                  	  <input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('SAVE');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" />
+                  	 	<a class="btn btn-primary black save" download href="<?php echo $this->baseUrl()."/images/".$profile;?>"><i class="ti-download"></i> <?php echo $tr->translate('Download Sample Images');?></a>
+                  	  </div>
+                   </div>
+			</div>
+			<div class="col-sm-4">
+                   
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#profile-img").change(function(){
+        readURL(this);
+    });
+</script>

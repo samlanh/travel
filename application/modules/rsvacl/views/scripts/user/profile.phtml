@@ -1,0 +1,55 @@
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$this->headTitle($tr->translate('Profile'));
+echo $this->headTitle();
+$profile = $this->profile;
+if (!empty($profile['profile_img'])){
+	$imagepro="/images/profile/".$profile['profile_img'];
+}else{$imagepro="/images/user.png";}
+?>
+ <div class="page-title">
+    <div class="title_left">
+       <h3><?php echo $tr->translate("Profile");?></h3>
+    </div>
+</div>
+ <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><?php echo $profile['first_name']." ".$tr->translate("Profile");?></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                      <div class="profile_img">
+                        <div id="crop-avatar">
+                          <!-- Current avatar -->
+                          <img class="img-responsive avatar-view" src="<?php echo $this->baseUrl().$imagepro;?>" alt="Avatar" title="Change the avatar">
+                        </div>
+                      </div>
+                      <h3><?php echo $profile['first_name'];?></h3>
+
+                      <ul class="list-unstyled user_data">
+                        <li>
+                          <i class="fa fa-briefcase user-profile-icon"></i> <?php echo $profile['user_type_title'];?>
+                        </li>
+                        <li class="m-top-xs">
+                          <i class="fa fa-external-link user-profile-icon"></i>
+                          <a href="http://www.kimlabs.com/profile/" target="_blank">www.kimlabs.com</a>
+                        </li>
+                      </ul>
+
+                      <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                      <br />
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>

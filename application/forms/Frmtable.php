@@ -16,7 +16,7 @@ class Application_Form_Frmtable
         //-------------------------Header----------------------
        	$form='';                 
         $counter='<strong>Number of record(s): '.count($rows).'</strong>';
-        $head=$form.'<table class="collape tablesorter" id="table"  width="100%">';
+        $head=$form.'<table class="collape tablesorter" id="exportExcel"  width="100%">';//id="table"
         $col_str="";
         if($type!=null){
     		$col_str='<thead><tr><th class="tdheader">No</th>';
@@ -129,6 +129,19 @@ class Application_Form_Frmtable
     /* @ Desc: show add button
      * @param $url_new
      * */
+    
+    public function showCopyBuntton($url_copy) {
+    	defined('BASE_URL')	|| define('BASE_URL', Zend_Controller_Front::getInstance()->getBaseUrl());
+    	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+    
+    	$copyButton = '&nbsp;<a href="#" class="btn-action" onClick="copyRecord(\''.$url_copy.'\')">'
+    	.'<img alt="" src="'.BASE_URL.'/images/icon/copy.png"><b>'
+    	.$tr->translate("COPY")
+    	.'</b></a>';
+    	return $copyButton;
+    }
+    
+    
     public function showAddBuntton($url_new) {
     	defined('BASE_URL')	|| define('BASE_URL', Zend_Controller_Front::getInstance()->getBaseUrl());
     	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
@@ -160,83 +173,49 @@ class Application_Form_Frmtable
      * @param $link field with its link for access to its detail info EX: array('name'=>$link): name is field, link where u want to access
      * @param $editLink for link edit form 
      */
-    
-    
-    public function showCopyBuntton($url_copy) {
-    	defined('BASE_URL')	|| define('BASE_URL', Zend_Controller_Front::getInstance()->getBaseUrl());
-    	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-    
-    	$copyButton = '&nbsp;<a href="#" class="btn-action" onClick="copyRecord(\''.$url_copy.'\')">'
-    	.'<img alt="" src="'.BASE_URL.'/images/icon/copy.png"><b>'
-    	.$tr->translate("COPY")
-    	.'</b></a>';
-    	return $copyButton;
-    }
-    
-    
-    public function getCheckList($delete=0, $columns,$rows,$link=null,$editLink="", $class='items', $textalign= "left", $report=false, $id = "table")
+    public function getCheckList($delete=0, $columns,$rows,$link=null,$editLink="", $class='items', $textalign= "left", $report=false, $id = "exportExcel")
     {
     	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
     	/*
      	* Define string of pagination Sophen 27 June 2012
      	*/
-    	$stringPagination = '<script type="text/javascript">
-				$(document).ready(function(){
-					$("#'.$id.'").tablesorter();
-					
-					$("#'.$id.'").tablesorter().tablesorterPager({container: $("#pagination_'.$id.'")});
-					$("input:.pagedisplay").focus(function(){ this.blur(); });
-					
-					function changeColor(){
-						alert("change color on mouse over");
-					}
-				});
-		</script>
-		<div id="pagination_'.$id.'" class="pager" >
-					<form >
-						<table  style="width: 200px;"><tr>
-						<td><img src="'.BASE_URL.'/images/first.gif" class="first"/></td>
-						<td><img src="'.BASE_URL.'/images/previous.gif" class="prev"/></td>
-						<td><input type="text" class="pagedisplay"/></td>
-						<td><img src="'.BASE_URL.'/images/next.gif" class="next"/></td>
-						<td><img src="'.BASE_URL.'/images/last.gif" class="last"/></td>
-						<td><select class="pagesize" >
-							<option selected="selected"  value="10">10</option>
-							<option value="20">20</option>
-							<option value="30">30</option>
-							<option value="40">40</option>
-							<option value="50">50</option>
-							<option value="60">60</option>
-							<option value="70">70</option>
-							<option value="80">80</option>
-							<option value="90">90</option>
-							<option value="100">100</option>
-							</select>
-					    </td>
-						</tr>
-						</table>
-					</form>
-			</div>	';
-    	/* end define string*/
     	
-    	$head='<form name="list"><div style="overflow:scroll; max-height:450px; overflow-x:hidden;" ><table class="collape tablesorter" id="'.$id.'" width="100%" style="white-space: nowrap;">';
+    	/* end define string*/
+    	//$head='<form name="list"><div style="overflow:scroll; max-height:450px; overflow-x:hidden;" ><table class="collape tablesorter" id="'.$id.'" width="100%">';
+    	
+    	$head='
+    	
+	    		 <table id="datatable" class="table table-striped table-bordered">';
     	$col_str='';
-    	$col_str .='<thead><tr>';
-    	if($delete== 1 || $delete== 2 ) {
-    		$col_str .= '<th class="tdheader tdcheck"></td>';
+    	$col_str .='<thead>
+    		<tr>';
+    	if($delete== 1) {
+    		$col_str .= '<th></th>';
+    	}elseif($delete==2){
+    		$col_str .= '<th></th>';
+    	}elseif($delete==3){
+    		$col_str .= '<th></th>';
     	}
-    	$col_str .= '<th class="tdheader">'.$tr->translate("NUM").'</th>';
+    	
+    	$col_str .= '<th>'.$tr->translate("NUM").'</th>';
     	//add columns
     	foreach($columns as $column){
-    		$col_str=$col_str.'<th class="tdheader">'.$tr->translate($column).'</th>';
+    		$col_str=$col_str.'<th>'.$tr->translate($column).'</th>';
+    	}
+    	if($delete==3 || $delete==4){
+    		$col_str .= '<th></td>';
     	}
     	if($editLink != "") {
-    		$col_str .='<th class="tdheader tdedit">'.$tr->translate('EDIT_CAP').'</th>';
+    		$col_str .='<th>'.$tr->translate('EDIT_CAP').'</th>';
     	}
     	$col_str.='</tr></thead>';
     	$row_str='<tbody>';
     	//add element rows	
-    	if($rows==NULL) return $head.$col_str.'</table></div><center style="font-size:18pt;">No record</center></form>';
+    	if($rows==NULL) return $head.$col_str.'
+    			</table>
+    		
+    		<center style="font-size:18pt;"><label id="data_table">No record</label></center>
+    	';
     	$temp=0;
     	/*------------------------Check param id----------------------------------*/
 
@@ -255,12 +234,12 @@ class Application_Form_Frmtable
 		  				if($read==null) $read='&nbsp';
 		  				if($i==0) {
 		  					$temp=$read;
-		  					if($delete==2){
+		  					if($delete==2 || $delete==3){
 				    			$row_str .= '<td><input type="radio" onclick="setValue('.$temp.')" name="copy" id="copy" value="'.$temp.'" /></td>';
 		  					}else if($delete==1){
 		  						$row_str .= '<td><input type="checkbox" name="del[]" id="del[]" value="'.$temp.'" /></td>';
 		  					}
-		  					$row_str.='<td class="items-no">'.$r.'</td>';
+		  					$row_str.='<td class="text-center">'.$r.'</td>';
 		  				} else {
     						if($link!=null){
     							foreach($link as $column=>$url)
@@ -288,14 +267,24 @@ class Application_Form_Frmtable
     					}
     					$i++;
 		  			}
+		  			if($delete==3 || $delete==4){
+		  				$row_str .= '<td align="center">
+			  				<a class="btn btn-app small" onclick="showDeleteForm('.$temp.')">
+		                      <i class="fa fa-trash"></i>
+		                    </a>
+		  				</td>';
+		  			}
  			$row_str.='</tr>';
     	}
-    	$counter='<span class="row_num">'.$tr->translate('NUM-RECORD').count($rows).'</span>';
+    	//$counter='<span class="row_num">'.$tr->translate('NUM-RECORD').' '.count($rows).'</span>';
     	$row_str.='</tbody>';
-    	$footer='</table></div></form>';
-    	if(!$report){
-    		$footer .= '<div class="footer_list">'.$stringPagination.$counter.'</div>';
-    	}
+    	$footer='</table>
+    	</div>
+    </form>';
+//     	if(!$report){
+//     		$footer .= '<div class="footer_list">'.$counter.'</div>';
+//     	}
+    	$footer.="</div>";
     	return $head.$col_str.$row_str.$footer;
     }
     

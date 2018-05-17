@@ -1,0 +1,62 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle($tr->translate("DRIVERMG")); 
+	echo $this->headTitle();
+	$urledit = $this->baseUrl()."/employee/position/edit";
+?>   
+<style>
+img.status_icon {
+    width: 16px;
+}
+</style> 
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-star"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("POSITION")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    				<div class="buttun-block">
+						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/employee/position/add";?>"><?php echo $tr->translate("Add Position")?></a>
+					</div>
+    			</div>
+    		</div>
+			<div class="col-sm-12">
+				<table id="datatable-buttons" class="table table-striped table-bordered">
+					<thead>
+    					<tr>
+    						<th><?php echo $tr->translate("NUM");?></th>
+    						<th><?php echo $tr->translate("Position Title");?></th>
+    						<th><?php echo $tr->translate("DESCRIPTION");?></th>
+    						<th><?php echo $tr->translate("Create Date");?></th>
+    						<th><?php echo $tr->translate("Modify Date");?></th>
+    						<th><?php echo $tr->translate("STATUS");?></th>
+    					</tr>
+    				</thead>
+    				<tbody>
+    					<?php 
+    					if (!empty($this->allposition)) 
+    						foreach ($this->allposition as $key => $position){
+    							$images = $this->baseUrl()."/images/icon/active.png";
+    							if ($position['status']!=1){
+    								$images = $this->baseUrl()."/images/icon/blocked.png";
+    							}
+    						?>
+    					<tr>
+    						<td><?php echo $key+1;?></td>
+    						<td><a class="edit" href="<?php echo $urledit."/id/".$position['id'];?>"><?php echo $position['title'];?></a></td>
+    						<td><a class="edit" href="<?php echo $urledit."/id/".$position['id'];?>"><?php echo $position['description'];?></a></td>
+    						<td><?php if (!empty($position['createDate'])){ echo date("H:i:s d M Y",strtotime($position['createDate']));}?></td>
+    						<td><?php if (!empty($position['modifyDate'])){ echo date("H:i:s d M Y",strtotime($position['modifyDate']));}?></td>
+    						<td class="text-center"><img class="status_icon" src="<?php echo $images;?>" /></td>
+    					</tr>
+    					<?php }?>
+    				</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END PAGE CONTENT -->

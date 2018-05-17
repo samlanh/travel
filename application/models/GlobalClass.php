@@ -24,7 +24,17 @@ class Application_Model_GlobalClass  extends Zend_Db_Table_Abstract
    	$myopt .= '<option value="Yes">Yes</option>';
    	$myopt .= '<option value="No">No</option>';
    	return $myopt;
-   }	
+   
+   }
+public function getOptonsHtmlTranslate($sql, $display, $value){
+   	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+   	$db = $this->getAdapter();
+   	$option = '<option value="">--- Select ---</option>';
+   	foreach($db->fetchAll($sql) as $r){
+   		$option .= '<option value="'.$r[$value].'">'.htmlspecialchars($tr->translate(strtoupper($r[$display])), ENT_QUOTES).'</option>';
+   	}
+   	return $option;
+   }   
    public function getImgAttachStatus($rows,$base_url, $case=''){
 		if($rows){			
 			$imgattach='<img src="'.$base_url.'/images/icon/attachment.png"/>';
@@ -91,57 +101,39 @@ class Application_Model_GlobalClass  extends Zend_Db_Table_Abstract
 	 * @var $key = [0-23]
 	 */
 	public function getHours($key = ''){
-		// 		$hours='';
-		// 		$time = 7;
-	
-		// 		echo $hours;exit();
-		$hours ='<option value="07.00">07:00 AM </option>'.
-				'<option value="07.15">07:15 AM </option>'.
-				'<option value="07.30">07:30 AM </option>'.
-				'<option value="08.00">08:00 AM </option>'.
-				'<option value="08.15">08:15 AM </option>'.
-				'<option value="08:20">08:20 AM </option>'.
-				'<option value="08.30">08:30 AM </option>'.
-				'<option value="08.40">08.40 AM </option>'.
-				'<option value="09.00">09:00 AM </option>'.
-				'<option value="09.15">09:15 AM </option>'.
-				'<option value="09.30">09:30 AM </option>'.
-				'<option value="09.40">09:40 AM </option>'.
-				'<option value="10.00">10:00 AM </option>'.
-				'<option value="10.15">10:15 AM </option>'.
-				'<option value="10.20">10:20 AM </option>'.
-				'<option value="10.30">10:30 AM </option>'.
-				'<option value="10.40">10:40 AM </option>'.
-				'<option value="11.00">11:00 AM </option>'.
-				'<option value="11.15">11:15 AM </option>'.
-				'<option value="11.30">11:30 AM </option>'.
-				'<option value="12.00">12:00 AM </option>'.
-				'<option value="12.30">12:30 AM </option>'.
-				'<option value="13.00">01:00 PM </option>'.
-				'<option value="13.30">01:30 PM </option>'.
-				'<option value="13.50">01:50 PM </option>'.
-				'<option value="14.00">02:00 PM </option>'.
-				'<option value="14.30">02:30 PM </option>'.
-				'<option value="14.50">02:50 PM </option>'.
-				'<option value="15.00">03:00 PM </option>'.
-				'<option value="15.10">03:10 PM </option>'.
-				'<option value="15.30">03:30 PM </option>'.
-				'<option value="15.45">03:45 PM </option>'.
-				'<option value="16.00">04:00 PM </option>'.
-				'<option value="16.30">04:30 PM </option>'.
-				'<option value="17.00">05:00 PM </option>'.
-				'<option value="17.30">05:30 PM </option>'.
-				'<option value="18.00">06:00 PM </option>'.
-				'<option value="18.30">06:30 PM </option>'.
-				'<option value="19.00">07:00 PM </option>'.
-				'<option value="19.30">07:30 PM </option>'.
-				'<option value="20.00">08:00 PM </option>'.
-				'<option value="20.15">08:15 PM </option>'.
-				'<option value="20.30">08:30 PM </option>'.
-				'<option value="21.00">09:00 PM </option>'.
-				'<option value="21:30">09:30 PM </option>';
-	
-		return  $hours;
+		$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+		$am = $tr->translate('AM');
+		$pm = $tr->translate('PM');
+		$hours = array(
+				'12:00 '. $pm,
+				'01:00 '. $am,
+				'02:00 '. $am,
+				'03:00 '. $am,
+				'04:00 '. $am,
+				'05:00 '. $am,
+				'06:00 '. $am,
+				'07:00 '. $am,
+				'08:00 '. $am,
+				'09:00 '. $am,
+				'10:00 '. $am,
+				'11:00 '. $am,
+				'12:00 '. $am,
+				'01:00 '. $pm,
+				'02:00 '. $pm,
+				'03:00 '. $pm,
+				'04:00 '. $pm,
+				'05:00 '. $pm,
+				'06:00 '. $pm,
+				'07:00 '. $pm,
+				'08:00 '. $pm,
+				'09:00 '. $pm,
+				'10:00 '. $pm,
+				'11:00 '. $pm				
+				); 
+		if(empty($key)){
+			return $hours;
+		}
+		return  $hours[$key];
 	}
 	
 	/**
@@ -178,259 +170,137 @@ class Application_Model_GlobalClass  extends Zend_Db_Table_Abstract
 	 * @param $limit number of limit record
 	 * @return $record_count number of record
 	 */
-		public function getList($url,$frm,$start,$limit,$record_count){
-			$page = new Application_Form_FrmNavigation($url, $start, $limit, $record_count);
-			$page->init($url, $start, $limit, $record_count);//can wrong $form
-			$nevigation = $page->navigationPage();
-			$rows_per_page = $page->getRowsPerPage($limit, $frm);
-			$result_row = $page->getResultRows();
-			$arr = array(
-					"nevigation"=>$nevigation,
-					"rows_per_page"=>$rows_per_page,
-					"result_row"=>$result_row);
-			return $arr;
-		}
-		public function getAllMetionOption(){
-			$_db = new Application_Model_DbTable_DbGlobal();
-			$rows = $_db->getAllMention();
-			$option = '';
-			if(!empty($rows))foreach($rows as $key => $value){
-				$option .= '<option value="'.$key.'" >'.htmlspecialchars($value, ENT_QUOTES).'</option>';
-			}
-			return $option;
-		}
-		public function getAllPayMentTermOption(){
-			$_db = new Application_Model_DbTable_DbGlobal();
-			$rows = $_db->getAllPaymentTerm();
-			$option = '';
-			if(!empty($rows))foreach($rows as $key => $value){
-				$option .= '<option value="'.$key.'" >'.htmlspecialchars($value, ENT_QUOTES).'</option>';
-			}
-			return $option;
-		}
+// 		public function getList($url,$frm,$start,$limit,$record_count){
+// 			$page = new Application_Form_FrmNavigation($url, $start, $limit, $record_count);
+// 			$page->init($url, $start, $limit, $record_count);//can wrong $form
+// 			$nevigation = $page->navigationPage();
+// 			$rows_per_page = $page->getRowsPerPage($limit, $frm);
+// 			$result_row = $page->getResultRows();
+// 			$arr = array(
+// 					"nevigation"=>$nevigation,
+// 					"rows_per_page"=>$rows_per_page,
+// 					"result_row"=>$result_row);
+// 			return $arr;
+// 		}
+// 		public function getAllMetionOption(){
+// 			$_db = new Application_Model_DbTable_DbGlobal();
+// 			$rows = $_db->getAllMention();
+// 			$option = '';
+// 			if(!empty($rows))foreach($rows as $key => $value){
+// 				$option .= '<option value="'.$key.'" >'.htmlspecialchars($value, ENT_QUOTES).'</option>';
+// 			}
+// 			return $option;
+// 		}
+// 		public function getAllPayMentTermOption(){
+// 			$_db = new Application_Model_DbTable_DbGlobal();
+// 			$rows = $_db->getAllPaymentTerm();
+// 			$option = '';
+// 			if(!empty($rows))foreach($rows as $key => $value){
+// 				$option .= '<option value="'.$key.'" >'.htmlspecialchars($value, ENT_QUOTES).'</option>';
+// 			}
+// 			return $option;
+// 		}
 		public function getAllFacultyOption(){
 			$_db = new Application_Model_DbTable_DbGlobal();
-			$rows = $_db->getAllMajor();
-			array_unshift($rows, array('id'=>-1,'name'=>"select grade"));
+			$rows = $_db->getAllFecultyName();
+			array_unshift($rows, array('dept_id'=>-1,'en_name'=>"Add New"));
 			$options = '';
 			if(!empty($rows))foreach($rows as $value){
-				$options .= '<option value="'.$value['id'].'" >'.htmlspecialchars($value['name'], ENT_QUOTES).'</option>';
+				$options .= '<option value="'.$value['dept_id'].'" >'.htmlspecialchars($value['en_name'], ENT_QUOTES).'</option>';
 			}
 			return $options;
 		}
-		public function getAllSession(){
-			$db=$this->getAdapter();
-			$sql=" SELECT key_code AS id,CONCAT(name_en,'-',name_kh) AS `name` FROM rms_view WHERE `type`=4 AND `status`=1 ";
-		    $rows=$db->fetchAll($sql);
-		    $options = '';
-		    if(!empty($rows))foreach($rows as $value){
-		    	$options .= '<option value="'.$value['id'].'" >'.htmlspecialchars($value['name'], ENT_QUOTES).'</option>';
-		    }
-		    return $options;
-		}
-		public function getAllServiceItemOption($type=null){
-			$_db = new Application_Model_DbTable_DbGlobal();
-			$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-			$rows = $_db->getAllstudentRequest($type);
-			array_unshift($rows,array('id' => '-1',"name"=>$tr->translate("ADD_NEW")));
-			array_unshift($rows,array('id' => '',"name"=>$tr->translate("SELECT_SERVICE"), ));
-			$options = '';
-			if(!empty($rows))foreach($rows as $value){
-				$options .= '<option value="'.$value['id'].'" >'.htmlspecialchars($value['name'], ENT_QUOTES).'</option>';
-			}
-			return $options;
-		}
-		public function getImgActive($rows,$base_url, $case='',$type=null){
+		
+		public function getImgActive($rows,$base_url, $case='',$degree=null,$display=null){
 			if($rows){
 				$imgnone='<img src="'.$base_url.'/images/icon/cross.png"/>';
 				$imgtick='<img src="'.$base_url.'/images/icon/apply2.png"/>';
-				$request=Zend_Controller_Front::getInstance()->getRequest();
+		
 				foreach ($rows as $i =>$row){
+					if($degree!=null){
+						$dg = new Application_Model_DbTable_DbGlobal();
+						
+						$rows[$i]['degree']  = $dg->getAllDegree($row['degree']);
+					}
+					if($display!=null){
+						$rows[$i]['displayby']= ($row['displayby']==1)?'Khmer':'English';
+					}
+					if (!empty($row['is_require'])){
+						if($row['is_require'] == 1){
+							$rows[$i]['is_require']= $imgtick;
+						}
+						else{
+							$rows[$i]['is_require'] = $imgnone;
+						
+						}
+					}
 					if($row['status'] == 1){
 						$rows[$i]['status']= $imgtick;
 					}
 					else{
 						$rows[$i]['status'] = $imgnone;
+						
 					}
-					if($type!=null){
-						if($row['type'] == 1){
-							$rows[$i]['type']="Service" ;
-						}
-						else{
-							$rows[$i]['type']="Program" ;
-						}
-					}
+					
 				}
 			}
 			return $rows;
 		}
-		public function getServiceProgramType($rows,$base_url, $case=''){
+		public function getSex($rows,$base_url, $case='',$type=null){
 			if($rows){
-				foreach ($rows as $i =>$row){
-					if($row['type'] == 1){
-						$rows[$i]['type']="Service" ;
-					}
-					else{
-						$rows[$i]['type']="Program" ;
-					}
-				}
-			}
-			return $rows;
-		}
-		public function getGernder($rows,$base_url, $case=''){
-			if($rows){
+				$m='M';
+				$f='F';
 				foreach ($rows as $i =>$row){
 					if($row['sex'] == 1){
-						$rows[$i]['sex']="M" ;
+						$rows[$i]['sex'] = $f;
 					}
 					else{
-						$rows[$i]['sex']="F" ;
+						$rows[$i]['sex'] = $m;
 					}
 				}
 			}
 			return $rows;
 		}
-		public function getGetPayTerm($rows,$base_url, $case=''){
-			$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-			if($rows){
-				foreach ($rows as $i =>$row){
-					if($row['payment_term'] == 2){
-						$rows[$i]['payment_term']=$tr->translate(' ត្រីមាស');
-					}
-					else if($row['payment_term'] == 1){
-						$rows[$i]['payment_term']=$tr->translate('MONTHLY');
-					}
-					else if($row['payment_term'] == 3){
-						$rows[$i]['payment_term']=$tr->translate(' ឆមាស');
-					}
-					else if($row['payment_term'] == 4){
-						$rows[$i]['payment_term']=$tr->translate('ឆ្នាំ');
-					}
-				}
-			}
-			return $rows;
-		}
-		public function getSession($rows,$base_url, $case=''){
-			$imgnone='<img src="'.$base_url.'/images/icon/cross.png"/>';
-			$imgtick='<img src="'.$base_url.'/images/icon/apply2.png"/>';
-			$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-			if($rows){
-				foreach ($rows as $i =>$row){
-					if($row['session_id'] == 1){
-						$rows[$i]['session_id']=$tr->translate(' ព្រឹក');
-						$rows[$i]['status']= $imgtick;
-					}
-					else if($row['session_id'] ==2){
-						$rows[$i]['session_id']=$tr->translate('រសៀល');
-					}
-					else if($row['session_id'] == 3){
-						$rows[$i]['session_id']=$tr->translate(' ល្ញាច');
-					}
-					else if($row['session_id'] == 4){
-						$rows[$i]['session_id']=$tr->translate('ចុងសបា្តហ៏');
-					}
-				}
-			}
-			return $rows;
-		}
-		public function getsunjectOption(){
+		public function getAllClientGroupOption(){
 			$_db = new Application_Model_DbTable_DbGlobal();
-			$rows = $_db->getAllsubject();
-			//array_unshift($rows, array('id'=>-1,'subject_name'=>"Add New"));
+			$rows = $_db->getClientByType();
+			array_unshift($rows, array('client_id'=>-1,'name_en'=>"Add New"));
 			$options = '';
 			if(!empty($rows))foreach($rows as $value){
-				$options .= '<option value="'.$value['id'].'" >'.htmlspecialchars($value['subject_name'], ENT_QUOTES).'</option>';
+				$options .= '<option value="'.$value['client_id'].'" >'.htmlspecialchars($value['name_en'], ENT_QUOTES).'</option>';
 			}
-			$options .= '<option Value="-1">Add New</option>';
 			return $options;
 		}
-		public function getTeachersunjectOption(){
+		public function getAllClientCodeOption(){
 			$_db = new Application_Model_DbTable_DbGlobal();
-			$rows = $_db->getAllTeacherSubject();
+			$rows = $_db->getClientByType();
+// 			array_unshift($rows, array('client_id'=>-1,'client_number'=>"Add New"));
 			$options = '';
 			if(!empty($rows))foreach($rows as $value){
-				$options .= '<option value="'.$value['id'].'" >'.htmlspecialchars($value['subject_name'].' , '.$value['teacher_name'], ENT_QUOTES).'</option>';
+				$options .= '<option value="'.$value['client_id'].'" >'.htmlspecialchars($value['client_number'], ENT_QUOTES).'</option>';
 			}
-			$options .= '<option Value="-1">Add New</option>';
 			return $options;
 		}
-		public function getAllExpenseIncomeType($type){
-			$_db = new Application_Model_DbTable_DbGlobal();
-			$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-			$rows = $_db->getExpenseIncome($type);
+		public function getCollecteralOption(){
+			$db = new Application_Model_DbTable_DbGlobal();
+			$rows= $db->getCollteralType();
 			$options = '';
-			$options .= '<option Value="0">'.$tr->translate("SELECT_CATEGORY").'</option>';
-			$options .= '<option Value="-1">'.$tr->translate("ADD_NEW").'</option>';
 			if(!empty($rows))foreach($rows as $value){
-				$options .= '<option value="'.$value['id'].'" >'.htmlspecialchars($value['name']).'</option>';
+				$options .= '<option value="'.$value['id'].'" >'.htmlspecialchars($value['title_en'], ENT_QUOTES).'</option>';
 			}
-			
+			return $options;
+		}
+		public function getCollecteralTypeOption(){
+				$options= '<option value="1" >'.htmlspecialchars('ផ្ទាល់ខ្លួន', ENT_QUOTES).'</option>';
+				$options .= '<option value="2" >'.htmlspecialchars('អ្នកធានាជំនួស', ENT_QUOTES).'</option>';
 			return $options;
 		}
 		
-		public function getAllDays(){
-			$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-			$hours ='<option value="1">'.$tr->translate('MO').'</option>'.
-					'<option value="2">'.$tr->translate('TU').'</option>'.
-					'<option value="3">'.$tr->translate('WE').'</option>'.
-					'<option value="4">'.$tr->translate('TH').'</option>'.
-					'<option value="5">'.$tr->translate('FR').'</option>'.
-					'<option value="6">'.$tr->translate('SA').'</option>'.
-					'<option value="7">'.$tr->translate('SU').'</option>';
-			return  $hours;
-		}
 		
-		public function getHoursStudy(){
-			$hours ='<option value="07.00">07:00 AM </option>'.
-					'<option value="07.15">07:15 AM </option>'.
-					'<option value="07.30">07:30 AM </option>'.
-					'<option value="08.00">08:00 AM </option>'.
-					'<option value="08.15">08:15 AM </option>'.
-					'<option value="08.20">08:20 AM </option>'.
-					'<option value="08.30">08:30 AM </option>'.
-					'<option value="08.40">08.40 AM </option>'.
-					'<option value="09.00">09:00 AM </option>'.
-					'<option value="09.15">09:15 AM </option>'.
-					'<option value="09.30">09:30 AM </option>'.
-					'<option value="09.40">09:40 AM </option>'.
-					'<option value="09.50">09:50 AM </option>'.
-					'<option value="10.00">10:00 AM </option>'.
-					'<option value="10.15">10:15 AM </option>'.
-					'<option value="10.20">10:20 AM </option>'.
-					'<option value="10.30">10:30 AM </option>'.
-					'<option value="10.40">10:40 AM </option>'.
-					'<option value="11.00">11:00 AM </option>'.
-					'<option value="11.15">11:15 AM </option>'.
-					'<option value="11.30">11:30 AM </option>'.
-					'<option value="12.00">12:00 AM </option>'.
-					'<option value="12.30">12:30 AM </option>'.
-					'<option value="13.00">01:00 PM </option>'.
-					'<option value="13.30">01:30 PM </option>'.
-					'<option value="13.40">01:40 PM </option>'.
-					'<option value="13.50">01:50 PM </option>'.
-					'<option value="14.00">02:00 PM </option>'.
-					'<option value="14.30">02:30 PM </option>'.
-					'<option value="14.40">02:40 PM </option>'.
-					'<option value="14.50">02:50 PM </option>'.
-					'<option value="15.00">03:00 PM </option>'.
-					'<option value="15.10">03:10 PM </option>'.
-					'<option value="15.30">03:20 PM </option>'.
-					'<option value="15.30">03:30 PM </option>'.
-					'<option value="15.45">03:45 PM </option>'.
-					'<option value="16.00">04:00 PM </option>'.
-					'<option value="16.30">04:30 PM </option>'.
-					'<option value="17.00">05:00 PM </option>'.
-					'<option value="17.30">05:30 PM </option>'.
-					'<option value="18.00">06:00 PM </option>'.
-					'<option value="18.30">06:30 PM </option>'.
-					'<option value="19.00">07:00 PM </option>'.
-					'<option value="19.30">07:30 PM </option>'.
-					'<option value="20.00">08:00 PM </option>'.
-					'<option value="20.15">08:15 PM </option>'.
-					'<option value="20.30">08:30 PM </option>'.
-					'<option value="21.00">09:00 PM </option>'.
-					'<option value="21.30">09:30 PM </option>';
-			return  $hours;
-	}
+		
+		
+	
+		
+		
 }
 

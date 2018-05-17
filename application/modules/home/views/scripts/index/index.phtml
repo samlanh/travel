@@ -1,0 +1,118 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle($tr->translate("DASHBOARD")); 
+	echo $this->headTitle();
+	
+	$db = new Home_Model_DbTable_DbDashboard();
+?>
+
+                <!-- START PAGE CONTENT -->
+                <div id="page-right-content">
+
+                    <div class="container">
+                        <div class="row">
+							<div class="col-sm-12">
+								<div class="card-box widget-inline">
+									<div class="row">
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-primary mdi mdi-crosshairs"></i> <b data-plugin="counterup"><?php echo $this->totalDriver;?></b></h3>
+												<p class="text-muted"><?php echo $tr->translate("total of drivers")?></p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-custom mdi mdi-cart-outline"></i> <b data-plugin="counterup"><?php echo $this->totalBooking;?></b></h3>
+												<p class="text-muted"><?php echo $tr->translate("total of bookings")?></p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center">
+												<h3 class="m-t-10"><i class="text-info mdi mdi-account-multiple"></i> <b data-plugin="counterup"><?php echo $this->totalCustomer;?></b></h3>
+												<p class="text-muted"><?php echo $tr->translate("total of customers")?></p>
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-sm-6">
+											<div class="widget-inline-box text-center b-0">
+												<h3 class="m-t-10"><i class="text-danger mdi mdi-cloud-download"></i> <b data-plugin="counterup">325</b></h3>
+												<p class="text-muted"><?php echo $tr->translate("total of downloads")?></p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+                        <!--end row -->
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card-box">
+                                    <h4 class="m-t-0"><?php echo $tr->translate("Download App Statistic")?></h4>
+                                    <div class="text-center">
+                                        <ul class="list-inline chart-detail-list">
+                                            <li>
+                                                <h5 class="font-normal"><i class="fa fa-circle m-r-10 text-primary"></i>iOS</h5>
+                                            </li>
+                                            <li>
+                                                <h5 class="font-normal"><i class="fa fa-circle m-r-10 text-info"></i>Android</h5>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="dashboard-line-chart" style="height: 300px;"></div>
+                                </div>
+                            </div> <!-- end col -->
+                            
+                            <div class="col-lg-6">
+                                <div class="card-box">
+                                    <h4 class="m-t-0"><?php echo $tr->translate("Number Of Booking")?></h4>
+                                    <div class="text-center">
+                                        <ul class="list-inline chart-detail-list">
+                                            <li>
+                                                <h5 class="font-normal"><i class="fa fa-circle m-r-10 text-primary"></i><?php echo $tr->translate("Call Center")?></h5>
+                                            </li>
+                                            <li>
+                                                <h5 class="font-normal"><i class="fa fa-circle m-r-10 text-muted"></i><?php echo $tr->translate("App Booking")?></h5>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="dashboard-bar-stacked" style="height: 300px;"></div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+                    </div>
+                    <!-- end container -->
+
+
+                </div>
+                <!-- End #page-right-content -->
+
+            <?php 
+            $start_year = date("Y-m-d",strtotime(" -10 year"));
+            ?>
+ <!--Morris Chart-->
+ 		<script>
+ 		var $stckedData  = [];
+ 		//creating Stacked chart
+        var $stckedData  = [
+            <?php for ($i=0; $i<=10; $i++ ){ 
+            	$year = date("Y",strtotime("$start_year+$i year"));
+            	$back = $db->getBookingByBackOfficeByYear($year);
+            	$app = $db->getBookingByAppByYear($year);
+            ?>
+            { y: '<?php echo $year;?>', a: <?php echo $back;?>, b: <?php echo $app;?> },
+            <?php }?>
+        ];
+ 		</script>
+		<script src="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/morris/morris.min.js"></script>
+		<script src="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/raphael/raphael-min.js"></script>
+        <!-- Dashboard init -->
+		<script src="<?php echo $this->baseUrl()."/templates/";?>assets/pages/jquery.dashboard.js"></script>
+
+
+       

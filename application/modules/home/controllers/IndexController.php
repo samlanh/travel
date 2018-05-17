@@ -1,16 +1,24 @@
 <?php
-class Home_IndexController extends Zend_Controller_Action {
-	const REDIRECT_URL='/global';
-	protected $tr;
-	public function init()
+class Home_indexController extends Zend_Controller_Action {
+	
+	
+public function init()
+    {    	
+     /* Initialize action controller here */
+    	header('content-type: text/html; charset=utf8');
+	}
+	public function indexAction()
 	{
-		$this->tr=Application_Form_FrmLanguages::getCurrentlanguage();
-		/* Initialize action controller here */
-		header('content-type: text/html; charset=utf8');
-		defined('BASE_URL')	|| define('BASE_URL', Zend_Controller_Front::getInstance()->getBaseUrl());
+		$session_user=new Zend_Session_Namespace('auth_flower');
+		if (empty($session_user->user_id)){
+			$this->_redirect("/");
+		}
+		$db = new Home_Model_DbTable_DbDashboard();
+		$this->view->totalBooking = $db->getTotalBooking();
+		$this->view->totalDriver = $db->getTotalDriver();
+		$this->view->totalCustomer = $db->getTotalCustomer();
+		
 	}
-	public function indexAction(){
-     
-	}
+	
 }
 

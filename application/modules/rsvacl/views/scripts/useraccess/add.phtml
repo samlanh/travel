@@ -1,0 +1,115 @@
+<style>
+fieldset.fifthy {	
+	border-right: 0px;
+	width: 30%;
+}
+fieldset.fifthy table{
+	padding-right: 1px;
+}
+table.user td{
+	vertical-align: top;   
+}
+</style>       
+
+<?php $rs=$this->rs;
+	
+	  $acl=($this->acl=='')? array():$this->acl;
+	  $acl_name=($this->acl_name=='')? array(): $this->acl_name;
+	  $tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	  $df=$this->data;
+?>
+<title><?php echo $tr->translate("USERACCESS")?></title>
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-user"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("USERACCESS")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    			</div>
+    		</div>
+			<div class="col-sm-12">
+				<div class="card-box">
+						<div class="form-group">
+		                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('USER_TYPE')?><span class="required">*</span>
+		                   </label>
+		                   <div class="col-md-4 col-sm-4 col-xs-4">
+		                    	<input class="form-control" type="text" required="true" name="user_type" id="user_type" placeholder="User Type" 	 value="<?php echo $this->rs[0]['user_type'];?>"missingMessage="Invalid User type!"  disabled/>
+                  			</div>
+               		 	</div>
+              			<div class="clearfix"></div>
+              			<form name="frmsearch" action="" method="post">
+			               <div class="form-group">
+			                   <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php echo $tr->translate('MODULE')?><span class="required">*</span>
+			                   </label>
+			                   <div class="col-md-4 col-sm-4 col-xs-4">
+			                    	<select name="fmod" id="fmod" class="form-control" required="true" missingMessage="Invalid Parent Name!" ><?php echo $this->optoin_mod;?></select>
+			                   </div>
+			                   <!-- 
+			                   <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php //echo $tr->translate('CONTROLLER')?>
+			                   </label>
+			                   <div class="col-md-4 col-sm-4 col-xs-4">
+			                    	<select name="fcon" id="fcon" class="form-control"   missingMessage="Invalid Parent Name!"><?php //echo $this->optoin_con;?></select>
+			                   </div>
+			                   <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php //echo $tr->translate('ACTIONS')?>
+			                   </label>
+			                   <div class="col-md-4 col-sm-4 col-xs-4">
+			                    	<select name="fact" id="fact" class="form-control"   missingMessage="Invalid Parent Name!" ><?php //echo $this->optoin_act;?></select>
+			                   </div>
+			                    -->
+			                    <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php echo $tr->translate('STATUS')?>
+			                   </label>
+			                   <div class="col-md-4 col-sm-4 col-xs-4">
+			                    	<select name="fstatus" id="fstatus" class="form-control"  missingMessage="Invalid Parent Name!" ><?php echo $this->optoin_status;?></select>
+			                   </div>
+			                </div>
+			                <div class="form-group">
+			                   <div class="col-md-4 col-sm-4 col-xs-4">
+			                    	<input type="submit" value="Search" name="btsave" label="<?php echo $tr->translate("SEARCH");?>" title="<?php echo $tr->translate("SEARCH");?>" class="btn btn-primary"/>
+			                   </div>
+			                </div>
+			            </form>
+			            <div class="clearfix"></div>
+				</div>
+				<div class="card-box">
+					 <?php echo $this->list;?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	.pointer{
+		cursor: pointer;	
+	}
+</style>
+<script>
+$(function(){		
+	$('#fmod').val('<?php echo $df['fmod']?>');
+	//$('#fcon').val('<?php //echo $df['fcon']?>');
+	//$('#fact').val('<?php //echo $df['fact']?>');
+	$('#fstatus').val('<?php echo $df['fstatus']?>');
+});
+	function changeStatus(id, user_type){
+		url = "<?php echo BASE_URL;?>/rsvacl/useraccess/update-status";
+		status = "no";
+		none_src = "<?php echo BASE_URL?>/images/icon/none.png";
+		tick_src = "<?php echo BASE_URL?>/images/icon/tick.png";
+
+		if( $("#img_" + id).attr("src") == tick_src){
+			status = "yes";
+		}
+		
+		$.post( url, { 'acl_id': id, 'status': status, 'user_type_id':user_type},
+	      function( data ) {
+			 img_src = none_src;
+	         if(data == "yes"){
+				img_src = tick_src;
+	         }	         
+	         $("#img_" + id).attr("src", img_src);
+	      }
+	    );
+	}
+</script>

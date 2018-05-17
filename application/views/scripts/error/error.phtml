@@ -1,29 +1,106 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Zend Framework Default Application</title>
-</head>
-<body>
-  <h1>An error occurred</h1>
-  <h2 style="padding-top:20px; color: red;"><?php echo $this->message ?></h2>
+<?php 
 
-  <?php if (isset($this->exception)): ?>
-  
-  <h3>Exception information:</h3>
-  <p>
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
-  </p>
+?>
 
-  <h3>Stack trace:</h3>
-  <pre><?php echo $this->exception->getTraceAsString() ?>
-  </pre>
+<!DOCTYPE html>
+<html lang="en">
 
-  <h3>Request Parameters:</h3>
-  <pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?>
-  </pre>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Personal Information - Ministry of Industry and Handicraft</title>
+ 	<link rel="shortcut icon" href="<?php echo $this->baseUrl();?>/images/icon.ico" type="image/x-icon"/>
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo $this->baseUrl()."/templates/front/";?>vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-  <?php endif ?>
+    <!-- Custom fonts for this template -->
+    <link href="<?php echo $this->baseUrl()."/templates/front/";?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Hanuman|Moul" rel="stylesheet">
 
-</body>
+    <!-- Plugin CSS -->
+    <link href="<?php echo $this->baseUrl()."/templates/front/";?>vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="<?php echo $this->baseUrl()."/templates/front/";?>css/freelancer.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-weight: normal;">
+            <img src="<?php echo $this->baseUrl()."/images/all/logo/logo.png"?>" width="50px">  ព័ត៌មានរបស់មន្ត្រី
+          </a>
+      </div>
+    </nav>
+	<!-- Contact Section -->
+    <section  id="contact" class="no-data">
+   			<div class="container">
+   				<div class="content" >
+   						<img src="<?php echo $this->baseUrl()."/images/all/logo/logo.png"?>" />
+   						<h2>
+   						សូមអភ័យទោស មិនមានពត៌មាននេះទេ!
+   						</h2>
+   						<br />
+   						<h4>សូមព្យាយាមម្ដងទៀត</h4>
+   				</div>
+   			</div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">ទីតាំង</h4>
+            <p class="lead mb-0">45,41, មហាវិធីព្រះនរោត្តម សង្កាត់ចតុមុខ ខណ្ឌដូនពេញ ភ្នំពេញ</p>
+          </div>
+          <div class="col-md-4 mb-5 mb-lg-0">
+          </div>
+          <div class="col-md-4">
+            <h4 class="text-uppercase mb-4">អំពីកម្មវិធី</h4>
+            <p class="lead mb-0">កម្មវិធីនេះបង្កើតដើម្បីពន្លឿនក្នុងការស្វែងរកមន្ត្រីក្នុងក្រសួង</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="copyright py-4 text-center text-white">
+      <div class="container">
+        <small>Copyright &copy; ក្រសួងឧស្សាហកម្ម និងសិប្បកម្ម 2017</small>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-to-top d-lg-none position-fixed ">
+      <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+
+    <!-- Portfolio Modals -->
+
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>js/jqBootstrapValidation.js"></script>
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>js/freelancer.min.js"></script>
+
+  </body>
+
 </html>

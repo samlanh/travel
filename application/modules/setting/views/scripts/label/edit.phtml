@@ -1,0 +1,33 @@
+<?php
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$this->headTitle($tr->translate('Edit Label')); 
+echo $this->headTitle();
+?>
+<title>Edit Label</title>
+	<div class="clearfix"></div>
+	<div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+             <div class="x_title">
+             	<h2><i class="fa fa-bars"></i> <?php echo $tr->translate('Edit Label')?></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                </ul>
+             	<form action="<?php echo $this->url(array('module'=>'setting','controller'=>'Label','action'=>'edit')); ?>" method="post" enctype="application/x-www-form-urlencoded" >
+					<table width="100%">
+						<tr>
+							<td>Label Name</td>
+							<td>
+								<input type="text" required="true" name="label_name"​ dojoType="dijit.form.ValidationTextBox" value="<?php echo $this->rs['keyValue'];?>" missingMessage="អ្នក​ភ្លេច​បំពេញ​ ពិស្ដាជាខ្មែរ!" class="fullside" />
+							  	<input type="hidden" name="id" value="<?php echo $this->rs['code'];?>"  />
+							   <input type="submit" value="រក្សាទុក" label="រក្សាទុក" dojoType="dijit.form.Button"  iconClass="dijitEditorIcon dijitEditorIconSave"/> 							
+															
+							</td>
+						</tr>
+					</table>
+				</form>
+             </div>
+		  </div>
+	  </div>
+	</div>         	
+	

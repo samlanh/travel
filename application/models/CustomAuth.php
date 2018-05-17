@@ -18,8 +18,7 @@ class Application_Model_CustomAuth extends Zend_Controller_Plugin_Abstract
 										"default/index/index",
 										"default/error/error",
 										"default/index/changepassword",
-										"default/index/logout",
-										"exchange/index/check-rate" 
+										"default/index/logout" 
 								);
  	
 	public function __construct(Zend_Auth $auth)
@@ -33,16 +32,16 @@ class Application_Model_CustomAuth extends Zend_Controller_Plugin_Abstract
  	{ 	
  		//clear session from search session
  		$this->clearSession();
- 		
- 		$session_user=new Zend_Session_Namespace('authstu');
+ 		$session_user=new Zend_Session_Namespace('auth_flower');
  		$module = $request->getModuleName();
  		$controller = $request->getControllerName();
  		$action = $request->getActionName();
  		$url = $module."/".$controller."/".$action;
  		$_url = "";
  		
- 		
+ 		//have login
  		if(isset($session_user->arr_acl)){
+ 			
 	 		$arr_acl = $session_user->arr_acl;
 	 		$valid_action = FALSE;
 	 		
@@ -60,9 +59,10 @@ class Application_Model_CustomAuth extends Zend_Controller_Plugin_Abstract
 				
 	 		} 
 	 		
+	 		//echo $valid_action."valid action";exit();
 	 		//redirect to homepage
 	 		if(!$valid_action){
-	 			//For all url that can access all user type
+	 			//just open block below
 // 	 			if($url !== "default/index/index" && $url !=="default/error/error" && $url !=="default/index/changepassword" && $url !=="default/index/logout"){
 // 	 				$_url = '/';
 // 	 			}
@@ -77,19 +77,22 @@ class Application_Model_CustomAuth extends Zend_Controller_Plugin_Abstract
 	 				$_url = '/';
 	 			}		
 	 		}
-	 		else{
+	 		else{//if no have action
 	 			$_url = $this->rewriteUrl($url);
 	 		}
  		}else{ //no login
  			//redirect to login page
-	 		if($url !== "default/index/index"){ 
+ 		   if($url !== "default/index/index"){ 
 	 			$_url = "/";
 	 		}
 	 	}
-	 	
 	 	if(!empty($_url)){
 	 		Application_Form_FrmMessage::redirectUrl($_url);
 	 	}
+// 	 	if(!empty($_url)){
+// 	 		$_url="/home";
+// 	 		Application_Form_FrmMessage::redirectUrl($_url);
+// 	 	}
 			
  	}
  	

@@ -1,0 +1,28 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle($tr->translate("USER_TYPE")); 
+	echo $this->headTitle();
+?>	
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-user"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("USER_TYPE")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    				<div class="buttun-block">
+						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/rsvacl/user/add";?>"><?php echo $tr->translate("Add User Type")?></a>
+					</div>
+    			</div>
+    		</div>
+			<div class="col-sm-12">
+				<div class="card-box">
+					<?php echo $this->list;?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

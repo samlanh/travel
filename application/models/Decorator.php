@@ -9,7 +9,7 @@ class Application_Model_Decorator
 	}
 	public static function removeAllDecorator($form)
 	{
-		$elements=$form->getElements();
+		$elements=$form->getElements(); 
 		foreach($elements as $element){
 			$element->removeDecorator('HtmlTag');
 			$element->removeDecorator('DtDdWrapper');
@@ -28,41 +28,35 @@ class Application_Model_Decorator
 		}
 	}
 	public function getMenuLeft($arr_menu,$controller,$module=null){
-		
-// 		print_r($arr_menu);exit();
-		
 		$menu='';
 		$i=0;
-		$session_user=new Zend_Session_Namespace('authstu');
+		$session_user=new Zend_Session_Namespace('auth_flower');
 		$arr_actin=$session_user->arr_actin;
-// 				print_r($arr_actin);exit();
-	
+// 		print_r($arr_actin);
+		
 		//if(is_array($arr_menu)){
-		foreach($arr_menu as $param=>$url){
-			
-// 			echo $param.'<br />';
-// 			echo 'url='.$url.'<br />';
-			
-			//$access = array_search($module.'/'.$param,$arr_actin);
-			//if($access!=''){
-			if($param==$controller){
-				$uri=$this->baseUrl().'/'.$module.'/'.$param;
-				$url=str_replace('href=""', 'href="'.$uri.'"', $url);
-				$menu.=$this->spanMenu($url,$controller=null);
-			}else{
-				if($module!=null){
-					$uri=$this->baseUrl().'/'.$module.'/'.$param;
-					$url=str_replace('href=""', 'href="'.$uri.'"', $url);
-					$menu.=$url;
-				}else{
-					$menu.=$url;
-				}
+			foreach($arr_menu as $param=>$url){
+				//$access = array_search($module.'/'.$param,$arr_actin);
+				//if($access!=''){
+						if($param==$controller){
+							$uri=$this->baseUrl().'/'.$module.'/'.$param;
+							$url=str_replace('href=""', 'href="'.$uri.'"', $url);
+							$menu.=str_replace('<a', '<a class="'.$class.'"', $url);
+							//$menu.=$this->spanMenu($url,$controller=null);
+						}else{
+							if($module!=null){
+								$uri=$this->baseUrl().'/'.$module.'/'.$param;
+								$url=str_replace('href=""', 'href="'.$uri.'"', $url);
+								$menu.=$url;
+							}else{
+								$menu.=$url;
+							}
+						}
+				//}
+				$i++;
 			}
-			//}
-			$i++;
-		}
-		return $menu;
-		// }
+			return $menu;
+	 // }
 		//return null;
 	}
 	public function spanMenu($url,$controller,$class="current-left"){

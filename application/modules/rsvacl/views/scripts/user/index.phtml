@@ -1,0 +1,65 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle($tr->translate("USER")); 
+	echo $this->headTitle();
+?>	
+<style>
+	#grid{
+		margin: 0 auto;
+	}
+	.dojoxGridSortNode{
+		text-align: center;	
+		height: 30px;		
+	}
+</style>
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-user"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("USER")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    				<div class="buttun-block">
+						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/rsvacl/user/add";?>"><?php echo $tr->translate("Add User")?></a>
+					</div>
+    			</div>
+    		</div>
+			<div class="col-sm-12">
+				<div class="card-box">
+					<form name="frmlist_users" action="<?php echo $this->url(array('module'=>'rsvacl','controller'=>'user','action'=>'index')); ?>"  method="post">
+						<div class="form-group">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="txtsearch" id="txtsearch"  placeholder="Search..." value='<?php echo $this->txtsearch;?>'>
+                            </div>
+                            <div class="col-md-3">
+                            	<select class="form-control" name="user_type" id="user_type">
+                            		<option value="-1" <?php if($this->user_type == -1) echo 'selected="selected"';?> ><?php echo $tr->translate("CHOOSE_USER_TYPE")?></option> 
+									<?php foreach ($this->user_typelist as $key => $ut) : ?>
+										<option value="<?php echo $key;?>" <?php if($key == $this->user_type) echo 'selected'?>><?php echo $ut;?></option>
+									<?php endforeach;?>	 
+                            	</select>
+                            </div>
+                             <div class="col-md-3">
+                            	<select class="form-control" name="active" id="active">
+                            		<option value="-1" <?php if($this->active == -1) echo 'selected="selected"';?> ><?php echo $tr->translate("CHOOSE_STATUS")?></option> 
+									<?php foreach ($this->activelist as $key => $at) : ?>
+										<option value="<?php echo $key;?>" <?php if($key == $this->active) echo 'selected'?>><?php echo $at;?></option>
+									<?php endforeach;?>	  
+                            	</select>
+                            </div>
+                            <div class="col-md-3">
+                            	<button class="btn btn-primary" showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
+                            </div>
+                       </div>
+					</form>
+					<div class="clearfix"></div>
+				</div>
+				<div class="card-box">
+					<?php echo $this->list;?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

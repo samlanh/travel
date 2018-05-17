@@ -8,14 +8,14 @@ class Application_Form_FrmLogin extends Zend_Dojo_Form
         /* Form Elements & Other Definitions Here ... */
     	
     	   
-		$user_name_login=new Zend_Dojo_Form_Element_ValidationTextBox('txt_user_name');		
-		$user_name_login->setLabel('ឈ្មោះ​អ្នក​ប្រើ​ប្រាស់')			
+		$user_name_login=new Zend_Dojo_Form_Element_ValidationTextBox('emailaddress');		
+		$user_name_login->setLabel('Email address')			
 						->setRequired(true);
 									
 									
 		
 		$password_login=new Zend_Dojo_Form_Element_PasswordTextBox('txt_password');
-		$password_login->setLabel('ពាក្យ​​សំងាត់')
+		$password_login->setLabel('Password')
 						->setRequired(true);
 		
 		$submit_login=new Zend_Dojo_Form_Element_SubmitButton('submit_login');				

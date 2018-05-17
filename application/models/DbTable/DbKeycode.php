@@ -5,7 +5,11 @@ class Application_Model_DbTable_DbKeycode extends Zend_Db_Table_Abstract
 
     protected $_name = 'rms_setting';
     
-
+	public function getSystemSetting($id){
+		$db = $this->getAdapter();
+		$sql = "SELECT keycode,value FROM ln_system_setting WHERE id=$id";
+		return $db->fetchRow($sql);
+	}
 	function getKeyCodeMiniInv($loginonly = FALSE){
 		$db = $this->getAdapter();
 		$sql = 'SELECT `keyName`,`keyValue` FROM `rms_setting`';
@@ -22,6 +26,11 @@ class Application_Model_DbTable_DbKeycode extends Zend_Db_Table_Abstract
 	
 	static function getHieghtRow(){
 		return 29;		
+	}
+	public function getLabelVaueById($id){
+		$db = $this->getAdapter();
+		$sql = "SELECT code,keyName,keyValue FROM `rms_setting` WHERE code = $id AND access_type=0";
+		return $db->fetchRow($sql);
 	}
 	
 	function getMainBranch(){
@@ -47,11 +56,6 @@ class Application_Model_DbTable_DbKeycode extends Zend_Db_Table_Abstract
 					12=>'ធ្នូ'
 					);
 		return $_mkh[$month];
-	}
-	public function getLabelVaueById($id){
-		$db = $this->getAdapter();
-		$sql = "SELECT code,keyName,keyValue FROM `rms_setting` WHERE code = $id AND access_type=0";
-		return $db->fetchRow($sql);
 	}
 }
 

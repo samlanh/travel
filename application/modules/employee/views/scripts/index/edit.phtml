@@ -1,0 +1,561 @@
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$this->headTitle($tr->translate('Edit Employee'));
+echo $this->headTitle();
+
+$db = new Employee_Model_DbTable_DbEmployee();
+	$position = $db->getSettingByValue("position");
+	$ministry = $db->getSettingByValue("ministry");
+	$person = $db->getSettingByValue("person");
+	$cardBackground = $db->getSettingByValue("cardBackground");
+	
+	$MH_fornt = $cardBackground['value'];
+$profile = $this->baseUrl()."/images/profile.jpg";
+$employee = $this->employee;
+$url="http://".$_SERVER['HTTP_HOST'];
+$file="";
+if (!empty($employee['profilePhoto'])){
+	$profile = $this->baseUrl()."/images/all/".$employee['profilePhoto'];
+	$file= $employee['profilePhoto'];
+}
+$number = array("០","១","២","៣","៤","៥","៦","៧","៨","៩");
+$month = array("01"=>"មករា", "02"=>"កុម្ភៈ", "03"=>"មិនា", "04"=>"មេសា", "05"=>"ឧសភា", "06"=>"មិថុនា", "07"=>"កក្កដា","08"=>"សីហា", "09"=>"កញ្ញា", "10"=>"តុលា","11"=>"វិច្ឆិកា", "12"=>"ធ្នូ");
+
+$phblicpart = PUBLIC_PATH;
+$errorCorrectionLevel = 'L';
+$matrixPointSize = 4;
+//html PNG location prefix
+$PNG_WEB_DIR = $this->baseUrl().'/images/all/qrcode/';
+$PNG_TEMP_DIR = $phblicpart.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR."all".DIRECTORY_SEPARATOR."qrcode".DIRECTORY_SEPARATOR;
+include $phblicpart.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."phpqrcode".DIRECTORY_SEPARATOR."qrlib.php";
+$filename="";
+if (!empty($employee['employeeCode'])){
+	$filename = $PNG_TEMP_DIR.md5($employee['employeeCode'].'|'.$errorCorrectionLevel.'|'.$matrixPointSize).'.png';
+	if (file_exists($filename)){
+	
+	}else{
+		QRcode::png($url.$this->baseUrl()."/index/employee?information=".$employee['employeeCode'], $filename, $errorCorrectionLevel, $matrixPointSize, 2);
+	}
+}
+?>
+<style>
+.form-group {
+    margin-bottom: 5px;
+}
+.form-horizontal .control-label {
+    text-align: left;
+}
+.thumb-xl {
+    height: 180px;
+    width: 150px;
+}
+div.browe_photo .input-group {
+    display: block;
+}
+label#error {
+    color: #F44336;
+}
+.card-employee {
+    border: solid 1px #cecccc;
+    border-radius: 5px;
+    width: 14cm;
+    padding: 10px;
+        color: #0670c3;
+}
+</style>
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+	    		<div class="col-sm-12 border-botom">
+	    			<div class="col-sm-8">
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Edit Employee");?></h4>
+	    			</div>
+	    			<div class="col-sm-4 text-right">
+	    			</div>
+	    		</div>
+    		
+			<div class="col-sm-8">
+					<div class="form-group">
+						<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Employee ID')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                    	<input class="form-control"  type="text" onKeyup="CheckEmployeeCode();" name="employeeCode" id="employeeCode" value="<?php echo $employee['employeeCode'];?>" placeholder="<?php echo $tr->translate('Employee ID')?>"/>
+	                  		<input class="form-control"  type="hidden"  name="id" id="id"  value="<?php echo $employee['id'];?>"/>
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Sure Name')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                      <input class="form-control" type="text"  name="sureName" id="sureName" value="<?php echo $employee['sureName'];?>" placeholder="<?php echo $tr->translate('Sure Name')?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('First Name')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="firstName" id="firstName" value="<?php echo $employee['firstName'];?>" placeholder="<?php echo $tr->translate('First Name');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Latin Name')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="latinName" id="latinName" value="<?php echo $employee['latinName'];?>" placeholder="<?php echo $tr->translate('Latin Name');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Gender')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="gender" id="gender" value="<?php echo $employee['gender'];?>" placeholder="<?php echo $tr->translate('Gender');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('DOB')?> :
+	                   </label>
+	                    <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="dob" id="dob" value="<?php echo $employee['dob'];?>" placeholder="<?php echo $tr->translate('DOB');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('POB')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="pob" id="pob" placeholder="<?php echo $tr->translate('POB');?>" value="<?php echo $employee['pob'];?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Nation')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="nation" id="nation" value="<?php echo $employee['nation'];?>" placeholder="<?php echo $tr->translate('Nation');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Nationality')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="nationality" id="nationality" value="<?php echo $employee['nationality'];?>" placeholder="<?php echo $tr->translate('Nationality');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Family Status')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="familyStatus" id="familyStatus" value="<?php echo $employee['familyStatus'];?>" placeholder="<?php echo $tr->translate('Family Status');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ID Card Number')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="idCardNumber" id="idCardNumber" value="<?php echo $employee['idCardNumber'];?>" placeholder="<?php echo $tr->translate('ID Card Number');?>" />
+	                   </div>
+	                </div>
+	                 <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Start Work Date')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="startWorkDate" id="startWorkDate" value="<?php echo $employee['startWorkDate'];?>" placeholder="<?php echo $tr->translate('Start Work Date');?>" />
+	                   </div>
+	                </div>
+	                 <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Framework')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="framework" id="framework" value="<?php echo $employee['framework'];?>" placeholder="<?php echo $tr->translate('Framework');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('POSITION')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="position" id="position" value="<?php echo $employee['position'];?>" placeholder="<?php echo $tr->translate('POSITION');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Appointment Letter')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="appointmentLetter" id="appointmentLetter" value="<?php echo $employee['appointmentLetter'];?>" placeholder="<?php echo $tr->translate('Appointment Letter');?>" />
+	                   </div>
+	                </div>
+	                 <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Organization')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"  name="organization" id="organization" value="<?php echo $employee['organization'];?>" placeholder="<?php echo $tr->translate('Organization');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Ministry')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"  name="ministry" id="ministry"  value="<?php echo $employee['ministry'];?>" placeholder="<?php echo $tr->translate('Ministry');?>" />
+	                   </div>
+	                </div>
+	                 <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Education Level')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="educationLevel" id="educationLevel" value="<?php echo $employee['educationLevel'];?>" placeholder="<?php echo $tr->translate('Education Level');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Specialty or skill')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="skill" id="skill" value="<?php echo $employee['skill'];?>" placeholder="<?php echo $tr->translate('Specialty or skill');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Language')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="language" id="language" value="<?php echo $employee['language'];?>" placeholder="<?php echo $tr->translate('Language');?>" />
+	                   </div>
+	                </div>
+	                 <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Last Level')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="lastLevel" id="lastLevel" value="<?php echo $employee['lastLevel'];?>" placeholder="<?php echo $tr->translate('Last Level');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Salary Updated')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="salaryUpdated" id="salaryUpdated" value="<?php echo $employee['salaryUpdated'];?>" placeholder="<?php echo $tr->translate('Salary Updated');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Last Raise Salary')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"  name="lastRaiseSalary" value="<?php echo $employee['lastRaiseSalary'];?>" id="lastRaiseSalary" placeholder="<?php echo $tr->translate('Last Raise Salary');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Old Work Place')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"  name="oldWorkPlace" id="oldWorkPlace" value="<?php echo $employee['oldWorkPlace'];?>" placeholder="<?php echo $tr->translate('Old Work Place');?>" />
+	                   </div>
+	                </div>
+	                 <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Expect Retire')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"  name="expectRetire" value="<?php echo $employee['expectRetire'];?>" id="expectRetire" placeholder="<?php echo $tr->translate('Expect Retire');?>" />
+	                   </div>
+	                </div>
+	               <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Work Place Address')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"  name="workPlaceAddress" id="workPlaceAddress" value="<?php echo $employee['workPlaceAddress'];?>" placeholder="<?php echo $tr->translate('Work Place Address');?>" />
+	                   </div>
+	                </div> 
+	                 <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Current Address')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="currentAddress" id="currentAddress" value="<?php echo $employee['currentAddress'];?>" placeholder="<?php echo $tr->translate('Current Address');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Expired Date')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="expiredDate" id="expiredDate" value="<?php echo $employee['expiredDate'];?>" placeholder="<?php echo $tr->translate('Expired Date');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label style=" background: #068244;    padding: 5px;   color: #fff;" class="control-label col-md-12 col-sm-12 col-xs-12" for="first-name"><?php echo $tr->translate('The name of the contact, Phone , Email Address In case of an emergency')?> :
+	                   </label>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Contact Name');?> :</label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"  name="contactName" id="contactName" value="<?php echo $employee['contactName'];?>" placeholder="<?php echo $tr->translate('Contact Name');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Phone Number');?> :</label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="phoneNumber" id="phoneNumber" value="<?php echo $employee['phoneNumber'];?>" placeholder="<?php echo $tr->translate('Phone Number');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Email Address');?> :</label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="emailAddress" id="emailAddress"  value="<?php echo $employee['emailAddress'];?>" placeholder="<?php echo $tr->translate('Email Address');?>" />
+	                   </div>
+	                </div>
+	                
+	                
+	                <?php $sewe=0; if ($sewe==1){?>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Position Equal')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"  name="positionEqual" id="positionEqual" value="<?php echo $employee['positionEqual'];?>" placeholder="<?php echo $tr->translate('Position Equal');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Certification Level')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="certification" id="certification" value="<?php echo $employee['certification'];?>"  placeholder="<?php echo $tr->translate('Certification Level');?>" />
+	                   </div>
+	                </div>
+	                 <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Certificate Code')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="certificateCode" id="certificateCode" value="<?php echo $employee['certificateCode'];?>" placeholder="<?php echo $tr->translate('Certificate Code');?>" />
+	                   </div>
+	                </div>
+	                 <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Salary')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"  name="salary" id="salary" value="<?php echo $employee['salary'];?>" placeholder="<?php echo $tr->translate('Money');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Seniority')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="seniority" id="seniority" value="<?php echo $employee['seniority'];?>" placeholder="<?php echo $tr->translate('Seniority');?>" />
+	                   </div>
+	                </div>
+	               <?php }?>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                    	<div class="thumb-xl member-thumb m-b-10 center-block">
+                            <img id="profile-img-tag" src="<?php echo $profile;?>" class=" img-thumbnail" alt="profile-image" >
+	                        </div>
+                        </div>
+                 </div>
+                 <div class="form-group">
+                       <div class="col-md-12 col-sm-12 col-xs-12 m-t-10 text-center browe_photo">
+                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('BROWSE_PHOTO')?>">
+                  	  </div>
+                   </div>
+                   <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-center">
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('SAVE');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
+			                </div>
+	                    </div>
+                    </div>
+                    <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-center">
+								<input onclick="PrintDiv();"  class="btn btn-primary black save" type="button" value="<?php echo $tr->translate('Print Card');?>" label="<?php echo $tr->translate('Print Card');?>" /> 
+			                </div>
+	                    </div>
+                    </div>
+                     <br />
+                    <div id="divPrint" class="form-group" style="display: none;" >
+                    		<style>
+								.card-content{
+										background-image: url('<?php echo $this->baseUrl()."/images/card/".$MH_fornt;?>');
+									 background-size: 100%;background-repeat: no-repeat;								
+									}
+								 .left-block {
+								    margin-top: 7px;
+								}
+								.right-block{
+									margin-top: -7px;
+									}
+								ul.list-data {
+								    list-style-type: none;
+								    font-size: 9px;
+								    padding: 0;
+									font-weight:600;
+								}
+
+								ul.list-data span.title {
+								    min-width: 2cm;
+								    display: inline-block;
+								    font-family: Arial,'Khmer OS Muol Light';
+								}
+								ul.list-data span.title_value.up{
+									text-transform: uppercase;	
+									font-weight: 600;
+								}
+									span.title_value.name {
+									    min-width: 110px;
+									    display: inline-block;
+									}
+								span.title_gender {
+								    font-family: Arial,'Khmer OS Muol Light';
+								}
+								.foot-right-block,.foot-left-block,
+								.left-block, .right-block,
+								.last_footer .left,
+								.last_footer .right {
+								    display: inline-block;
+								}
+								.right-block {
+								    width: 45%;
+								    vertical-align: top;padding-left: 85px;
+								}
+								.left-block {
+								    width: 24%;
+								    vertical-align: top;
+								    text-align: center;
+								}
+								.left-block .photo {
+									margin-top:1px;
+								    text-align: center;
+								}
+								.left-block .photo img {
+								    width: 64px;
+								    height: 77px;
+								}
+								.foot-left-block {
+								    width: 40%;
+								    vertical-align: top;
+								}
+								.foot-right-block {
+								    text-align: center;
+								    vertical-align: top;
+								    width: 58%;
+								position: relative;
+								}
+								.foot-right-block p {
+								    font-size: 6px;
+								    padding: 0;
+    								margin: 0;
+								}
+								.qrimages {
+								    width: 60%;
+								    text-align: center;
+								}
+								.qrimages img {
+								   width: 50px;
+								}
+							</style>
+                    	<div class="card-content" style=" line-height: 16.285px;  width: 8.6cm; height:5.1cm;   color: #3f3f95; font-family: Arial, sans-serif,'Kh Battambang','Khmer Battambang'; ">
+                    		<div class="left-block">
+                    			<div class="photo">
+                    				<img  src="<?php echo $profile;?>" alt="profile-image" >
+                    			</div>
+                    		</div>
+                    		<div class="right-block">
+	                    		<ul class="list-data">
+	                    			<li><span class="title_value">&nbsp;<?php echo $employee['employeeCode'];?></span></li>
+	                    			<li><span class="title_value name">&nbsp;<?php echo $employee['firstName']." ".$employee['sureName'];?></span><span class="title_value"> &nbsp;&nbsp;<?php echo $employee['gender'];?></span></li>
+	                    			<li><span class="title_value up">&nbsp;<?php echo $employee['latinName'];?></span></li>
+	                    			<li><span class="title_value">&nbsp;<?php echo $employee['dob'];?></span></li>
+	                    			<li><span class="title_value">&nbsp;<?php echo $employee['position'];?></span></li>
+	                    			<li><span class="title_value">&nbsp;<?php echo $employee['organization'];?></span></li>
+	                    		</ul>
+	                    	</div>
+	                    	<div class="foot-left-block">
+                    			<div class="qrimages">
+                    				<img  src="<?php echo $PNG_WEB_DIR.basename($filename);?>" alt="profile-image" >
+                    			</div>
+                    		</div>
+                    		<div class="foot-right-block">
+                    		</div>
+                    	</div>
+                    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php // benchmark
+    //QRtools::timeBenchmark();    
+?>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#profile-img").change(function(){
+        readURL(this);
+    });
+
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+            var msg='You can input only number.';
+    		alert(msg);
+    		return false;
+        }
+        return true;
+    }
+	var oldEmployeeCode ='<?php echo $employee['employeeCode'];?>';
+    var url_checkEmployee = '<?php echo $this->url(array('module'=>'employee','controller'=>'index','action'=>'checkemplyeecode')); ?>';
+    function CheckEmployeeCode(){
+    	employeeCode = $('#employeeCode').val();
+    	 var message = document.getElementById('error');
+    	$.ajax({
+            url: url_checkEmployee,
+            type: "post",
+            data: {'employeeCode':employeeCode},
+            success: function(data){
+                val = $.parseJSON(data);
+    				if(val==1){
+        				if(oldEmployeeCode==employeeCode){
+        					document.getElementById('btnsubmit').disabled=false;
+        					message.innerHTML = "";
+        				}else{
+    						document.getElementById('btnsubmit').disabled=true;
+    						 message.innerHTML = "<?php echo $tr->translate("Employee ID has already in other employee");?>";
+        				}
+    				}
+    				else{
+    					document.getElementById('btnsubmit').disabled=false;
+    					message.innerHTML = "";
+    				}
+
+    			},
+    			error: function(err) {
+    				alert(err);
+    			}
+    		});
+    }
+
+    function PrintDiv() {
+    	loading();
+      	 var contents = document.getElementById("divPrint").innerHTML;
+     	  var frame1 = document.createElement('iframe');
+        frame1.name = "frame1";
+        frame1.style.position = "absolute";
+        frame1.style.top = "-1000000px";
+        document.body.appendChild(frame1);
+        var frameDoc = (frame1.contentWindow) ? frame1.contentWindow : (frame1.contentDocument.document) ? frame1.contentDocument.document : frame1.contentDocument; frameDoc.document.open();
+        frameDoc.document.write('<html><head><title>Employee ID</title>');
+        frameDoc.document.write('</head><body>');
+        frameDoc.document.write(contents);
+        frameDoc.document.write('</body></html>');
+        frameDoc.document.close();
+        setTimeout(function () {
+            window.frames["frame1"].focus();
+            window.frames["frame1"].print();
+            document.body.removeChild(frame1);
+            closeloading();
+        }, 2000);
+       return false;
+    }
+</script>

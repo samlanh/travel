@@ -11,9 +11,6 @@
 	$session_user=new Zend_Session_Namespace('auth_flower');
 	$arr_module = $session_user->arr_acl;
 	$username = $session_user->first_name;
-	
-	$ReportAction = $dbuser->getArrAclReport($session_user->level);
-	
 	$userinfo="";
 	if (!empty($session_user->user_id)){
 	$userinfo = $dbuser->getUserInfomation($session_user->user_id);
@@ -24,28 +21,31 @@
 	$newarray=array();
 	if(!empty($arr_module)){
 		foreach ($arr_module as $key => $rs){
+			if($rs['module']=='report' AND $rs['controller']!='loan'){
+				continue;
+			}
 			$lblcontroller = $rs['controller'];
-// 			if($rs['module']=='report' AND $rs['controller']!='index'){
-// 				$lblcontroller='REPORT';
-// 				continue;
+// 			if($rs['controller']=='index' AND $rs['module']=='group' ){
+// 				$lblcontroller='CLIENT_INFO';
 // 			}
-			if($rs['module']=='degree' AND $rs['controller']=='index'){
-				$lblcontroller='DEGREE';
-			}
-			if($rs['module']=='report' AND $rs['controller']=='index'){
-				$lblcontroller='REPORT';
-			}
-			if($rs['module']=='requestscholarship' AND $rs['controller']=='index'){
-				$lblcontroller='REQUESTSCHOLARSHIP';
-			}
-			if($rs['module']=='requestscholarship' AND $rs['controller']=='program'){
-				$lblcontroller='PROGRAM STUDY';
-			}
+// 			if($rs['controller']=='index' AND $rs['module']=='loan' ){
+// 				$lblcontroller='IL_DISBURSE';
+// 			}
+// 			if($rs['controller']=='index' AND $rs['module']=='other' ){
+// 				$lblcontroller='province';
+// 			}
+// 			if($rs['controller']=='loantype' AND $rs['module']=='other' ){
+// 				$lblcontroller='OTHER';
+// 			}
+// 			if($rs['controller']=='term' AND $rs['module']=='other' ){
+// 				$lblcontroller='termcondition';
+// 			}
 			if($module!=$rs['module']){
-				$newarray= array($rs['controller']=>$tr->translate(strtoupper($lblcontroller)));
+				$newarray= array($rs['controller']=>'<a href="">'.$tr->translate(strtoupper($lblcontroller)).'</a>');
 				$menu[$rs['module']]= $newarray;
+				$old_module=$rs['module'];
 			}else{
-				$newarray= array_merge($newarray,array($rs['controller']=>$tr->translate(strtoupper($lblcontroller))));
+				$newarray= array_merge($newarray,array($rs['controller']=>'<a href="">'.$tr->translate(strtoupper($lblcontroller)).'</a>'));
 			    $menu[$rs['module']] = $newarray;
 			}
 			$module=$rs['module'];
@@ -56,9 +56,8 @@
 	?>
 	<?php 
 	$array_icon = array(
-			'home'=>'<i class="ti-home"></i>',
-			'requestscholarship'=>'<i class="ti-write"></i>',
-			'degree'=>'<i class="ti-layout-tab"></i>',
+			'employee'=>'<i class="ti-id-badge"></i>',
+			'bookingmg'=>'<i class="ti-shopping-cart"></i>',
 			'report'=>'<i class="ti-desktop"></i>',
 			'rsvacl'=>'<i class="ti-user"></i>',
 			'setting'=>'<i class="ti-settings"></i>',
@@ -73,31 +72,22 @@
                             <button type="button" class="button-menu-mobile btn-mobile-view visible-xs visible-sm">
                                 <i class="mdi mdi-close"></i>
                             </button>
-							<div class="buttun-booking">
-								<a class="btn btn-primary top-make-booking" href="<?php echo $this->baseUrl()."/requestscholarship/index/add";?>"><?php echo $tr->translate("ADD REQUESTSCHOLARSHIP");?></a>
-							</div>
+                            <div class="user_name">
+                            	<?php echo $username;?>
+                            </div>
+							<!-- <div class="buttun-booking">
+								<a class="btn btn-primary top-make-booking" href="<?php //echo $this->baseUrl()."/bookingmg/index/add";?>"><?php //echo $tr->translate("Make Booking");?></a>
+							</div>-->
                             <!-- Left Menu Start -->
                             <ul class="metisMenu nav" id="side-menu">
 								<?php if(!empty($arr_module)){ foreach ($arr_module as $rs){
 			                		$url =$this->url(array('module'=>$rs,'controller'=>'index','action'=>'index'), null, true);
-			                		if ($rs=="home"){
-			                			$title=$tr->translate("DASHBOARD");
+			                		if ($rs=="group"){
+			                			$title=$tr->translate("CUSTOMER");
 			                		}else{
 			                			$title=$tr->translate(strtoupper($rs));
 			                		}
 			                	?>
-			                	<?php if ($rs=="report"){?>
-			                	<li <?php if ($moduless==$rs){?>class="active"<?php }?>>
-			                	 <a href="javascript: void(0);" aria-expanded="true"><?php echo $array_icon[$rs];?> <?php echo $title;?> <span class="fa arrow"></span></a>
-			                		<ul class="nav-second-level nav" aria-expanded="true">
-			                			<?php if (!empty($ReportAction)) foreach ($ReportAction as $rep){
-			                				$urlsub = $this->url(array('module'=>$rep['module'],'controller'=>$rep['controller'],'action'=>$rep['action']), null, true);
-			                				?>
-			                			<li><a href="<?php echo $urlsub;?>"><?php echo $tr->translate(strtoupper($rep['label']));?></a></li>
-			                			<?php }?>
-			                		</ul>
-			                	</li>
-			                	<?php }else{?>
                                 <li <?php if ($moduless==$rs){?>class="active"<?php }?>>
                                 	<?php 
                                 		$count= count($arr_param_menu[$rs]);
@@ -123,8 +113,7 @@
                                      <?php } ?>
                                 </li>
                                 <?php }
-								}?>
-                				 <?php }?>
+                				}?>
                             </ul>
                         </div>
                     </div><!--Scrollbar wrapper-->

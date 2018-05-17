@@ -1,0 +1,273 @@
+<?php 
+$session_user=new Zend_Session_Namespace('auth_flower');
+$userName = $session_user->first_name;
+$userID = $session_user->user_id;
+
+$employee= $this->employee;
+$file="";
+$profile = $this->baseUrl()."/images/profile.jpg";
+if (!empty($employee['profilePhoto'])){
+	$profile = $this->baseUrl()."/images/all/".$employee['profilePhoto'];
+	$file= $employee['profilePhoto'];
+}
+$number = array("០","១","២","៣","៤","៥","៦","៧","៨","៩");
+$month = array("01"=>"មករា", "02"=>"កុម្ភៈ", "03"=>"មិនា", "04"=>"មេសា", "05"=>"ឧសភា", "06"=>"មិថុនា", "07"=>"កក្កដា","08"=>"សីហា", "09"=>"កញ្ញា", "10"=>"តុលា","11"=>"វិច្ឆិកា", "12"=>"ធ្នូ");
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+     <link rel="shortcut icon" href="<?php echo $this->baseUrl();?>/images/icon.ico" type="image/x-icon"/>
+    <title>Personal Information - Ministry of Industry and Handicraft</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo $this->baseUrl()."/templates/front/";?>vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="<?php echo $this->baseUrl()."/templates/front/";?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Hanuman|Moul" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link href="<?php echo $this->baseUrl()."/templates/front/";?>vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="<?php echo $this->baseUrl()."/templates/front/";?>css/freelancer.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-weight: normal;">
+            <img src="<?php echo $this->baseUrl()."/images/all/logo/logo.png"?>" width="50px">  ព័ត៌មានរបស់មន្ត្រី
+          </a>
+      </div>
+    </nav>
+
+    <?php if (!empty($employee)){?>
+    <!-- Contact Section -->
+    <section  id="contact">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary" style="padding-top:50px">អំពីមន្ត្រី</h2>
+        <hr style="border-width:  3px; border-color: #00672e;" />
+        <div class="row">
+            <div class="center-block">
+                <img width="250px" src="<?php echo $profile; ?>" class="center-block" >
+            </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+              <div class="table-responsive">
+                  <table class="table datavalue">
+                  			<tr>
+                                <th>អត្តលេខ</th>
+                                <td><?php echo $employee["employeeCode"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>គោត្តនាម និងនាម</th>
+                                <td><?php echo $employee["firstName"]." ".$employee["sureName"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>អក្សរឡាតាំង</th>
+                                <td><?php echo $employee["latinName"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>ភេទ</th>
+                                <td><?php echo $employee['gender'];?></td>
+                            </tr>
+                            <tr>
+                                <th>ថ្ងៃ ខែ ឆ្នាំកំណើត</th>
+                                <td><?php  echo $employee['dob'];?></td>
+                            </tr>
+                             <tr>
+                                <th>ឋានៈ​ និង តួនាទី</th>
+                                <td><?php echo $employee["position"]; ?></td>
+                            </tr>
+                             <tr>
+                                <th>អង្គភាព</th>
+                                <td><?php echo $employee["organization"]; ?></td>
+                            </tr>
+                             <tr>
+                                <th>ផុតកំណត់នៅថ្ងៃទី ខែ ឆ្នាំ</th>
+                                <td><?php echo $employee["expiredDate"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>ទីកន្លែងកំណើត</th>
+                                <td><?php echo $employee["pob"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>ជនជាតិ</th>
+                                <td><?php echo $employee["nation"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>សញ្ជាតិ</th>
+                                <td><?php echo $employee["nationality"]; ?></td>
+                            </tr>
+                             <tr>
+                                <th>លេខអត្តសញ្ញាណប័ណ្ណប្រជាជន</th>
+                                <td><?php echo $employee["idCardNumber"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>ក្រសួង</th>
+                                <td><?php echo $employee["ministry"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>កម្រិតវប្បធម៌</th>
+                                <td><?php echo $employee["educationLevel"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>ឯកទេស ឬ មុខជំនាញ</th>
+                                <td><?php echo $employee["skill"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>ភាសា</th>
+                                <td><?php echo $employee["language"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>ក្រសួង ស្ថាប័ន ធ្លាប់បានបម្រើការងារ </th>
+                                <td><?php echo $employee["oldWorkPlace"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>អាសយដ្ឋានកន្លែងធ្វើការ</th>
+                                <td><?php echo $employee["workPlaceAddress"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>អាសយដ្ឋានស្នាក់នៅបច្ចុប្បន្ន</th>
+                                <td><?php echo $employee["currentAddress"]; ?></td>
+                            </tr>
+                             <tr>
+                                <th>ឈ្មោះ លេខទូរស័ព្ទ អ៊ីម៉ែល  <br />សម្រាប់ទំនាក់ទំនងក្នុងករណីមានគ្រោះអាសន្ន</th>
+                                <td>
+                                	<?php echo $employee["contactName"]; ?><br />
+                                	<?php echo $employee["phoneNumber"]; ?><br />
+                                	<?php echo $employee["emailAddress"]; ?><br />
+                                </td>
+                            </tr>
+                           
+                             
+                            <?php if (!empty($userID)){?> 
+                            <tr>
+                                <th>ថ្ងៃ.ខែ.ឆ្នាំ ចូលបម្រើការងាររដ្ឋ</th>
+                                <td><?php echo $employee['startWorkDate']; ?></td>
+                            </tr>
+                            <tr>
+                                <th>ក្របខណ្ឌ</th>
+                                <td><?php echo $employee["framework"]; ?></td>
+                            </tr>
+                           
+                             <tr>
+                                <th>តែងតាំងដោយ</th>
+                                <td><?php echo $employee["appointmentLetter"]; ?></td>
+                            </tr>
+                             <tr>
+                                <th>ក្របខ័ណ្ឌ ឋានន្តរស័ក្តិ និងថ្នាក់ចុងក្រោយ </th>
+                                <td><?php echo $employee["lastLevel"]; ?></td>
+                            </tr>
+                             <tr>
+                                <th>ថ្ងៃ​.ខែ.ឆ្នាំ ឡើងកាំប្រាក់​ ចុងក្រោយ</th>
+                                <td><?php echo $employee['salaryUpdated']; ?></td>
+                            </tr>
+                            <tr>
+                                <th>កម្រិតប្រាក់បំណាច់មុខងារចុងក្រោយ </th>
+                                <td><?php echo $employee["lastRaiseSalary"]; ?></td>
+                            </tr>
+                            <tr>
+                                <th>ថ្ងៃ ខែ ឆ្នាំត្រូវចូលនិវត្តន៍</th>
+                                <td><?php echo $employee['expectRetire'];?></td>
+                            </tr>
+                             <tr>
+                                <th>ស្ថានភាពគ្រួសា</th>
+                                <td><?php echo $employee['familyStatus'];?></td>
+                            </tr>
+                            <?php }?>
+                           
+                       <?php if (empty($userID)){?>       
+                      <tr> <td> <a href="<?php echo $this->baseUrl()."/index/index?information=".$employee["employeeCode"];?>"> ចូលទៅមើលពត៌មានលម្អិត </a><td> </tr>
+                      <?php }else{?>
+                      <tr> <td> <a href="<?php echo $this->baseUrl()."/index/logoutdetail?information=".$employee["employeeCode"];?>"> ចាកចេញពីការមើលពត៌មានលម្អិត </a><td></tr>
+                      <?php }?>
+                  </table>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+<?php }else{?>
+	<!-- Contact Section -->
+    <section  id="contact" class="no-data">
+   			<div class="container">
+   				<div class="content" >
+   						<img src="<?php echo $this->baseUrl()."/images/all/logo/logo.png"?>" />
+   						<h2>
+   						សូមអភ័យទោស មិនមានពត៌មាននេះទេ!
+   						</h2>
+   						<br />
+   						<h4>សូមព្យាយាមម្ដងទៀត</h4>
+   				</div>
+   			</div>
+    </section>
+    
+<?php }?>
+    <!-- Footer -->
+    <footer class="footer text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">ទីតាំង</h4>
+            <p class="lead mb-0">45,41, មហាវិធីព្រះនរោត្តម សង្កាត់ចតុមុខ ខណ្ឌដូនពេញ ភ្នំពេញ</p>
+          </div>
+          <div class="col-md-4 mb-5 mb-lg-0">
+          </div>
+          <div class="col-md-4">
+            <h4 class="text-uppercase mb-4">អំពីកម្មវិធី</h4>
+            <p class="lead mb-0">កម្មវិធីនេះបង្កើតដើម្បីពន្លឿនក្នុងការស្វែងរកមន្ត្រីក្នុងក្រសួង</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="copyright py-4 text-center text-white">
+      <div class="container">
+        <small>Copyright &copy; ក្រសួងឧស្សាហកម្ម និងសិប្បកម្ម 2017</small>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-to-top d-lg-none position-fixed ">
+      <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+
+    <!-- Portfolio Modals -->
+
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>js/jqBootstrapValidation.js"></script>
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="<?php echo $this->baseUrl()."/templates/front/";?>js/freelancer.min.js"></script>
+
+  </body>
+
+</html>

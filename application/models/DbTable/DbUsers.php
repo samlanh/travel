@@ -9,19 +9,47 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
 	public function getUserInfo($user_id)
 	{		
 		$select=$this->select();
-			$select->from($this,array('user_type', 'last_name' ,'first_name','branch_id'))
+			$select->from($this,array('user_type', 'last_name' ,'first_name','user_name'))
 			->where('id=?',$user_id);			
 		$row=$this->fetchRow($select);		
 		if(!$row) return NULL;
 		return $row;
+	}
+	function getUserInfomation($user_id){
+		$db = $this->getAdapter();
+		$sql= "SELECT u.*,
+		(SELECT ut.user_type FROM `rms_acl_user_type` AS ut WHERE ut.user_type_id = u.`user_type` LIMIT 1) AS user_type_title FROM `rms_users` AS u WHERE u.`id`=$user_id LIMIT 1";
+		return $db->fetchRow($sql);
 	}	
+// 	public function getThemeByUserId($user_id){
+// 		$db = $this->getAdapter();
+// 		$sql = "SELECT theme_name FROM `ln_theme_user` WHERE user_id =$user_id LIMIT 1";
+// 		$rs_theme = $db->fetchOne($sql);
+// 		$array_theme = array(
+// 			1=>"claro",
+// 			2=>"nihilo",
+// 			3=>"soria",
+// 			4=>"tundra"
+// 			);
+// 		if(!empty($rs_theme)){
+// 			return $array_theme[$rs_theme];
+// 		}else{
+// 			$sql = "SELECT value FROM `ln_system_setting` WHERE keycode ='theme_setting' ";
+// 			$rs_theme = $db->fetchOne($sql);
+// 			if(!empty($rs_theme)){
+// 				return $array_theme[$rs_theme];
+// 			}else{
+// 				return $array_theme[1];
+// 			}
+// 		}
+// 	}
 	
 	//function get user id from database
 	public function getUserID($user_name)
 	{		
 		$select=$this->select();
 			$select->from($this,'id')
-			->where('user_name=?',$user_name);
+			->where('email=?',$user_name);
 		$row=$this->fetchRow($select);		
 		if(!$row) return NULL;
 		return $row['id'];
@@ -42,26 +70,24 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
      * @param <string> $username
      * @param <string> $password
      */
-    public function userAuthenticate($username,$password)
+    public function userAuthenticate($emailaddress,$password)
 	{
         
 		$db_adapter = Application_Model_DbTable_DbUsers::getDefaultAdapter(); 
         $auth_adapter = new Zend_Auth_Adapter_DbTable($db_adapter);
               
         $auth_adapter->setTableName($this->_name) // table where users are stored
-                     ->setIdentityColumn('user_name') // field name of user in the table
+                     ->setIdentityColumn('email') // field name of user in the table
                      ->setCredentialColumn('password') // field name of password in the table
                      ->setCredentialTreatment('MD5(?) AND active=1'); // optional if password has been hashed
  		
-        $auth_adapter->setIdentity($username); // set value of username field
+        $auth_adapter->setIdentity($emailaddress); // set value of username field
         $auth_adapter->setCredential($password);// set value of password field
  
         //instantiate Zend_Auth class        
         $auth = Zend_Auth::getInstance();
         
- 
         $result = $auth->authenticate($auth_adapter);
-        
  
         if($result->isValid()){            
            	return true;				  
@@ -114,8 +140,8 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
 		u.`last_name` ,
 		u.`first_name` AS name,
 		u.`user_name` ,
-		(SELECT user_type FROM `rms_acl_user_type` WHERE user_type_id=u.user_type LIMIT 1) aS users_type,
-		(SELECT branch_namekh FROM `rms_branch` WHERE status=1 AND branch_namekh!='' AND br_id=u.branch_id) AS branch_name,
+		u.`email` ,
+		u.`user_type`,
 		u.`active` as status
 		FROM `rms_users` AS u
 		
@@ -135,6 +161,7 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
 			$s_where = array();
 			foreach($fields as $field)
 			{
+				$search['txtsearch']=trim(addslashes($search['txtsearch']));
 				$s_where[] = $field." LIKE '%{$search['txtsearch']}%'";
 			}
 			$where .= ' AND ('.implode(' OR ',$s_where).')';
@@ -173,8 +200,8 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
 					u.`last_name`, 
 					u.`user_name`, 
 					u.`user_type`, 
+					u.`email`, 
 					u.`active`, 
-					u.branch_id,
 					u.`id` 
 					
 				FROM `rms_users` AS u
@@ -216,12 +243,12 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
 	function insertUser($data){
 		
 		$_user_data=array(
-	    	'last_name'=>$data['last_name'],
+// 	    	'last_name'=>$data['last_name'],
 			'first_name'=>$data['first_name'],
-			'user_name'=>$data['user_name'],
+// 			'user_name'=>$data['user_name'],
+			'email'=>$data['email'],
 			'password'=> MD5($data['password']),
 			'user_type'=> $data['user_type'],
-			'branch_id'=>$data['branch_id'],
 			'active'=> 1			
 	    ); 
 	    	           	    	   
@@ -230,15 +257,17 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
 	
 	function updateUser($data){		
 		$_user_data=array(
-	    	'last_name'=>$data['last_name'],
+// 	    	'last_name'=>$data['last_name'],
 			'first_name'=>$data['first_name'],
-			'user_name'=>$data['user_name'],
-			'password'=> MD5($data['password']),
+// 			'user_name'=>$data['user_name'],
+			'email'=>$data['email'],
+// 			'password'=> MD5($data['password']),
 			'user_type'=> $data['user_type'],
-			'branch_id'=>$data['branch_id'],
-			'active'=> $data['active']			
+// 			'active'=> $data['active']			
 	    );    	   
-		
+		if (!empty($data['check_change'])){
+			$_user_data['password']= md5($data['password']);
+		}
 		$where=$this->getAdapter()->quoteInto('id=?', $data['id']); 
     	   
 		return  $this->update($_user_data,$where);
@@ -258,41 +287,41 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
 	 * To get all acl of a user type
 	 * @param string $user_type_id
 	 */
-// 	public function getArrAcl($user_type_id){
-// 		$db = $this->getAdapter();
-// 		$sql = "SELECT aa.module, aa.controller, aa.action FROM rms_acl_user_access AS ua  INNER JOIN rms_acl_acl AS aa ON (ua.acl_id=aa.acl_id) WHERE ua.user_type_id='".$user_type_id."'";
-// 		$rows = $db->fetchAll($sql);
-// 		return $rows;
-// 	}
 	public function getArrAcl($user_type_id){
 		$db = $this->getAdapter();
-		$sql = "SELECT aa.module, aa.controller, aa.action,aa.label FROM rms_acl_user_access AS ua  INNER JOIN rms_acl_acl AS aa
-		ON (ua.acl_id=aa.acl_id) WHERE ua.user_type_id='".$user_type_id."'
-		GROUP BY  aa.module ,aa.controller,aa.action
-		ORDER BY aa.module ,aa.is_menu ASC ,aa.rank ASC ";
+		$sql = "SELECT aa.module, aa.controller, aa.action FROM rms_acl_user_access AS ua  INNER JOIN rms_acl_acl AS aa 
+		ON (ua.acl_id=aa.acl_id) WHERE ua.user_type_id='".$user_type_id."' 
+		GROUP BY  aa.module ,aa.controller,aa.action 
+		ORDER BY aa.module ,aa.rank ASC ";
 		$rows = $db->fetchAll($sql);
 		return $rows;
 	}
-	public function getArrAclReport($user_type_id,$str_controller='allreport'){
+	public function getArrAclReport($user_type_id){
 		$db = $this->getAdapter();
-		$session_user=new Zend_Session_Namespace('authstu');
-		$user_type_id = $session_user->level;
 		$sql = "SELECT aa.label,aa.module, aa.controller, aa.action FROM rms_acl_user_access AS ua  INNER JOIN rms_acl_acl AS aa
-		ON (ua.acl_id=aa.acl_id) 
-			WHERE aa.status=1 AND ua.user_type_id='".$user_type_id."'
-				AND aa.module='allreport' 
-				AND aa.controller ='".$str_controller."'
-			GROUP BY  aa.module ,aa.controller,aa.action
-		ORDER BY aa.module ,aa.controller ASC , aa.acl_id ASC ";	
-		return $db->fetchAll($sql);
+		ON (ua.acl_id=aa.acl_id) WHERE aa.status=1 AND ua.user_type_id='".$user_type_id."'
+		AND aa.module='report' GROUP BY  aa.module ,aa.controller,aa.action
+		ORDER BY aa.module ,aa.rank ASC ";
+		$rows = $db->fetchAll($sql);
+		return $rows;
 	}
 	function getAccessUrl($module,$controller,$action){
-		$session_user=new Zend_Session_Namespace('authstu');
+		$session_user=new Zend_Session_Namespace('auth_flower');
 		$user_typeid = $session_user->level;
 		$db = $this->getAdapter();
-		$sql = "SELECT aa.module, aa.controller, aa.action FROM rms_acl_user_access AS ua  INNER JOIN rms_acl_acl AS aa
-		ON (ua.acl_id=aa.acl_id) WHERE ua.user_type_id='".$user_typeid."' AND aa.module='".$module."' AND aa.controller='".$controller."' AND aa.action='".$action."' limit 1";
-		$rows = $db->fetchAll($sql);
-		return $rows;
+			$sql = "SELECT aa.module, aa.controller, aa.action FROM rms_acl_user_access AS ua  INNER JOIN rms_acl_acl AS aa 
+					ON (ua.acl_id=aa.acl_id) WHERE ua.user_type_id='".$user_typeid."' AND aa.module='".$module."' AND aa.controller='".$controller."' AND aa.action='".$action."' limit 1";
+					$rows = $db->fetchAll($sql);
+					//echo $sql;
+	    return $rows;
+	}
+	
+	function updateStatus($us_id,$status){
+		$_user_data=array(
+			'active'=> $status
+		);
+		$where=$this->getAdapter()->quoteInto('id=?', $us_id);
+		return  $this->update($_user_data,$where);
 	}
 }
+

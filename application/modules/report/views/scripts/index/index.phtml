@@ -1,0 +1,121 @@
+  <?php 
+  $tr = Application_Form_FrmLanguages::getCurrentlanguage();
+  $this->headTitle($tr->translate("REPORT"));
+  echo $this->headTitle();
+  ?>
+  <style>
+.pending span.status {
+    color: #ef9d09;
+}
+.accept span.status {
+    color: #63b509;
+}
+span.status{
+	font-weight: 600;
+    text-transform: capitalize;
+}
+.border {
+    height: 3px;
+    background: #6f6f6f;
+    margin: 10px 0;
+}
+ul.booking_info {
+    list-style-type: none;
+}
+ul.booking_info li {
+    line-height: 24px;
+    color: #635f5f;
+}
+ul.booking_info li span.value {
+    font-weight: 800;
+    font-size: 18px;
+}
+</style> 
+  <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-desktop"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("REPORT")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    			</div>
+    		</div>
+			<div class="col-sm-12">
+				<div class="card-box">
+					<form name="frmlist_users" action=""  method="post">
+						<div class="form-group">
+	                         <div class="col-md-8">
+									<div class="form-group">
+				                    	<label class="col-md-3"><?php echo $tr->translate("Date Range");?></label>
+				                        <div class="col-md-7">
+				                        	<div class="input-daterange input-group" id="date-range">
+				                            	<input type="text" class="form-control" name="start" value="<?php if (!empty($this->search['start'])){ echo date("m/d/Y",strtotime($this->search['start']));}?>" />
+				                                <span class="input-group-addon b-0"><?php echo $tr->translate("to");?></span>
+				                                <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("m/d/Y",strtotime($this->search['end']));}?>" />
+				                            </div>
+				                      	</div>
+				                        <div class="col-md-2"><button class="btn btn-primary black" showLabel="true" type="submit"><?php echo $tr->translate("SUBMIT");?></button></div>
+				                   </div>
+				             </div>
+				        </div>
+	                </form>
+	               <div class="clearfix"></div>
+	               <div class="border"></div>
+	               <ul class="booking_info">
+	               		<li><?php echo $tr->translate("Total Booking");?> &nbsp;&nbsp;:&nbsp;&nbsp; <span class="value"><?php echo $this->totalbooking;?></span></li>
+	               		<li><?php echo $tr->translate("Booking by Call center");?> &nbsp;&nbsp;:&nbsp;&nbsp; <span class="value"><?php echo $this->backoffice;?></span></li>
+	               		<li><?php echo $tr->translate("Booking by APP");?> &nbsp;&nbsp;:&nbsp;&nbsp; <span class="value"><?php echo $this->appbooking;?></span></li>
+	               		<li><?php echo $tr->translate("Customer Cancel");?> &nbsp;&nbsp;:&nbsp;&nbsp; <span class="value"><?php echo $this->bookingcancel;?></span></li>
+	               </ul>
+	               <div class="border"></div>
+				</div>
+				<table id="datatable-buttons" class="table table-striped table-bordered">
+					<thead>
+    					<tr>
+    						<th><?php echo $tr->translate("NUM");?></th>
+    						<th><?php echo $tr->translate("BOOKING_ID");?></th>
+    						<th><?php echo $tr->translate("CUSTOMER_PHONE");?></th>
+    						<th><?php echo $tr->translate("DRIVER_ID");?></th>
+    						<th><?php echo $tr->translate("CAR_TYPE");?></th>
+    						<th><?php echo $tr->translate("BOOKING_DATE");?></th>
+    						<th><?php echo $tr->translate("PICK_UP_LOCATION");?></th>
+    						<th><?php echo $tr->translate("STATUS");?></th>
+    					</tr>
+    				</thead>
+    				<tbody>
+    					<?php 
+    					$arraycar = array('standard'=>"Standard",'suv'=>"SUV",'vip'=>"VIP");
+    					if (!empty($this->allbooking)) 
+    						foreach ($this->allbooking as $key => $booking){
+    						
+    						$string_id = strlen($booking['id']);
+    						$bookig_id= $booking['id'];
+    						if ($string_id<5){
+    							for ($i=$string_id; $i<5; $i++){
+    								$bookig_id= "0".$bookig_id;
+    							}
+    						}
+    						?>
+    					<tr>
+    						<td><?php echo $key+1;?></td>
+    						<td>
+    							<?php echo $bookig_id;?>
+    						</td>
+    						<td>
+    							<?php echo $booking['phoneNumber'];?>
+    						</td>
+    						<td><?php echo $booking['driverId'];?></td>
+    						<td><?php echo $arraycar[$booking['carType']];?></td>
+    						<td><?php echo date("H:i:s d-M-Y",strtotime($booking['bookingDate']));?></td>
+    						<td><?php echo $booking['pickUpLocation'];?></td>
+    						<td class="text-center <?php echo $booking['status'];?>"><span class="status"><?php echo $booking['status'];?></span></td>
+    					</tr>
+    					<?php }?>
+    				</tbody>
+    			</table>
+			</div>
+		</div>
+	</div>
+</div>
