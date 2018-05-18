@@ -108,7 +108,7 @@ class RsvAcl_UserController extends Zend_Controller_Action
     }
     function profileAction(){
     	$db_user=new Application_Model_DbTable_DbUsers();
-    	$session_user=new Zend_Session_Namespace('auth_flower');
+    	$session_user=new Zend_Session_Namespace('auth_travel');
     	if (!empty($session_user->user_id)){
     		$userinfo = $db_user->getUserInfomation($session_user->user_id);
     		$this->view->profile = $userinfo;
@@ -120,7 +120,7 @@ class RsvAcl_UserController extends Zend_Controller_Action
     public function changepasswordAction()
 	{
 		if ($this->getRequest()->isPost()){ 
-			$session_user=new Zend_Session_Namespace('auth_flower');    		
+			$session_user=new Zend_Session_Namespace('auth_travel');    		
     		$pass_data=$this->getRequest()->getPost();
     		if ($pass_data['current_password'] == $session_user->pwd){
     			    			 

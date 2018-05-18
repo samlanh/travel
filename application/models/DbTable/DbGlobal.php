@@ -6,18 +6,18 @@ class Application_Model_DbTable_DbGlobal extends Zend_Db_Table_Abstract
 		$this->_name=$name;
 	}
 	public static function getUserId(){
-		$session_user=new Zend_Session_Namespace('auth_flower');
+		$session_user=new Zend_Session_Namespace('auth_travel');
 		return $session_user->user_id;
 	}
 	public static function GlobalgetUserId(){
-		$session_user=new Zend_Session_Namespace('auth_flower');
+		$session_user=new Zend_Session_Namespace('auth_travel');
 		return $session_user->user_id;
 	}
 	function getAllCustomer(){
 		return array();
 	}
 	public function getAccessPermission($branch_str='branch_id'){
-		$session_user=new Zend_Session_Namespace('auth_flower');
+		$session_user=new Zend_Session_Namespace('auth_travel');
 		$branch_id = $session_user->branch_id;
 		$level = $session_user->level;
 		if($level==1 OR $level==2){

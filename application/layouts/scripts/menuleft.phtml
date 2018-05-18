@@ -1,4 +1,4 @@
-	<?php
+<?php
 	$tr=Application_Form_FrmLanguages::getCurrentlanguage();
 	$request=Zend_Controller_Front::getInstance()->getRequest();
 	$action = $request->getActionName();
@@ -8,7 +8,7 @@
 	
 	$dbuser = new Application_Model_DbTable_DbUsers();
 	
-	$session_user=new Zend_Session_Namespace('auth_flower');
+	$session_user=new Zend_Session_Namespace('auth_travel');
 	$arr_module = $session_user->arr_acl;
 	$username = $session_user->first_name;
 	$userinfo="";
@@ -109,4 +109,5 @@
                 </aside>
                 <!--left navigation end-->
                 
+
 		

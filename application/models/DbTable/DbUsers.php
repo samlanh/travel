@@ -49,7 +49,7 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
 	{		
 		$select=$this->select();
 			$select->from($this,'id')
-			->where('email=?',$user_name);
+			->where('user_name=?',$user_name);
 		$row=$this->fetchRow($select);		
 		if(!$row) return NULL;
 		return $row['id'];
@@ -70,18 +70,18 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
      * @param <string> $username
      * @param <string> $password
      */
-    public function userAuthenticate($emailaddress,$password)
+    public function userAuthenticate($user_name,$password)
 	{
         
 		$db_adapter = Application_Model_DbTable_DbUsers::getDefaultAdapter(); 
         $auth_adapter = new Zend_Auth_Adapter_DbTable($db_adapter);
               
         $auth_adapter->setTableName($this->_name) // table where users are stored
-                     ->setIdentityColumn('email') // field name of user in the table
+                     ->setIdentityColumn('user_name') // field name of user in the table
                      ->setCredentialColumn('password') // field name of password in the table
                      ->setCredentialTreatment('MD5(?) AND active=1'); // optional if password has been hashed
  		
-        $auth_adapter->setIdentity($emailaddress); // set value of username field
+        $auth_adapter->setIdentity($user_name); // set value of username field
         $auth_adapter->setCredential($password);// set value of password field
  
         //instantiate Zend_Auth class        
@@ -306,7 +306,7 @@ class Application_Model_DbTable_DbUsers extends Zend_Db_Table_Abstract
 		return $rows;
 	}
 	function getAccessUrl($module,$controller,$action){
-		$session_user=new Zend_Session_Namespace('auth_flower');
+		$session_user=new Zend_Session_Namespace('auth_travel');
 		$user_typeid = $session_user->level;
 		$db = $this->getAdapter();
 			$sql = "SELECT aa.module, aa.controller, aa.action FROM rms_acl_user_access AS ua  INNER JOIN rms_acl_acl AS aa 

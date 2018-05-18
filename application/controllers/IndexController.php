@@ -18,7 +18,7 @@ class IndexController extends Zend_Controller_Action
     	$url="http://qr.mihcambodia.com/public";
     	// action body
         /* set this to login page to change the character charset of browsers to Utf-8  ...*/
-    	$session_user=new Zend_Session_Namespace('auth_flower');
+    	$session_user=new Zend_Session_Namespace('auth_travel');
     	$information = $this->getRequest()->getParam('information');
     	$this->view->information = $information;
     	$dbemployee = new Employee_Model_DbTable_DbEmployee();
@@ -42,12 +42,12 @@ class IndexController extends Zend_Controller_Action
 				$session_lang->lang_id=2;//for creat session
 				Application_Form_FrmLanguages::getCurrentlanguage($session_lang->lang_id);//for choose lang for when login
 				
-				$emailaddress=	$formdata['emailaddress'];
+				$user_name=	$formdata['user_name'];
 				$password= $formdata['txt_password'];
 				$db_user=new Application_Model_DbTable_DbUsers();
-				if($db_user->userAuthenticate($emailaddress,$password)){					
+				if($db_user->userAuthenticate($user_name,$password)){					
 					
-					$user_id=$db_user->getUserID($emailaddress);
+					$user_id=$db_user->getUserID($user_name);
 					$user_info = $db_user->getUserInfo($user_id);
 					
 					$arr_acl=$db_user->getArrAcl($user_info['user_type']);
@@ -122,7 +122,7 @@ class IndexController extends Zend_Controller_Action
         if($this->getRequest()->getParam('value')==1){        	
         	$aut=Zend_Auth::getInstance();
         	$aut->clearIdentity();        	
-        	$session_user=new Zend_Session_Namespace('auth_flower');
+        	$session_user=new Zend_Session_Namespace('auth_travel');
         	
         	$log=new Application_Model_DbTable_DbUserLog();
 			$log->insertLogout($session_user->user_id);
@@ -138,7 +138,7 @@ class IndexController extends Zend_Controller_Action
     {
     	$dbemployee = new Employee_Model_DbTable_DbEmployee();
     	$information = $this->getRequest()->getParam('information');
-    	$session_user=new Zend_Session_Namespace('auth_flower');
+    	$session_user=new Zend_Session_Namespace('auth_travel');
     	$session_user->unsetAll();
    		if (!empty($information)){
     		$employee = $dbemployee->getEmployeeByCode($information);
@@ -152,7 +152,7 @@ class IndexController extends Zend_Controller_Action
     {
         // action body
         if ($this->getRequest()->isPost()){ 
-			$session_user=new Zend_Session_Namespace('auth_flower');    		
+			$session_user=new Zend_Session_Namespace('auth_travel');    		
     		$pass_data=$this->getRequest()->getPost();
     		if ($pass_data['password'] == $session_user->pwd){
     			    			 

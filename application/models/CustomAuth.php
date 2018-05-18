@@ -32,7 +32,7 @@ class Application_Model_CustomAuth extends Zend_Controller_Plugin_Abstract
  	{ 	
  		//clear session from search session
  		$this->clearSession();
- 		$session_user=new Zend_Session_Namespace('auth_flower');
+ 		$session_user=new Zend_Session_Namespace('auth_travel');
  		$module = $request->getModuleName();
  		$controller = $request->getControllerName();
  		$action = $request->getActionName();

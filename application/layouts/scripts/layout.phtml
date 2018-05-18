@@ -6,7 +6,7 @@
 	$controller=$request->getControllerName();
 	$module=$request->getModuleName();
 	
-	$session_user=new Zend_Session_Namespace('auth_flower');
+	$session_user=new Zend_Session_Namespace('auth_travel');
 	$username = $session_user->first_name;
 	$them_style = 'soria'; //$session_user->theme_style;
 	
@@ -21,7 +21,7 @@
 ?>
 <?php if($module!='default'){
 	if (empty($session_user->user_id)){
-		Application_Form_FrmMessage::redirectUrl("/");
+		//Application_Form_FrmMessage::redirectUrl("/");
 	}
 	?>
 <html>
