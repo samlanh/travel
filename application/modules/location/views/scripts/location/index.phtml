@@ -1,0 +1,47 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle($tr->translate("USER")); 
+	echo $this->headTitle();
+?>	
+<style>
+	#grid{
+		margin: 0 auto;
+	}
+	.dojoxGridSortNode{
+		text-align: center;	
+		height: 30px;		
+	}
+</style>
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-user"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("USER")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    				<div class="buttun-block">
+						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/rsvacl/user/add";?>"><?php echo $tr->translate("Add User")?></a>
+					</div>
+    			</div>
+    		</div>
+			<div class="col-sm-12">
+				<div class="card-box">
+					<form name="frmlist_users" action="<?php echo $this->url(array('module'=>'rsvacl','controller'=>'user','action'=>'index')); ?>"  method="post">
+						<div class="form-group">
+                             
+                            <div class="col-md-3">
+                            	<button class="btn btn-primary" showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
+                            </div>
+                       </div>
+					</form>
+					<div class="clearfix"></div>
+				</div>
+				<div class="card-box">
+					<?php echo $this->list;?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
