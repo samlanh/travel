@@ -1,0 +1,237 @@
+<?php 
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle($tr->translate('Edit Employee'));
+	echo $this->headTitle();
+
+	$logo = $this->baseUrl()."/images/profile.jpg";
+	$supplyer = $this->supplyer;
+	$file="";
+	if (!empty($supplyer['logo'])){
+		$logo = $this->baseUrl()."/images/supplyerlogo/".$supplyer['logo'];
+		$file= $supplyer['logo'];
+	}
+?>
+<style>
+.form-group {
+    margin-bottom: 5px;
+}
+.form-horizontal .control-label {
+    text-align: left;
+}
+.thumb-xl {
+    height: 180px;
+    width: 150px;
+}
+div.browe_photo .input-group {
+    display: block;
+}
+label#error {
+    color: #F44336;
+}
+.card-employee {
+    border: solid 1px #cecccc;
+    border-radius: 5px;
+    width: 14cm;
+    padding: 10px;
+        color: #0670c3;
+}
+</style>
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+	    		<div class="col-sm-12 border-botom">
+	    			<div class="col-sm-8">
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Edit Employee");?></h4>
+	    			</div>
+	    			<div class="col-sm-4 text-right">
+	    			</div>
+	    		</div>
+    		
+				<div class="col-sm-8">
+					<div class="form-group">
+						<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">
+	                   		<?php echo $tr->translate('ឈ្មោះអ្នកផ្គត់ផ្គង់')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                    	<input class="form-control" type="text" name="supplyerName" id="supplyerName" value="<?php echo $supplyer['supplyerName']?>" placeholder="<?php echo $tr->translate('ឈ្មោះអ្នកផ្គត់ផ្គង់')?>"/>
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ប្រភេទសាខា')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+						  <select class="form-control select2me" name="isMainBranch" id="isMainBranch" placeholder="<?php echo $tr->translate('ប្រភេទសាខា')?>" >
+								<option value="1" <?php if($supplyer['isMainBranch']==1){echo "selected='selected'";}?>>សាខាមេ</option>
+								<option value="0" <?php if($supplyer['isMainBranch']==0){echo "selected='selected'";}?>>សាខាកូន</option>
+	                      </select>
+					  </div>
+	                   
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ជ្រើសរើសសាខាមេ')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="parent" id="parent" value="<?php echo $supplyer['parent']?>" placeholder="<?php echo $tr->translate('ជ្រើសរើសសាខាមេ');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខទូរសព្ទ')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="tel" id="tel" value="<?php echo $supplyer['tel']?>" placeholder="<?php echo $tr->translate('លេខទូរសព្ទ');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អ៊ីមែល')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="email" id="email" value="<?php echo $supplyer['email']?>" placeholder="<?php echo $tr->translate('អ៊ីមែល');?>" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('គេហទំព័រ')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control"   name="website" id="website" value="<?php echo $supplyer['website']?>" placeholder="<?php echo $tr->translate('គេហទំព័រ');?>" />
+	                   </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អំពីយើង')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <textarea type="text" class="form-control"   name="aboutUs" id="aboutUs" ><?php echo $supplyer['aboutUs']?></textarea>
+	                   </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('គោលការណ៍បោះបង់')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <textarea type="text" class="form-control" name="cancelPolicy" id="cancelPolicy" ><?php echo $supplyer['cancelPolicy']?></textarea>
+	                   </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អាសយដ្ឋានលើ Map')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <textarea type="text" class="form-control" name="map" id="map" ><?php echo $supplyer['map']?></textarea>
+	                   </div>
+	                </div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+	                    	<div class="thumb-xl member-thumb m-b-10 center-block">
+	                            <img id="profile-img-tag" src="<?php echo $logo;?>" class=" img-thumbnail" alt="profile-image" >
+		                        </div>
+	                        </div>
+	                 </div>
+	                 <div class="form-group">
+	                       <div class="col-md-12 col-sm-12 col-xs-12 m-t-10 text-center browe_photo">
+	                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="logo" data-buttontext="<?php echo $tr->translate('រូបភាព(Logo)')?>">
+	                  	  </div>
+					 </div>
+					 
+					 
+					 <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-center">
+	                    	 	<input type="hidden" name="oldLogo" id="oldLogo" class="form-control" value="<?php echo $supplyer['logo']?>" />
+	                    	 	<input type="hidden" name="oldActivityPhoto" id="oldActivityPhoto" class="form-control" value="<?php echo $supplyer['activityPhoto']?>" />
+			                </div>
+	                    </div>
+                    </div>
+                    <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-center">
+	                    	 	&nbsp;
+			                </div>
+	                    </div>
+                    </div>
+                    <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-center">
+	                    	 	&nbsp;
+			                </div>
+	                    </div>
+                    </div>
+                    <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-center">
+	                    	 	&nbsp;
+			                </div>
+	                    </div>
+                    </div>
+                    <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	<div class="row">
+								<div class="col-md-12" style="font-size: 16px;text-align: center;">
+								    Select Photo (one or multiple):
+								</div>
+							</div>
+	                    </div>
+                    </div>
+                    
+                    <div class="form-group">
+	                     <div class="col-md-12 col-sm-12 col-xs-12 m-t-10 text-center browe_photo">
+	                     	<input type="file" multiple id="photo" class="filestyle" data-input="false" name="photo[]" data-buttontext="<?php echo $tr->translate('រូបភាព(សកម្មភាព)')?>">
+	                  	 </div>
+                 	</div>
+					 
+				</div>
+				
+				<div class="col-sm-12">
+                	<div class="form-group">
+	                    &nbsp;
+                    </div>
+				</div>
+				
+				<div class="col-sm-12">
+                	<div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-center">
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('SAVE');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
+			                </div>
+	                    </div>
+                    </div>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>
+<?php // benchmark
+    //QRtools::timeBenchmark();    
+?>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#profile-img").change(function(){
+        readURL(this);
+    });
+
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+            var msg='You can input only number.';
+    		alert(msg);
+    		return false;
+        }
+        return true;
+    }
+
+</script>

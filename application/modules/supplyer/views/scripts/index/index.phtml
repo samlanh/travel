@@ -1,0 +1,343 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle($tr->translate("EMPLOYEE")); 
+	echo $this->headTitle();
+	
+	$url_delete =$this->url(array('module'=>'employee','controller'=>'index','action'=>'delete'));
+	$db = new Employee_Model_DbTable_DbEmployee();
+	$position = $db->getSettingByValue("position");
+	$ministry = $db->getSettingByValue("ministry");
+	$person = $db->getSettingByValue("person");
+	$cardBackground = $db->getSettingByValue("cardBackground");
+	
+	$MH_fornt = $cardBackground['value'];
+	$urledit = $this->baseUrl()."/employee/index/edit";
+	
+	$number = array("០","១","២","៣","៤","៥","៦","៧","៨","៩");
+	$month = array("01"=>"មករា", "02"=>"កុម្ភៈ", "03"=>"មិនា", "04"=>"មេសា", "05"=>"ឧសភា", "06"=>"មិថុនា", "07"=>"កក្កដា","08"=>"សីហា", "09"=>"កញ្ញា", "10"=>"តុលា","11"=>"វិច្ឆិកា", "12"=>"ធ្នូ");
+	
+	$url="http://".$_SERVER['HTTP_HOST'];
+	$phblicpart = PUBLIC_PATH;
+	$errorCorrectionLevel = 'L';
+	$matrixPointSize = 4;
+	//html PNG location prefix
+	$PNG_WEB_DIR = $this->baseUrl().'/images/all/qrcode/';
+	$PNG_TEMP_DIR = $phblicpart.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR."all".DIRECTORY_SEPARATOR."qrcode".DIRECTORY_SEPARATOR;
+	include $phblicpart.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."phpqrcode".DIRECTORY_SEPARATOR."qrlib.php";
+	
+	$count = count($this->allemployee);
+	$timeload="3000";
+	if ($count>100){
+		$timeload="9000";
+	}
+	if ($count<=10){
+		$timeload="2000";
+	}
+?>   
+<style>
+img.status_icon {
+    width: 16px;
+}
+div.search {
+    padding: 0 2px;
+    margin: 0;
+}
+span.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+</style> 
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("EMPLOYEE")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    				<div class="buttun-block">
+						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/employee/index/add";?>"><?php echo $tr->translate("Add Employee")?></a>
+						<a class="btn btn-primary black save" onclick="PrintDiv();" ><?php echo $tr->translate('Print Card');?></a>	
+					</div>
+    			</div>
+    		</div>
+			<div class="col-sm-12">
+				<div class="card-box">
+					<form name="frmlist_users" action=""  method="post">
+						<div class="form-group">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("Search by employee id");?>" value='<?php echo $this->search['adv_search'];?>'>
+								 </div>
+                            <div class="col-md-1">
+                            </div>
+                             <div class="col-md-8 text-right">
+                            	 <div class="form-group">
+					                   <div class="col-md-2 text-left search">
+					                 	  <select class="form-control select2" id="gender"  name="gender"  > 
+					                 	  	<option value=""><?php echo $tr->translate('Gender')?></option>
+					                   			<option value="male" <?php if ($this->search['gender']=="male"){ echo 'selected="selected"';}?>><?php echo $tr->translate('MALE')?></option>
+					                   			<option value="female" <?php if ($this->search['gender']=="female"){ echo 'selected="selected"';}?>><?php echo $tr->translate('FEMALE')?></option>
+											</select> 
+					                   </div>
+                                   	<div class="col-md-6 search">
+                                     	<div class="input-daterange input-group" id="date-range">
+                                          	<input type="text" class="form-control" name="start" value="<?php if (!empty($this->search['start'])){ echo date("m/d/Y",strtotime($this->search['start']));}?>" />
+                                            <span class="input-group-addon b-0"><?php echo $tr->translate("to");?></span>
+                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("m/d/Y",strtotime($this->search['end']));}?>" />
+                                       </div>
+                                   	</div>
+                                   	<div class="col-md-3 text-left search">
+					                 	  <select class="form-control select2" id="status"  name="status"  > 
+					                 	  		<option value="-1"><?php echo $tr->translate('STATUS')?></option>
+					                   			<option value="1" <?php if ($this->search['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('ACTIVE')?></option>
+					                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE')?></option>
+											</select> 
+					                   </div>
+                                   <div class="col-md-1 search">
+                                   	<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
+                                   	 </div>
+                                 </div>
+                            </div>
+                       </div>
+					</form>
+					<div class="clearfix"></div>
+				</div>
+				<table id="datatable-buttons" class="table table-striped table-bordered">
+					<thead>
+    					<tr>
+    						<th><?php echo $tr->translate("NUM");?></th>
+    						<th><?php echo $tr->translate("Employee ID");?></th>
+    						<th><?php echo $tr->translate("First Name Last Name");?></th>
+    						<th><?php echo $tr->translate("Gender");?></th>
+    						<th><?php echo $tr->translate("Framework");?></th>
+    						<th><?php echo $tr->translate("POSITION");?></th>
+    						<th><?php echo $tr->translate("Phone Number");?></th>
+    						<th><?php echo $tr->translate("STATUS");?></th>
+    						<th><?php //echo $tr->translate("STATUS");?></th>
+    					</tr>
+    				</thead>
+    				<tbody>
+    					<?php 
+    					if (!empty($this->allemployee)) 
+    						foreach ($this->allemployee as $key => $employee){
+    							$images = $this->baseUrl()."/images/icon/active.png";
+    							if ($employee['status']!=1){
+    								$images = $this->baseUrl()."/images/icon/blocked.png";
+    							}
+    						?>
+    					<tr>
+    						<td><?php echo $key+1;?></td>
+    						<td><a class="edit" href="<?php echo $urledit."/id/".$employee['id'];?>"><?php echo $employee['employeeCode'];?></a></td>
+    						<td><a class="edit" href="<?php echo $urledit."/id/".$employee['id'];?>"><?php echo $employee['firstName']." ".$employee['sureName'];?></a></td>
+    						<td><?php echo $employee['gender'];?></td>
+    						<td><?php echo $employee['framework'];?></td>
+    						<td><?php echo $employee['position'];?></td>
+    						<td><?php echo $employee['phoneNumber'];?></td>
+    						<td class="text-center"><img class="status_icon" src="<?php echo $images;?>" /></td>
+    						<td>
+	    						<a title="<?php echo $tr->translate("Delete Now"); ?>" data-toggle="modal" data-target="#myModal" class="btn btn-app small" onclick="showDeleteForm(<?php echo $employee['id'];?>)">
+			                      <i class="fa fa-trash"></i>
+			                    </a>
+		                    </td>
+    					</tr>
+    					<?php }?>
+    				</tbody>
+				</table>
+				<div id="divPrint" class="form-group" style="display: none;">
+					<style>
+								.card-content{
+									background-image: url('<?php echo $this->baseUrl()."/images/card/".$MH_fornt;?>');
+									 background-size: 100%;background-repeat: no-repeat;	
+									 line-height: 16.9px;  
+									 width: 8.6cm; height:5.1cm;  
+									 color: #3f3f95; 
+									 font-family: Arial, sans-serif,'Kh Battambang','Khmer Battambang'; 							
+								}
+							.left-block {
+								    margin-top: 7px;
+								}
+								.right-block{
+									margin-top: -6px;
+									}
+								ul.list-data {
+								    list-style-type: none;
+								    font-size: 9px;
+								    padding: 0;
+									font-weight:600;
+								}
+
+								ul.list-data span.title {
+								    min-width: 2cm;
+								    display: inline-block;
+								    font-family: Arial,'Khmer OS Muol Light';
+								}
+								ul.list-data span.title_value.up{
+									text-transform: uppercase;	
+									font-weight: 600;
+								}
+									span.title_value.name {
+									    min-width: 110px;
+									    display: inline-block;
+									}
+								span.title_gender {
+								    font-family: Arial,'Khmer OS Muol Light';
+								}
+								.foot-right-block,.foot-left-block,
+								.left-block, .right-block,
+								.last_footer .left,
+								.last_footer .right {
+								    display: inline-block;
+								}
+								.right-block {
+								    width: 45%;
+								    vertical-align: top;padding-left: 85px;
+								}
+								.left-block {
+								    width: 24%;
+								    vertical-align: top;
+								    text-align: center;
+								}
+								.left-block .photo {
+									margin-top:1px;
+								    text-align: center;
+								}
+								.left-block .photo img {
+								    width: 64px;
+								    height: 77px;
+								}
+								.foot-left-block {
+								    width: 40%;
+								    vertical-align: top;
+								}
+								.foot-right-block {
+								    text-align: center;
+								    vertical-align: top;
+								    width: 58%;
+								position: relative;
+								}
+								.foot-right-block p {
+								    font-size: 6px;
+								    padding: 0;
+    								margin: 0;
+								}
+								.qrimages {
+								    width: 60%;
+								    text-align: center;
+								}
+								.qrimages img {
+								   width: 50px;
+								}
+								div.pagese{ page-break-inside:always; page-break-after:always; }
+							</style>
+							
+				<?php if (!empty($this->allemployee)){
+					
+					foreach ($this->allemployee as $key => $employee){
+						$profile = $this->baseUrl()."/images/profile.jpg";
+						if (!empty($employee['profilePhoto'])){
+							$profile = $this->baseUrl()."/images/all/".$employee['profilePhoto'];
+						}
+							
+							
+						$filename="";
+						if (!empty($employee['employeeCode'])){
+							$filename = $PNG_TEMP_DIR.md5($employee['employeeCode'].'|'.$errorCorrectionLevel.'|'.$matrixPointSize).'.png';
+							if (file_exists($filename)){
+								
+							}else{
+								QRcode::png($url.$this->baseUrl()."/index/employee?information=".$employee['employeeCode'], $filename, $errorCorrectionLevel, $matrixPointSize, 2);
+							}
+						}	
+					?>
+						<div class="pagese">
+							<div class="card-content">
+	                    		<div class="left-block">
+	                    			<div class="photo">
+	                    				<img  src="<?php echo $profile;?>" alt="profile-image" >
+	                    			</div>
+	                    		</div>
+	                    		<div class="right-block">
+		                    		<ul class="list-data">
+		                    			<li><span class="title_value">&nbsp;<?php echo $employee['employeeCode'];?></span></li>
+		                    			<li><span class="title_value name">&nbsp;<?php echo $employee['firstName']." ".$employee['sureName'];?></span><span class="title_value"> &nbsp;&nbsp;<?php echo $employee['gender'];?></span></li>
+		                    			<li><span class="title_value up">&nbsp;<?php echo $employee['latinName'];?></span></li>
+		                    			<li><span class="title_value">&nbsp;<?php echo $employee['dob'];?></span></li>
+		                    			<li><span class="title_value">&nbsp;<?php echo $employee['position'];?></span></li>
+		                    			<li><span class="title_value">&nbsp;<?php echo $employee['organization'];?></span></li>
+		                    		</ul>
+		                    	</div>
+		                    	<div class="foot-left-block">
+	                    			<div class="qrimages">
+	                    				<img  src="<?php echo $PNG_WEB_DIR.basename($filename);?>" alt="profile-image" >
+	                    			</div>
+	                    		</div>
+	                    		<div class="foot-right-block">
+	                    		</div>
+	                    	</div>
+						</div>
+						
+					<?php 
+					}
+				}?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END PAGE CONTENT -->
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center"><?php echo $tr->translate("Would you want to delete this record");?></h4>
+        </div>
+        <div class="modal-body text-center">
+          	<button type="button" class="btn btn-primary block" onclick="deleteRecord('<?php echo $url_delete;?>')" ><?php echo $tr->translate("Delete Now");?></button>
+          	<button type="button" class="btn btn-primary unblock"  data-dismiss="modal"><?php echo $tr->translate("Close");?></button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<script>
+var timeout ='<?php echo $timeload;?>';
+function PrintDiv() {
+	loading();
+    var contents = document.getElementById("divPrint").innerHTML;
+    var frame1 = document.createElement('iframe');
+    frame1.name = "frame1";
+    frame1.style.position = "absolute";
+    frame1.style.top = "-1000000px";
+    document.body.appendChild(frame1);
+    var frameDoc = (frame1.contentWindow) ? frame1.contentWindow : (frame1.contentDocument.document) ? frame1.contentDocument.document : frame1.contentDocument; frameDoc.document.open();
+    frameDoc.document.write('<html><head><title>Employee ID</title>');
+    frameDoc.document.write('</head><body>');
+    frameDoc.document.write(contents);
+    frameDoc.document.write('</body></html>');
+    frameDoc.document.close();
+    setTimeout(function () {
+        window.frames["frame1"].focus();
+        window.frames["frame1"].print();
+        document.body.removeChild(frame1);
+        closeloading();
+    }, timeout);
+   return false;
+}
+var recordid ='';
+function deleteRecord(url){
+	loading();
+	 id = recordid;
+	 window.location.href = url+'/id/'+id;
+}
+function showDeleteForm(id){
+	if(id==''){
+		recordid='';
+	}else{
+		recordid = id;
+	}
+}
+</script>
