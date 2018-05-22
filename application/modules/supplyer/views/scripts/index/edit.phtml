@@ -68,14 +68,18 @@ label#error {
 								<option value="0" <?php if($supplyer['isMainBranch']==0){echo "selected='selected'";}?>>សាខាកូន</option>
 	                      </select>
 					  </div>
-	                   
 	                </div>
 	                <div class="form-group">
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ជ្រើសរើសសាខាមេ')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="parent" id="parent" value="<?php echo $supplyer['parent']?>" placeholder="<?php echo $tr->translate('ជ្រើសរើសសាខាមេ');?>" />
-	                   </div>
+	                     <select class="form-control select2me" name="parent" id="parent"  >
+							<option value="">ជ្រើសរើសសាខាមេ</option>
+							<?php if(!empty($this->mainSupplyer)){foreach ($this->mainSupplyer as $rs){?>
+								<option value="<?php echo $rs['id']?>" <?php if($supplyer['parent']==$rs['id']){echo "selected='selected'";}?>><?php echo $rs['name']?></option>
+							<?php }}?>
+	                     </select>
+	                  </div>
 	                </div>
 	                <div class="form-group">
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខទូរសព្ទ')?> :
@@ -122,6 +126,18 @@ label#error {
 	                     <textarea type="text" class="form-control" name="map" id="map" ><?php echo $supplyer['map']?></textarea>
 	                   </div>
 	                </div>
+	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ស្ថានភាព')?> :
+	                   </label>
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+						  <select class="form-control select2me" name="status" id="status" placeholder="<?php echo $tr->translate('ប្រភេទសាខា')?>" >
+								<option value="1" <?php if($supplyer['status']==1){echo "selected='selected'";}?>>ប្រើប្រាស់</option>
+								<option value="0" <?php if($supplyer['status']==0){echo "selected='selected'";}?>>មិនប្រើប្រាស់</option>
+	                      </select>
+					   </div>
+	                </div>
+	                
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
@@ -141,8 +157,8 @@ label#error {
 					 <div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-center">
-	                    	 	<input type="hidden" name="oldLogo" id="oldLogo" class="form-control" value="<?php echo $supplyer['logo']?>" />
-	                    	 	<input type="hidden" name="oldActivityPhoto" id="oldActivityPhoto" class="form-control" value="<?php echo $supplyer['activityPhoto']?>" />
+	                    	 	<input type="text" name="oldLogo" id="oldLogo" class="form-control" value="<?php echo $supplyer['logo']?>" />
+	                    	 	<input type="text" name="oldActivityPhoto" id="oldActivityPhoto" class="form-control" value="<?php echo $supplyer['activityPhoto']?>" />
 			                </div>
 	                    </div>
                     </div>
@@ -195,7 +211,7 @@ label#error {
                 	<div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-center">
-								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('SAVE');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('កែប្រែទិន្នន័យ');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
 			                </div>
 	                    </div>
                     </div>

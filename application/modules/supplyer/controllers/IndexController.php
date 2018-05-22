@@ -39,14 +39,15 @@ public function init()
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			}
 		}
-		$this->view->allposition = $db->getAllPosition();
+		$this->view->mainSupplyer = $db->getAllMainSupplyer();
 	}
 	public function editAction(){
+		$id = $this->getRequest()->getParam("id");
 		$db = new Supplyer_Model_DbTable_DbSupplyer();
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();
 			try{
-				$db->editEmployee($data);
+				$db->editSupplyer($data,$id);
 				Application_Form_FrmMessage::Sucessfull("UPDATE_SUCCESS",self::REDIRECT_URL);
 // 				$this->_redirect(self::REDIRECT_URL);
 			}catch (Exception $e){
@@ -54,10 +55,12 @@ public function init()
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			}
 		}
-		$id = $this->getRequest()->getParam("id");
+		
 		$supplyer = $db->getSupplyerById($id);
 		$this->view->supplyer =$supplyer;
 		//print_r($supplyer);exit();
+		
+		$this->view->mainSupplyer = $db->getAllMainSupplyer();
 		
 	}
 	function updateAction(){

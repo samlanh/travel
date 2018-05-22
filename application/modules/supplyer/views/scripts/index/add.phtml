@@ -59,8 +59,13 @@ label#error {
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ជ្រើសរើសសាខាមេ')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="parent" id="parent" placeholder="<?php echo $tr->translate('ជ្រើសរើសសាខាមេ');?>" />
-	                   </div>
+	                  	 <select class="form-control select2me" name="parent" id="parent"  >
+							<option value="">ជ្រើសរើសសាខាមេ</option>
+							<?php if(!empty($this->mainSupplyer)){foreach ($this->mainSupplyer as $rs){?>
+								<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
+							<?php }}?>
+	                      </select>
+	                  </div>
 	                </div>
 	                <div class="form-group">
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខទូរសព្ទ')?> :
