@@ -30,7 +30,7 @@ echo $this->headTitle();
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('SERVICE_TYPE')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	 <select class="form-control select2" id="service_type"  name="service_type"  > 
+	                    	 <select class="form-control select2" id="service_type"  name="service_type" required > 
 		                 	  		<option value="-1"><?php echo $tr->translate('Select Service')?></option>
 		                 	  		<?php if(!empty($this->service_type)) foreach ($this->service_type As $servic){?>
 		                   			<option value="<?php echo $servic['id']?>"><?php echo $servic['name']?></option>
