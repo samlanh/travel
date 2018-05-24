@@ -8,6 +8,19 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
     	$db = new Application_Model_DbTable_DbGlobal();
 		return $db->getUserId();   
     } 
+    
+    static function getCurrentLang(){
+    	$session_lang=new Zend_Session_Namespace('lang');
+    	if(!empty($session_lang->lang_id)){
+    		if ($session_lang->lang_id>2){
+    			return 2;
+    		}
+    		return $session_lang->lang_id;
+    	}else{
+    		return 2;
+    	}
+    }
+    
 	 function getAllLocationName($search=NULL){
 		   	$db = $this->getAdapter();
 		   	$db->beginTransaction();
@@ -115,6 +128,22 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			$db->rollBack();
 		}
+	}
+	
+	function getAllProvince(){
+		$lang= $this->getCurrentLang();
+		$array = array(1=>"province_en_name",2=>"province_kh_name");
+		$db = $this->getAdapter();
+		$sql=" SELECT p.province_id AS id,$array[$lang] As name  FROM `rms_province` AS p WHERE p.status=1";
+		return $db->fetchAll($sql);
+	}
+	
+	function getAllService(){
+		$lang= $this->getCurrentLang();
+		$array = array(1=>"province_en_name",2=>"province_kh_name");
+		$db = $this->getAdapter();
+		$sql="  SELECT id,`serviceName` AS `name` FROM `tp_location_service` WHERE `status`=1";
+		return $db->fetchAll($sql);
 	}
 	
 }

@@ -100,7 +100,7 @@ class IndexController extends Zend_Controller_Action
 		$this->_helper->layout()->disableLayout();
 	}
     protected function sortMenu($menus){
-    	$menus_order = Array ( 'home','employee','booking','rsvacl','setting');
+    	$menus_order = Array ( 'home','employee','booking','rsvacl','setting','location',);
     	$temp_menu = Array();
     	$menus=array_unique($menus);
     	foreach ($menus_order as $i => $val){
