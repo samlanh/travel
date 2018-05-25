@@ -52,16 +52,19 @@ public function init()
 	}
 	
 	public function editAction(){
+		$db = new Location_Model_DbTable_DbLocation();
 		$id=$this->getRequest()->getParam('id');
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();
-			$db = new Location_Model_DbTable_DbLocation();
 			try{
-				$id= $db->insertLocation($data);
-				if(isset($data['save_close'])){
+				$data['id']=$id;
+				$id= $db->updateLocation($data);
+				if(isset($data["save_close"])){
 					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
+				}else {
+				  Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
 				}
-				Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL_ADD);
+				Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());

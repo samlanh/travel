@@ -1,6 +1,6 @@
 <?php
 
-class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
+class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
 {
 
     protected $_name = 'tbl_employee';

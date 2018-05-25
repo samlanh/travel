@@ -9,7 +9,7 @@ echo $this->headTitle();
     	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Add Location")?></h4>
+    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("ADD_VEHICLE_TYPE")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
     			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/location/location/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
@@ -19,10 +19,10 @@ echo $this->headTitle();
 			<div class="col-sm-8">
 				<form name="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Location Name')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Vehicle Type Name')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text" required="true" name="location_name" id="location_name" placeholder="<?php echo $tr->translate('location name')?>"/>
+	                    	<input class="form-control"  type="text" required="true" name="vehicle_type" id="vehicle_type" placeholder="<?php echo $tr->translate('Vehicle Type Name')?> "/>
 	                   </div>
 	                </div>
 	                
@@ -39,32 +39,52 @@ echo $this->headTitle();
 	                   </div>
 	                </div>
 	                
-	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('COUNTRY_NAME')?> :
-	                   </label>
-	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	 <select class="form-control select2" id="country_name"  name="country_name"  > 
-		                   			<option value="1" ><?php echo $tr->translate('CAMBODIA')?></option>
-							</select> 
-	                   </div>
-	                </div>
-	                
-	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ORDER_BY')?> :
-	                   </label>
-	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" placeholder="<?php echo $tr->translate('ORDER_BY')?>"/>
-	                   </div>
-	                </div>
-	                <!-- 
-	                <div class="form-group">
+	                 <div class="form-group">
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('DESCRIPTION')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
 	                   		<textarea class="form-control" rows="5" id="description" name="description"></textarea>
 	                   </div>
 	                </div>
-	                 -->
+	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនកៅអី')?> :
+	                   </label>
+	                   <div class="col-md-8 col-sm-8 col-xs-8">
+	                    	<input class="form-control"  type="text"  name="amount_sit" id="amount_sit" placeholder="<?php echo $tr->translate('Amount Sits')?>"/>
+	                   </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនវាលីធំ')?> :
+	                   </label>
+	                   <div class="col-md-8 col-sm-8 col-xs-8">
+	                    	<input class="form-control"  type="text"  name="amount_sit" id="amount_sit" placeholder="<?php echo $tr->translate('Amount Sits')?>"/>
+	                   </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនវាលីតូច')?> :
+	                   </label>
+	                   <div class="col-md-8 col-sm-8 col-xs-8">
+	                    	<input class="form-control"  type="text"  name="amount_sit" id="amount_sit" placeholder="<?php echo $tr->translate('Amount Sits')?>"/>
+	                   </div>
+	                </div>
+	                
+		             
+				 <div class="form-group">
+				 <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Image')?> :
+	                   </label>
+	                   <div class="col-md-8 col-sm-8 col-xs-8">
+	                    <div class="thumb-xl member-thumb m-b-10 center-block">
+                            <img id="profile-img-tag" src="<?php echo $this->baseUrl()."/images/profile.jpg";?>" class=" img-thumbnail" alt="profile-image" style="height: 100%;width: 100%;">
+	                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('BROWSE_PHOTO')?>">
+	                      </div>
+                        </div>
+                 </div>
+	                <div class="col-md-8 col-sm-8 col-xs-8">
+	                <br/><br/>
+	                  </div>
                     <div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-right">
