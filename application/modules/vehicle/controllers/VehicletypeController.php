@@ -1,8 +1,8 @@
 <?php
 class Vehicle_VehicletypeController extends Zend_Controller_Action {
 	
-	const REDIRECT_URL = '/location/location';
-	const REDIRECT_URL_ADD = '/location/location/add';
+	const REDIRECT_URL = '/vehicle/vehicletype';
+	const REDIRECT_URL_ADD = '/vehicle/vehicletype/add';
 public function init()
     {    	
      /* Initialize action controller here */
@@ -14,16 +14,17 @@ public function init()
     // action body
     	try {
     		$db=new Vehicle_Model_DbTable_DbVehicletype();
-    		$result = $db->getAllLocationName();
+    		$result = $db->getAllVicleType();
     		$list = new Application_Form_Frmtable();
     		$collumns = array("SERVICE_TYPE","LOCATION_NAME","COUNTRY_NAME","STATUS");
     		$link=array(
-    				'module'=>'location','controller'=>'location','action'=>'edit',
+    				'module'=>'vehicle','controller'=>'vehicletype','action'=>'edit',
     		);
     		$this->view->list=$list->getCheckList(0,$collumns, $result,array('serviceId'=>$link,'locationName'=>$link));
     		if (empty($result)){
     			$result = array('err'=>1, 'msg'=>'មិនទាន់មានទិន្នន័យនៅឡើយ!');
-    		}		
+    		}	
+    		$this->view->vehicle=$result;	
     	} catch (Exception $e) {
     		$result = Application_Model_DbTable_DbGlobal::getResultWarning();
     	}
@@ -35,7 +36,7 @@ public function init()
 			$data = $this->getRequest()->getPost();
 			$db = new Vehicle_Model_DbTable_DbVehicletype();
 			try{
-				$id= $db->insertLocation($data);
+				$id= $db->insertVehicleType($data);
 				if(isset($data['save_close'])){
 					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
 				} 
@@ -46,34 +47,33 @@ public function init()
 			}
 		}
 		$db_global=new Vehicle_Model_DbTable_DbVehicletype();
-		$rs=$this->view->province=$db_global->getAllProvince();
 		$this->view->service_type=$db_global->getAllService();
 		 
 	}
 	
 	public function editAction(){
-		$db = new Vehicle_Model_DbTable_DbVehicletype();
 		$id=$this->getRequest()->getParam('id');
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();
+			$db = new Vehicle_Model_DbTable_DbVehicletype();
+			$data['id']=$id;
 			try{
-				$data['id']=$id;
-				$id= $db->updateLocation($data);
+				$id= $db->updateVehicleType($data);
 				if(isset($data["save_close"])){
 					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
-				}else {
-				  Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
-				}
-				Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
+					$this->_redirect(self::REDIRECT_URL);
+				} 
+				Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL_ADD);
+				$this->_redirect(self::REDIRECT_URL);
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			}
 		}
 		$db_global=new Vehicle_Model_DbTable_DbVehicletype();
-		$rs=$this->view->province=$db_global->getAllProvince();
 		$this->view->service_type=$db_global->getAllService();
-		$this->view->row=$db->getAllLocationById($id);
+		$this->view->row=$db_global->getVehicleTypeBydid($id);
+		 
 	}
 	
 	function updateAction(){

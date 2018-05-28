@@ -61,10 +61,13 @@ public function init()
 				$id= $db->updateLocation($data);
 				if(isset($data["save_close"])){
 					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
+					$this->_redirect(self::REDIRECT_URL);
 				}else {
 				  Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
+				  $this->_redirect(self::REDIRECT_URL);
 				}
 				Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
+				$this->_redirect(self::REDIRECT_URL);
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());

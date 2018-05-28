@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('Add Position'));
+$this->headTitle($tr->translate('Add Vehicle Type'));
 echo $this->headTitle();
 ?>
  <!-- START PAGE CONTENT -->
@@ -12,7 +12,7 @@ echo $this->headTitle();
     				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("ADD_VEHICLE_TYPE")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
-    			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/location/location/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
+    			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/vehicle/vehicletype/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
     			</div>
     		</div>
     		
@@ -59,7 +59,7 @@ echo $this->headTitle();
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនវាលីធំ')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text"  name="amount_sit" id="amount_sit" placeholder="<?php echo $tr->translate('Amount Sits')?>"/>
+	                    	<input class="form-control"  type="text"  name="amountCase" id="amountCase" placeholder="<?php echo $tr->translate('ចំនួនវាលីធំ')?>"/>
 	                   </div>
 	                </div>
 	                
@@ -67,7 +67,7 @@ echo $this->headTitle();
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនវាលីតូច')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text"  name="amount_sit" id="amount_sit" placeholder="<?php echo $tr->translate('Amount Sits')?>"/>
+	                    	<input class="form-control"  type="text"  name="amountSmallCase" id="amountSmallCase" placeholder="<?php echo $tr->translate('ចំនួនវាលីតូច')?>"/>
 	                   </div>
 	                </div>
 	                

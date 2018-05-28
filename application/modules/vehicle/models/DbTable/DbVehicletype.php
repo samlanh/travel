@@ -3,7 +3,7 @@
 class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'tbl_employee';
+    protected $_name = 'tp_vehicletype';
     public function getUserId(){
     	$db = new Application_Model_DbTable_DbGlobal();
 		return $db->getUserId();   
@@ -21,21 +21,17 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
     	}
     }
     
-	 function getAllLocationName($search=NULL){
+	 function getAllVicleType($search=NULL){
 		   	$db = $this->getAdapter();
 		   	$db->beginTransaction();
 		   	try{
 // 		   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
 // 		   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
 		   		 
-		   		$sql=" SELECT l.id,
-				       l.serviceId,
-				       l.locationName,
-				       l.countryId,
-				       l.status
-				       FROM `tp_location` AS l 
-				       WHERE l.`status`=1
-		   		";
+		   		$sql=" SELECT v.*,v.`title`,
+				       (SELECT s.serviceName FROM `tp_location_service` AS s WHERE s.id=v.`serviceType` AND s.status=1 LIMIT 1)AS service_name,
+				        v.`amountSeat`,v.`amountCase`,v.`amountSmallCase`,v.`description`,v.`images`,`status`       
+				     FROM  `tp_vehicletype` AS v ";
 		   		$where="";
 // 		   		$where.= " AND  ".$from_date." AND ".$to_date;
 // 		   		if(!empty($search['adv_search'])){
@@ -54,7 +50,7 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
 // 		   		if(!empty($search['gender'])){
 // 		   			$where.=" AND e.gender= '".$search['gender']."'";
 // 		   		}
-		   		$order=" ORDER BY l.`locationName` ASC";
+		   		$order=" ORDER BY v.`id` DESC";
 		   		return $db->fetchAll($sql.$where.$order);
 	   		}catch(exception $e){
 	   			Application_Form_FrmMessage::message("Application Error");
@@ -63,38 +59,41 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
 	   		}
    	}
    	
-    function insertLocation($_data){
+    function insertVehicleType($_data){
     	$db = $this->getAdapter();
     	$db->beginTransaction();
     	try{
-//     		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
-//     		$part= PUBLIC_PATH.'/images/all/';
-//     		if (!file_exists($part)) {
-//     			mkdir($part, 0777, true);
-//     		}
-//     		$image_name = "";
-//     		$photo="";
-//     		$name = $_FILES['photo']['name'];
-//     		if (!empty($name)){
-//     			$ss = explode(".", $name);
-//     			$image_name = "employee_".$_data['employeeCode'].date("Y").date("m").date("d").time().".".end($ss);
-//     			$tmp = $_FILES['photo']['tmp_name'];
-//     			if(move_uploaded_file($tmp, $part.$image_name)){
-//     				$photo = $image_name;
-//     			}
-//     			else
-//     				$string = "Image Upload failed";
-//     		}
+    		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
+    		$part= PUBLIC_PATH.'/images/all/';
+    		if (!file_exists($part)) {
+    			mkdir($part, 0777, true);
+    		}
+    		$image_name = "";
+    		$photo="";
+    		$name = $_FILES['photo']['name'];
+    		if (!empty($name)){
+    			$ss = explode(".", $name);
+    			$image_name = "veh_".date("Y").date("m").date("d").time().".".end($ss);
+    			$tmp = $_FILES['photo']['tmp_name'];
+    			if(move_uploaded_file($tmp, $part.$image_name)){
+    				$photo = $image_name;
+    			}else{
+    				$photo = "Image Upload failed";
+    			}
+    		}
     		$_arr=array(
-    				'serviceId'		 => $_data['service_type'],
-    				'locationName'	 => $_data['location_name'],
-    				'countryId'      => $_data['country_name'],
-    				'orderRing'      => $_data['order_by'],
-    				'createDate'	 => date("Y-m-d H:i:s"),
-    				'status'         => 1,
-    				'userId'         => $this->getUserId(),
+    				'title'		 		=> $_data['vehicle_type'],
+    				'serviceType'	 	=> $_data['service_type'],
+    				'description'      	=> $_data['description'],
+    				'amountCase'      	=> $_data['amountCase'],
+    				'amountSmallCase'	=> $_data['amountSmallCase'],
+    				'amountSeat'      	=> $_data['amount_sit'],
+    				'images'      		=> $photo,
+    				'createDate'	 	=> date("Y-m-d H:i:s"),
+    				'modifyDate'	 	=> date("Y-m-d H:i:s"),
+    				'status'         	=> 1,
+    				'userId'         	=> $this->getUserId(),
     		);
-    		$this->_name="tp_location";
     		$pro_id =$this->insert($_arr);
     		$db->commit();
     	}catch(exception $e){
@@ -104,40 +103,46 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
     	}
     }
     
-    function updateLocation($_data){
+    function updateVehicleType($_data){
     	$db = $this->getAdapter();
     	$db->beginTransaction();
     	try{
-    		//     		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
-    		//     		$part= PUBLIC_PATH.'/images/all/';
-    		//     		if (!file_exists($part)) {
-    		//     			mkdir($part, 0777, true);
-    		//     		}
-    		//     		$image_name = "";
-    		//     		$photo="";
-    		//     		$name = $_FILES['photo']['name'];
-    		//     		if (!empty($name)){
-    		//     			$ss = explode(".", $name);
-    		//     			$image_name = "employee_".$_data['employeeCode'].date("Y").date("m").date("d").time().".".end($ss);
-    		//     			$tmp = $_FILES['photo']['tmp_name'];
-    		//     			if(move_uploaded_file($tmp, $part.$image_name)){
-    		//     				$photo = $image_name;
-    		//     			}
-    		//     			else
-    			//     				$string = "Image Upload failed";
-    			//     		}
+    		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
+    		$part= PUBLIC_PATH.'/images/all/';
+    		if (!file_exists($part)) {
+    			mkdir($part, 0777, true);
+    		}
+    		$image_name = "";
+    		$photo="";
+    		$name = $_FILES['photo']['name'];
+    		if (!empty($name)){
+    			$ss = explode(".", $name);
+    			$image_name = "veh_".date("Y").date("m").date("d").time().".".end($ss);
+    			$tmp = $_FILES['photo']['tmp_name'];
+    			if(move_uploaded_file($tmp, $part.$image_name)){
+    				$photo = $image_name;
+    			}else{
+    				$photo = "Image Upload failed";
+    			}
+    		}else{
+    			$photo=$_data['old_pic'];
+    		}
+    			
     		$_arr=array(
-    				'serviceId'		 => $_data['service_type'],
-    				'locationName'	 => $_data['location_name'],
-    				'countryId'      => $_data['country_name'],
-    				'orderRing'      => $_data['order_by'],
-    				'createDate'	 => date("Y-m-d H:i:s"),
-    				'status'         => 1,
-    				'userId'         => $this->getUserId(),
+    				'title'		 		=> $_data['vehicle_type'],
+    				'serviceType'	 	=> $_data['service_type'],
+    				'description'      	=> $_data['description'],
+    				'amountCase'      	=> $_data['amountCase'],
+    				'amountSmallCase'	=> $_data['amountSmallCase'],
+    				'amountSeat'      	=> $_data['amount_sit'],
+    				'images'      		=> $photo,
+    				'modifyDate'	 	=> date("Y-m-d H:i:s"),
+    				'status'         	=> 1,
+    				'userId'         	=> $this->getUserId(),
     		);
-    		$this->_name="tp_location";
+    		$this->_name="tp_vehicletype";
     		$where=" id=".$_data['id'];
-    		$pro_id =$this->update($_arr, $where);
+    		$this->update($_arr, $where);
     		$db->commit();
     	}catch(exception $e){
     		Application_Form_FrmMessage::message("Application Error");
@@ -146,46 +151,18 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
     	}
     }
     
-	function getAllLocationById($id){
-		$db = $this->getAdapter();
-		$sql="SELECT l.*
-		       FROM `tp_location` AS l  
-		       WHERE l.`status`=1  AND l.`id`=$id";
-		return $db->fetchRow($sql);
-	}
- 
-	function getEmployeeByCode($empoyeeid){
-		$db = $this->getAdapter();
-		$db->beginTransaction();
-		try{
-			$sql="SELECT d.*,
-			(SELECT p.title FROM `tbl_position` AS p WHERE p.id = d.`position` LIMIT 1) AS positionTitle
-			FROM `tbl_employee` AS d WHERE d.status=1 ";
-			$where=" AND d.`employeeCode` = '$empoyeeid'";
-			$order="";
-			$limit=" LIMIT 1";
-			return $db->fetchRow($sql.$where.$order.$limit);
-		}catch(exception $e){
-			Application_Form_FrmMessage::message("Application Error");
-			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
-			$db->rollBack();
-		}
-	}
-	
-	function getAllProvince(){
-		$lang= $this->getCurrentLang();
-		$array = array(1=>"province_en_name",2=>"province_kh_name");
-		$db = $this->getAdapter();
-		$sql=" SELECT p.province_id AS id,$array[$lang] As name  FROM `rms_province` AS p WHERE p.status=1";
-		return $db->fetchAll($sql);
-	}
-	
 	function getAllService(){
 		$lang= $this->getCurrentLang();
 		$array = array(1=>"province_en_name",2=>"province_kh_name");
 		$db = $this->getAdapter();
 		$sql="  SELECT id,`serviceName` AS `name` FROM `tp_location_service` WHERE `status`=1";
 		return $db->fetchAll($sql);
+	}
+	
+	function getVehicleTypeBydid($id){
+		$db = $this->getAdapter();
+		$sql="SELECT v.*  FROM  `tp_vehicletype` AS v WHERE v.`status`=1 AND v.`id`=$id";
+		return $db->fetchRow($sql);
 	}
 	
 }

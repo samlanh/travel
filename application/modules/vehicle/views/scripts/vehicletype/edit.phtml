@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('Add Position'));
+$this->headTitle($tr->translate('EDIT_VEHICLE_TYPE'));
 echo $this->headTitle();
 $row=$this->row;
 ?>
@@ -10,20 +10,20 @@ $row=$this->row;
     	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Add Location")?></h4>
+    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("EDIT_VEHICLE_TYPE")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
-    			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/location/location/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
+    			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/vehicle/vehicletype/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
     			</div>
     		</div>
     		
 			<div class="col-sm-8">
 				<form name="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Location Name')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Vehicle Type Name')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text" required="true" name="location_name" id="location_name" placeholder="<?php echo $tr->translate('location name')?>" value="<?php echo $row['locationName']?>"/>
+	                    	<input class="form-control"  type="text" value="<?php echo $this->row['title']?>" required="true" name="vehicle_type" id="vehicle_type"  >
 	                   </div>
 	                </div>
 	                
@@ -31,45 +31,67 @@ $row=$this->row;
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('SERVICE_TYPE')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	 <select class="form-control select2" id="service_type"  name="service_type"  > 
-		                 	  		<option value="-1" ><?php echo $tr->translate('Select Service')?></option>
+	                    	 <select class="form-control select2" id="service_type"  name="service_type" required > 
+		                 	  		<option value="-1"><?php echo $tr->translate('Select Service')?></option>
 		                 	  		<?php if(!empty($this->service_type)) foreach ($this->service_type As $servic){?>
-		                   			<option value="<?php echo $servic['id']?>" <?php if($servic['id']==$row['serviceId']) echo "selected='selected'"?>><?php echo $servic['name']?></option>
+		                   			<option value="<?php echo $servic['id']?>" <?php if($servic['id']==$this->row['serviceType']) echo "selected='selected'";?>><?php echo $servic['name']?></option>
 								    <?php }?>
 								</select> 
 	                   </div>
 	                </div>
 	                
-	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('COUNTRY_NAME')?> :
+	                 <div class="form-group">
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('DESCRIPTION')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	 <select class="form-control select2" id="country_name"  name="country_name"  > 
-		                   			<option value="1" <?php if($row['countryId']==1) echo "selected='selected'"?>><?php echo $tr->translate('CAMBODIA')?></option>
-							</select> 
+	                   		<textarea class="form-control" rows="5" id="description" name="description"><?php echo $this->row['description']?></textarea>
 	                   </div>
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ORDER_BY')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនកៅអី')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" <?php echo $row['orderRing']?> placeholder="<?php echo $tr->translate('ORDER_BY')?>"/>
+	                    	<input class="form-control"  type="text"  value="<?php echo $this->row['amountCase']?>" name="amount_sit" id="amount_sit" placeholder="<?php echo $tr->translate('Amount Sits')?>"/>
 	                   </div>
 	                </div>
-	             <!-- 
+	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('DESCRIPTION')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនវាលីធំ')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                   		<textarea class="form-control" rows="5" id="description" name="description"><?php echo $row['orderRing']?></textarea>
+	                    	<input class="form-control"  type="text" value="<?php echo $this->row['amountSmallCase']?>" name="amountCase" id="amountCase" placeholder="<?php echo $tr->translate('ចំនួនវាលីធំ')?>"/>
 	                   </div>
 	                </div>
-	                 -->   
+	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនវាលីតូច')?> :
+	                   </label>
+	                   <div class="col-md-8 col-sm-8 col-xs-8">
+	                    	<input class="form-control"  type="text" value="<?php echo $this->row['amountSeat']?>" name="amountSmallCase" id="amountSmallCase" placeholder="<?php echo $tr->translate('ចំនួនវាលីតូច')?>"/>
+	                   </div>
+	                </div>
+	                
+		             
+				 <div class="form-group">
+				 <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Image')?> :
+	                   </label>
+	                   <div class="col-md-8 col-sm-8 col-xs-8">
+	                    <div class="thumb-xl member-thumb m-b-10 center-block">
+                            <img id="profile-img-tag" src="<?php echo $this->baseUrl()."/images/all/".$row['images'];?>" class=" img-thumbnail" alt="profile-image" style="height: 100%;width: 100%;">
+	                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('BROWSE_PHOTO')?>">
+	                        <input type="hidden" name="old_pic" id="old_pic" value="<?php echo $row['images']?>" />
+	                      </div>
+                        </div>
+                 </div>
+	                <div class="col-md-8 col-sm-8 col-xs-8">
+	                <br/><br/>
+	                        
+	                  </div>
                     <div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-right">
-								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit"  label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="submitButton" />
+								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit" value="save_close" label="<?php echo $tr->translate('SAVE_CLOSE');?>"  />
 			                </div>
 	                    </div>
                     </div>
