@@ -18,12 +18,23 @@ public function init()
 					'start'=> '',
 					'end'=>date('Y-m-d'),
 					'status'=>-1,
-					'gender'=>'',
 			);
 		}
+		$db = new Supplyer_Model_DbTable_DbSupplyer();
+		$rs_rows = $db->getAllSupplyer($search);
+		
+		$list = new Application_Form_Frmtable();
+		$collumns = array("ឈ្មោះអ្នកផ្គត់ផ្គង់","លេខទូរសព្ទ","អ៊ីមែល","គេហទំព័រ","CREATE_DATE","USER","STATUS","DELETE");
+		$link = array(
+				'module'=>'supplyer','controller'=>'index','action'=>'edit',
+		);
+		$link1=array(
+				'module'=>'supplyer','controller'=>'index','action'=>'delete',
+		);
+		$this->view->list=$list->getCheckList(2, $collumns, $rs_rows,array('supplyerName'=>$link,'tel'=>$link,'email'=>$link,'website'=>$link,'Delete'=>$link1));
+		
 		$this->view->search = $search;
-		$db = new Employee_Model_DbTable_DbEmployee();
-		$this->view->allemployee = $db->getAllEmployee($search);
+		
 	}
 	public function addAction()
 	{

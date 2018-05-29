@@ -2,37 +2,6 @@
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	$this->headTitle($tr->translate("EMPLOYEE")); 
 	echo $this->headTitle();
-	
-	$url_delete =$this->url(array('module'=>'employee','controller'=>'index','action'=>'delete'));
-	$db = new Employee_Model_DbTable_DbEmployee();
-	$position = $db->getSettingByValue("position");
-	$ministry = $db->getSettingByValue("ministry");
-	$person = $db->getSettingByValue("person");
-	$cardBackground = $db->getSettingByValue("cardBackground");
-	
-	$MH_fornt = $cardBackground['value'];
-	$urledit = $this->baseUrl()."/employee/index/edit";
-	
-	$number = array("០","១","២","៣","៤","៥","៦","៧","៨","៩");
-	$month = array("01"=>"មករា", "02"=>"កុម្ភៈ", "03"=>"មិនា", "04"=>"មេសា", "05"=>"ឧសភា", "06"=>"មិថុនា", "07"=>"កក្កដា","08"=>"សីហា", "09"=>"កញ្ញា", "10"=>"តុលា","11"=>"វិច្ឆិកា", "12"=>"ធ្នូ");
-	
-	$url="http://".$_SERVER['HTTP_HOST'];
-	$phblicpart = PUBLIC_PATH;
-	$errorCorrectionLevel = 'L';
-	$matrixPointSize = 4;
-	//html PNG location prefix
-	$PNG_WEB_DIR = $this->baseUrl().'/images/all/qrcode/';
-	$PNG_TEMP_DIR = $phblicpart.DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR."all".DIRECTORY_SEPARATOR."qrcode".DIRECTORY_SEPARATOR;
-	include $phblicpart.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."phpqrcode".DIRECTORY_SEPARATOR."qrlib.php";
-	
-	$count = count($this->allemployee);
-	$timeload="3000";
-	if ($count>100){
-		$timeload="9000";
-	}
-	if ($count<=10){
-		$timeload="2000";
-	}
 ?>   
 <style>
 img.status_icon {
@@ -65,17 +34,17 @@ span.select2.select2-container.select2-container--default {
 					<form name="frmlist_users" action=""  method="post">
 						<div class="form-group">
                             <div class="col-md-4">
-                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("Search by employee id");?>" value='<?php echo $this->search['adv_search'];?>'>
+                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("Search Here");?>" value='<?php echo $this->search['adv_search'];?>'>
 								 </div>
                             <div class="col-md-1">
                             </div>
                              <div class="col-md-8 text-right">
                             	 <div class="form-group">
 					                   <div class="col-md-2 text-left search">
-					                 	  <select class="form-control select2" id="gender"  name="gender"  > 
-					                 	  	<option value=""><?php echo $tr->translate('Gender')?></option>
-					                   			<option value="male" <?php if ($this->search['gender']=="male"){ echo 'selected="selected"';}?>><?php echo $tr->translate('MALE')?></option>
-					                   			<option value="female" <?php if ($this->search['gender']=="female"){ echo 'selected="selected"';}?>><?php echo $tr->translate('FEMALE')?></option>
+					                 	  <select class="form-control select2" id="isVerify"  name="isVerify"  > 
+					                 	  	<option value=""><?php echo $tr->translate('Is Verify')?></option>
+					                   			<option value="1" <?php if ($this->search['isVerify']=="1"){ echo 'selected="selected"';}?>><?php echo $tr->translate('Verified')?></option>
+					                   			<option value="0" <?php if ($this->search['isVerify']=="0"){ echo 'selected="selected"';}?>><?php echo $tr->translate('Not Verified')?></option>
 											</select> 
 					                   </div>
                                    	<div class="col-md-6 search">
@@ -101,47 +70,9 @@ span.select2.select2-container.select2-container--default {
 					</form>
 					<div class="clearfix"></div>
 				</div>
-				<table id="datatable-buttons" class="table table-striped table-bordered">
-					<thead>
-    					<tr>
-    						<th><?php echo $tr->translate("NUM");?></th>
-    						<th><?php echo $tr->translate("Employee ID");?></th>
-    						<th><?php echo $tr->translate("First Name Last Name");?></th>
-    						<th><?php echo $tr->translate("Gender");?></th>
-    						<th><?php echo $tr->translate("Framework");?></th>
-    						<th><?php echo $tr->translate("POSITION");?></th>
-    						<th><?php echo $tr->translate("Phone Number");?></th>
-    						<th><?php echo $tr->translate("STATUS");?></th>
-    						<th><?php //echo $tr->translate("STATUS");?></th>
-    					</tr>
-    				</thead>
-    				<tbody>
-    					<?php 
-    					if (!empty($this->allemployee)) 
-    						foreach ($this->allemployee as $key => $employee){
-    							$images = $this->baseUrl()."/images/icon/active.png";
-    							if ($employee['status']!=1){
-    								$images = $this->baseUrl()."/images/icon/blocked.png";
-    							}
-    						?>
-    					<tr>
-    						<td><?php echo $key+1;?></td>
-    						<td><a class="edit" href="<?php echo $urledit."/id/".$employee['id'];?>"><?php echo $employee['employeeCode'];?></a></td>
-    						<td><a class="edit" href="<?php echo $urledit."/id/".$employee['id'];?>"><?php echo $employee['firstName']." ".$employee['sureName'];?></a></td>
-    						<td><?php echo $employee['gender'];?></td>
-    						<td><?php echo $employee['framework'];?></td>
-    						<td><?php echo $employee['position'];?></td>
-    						<td><?php echo $employee['phoneNumber'];?></td>
-    						<td class="text-center"><img class="status_icon" src="<?php echo $images;?>" /></td>
-    						<td>
-	    						<a title="<?php echo $tr->translate("Delete Now"); ?>" data-toggle="modal" data-target="#myModal" class="btn btn-app small" onclick="showDeleteForm(<?php echo $employee['id'];?>)">
-			                      <i class="fa fa-trash"></i>
-			                    </a>
-		                    </td>
-    					</tr>
-    					<?php }?>
-    				</tbody>
-				</table>
+				<?php 
+				   echo $this->list;
+				?>
 			</div>
 		</div>
 	</div>

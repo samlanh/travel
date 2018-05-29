@@ -13,11 +13,10 @@ public function init()
 		if (empty($session_user->user_id)){
 			$this->_redirect("/");
 		}
-		$db = new Home_Model_DbTable_DbDashboard();
-		$this->view->totalBooking = $db->getTotalBooking();
-		$this->view->totalDriver = $db->getTotalDriver();
-		$this->view->totalCustomer = $db->getTotalCustomer();
-		
+// 		$db = new Home_Model_DbTable_DbDashboard();
+// 		$this->view->totalBooking = $db->getTotalBooking();
+// 		$this->view->totalDriver = $db->getTotalDriver();
+// 		$this->view->totalCustomer = $db->getTotalCustomer();
 	}
 	
 }

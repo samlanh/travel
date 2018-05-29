@@ -18,12 +18,26 @@ public function init()
 					'start'=> '',
 					'end'=>date('Y-m-d'),
 					'status'=>-1,
-					'gender'=>'',
+					'isVerify'=>'',
 			);
 		}
+		
+		$db = new Booking_Model_DbTable_DbCustomer();
+		$rs_rows = $db->getAllEmployee($search);
+		
+		$list = new Application_Form_Frmtable();
+		$collumns = array("ឈ្មោះអតិថិជន","ភេទ","លេខទូរសព្ទ","អ៊ីមែល","របៀបចុះឈ្មោះ","Is Verify","CREATE_DATE","STATUS","ប្តូរ");
+		$link = array(
+				'module'=>'booking','controller'=>'customer','action'=>'edit',
+		);
+		$link1=array(
+				'module'=>'booking','controller'=>'customer','action'=>'delete',
+		);
+		$this->view->list=$list->getCheckList(2, $collumns, $rs_rows,array('customerName'=>$link,'gender'=>$link,'tel'=>$link,'email'=>$link,'website'=>$link,'Password'=>$link1));
+		
 		$this->view->search = $search;
-		$db = new Employee_Model_DbTable_DbEmployee();
-		$this->view->allemployee = $db->getAllEmployee($search);
+		
+		
 	}
 	public function addAction()
 	{

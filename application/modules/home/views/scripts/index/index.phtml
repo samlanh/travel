@@ -16,21 +16,21 @@
 									<div class="row">
 										<div class="col-lg-3 col-sm-6">
 											<div class="widget-inline-box text-center">
-												<h3 class="m-t-10"><i class="text-primary mdi mdi-crosshairs"></i> <b data-plugin="counterup"><?php echo $this->totalDriver;?></b></h3>
+												<h3 class="m-t-10"><i class="text-primary mdi mdi-crosshairs"></i> <b data-plugin="counterup"><?php //echo $this->totalDriver;?></b></h3>
 												<p class="text-muted"><?php echo $tr->translate("total of drivers")?></p>
 											</div>
 										</div>
 
 										<div class="col-lg-3 col-sm-6">
 											<div class="widget-inline-box text-center">
-												<h3 class="m-t-10"><i class="text-custom mdi mdi-cart-outline"></i> <b data-plugin="counterup"><?php echo $this->totalBooking;?></b></h3>
+												<h3 class="m-t-10"><i class="text-custom mdi mdi-cart-outline"></i> <b data-plugin="counterup"><?php //echo $this->totalBooking;?></b></h3>
 												<p class="text-muted"><?php echo $tr->translate("total of bookings")?></p>
 											</div>
 										</div>
 
 										<div class="col-lg-3 col-sm-6">
 											<div class="widget-inline-box text-center">
-												<h3 class="m-t-10"><i class="text-info mdi mdi-account-multiple"></i> <b data-plugin="counterup"><?php echo $this->totalCustomer;?></b></h3>
+												<h3 class="m-t-10"><i class="text-info mdi mdi-account-multiple"></i> <b data-plugin="counterup"><?php //echo $this->totalCustomer;?></b></h3>
 												<p class="text-muted"><?php echo $tr->translate("total of customers")?></p>
 											</div>
 										</div>
@@ -102,8 +102,8 @@
         var $stckedData  = [
             <?php for ($i=0; $i<=10; $i++ ){ 
             	$year = date("Y",strtotime("$start_year+$i year"));
-            	$back = $db->getBookingByBackOfficeByYear($year);
-            	$app = $db->getBookingByAppByYear($year);
+            	$back = "";//$db->getBookingByBackOfficeByYear($year);
+            	$app = "";//$db->getBookingByAppByYear($year);
             ?>
             { y: '<?php echo $year;?>', a: <?php echo $back;?>, b: <?php echo $app;?> },
             <?php }?>

@@ -53,7 +53,7 @@ class Employee_Model_DbTable_DbEmployee extends Zend_Db_Table_Abstract
     	try{
     		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
     		$part= PUBLIC_PATH.'/images/all/';
-    		if (!file_exists($part)) {
+    		if(!file_exists($part)) {
     			mkdir($part, 0777, true);
     		}
     		$image_name = "";

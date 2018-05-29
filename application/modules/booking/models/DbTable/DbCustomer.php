@@ -14,34 +14,42 @@ class Booking_Model_DbTable_DbCustomer extends Zend_Db_Table_Abstract
 	   	$db = $this->getAdapter();
 	   	$db->beginTransaction();
 	   	try{
-	   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
-	   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
+	   		$from_date =(empty($search['start']))? '1': " `createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
+	   		$to_date = (empty($search['end']))? '1': " `createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
 	   		 
-	   		$sql="
-	   			SELECT e.*,
-				(SELECT p.title FROM `tbl_position` AS p WHERE p.id = e.`position` LIMIT 1) AS positionTitle
-				FROM `tbl_employee` AS e 
-				WHERE e.`status`>-1
-	   		";
+	   		$sql="select
+	   					id,
+	   					customerName,
+	   					(select name_en from tp_view where type=2 and key_code = gender) as gender,
+	   					tel,
+	   					email,
+	   					registerBy,
+	   					(select name_en from tp_view where type=3 and key_code = isVerify) as isVerify,
+	   					createDate,
+	   					(select name_en from tp_view where type=1 and key_code = status) as status,
+	   					'Password'
+	   				from 
+	   					tp_customer
+	   				where
+	   					customerName !=''	
+	   			";
 	   		$where="";
 	   		$where.= " AND  ".$from_date." AND ".$to_date;
 	   		if(!empty($search['adv_search'])){
 	   			$s_where = array();
 	   			$s_search = addslashes(trim($search['adv_search']));
-	   			$s_where[] = " e.employeeCode LIKE '%{$s_search}%'";
-	   			$s_where[] = " e.sureName LIKE '%{$s_search}%'";
-	   			$s_where[] = " e.firstName LIKE '%{$s_search}%'";
-	   			$s_where[] = " e.latinName LIKE '%{$s_search}%'";
-	   			$s_where[] = " e.phoneNumber LIKE '%{$s_search}%'";
+	   			$s_where[] = " customerName LIKE '%{$s_search}%'";
+	   			$s_where[] = " tel LIKE '%{$s_search}%'";
+	   			$s_where[] = " email LIKE '%{$s_search}%'";
 	   			$where .=' AND ('.implode(' OR ',$s_where).')';
 	   		}
 	   		if($search['status']>-1){
-	   			$where.=" AND e.status=".$search['status'];
+	   			$where.=" AND status=".$search['status'];
 	   		}
-	   		if(!empty($search['gender'])){
-	   			$where.=" AND e.gender= '".$search['gender']."'";
+	   		if($search['isVerify']!=''){
+	   			$where.=" AND isVerify= '".$search['isVerify']."'";
 	   		}
-	   		$order=" ORDER BY e.`createDate` DESC";
+	   		$order=" ORDER BY `createDate` DESC";
 	   		return $db->fetchAll($sql.$where.$order);
    		}catch(exception $e){
    			Application_Form_FrmMessage::message("Application Error");
