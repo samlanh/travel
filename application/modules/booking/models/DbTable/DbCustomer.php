@@ -87,7 +87,7 @@ class Booking_Model_DbTable_DbCustomer extends Zend_Db_Table_Abstract
     				'age'	    	=> $_data['age'],
     				'tel'      		=> $_data['tel'],
     				'email'      	=> $_data['email'],
-    				'password'      => $_data['password'],// MD5($_data['password']),
+    				'password'      => MD5($_data['password']), // $_data['password'],,
     				'isVerify'      => $_data['isVerify'],
     				'photo'	  		=> $photo,
     				
@@ -173,6 +173,17 @@ class Booking_Model_DbTable_DbCustomer extends Zend_Db_Table_Abstract
     		$db->rollBack();
     	}
     }
+    
+    function changePassword($data, $id){
+    	$arr=array(
+    		'password'=> MD5($data['newPassword'])
+    	);
+    
+    	$where=$this->getAdapter()->quoteInto('id=?', $id);
+    	$this->_name="tp_customer";
+    	return  $this->update($arr,$where);
+    }
+    
     function updateStatus($us_id,$status){
     	$_user_data=array(
     			'status'=> $status

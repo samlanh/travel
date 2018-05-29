@@ -31,7 +31,7 @@ public function init()
 				'module'=>'booking','controller'=>'customer','action'=>'edit',
 		);
 		$link1=array(
-				'module'=>'booking','controller'=>'customer','action'=>'delete',
+				'module'=>'booking','controller'=>'customer','action'=>'changepassword',
 		);
 		$this->view->list=$list->getCheckList(2, $collumns, $rs_rows,array('customerName'=>$link,'gender'=>$link,'tel'=>$link,'email'=>$link,'website'=>$link,'Password'=>$link1));
 		
@@ -75,17 +75,28 @@ public function init()
 		//print_r($supplyer);exit();
 		
 	}
-	function updateAction(){
-		$blocked = $this->getRequest()->getParam('blocked');
-		$blocked = (empty($blocked))? 0 : $blocked;
+	
+	function changepasswordAction(){
+		$id = $this->getRequest()->getParam('id');
+		$db = new Booking_Model_DbTable_DbCustomer();
+		$row = $db->getCustomerById($id);
 		
-		$us_id = $this->getRequest()->getParam('id');
-		$us_id = (empty($us_id))? 0 : $us_id;
+		if ($this->getRequest()->isPost()){
+			$data=$this->getRequest()->getPost();
+			if($row['password'] == md5($data['oldPassword'])){
+				try {
+					$db->changePassword($data,$id);
+					Application_Form_FrmMessage::Sucessfull('ការផ្លាស់ប្តូរដោយជោគជ័យ', self::REDIRECT_URL);
+				} catch (Exception $e) {
+					Application_Form_FrmMessage::message('ការផ្លាស់ប្តូរត្រូវបរាជ័យ');
+				}
+			}else{
+				Application_Form_FrmMessage::message('ការផ្លាស់ប្តូរត្រូវបរាជ័យ');
+			}
+		}
 		
-		$db_user = new Employee_Model_DbTable_DbEmployee();
-		$db = $db_user->updateStatus($us_id,$blocked);
-		$this->_redirect(self::REDIRECT_URL);
 	}
+	
 	function deleteAction(){
 		$id = $this->getRequest()->getParam('id');
 		$id = (empty($id))? 0 : $id;
