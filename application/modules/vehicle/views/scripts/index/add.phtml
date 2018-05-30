@@ -1,0 +1,73 @@
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$this->headTitle($tr->translate('រថយន្តនិងតម្លៃ'));
+echo $this->headTitle();
+?>
+<style>
+.form-group {
+    margin-bottom: 5px;
+}
+.form-horizontal .control-label {
+    text-align: left;
+}
+.thumb-xl {
+    height: 180px;
+    width: 150px;
+}
+div.browe_photo .input-group {
+    display: block;
+}
+label#error {
+    color: #F44336;
+}
+
+</style>
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+	    		<div class="col-sm-12 border-botom">
+	    			<div class="col-sm-8">
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;រថយន្តនិងតម្លៃ</h4>
+	    			</div>
+	    			<div class="col-sm-4 text-right">
+	    			</div>
+	    		</div>
+				<div class="col-xs-2"></div>
+				<div class="col-xs-8">
+					<div class="form-group">
+						<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ឈ្មោះអ្នកផ្គត់ផ្គង់
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                    	<input class="form-control" type="text"  name="employeeCode" id="employeeCode" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ប្រភេទរថយន្ត </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                      <input class="form-control" type="text"  name="sureName" id="sureName" placeholder="" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ទំនេរ(is valiable) </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                      <input class="form-control" type="text"  name="sureName" id="sureName" placeholder="" />
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ពណ៍នា </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                  		<textarea class="form-control" rows="" cols="" name="description" id="description"></textarea>
+	                   </div>
+	                </div>
+				</div>
+				<div class="col-xs-2"></div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+   
+</script>

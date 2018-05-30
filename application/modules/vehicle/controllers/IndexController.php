@@ -1,5 +1,5 @@
 <?php
-class Vehicle_indexController extends Zend_Controller_Action {
+class Vehicle_IndexController extends Zend_Controller_Action {
 	
 	
 public function init()
@@ -10,7 +10,10 @@ public function init()
 	public function indexAction()
 	{
 		
-		
+	}
+	public function addAction()
+	{
+	
 	}
 	
 }
