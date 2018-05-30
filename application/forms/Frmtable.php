@@ -184,8 +184,7 @@ class Application_Form_Frmtable
     	//$head='<form name="list"><div style="overflow:scroll; max-height:450px; overflow-x:hidden;" ><table class="collape tablesorter" id="'.$id.'" width="100%">';
     	
     	$head='
-    	
-	    		 <table id="datatable" class="table table-striped table-bordered">';
+	    		<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">';
     	$col_str='';
     	$col_str .='<thead>
     		<tr>';

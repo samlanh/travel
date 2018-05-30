@@ -63,12 +63,14 @@
                             <button type="button" class="button-menu-mobile btn-mobile-view visible-xs visible-sm">
                                 <i class="mdi mdi-close"></i>
                             </button>
+                           <!-- 
                             <div class="user_name">
-                            	<?php echo $username;?>
+                            	<?php //echo $username;?>
                             </div>
-							<!-- <div class="buttun-booking">
-								<a class="btn btn-primary top-make-booking" href="<?php //echo $this->baseUrl()."/bookingmg/index/add";?>"><?php //echo $tr->translate("Make Booking");?></a>
-							</div>-->
+                            -->
+							<div class="buttun-booking">
+								<a class="btn btn-primary top-make-booking" href="<?php echo $this->baseUrl()."/bookingmg/index/add";?>"><?php echo $tr->translate("Make Booking");?></a>
+							</div>
                             <!-- Left Menu Start -->
                             <ul class="metisMenu nav" id="side-menu">
 								<?php if(!empty($arr_module)){ foreach ($arr_module as $rs){

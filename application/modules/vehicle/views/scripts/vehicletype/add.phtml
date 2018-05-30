@@ -3,6 +3,12 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 $this->headTitle($tr->translate('Add Vehicle Type'));
 echo $this->headTitle();
 ?>
+<style>
+.image-feature img#profile-img-tag {
+    margin-bottom: 10px;
+        height: 210px;
+}
+</style>
  <!-- START PAGE CONTENT -->
  <div id="page-right-content">
  	<div class="container">
@@ -15,7 +21,6 @@ echo $this->headTitle();
     			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/vehicle/vehicletype/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
     			</div>
     		</div>
-    		
 			<div class="col-sm-8">
 				<form name="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
 					<div class="form-group">
@@ -70,31 +75,33 @@ echo $this->headTitle();
 	                    	<input class="form-control"  type="text"  name="amountSmallCase" id="amountSmallCase" placeholder="<?php echo $tr->translate('ចំនួនវាលីតូច')?>"/>
 	                   </div>
 	                </div>
-	                
 		             
-				 <div class="form-group">
-				 <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Image')?> :
-	                   </label>
-	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    <div class="thumb-xl member-thumb m-b-10 center-block">
-                            <img id="profile-img-tag" src="<?php echo $this->baseUrl()."/images/profile.jpg";?>" class=" img-thumbnail" alt="profile-image" style="height: 100%;width: 100%;">
-	                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('BROWSE_PHOTO')?>">
-	                      </div>
-                        </div>
-                 </div>
+				 
 	                <div class="col-md-8 col-sm-8 col-xs-8">
 	                <br/><br/>
 	                  </div>
                     <div class="form-group">
-	                    <div class="col-md-12 col-sm-12 col-xs-12">
-	                    	 <div class="text-right">
+	                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
 								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit" value="<?php echo $tr->translate('SAVE_CLOSE');?>" label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="submitButton" />
 								<input class="btn btn-primary black save" name="save_new"  id="save_new" type="submit" value="<?php echo $tr->translate('SAVE_NEW');?>" label="<?php echo $tr->translate('SAVE_NEW');?>" id="submitButton" /> 
-			                </div>
 	                    </div>
                     </div>
 	               
 	              </form>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group col-md-12 col-sm-12 col-xs-12 ">
+					<label class="control-label " for="first-name"><?php echo $tr->translate('រូបភាពតំណាង')?> </label>
+				</div>
+				<div class="form-group">
+				 	
+	                   <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	<div class="image-feature m-b-10 center-block">
+                            <img id="profile-img-tag" src="<?php echo $this->baseUrl()."/images/vehicle_type.png";?>" class=" img-thumbnail m-b-10" alt="profile-image">
+	                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('BROWSE_PHOTO')?>">
+	                      </div>
+                        </div>
+                 </div>
 			</div>
 		</div>
 	</div>
