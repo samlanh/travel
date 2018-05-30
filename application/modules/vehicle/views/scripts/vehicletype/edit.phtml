@@ -4,6 +4,12 @@ $this->headTitle($tr->translate('EDIT_VEHICLE_TYPE'));
 echo $this->headTitle();
 $row=$this->row;
 ?>
+<style>
+.image-feature img#profile-img-tag {
+    margin-bottom: 10px;
+        height: 210px;
+}
+</style>
  <!-- START PAGE CONTENT -->
  <div id="page-right-content">
  	<div class="container">
@@ -16,9 +22,8 @@ $row=$this->row;
     			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/vehicle/vehicletype/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
     			</div>
     		</div>
-    		
+    		<form name="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
 			<div class="col-sm-8">
-				<form name="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Vehicle Type Name')?> :
 	                   </label>
@@ -71,33 +76,36 @@ $row=$this->row;
 	                    	<input class="form-control"  type="text" value="<?php echo $this->row['amountSeat']?>" name="amountSmallCase" id="amountSmallCase" placeholder="<?php echo $tr->translate('ចំនួនវាលីតូច')?>"/>
 	                   </div>
 	                </div>
-	                
 		             
-				 <div class="form-group">
-				 <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Image')?> :
-	                   </label>
-	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    <div class="thumb-xl member-thumb m-b-10 center-block">
-                            <img id="profile-img-tag" src="<?php echo $this->baseUrl()."/images/all/".$row['images'];?>" class=" img-thumbnail" alt="profile-image" style="height: 100%;width: 100%;">
+	                <div class="col-md-8 col-sm-8 col-xs-8">
+	                <br/><br/>
+	                  </div>
+                    <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit" value="<?php echo $tr->translate('SAVE_CLOSE');?>" label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="submitButton" />
+	                    </div>
+                    </div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group col-md-12 col-sm-12 col-xs-12 ">
+					<label class="control-label " for="first-name"><?php echo $tr->translate('រូបភាពតំណាង')?> </label>
+				</div>
+				<div class="form-group">
+	                   <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	<div class="image-feature m-b-10 center-block">
+	                    	<?php 
+	                    	$images= $this->baseUrl()."/images/vehicle_type.png";
+	                    	if (!empty($row['images'])){
+	                    	$images= $this->baseUrl()."/images/all/".$row['images'];
+	                    	}?>
+                            <img id="profile-img-tag" src="<?php echo $images;?>" class=" img-thumbnail m-b-10" alt="profile-image">
+                            <input type="hidden" name="old_pic" id="old_pic" value="<?php echo $row['images']?>" />
 	                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('BROWSE_PHOTO')?>">
-	                        <input type="hidden" name="old_pic" id="old_pic" value="<?php echo $row['images']?>" />
 	                      </div>
                         </div>
                  </div>
-	                <div class="col-md-8 col-sm-8 col-xs-8">
-	                <br/><br/>
-	                        
-	                  </div>
-                    <div class="form-group">
-	                    <div class="col-md-12 col-sm-12 col-xs-12">
-	                    	 <div class="text-right">
-								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit" value="save_close" label="<?php echo $tr->translate('SAVE_CLOSE');?>"  />
-			                </div>
-	                    </div>
-                    </div>
-	               
-	              </form>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>

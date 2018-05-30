@@ -21,8 +21,8 @@ echo $this->headTitle();
     			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/vehicle/vehicletype/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
     			</div>
     		</div>
+    		<form name="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
 			<div class="col-sm-8">
-				<form name="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Vehicle Type Name')?> :
 	                   </label>
@@ -86,8 +86,6 @@ echo $this->headTitle();
 								<input class="btn btn-primary black save" name="save_new"  id="save_new" type="submit" value="<?php echo $tr->translate('SAVE_NEW');?>" label="<?php echo $tr->translate('SAVE_NEW');?>" id="submitButton" /> 
 	                    </div>
                     </div>
-	               
-	              </form>
 			</div>
 			<div class="col-sm-4">
 				<div class="form-group col-md-12 col-sm-12 col-xs-12 ">
@@ -103,6 +101,7 @@ echo $this->headTitle();
                         </div>
                  </div>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
