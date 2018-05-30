@@ -35,11 +35,12 @@ File: Main file css
     color: #23b195; }
 
 .navbar-default {
-  background-color: #f5f5f5;
-  border-radius: 0;
-  z-index: 99;
-  border: none;
-  margin-bottom: 0; }
+background-color: #2b2b2b;
+    border-radius: 0;
+    z-index: 99;
+    border: none;
+    margin-bottom: 0;
+    box-shadow: 1px 2px 1px #908d83; }
   .navbar-default .navbar-nav > .open > a {
     background-color: rgba(122, 125, 132, 0.1); }
     .navbar-default .navbar-nav > .open > a:focus {
@@ -162,7 +163,7 @@ File: Main file css
   position: absolute;
   background-color: #ffffff;
   width: 240px;
-  top: 70px;
+  top: 82px;
   -moz-transition: margin-left 0.3s;
   -o-transition: margin-left 0.3s;
   -webkit-transition: margin-left 0.3s;
@@ -2362,8 +2363,8 @@ h3.timeline-title {
 }
 
 .buttun-booking a.btn.btn-primary.top-make-booking {
-    background: #000 !important;
-    border: solid 1px #000 !important;
+    background: #fac31a !important;
+    border: solid 1px #e6af06 !important;
     border-radius: 5px;
     padding: 10px 38px;
     font-size: 15px;
