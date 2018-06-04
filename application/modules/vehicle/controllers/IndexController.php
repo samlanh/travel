@@ -43,8 +43,8 @@ public function init()
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();
 			try{
-				$id= $db->insertPrice($data);
-				Application_Form_FrmMessage::Sucessfull("EDIT_SUCCESS", '/vehicle/index/index');
+				$db->updatePrice($data,$id);
+				Application_Form_FrmMessage::Sucessfull("EDIT_SUCCESS", '/vehicle/');
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());

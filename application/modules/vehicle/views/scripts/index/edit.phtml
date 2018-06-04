@@ -50,7 +50,7 @@ label#error {
 	                    	<select class="form-control select2me" name="supplyerId" id="supplyerId" placeholder="ប្រភេទរថយន្ត" >
 	                      		<option value="">ជ្រើសរើសអ្នកផ្គត់ផ្គង់</option>
 	                      		<?php if(!empty($this->supplyer)){foreach ($this->supplyer as $rs){?>
-								<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
+								<option value="<?php echo $rs['id']?>" <?php if($rs['id']==$this->row['supplyerId']){echo "selected='selected'";}?>><?php echo $rs['name']?></option>
 								<?php }}?>
 						    </select>
 	                   </div>
@@ -61,7 +61,7 @@ label#error {
 	                      <select class="form-control select2me" name="vehicleType" id="vehicleType" placeholder="ប្រភេទរថយន្ត" >
 	                      		<option value="">ជ្រើសរើសប្រភេទរថយន្ត</option>
 	                      		<?php if(!empty($this->vehicle_type)){foreach ($this->vehicle_type as $rs){?>
-								<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
+								<option value="<?php echo $rs['id']?>" <?php if($rs['id']==$this->row['vehicleType']){echo "selected='selected'";}?>><?php echo $rs['name']?></option>
 								<?php }}?>
 						  </select>
 	                   </div>
@@ -70,15 +70,15 @@ label#error {
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ទំនេរ(is available) </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
 	                      <select class="form-control select2me" name="isAvailable" id="isAvailable" placeholder="" >
-								<option value="1">ទំនេរ</option>
-								<option value="0">មិនទំនេរ</option>
+								<option value="1" <?php if($this->row['isAvailable']==1){echo "selected='selected'";}?>>ទំនេរ</option>
+								<option value="0" <?php if($this->row['isAvailable']==0){echo "selected='selected'";}?>>មិនទំនេរ</option>
 						  </select>
 	                   </div>
 	                </div>
 	                <div class="form-group">
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ពណ៍នា </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                  		<textarea class="form-control" rows="" cols="" name="note" id="note" placeholder="ពណ៍នា"></textarea>
+	                  		<textarea class="form-control" rows="" cols="" name="note" id="note" placeholder="ពណ៍នា"><?php echo $this->row['note']?></textarea>
 	                   </div>
 	                </div>
 				</div>
@@ -145,10 +145,54 @@ label#error {
 <script type="text/javascript">
 
 	$( document ).ready(function() {
-		addRow();
+		Initailize();
 	});
-
 	index=0;
+	function Initailize(){
+		
+		<?php if(!empty($this->row_detail)){foreach ($this->row_detail as $rs){?>
+		
+		index++;
+		template='<tr align="center" id="row_price_'+index+'">';
+		template+='<td width="2%">'+index+'</td>';
+		
+		template+='<td width="20%"><select class="form-control select2me" id="from_location_'+index+'" name="from_location_'+index+'" >';
+		template+='<option value="">Select</option>';
+			<?php foreach($this->location as $location){?>
+				template+='<option value="'+<?php echo $location['id']?>+'"><?php echo $location['name'];?></option>';
+			<?php }?>
+		template+='</select></td>';
+		
+		template+='<td width="20%"><select class="form-control select2me" id="to_location_'+index+'" name="to_location_'+index+'" >';
+		template+='<option value="">Select</option>';
+			<?php foreach($this->location as $location){?>
+				template+='<option value="'+<?php echo $location['id']?>+'"><?php echo $location['name'];?></option>';
+			<?php }?>
+		template+='</select></td>';
+		
+		template+='<td><input style="text-align:center;" type="text" id="duration_'+index+'" name="duration_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><input style="text-align:center;" type="text" id="cost_'+index+'" name="cost_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><input style="text-align:center;" type="text" id="price_'+index+'" name="price_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><input style="text-align:center;" type="text" id="discount_'+index+'" name="discount_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><button style="background: #ff3b3b;color: #fff;" type="button" onClick="deleteRecord('+index+')" name="deleteSale" class="btn default red">លុប</button></td>';
+		
+		template+='</tr>';
+		$('#lbl_price').append(template);
+		if($('#identity').val()!="") {
+			var identity = $('#identity').val();
+			$('#identity').val(identity+','+index);
+		} else {$('#identity').val(index);}
+
+		$('#from_location_'+index).val(<?php echo $rs['from_location'];?>);
+		$('#to_location_'+index).val(<?php echo $rs['to_location'];?>);
+		$('#duration_'+index).val("<?php echo $rs['duration'];?>");
+		$('#cost_'+index).val(<?php echo $rs['cost'];?>);
+		$('#price_'+index).val(<?php echo $rs['price'];?>);
+		$('#discount_'+index).val(<?php echo $rs['discount'];?>);
+		<?php }}?>
+	}
+
+	
 	function addRow(){
 		index++;
 		template='<tr align="center" id="row_price_'+index+'">';
@@ -181,6 +225,9 @@ label#error {
 			$('#identity').val(identity+','+index);
 		} else {$('#identity').val(index);}
 	}
+
+
+	
 	function deleteRecord(index) {
 		var identity = $('#identity').val();
 		var arrays = identity.split(',');
