@@ -3,7 +3,7 @@
 class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'tbl_employee';
+    protected $_name = 'tp_locations';
     public function getUserId(){
     	$db = new Application_Model_DbTable_DbGlobal();
 		return $db->getUserId();   
@@ -33,7 +33,7 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 				       l.locationName,
 				       l.countryId,
 				       l.status
-				       FROM `tp_location` AS l 
+				       FROM `tp_locations` AS l 
 				       WHERE l.`status`=1
 		   		";
 		   		$where="";
@@ -94,7 +94,7 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
     				'status'         => 1,
     				'userId'         => $this->getUserId(),
     		);
-    		$this->_name="tp_location";
+    		$this->_name="tp_locations";
     		$pro_id =$this->insert($_arr);
     		$db->commit();
     	}catch(exception $e){
@@ -135,7 +135,7 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
     				'status'         => 1,
     				'userId'         => $this->getUserId(),
     		);
-    		$this->_name="tp_location";
+    		$this->_name="tp_locations";
     		$where=" id=".$_data['id'];
     		$pro_id =$this->update($_arr, $where);
     		$db->commit();
@@ -149,7 +149,7 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 	function getAllLocationById($id){
 		$db = $this->getAdapter();
 		$sql="SELECT l.*
-		       FROM `tp_location` AS l  
+		       FROM `tp_locations` AS l  
 		       WHERE l.`status`=1  AND l.`id`=$id";
 		return $db->fetchRow($sql);
 	}
