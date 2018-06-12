@@ -34,16 +34,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         
-         <!-- Plugins css-->
+        <script src="<?php echo $this->baseUrl()."/templates/assets/"?>jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->baseUrl()."/templates"?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="<?php echo $this->baseUrl()."/templates"?>/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        
+        <script type="text/javascript" src="<?php echo $this->baseUrl()."/templates"?>/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="<?php echo $this->baseUrl()."/templates"?>/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+        
+        <!-- Plugins css-->
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl()."/templates"?>/assets/plugins/clockface/css/clockface.css"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl()."/templates"?>/assets/plugins/bootstrap-datepicker/css/datepicker3.css"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl()."/templates"?>/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl()."/templates"?>/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl()."/templates"?>/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+         
         <link href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
         <link rel="stylesheet" href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/switchery/switchery.min.css">
         <link href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <?php /*?>
+       
         <link href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
 		<link href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 		<link href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 		<link href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
 		<link href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-        
+        <?php */?>
          <!-- jvectormap -->
         <link href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
         
@@ -137,6 +152,7 @@
             <div class="page-contentbar">
             <?php echo $this->render('menuleft.phtml')?> 
               <?php 
+              	/*
 	              	$db = new Application_Model_DbTable_DbUsers();
             		$rs = $db->getAccessUrl($module,$controller,$action);
             		if(!empty($rs) OR $action=='changepassword'){
@@ -145,6 +161,8 @@
             		}else{
             			echo $this->render('pagenotfund.phtml');
             		}
+            	*/	
+              	echo $this->layout()->content;
 			?>
 
   
