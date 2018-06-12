@@ -9,7 +9,47 @@ public function init()
 	}
 	public function indexAction()
 	{
+		$db = new Vehicle_Model_DbTable_DbVehiclePrice();
+		try{
+			if($this->getRequest()->isPost()){
+				$search=$this->getRequest()->getPost();
+				$search['start']=date("Y-m-d",strtotime($search['start']));
+				$search['end']=date("Y-m-d",strtotime($search['end']));
+			}
+			else{
+				$search = array(
+						'adv_search' 	=> '',
+						'user'			=> '',
+						'vehicleType'	=> '',
+						'supplyerId'	=> '',
+						'start'			=> date('Y-m-d'),
+						'end'			=> date('Y-m-d'));
+			}
+			
+			$this->view->adv_search=$search;
+			$rs_rows= $db->getAllVehiclePrice($search);
+			$list = new Application_Form_Frmtable();
+			$collumns = array("Supplyer","Vehicle Type","isAvailable","Note","Date","User","Status");
+			$link=array(
+					'module'=>'vehicle','controller'=>'index','action'=>'edit',
+			);
+			$this->view->list=$list->getCheckList(2, $collumns, $rs_rows,array('supplyerName'=>$link,'title'=>$link,'isAvailable'=>$link));
+		}catch (Exception $e){
+			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
+			echo $e->getMessage();
+		}
 		
+		$this->view->supplyer = $db->getAllSupplyer();
+		$this->view->vehicle_type = $db->getAllVehicleType();
+		
+// 		$data = new Accounting_Model_DbTable_DbRegister();
+// 		$this->view->rows_degree=$data->getDegree();
+		 
+// 		$form=new Registrar_Form_FrmSearchInfor();
+// 		$form->FrmSearchRegister();
+// 		Application_Model_Decorator::removeAllDecorator($form);
+// 		$this->view->form_search=$form;
+	
 	}
 	
 	public function addAction()

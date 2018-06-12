@@ -1,0 +1,70 @@
+<?php 
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	print_r($this->adv_search);exit();
+?>
+
+<title>Vehicle Price</title>
+
+<div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Vehicle Price")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    				<div class="buttun-block">
+						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/vehicle/index/add";?>"><?php echo $tr->translate("Add Price")?></a>
+					</div>
+    			</div>
+    		</div>
+    		<div class="col-sm-12">
+    			<div class="card-box">
+					<form name="frmlist_users" action=""  method="post" autocomplete="off">
+						<div class="form-group">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("Search here...");?>" value='<?php echo $this->adv_search['adv_search'];?>'>
+							</div>
+                            <div class="col-md-9 text-right">
+                            	 <div class="form-group">
+					                <div class="col-md-3 text-left search">
+					                 	<select class="form-control select2" id="supplyerId"  name="supplyer"  > 
+					                 	 	<option value=""><?php echo $tr->translate('Supplyier')?></option>
+					                 	 	<?php if(!empty($this->supplyer)){foreach ($this->supplyer as $sup){?>
+					                 	 	<option value="<?php echo $sup['id']?>" <?php if ($this->adv_search['supplyer']==$sup['id']){ echo 'selected="selected"';}?>><?php echo $sup['name']?></option>
+					                 	 	<?php }}?>
+										</select> 
+					                </div>
+					                <div class="col-md-3 text-left search">
+				                 	    <select class="form-control select2" id="vehicleType"  name="vehicleType"  > 
+				                 	  		<option value=""><?php echo $tr->translate('Vehicle Type')?></option>
+					                 	 	<?php if(!empty($this->vehicle_type)){foreach ($this->vehicle_type as $veh){?>
+					                 	 	<option value="<?php echo $veh['id']?>" <?php if ($this->adv_search['supplyer']==$veh['id']){ echo 'selected="selected"';}?>><?php echo $veh['name']?></option>
+					                 	 	<?php }}?>
+										</select> 
+				                    </div>
+                                   	<div class="col-md-5 search">
+                                     	<div class="input-daterange input-group" id="date-range">
+                                          	<input type="text" class="form-control" name="start" value="<?php if (!empty($this->search['start'])){ echo date("m-d-Y",strtotime($this->adv_search['start']));}?>" />
+                                            <span class="input-group-addon b-0"><?php echo $tr->translate("to");?></span>
+                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("m-d-Y",strtotime($this->adv_search['end']));}?>" />
+                                       </div>
+                                   	</div>
+                                    <div class="col-md-1 search">
+                                   		<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
+                                   	</div>
+                                 </div>
+                           </div>
+                       </div>
+					</form>
+					<div class="clearfix"></div>
+				</div>
+    		</div>
+    		
+    		<div class="col-sm-12">
+    			<?php echo $this->list;?>
+    		</div>
+    		
+    	</div>
+    </div>		
+</div>

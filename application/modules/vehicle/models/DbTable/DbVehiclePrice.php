@@ -4,8 +4,54 @@ class Vehicle_Model_DbTable_DbVehiclePrice extends Zend_Db_Table_Abstract
     protected $_name = 'tp_price';
     
     public function getUserId(){
-    	$session_user=new Zend_Session_Namespace('authcar');
+    	$session_user=new Zend_Session_Namespace('auth_travel');
 		return $session_user->user_id;
+    }
+    
+    function getAllVehiclePrice($search=null){
+    	$db=$this->getAdapter();
+    	$sql=" SELECT
+			    	p.id,
+			    	s.supplyerName,
+			    	v.title,
+			    	(select name_en from tp_view as v where v.type=4 and v.key_code = p.isAvailable) as isAvailable,
+			    	note,
+			    	p.createDate,
+			    	(select first_name from rms_users as u where u.id = p.userId) as user,
+			    	(select name_en from tp_view as v where v.type=1 and v.key_code = p.status) as status
+    			FROM
+			    	tp_price as p,
+			    	tp_supplier as s,
+			    	tp_vehicletype as v
+    			WHERE
+			    	p.supplyerId = s.id
+			    	and p.vehicleType = v.id
+    		";
+    
+    	$where=" ";
+    
+    	$from_date =(empty($search['start']))? '1': " p.createDate >= '".$search['start']." 00:00:00'";
+    	$to_date = (empty($search['end']))? '1': " p.createDate <= '".$search['end']." 23:59:59'";
+    	$where = " AND ".$from_date." AND ".$to_date;
+    
+    	if(!empty($search['adv_search'])){
+	    	$s_where=array();
+	    	$s_search=addslashes(trim($search['adv_search']));
+	    	$s_where[]= " stu_code LIKE '%{$s_search}%'";
+	    	$s_where[]=" receipt_number LIKE '%{$s_search}%'";
+	    	$s_where[]= " stu_khname LIKE '%{$s_search}%'";
+	    	$s_where[]= " stu_enname LIKE '%{$s_search}%'";
+	    	$s_where[]= " sp.grade LIKE '%{$s_search}%'";
+	    	$where.=' AND ('.implode(' OR ', $s_where).')';
+    	}
+    	if(!empty($search['user'])){
+    		$where.=" AND sp.user_id=".$search['user'];
+    	}
+    	$order=" ORDER BY p.id DESC";
+    	
+    	echo $sql.$where.$order;
+    	
+    	return $db->fetchAll($sql.$where.$order);
     }
     
     function insertPrice($data){
@@ -114,7 +160,7 @@ class Vehicle_Model_DbTable_DbVehiclePrice extends Zend_Db_Table_Abstract
     
 	function getAllLocation(){
 		$db = $this->getAdapter();
-		$sql="SELECT id,locationName AS name FROM tp_location where locationName!='' and status=1 ";
+		$sql="SELECT id,locationName AS name FROM tp_locations where locationName!='' and status=1 ";
 		return $db->fetchAll($sql);
 	}
 	
