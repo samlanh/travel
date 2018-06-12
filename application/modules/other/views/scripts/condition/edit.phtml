@@ -1,0 +1,77 @@
+<?php 
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$this->headTitle($tr->translate('Add Condition'));
+echo $this->headTitle();
+//print_r($this->row);exit();
+$row=$this->row;
+?>
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Add Condition")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/other/condition/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
+    			</div>
+    		</div>
+    		
+			<div class="col-sm-12">
+				<form id="frm" class="form-horizontal form-label-left" action=""  method="post" enctype="multipart/form-data">
+					 
+	                <div class="form-group">
+	                   <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name"><?php echo $tr->translate('DESCRIPTION')?>:
+	                   </label>
+	                   <div class="col-md-12 col-sm-12 col-xs-12">
+	                   		<textarea class="form-control" rows="18" id="condition" name="condition" required> <?php echo $row['conTitle']?></textarea>
+	                   </div>
+	                </div>
+	                 
+	                 <div class="form-group">
+	                   <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php echo $tr->translate('ORDER_BY')?> :
+	                   </label>
+	                   <div class="col-md-4 col-sm-4 col-xs-4">
+	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" placeholder="<?php echo $tr->translate('ORDER_BY')?>" value=" <?php echo $row['orderBy']?>"/>
+	                   </div>
+	                   <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php echo $tr->translate('STATUS')?> :
+	                   </label>
+	                   <div class="col-md-4 col-sm-4 col-xs-4">
+	                    	<select class="form-control select2" id="status"  name="status"  > 
+	                   			<option value="1" <?php if ($row['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('ACTIVE')?></option>
+	                   			<option value="0"   <?php if ($row['status']==0){ echo 'selected="selected"';}?> ><?php echo $tr->translate('DEACTIVE')?></option>
+							</select>
+	                   </div>
+	                </div>
+	                 
+                    <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-right">
+								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit" value="<?php echo $tr->translate('SAVE_CLOSE');?>" label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="submitButton" />
+								<input class="btn btn-primary black save" name="save_new"  id="save_new" type="submit" value="<?php echo $tr->translate('SAVE_NEW');?>" label="<?php echo $tr->translate('SAVE_NEW');?>" id="submitButton" /> 
+			                </div>
+	                    </div>
+                    </div>
+	               
+	              </form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('#frm').submit(function() {
+		service_type = $("#service_type").val();
+	    if(service_type=='' || service_type==-1){
+	        alert("<?php echo $tr->translate('Select Service')?>");
+	        $('#service_type').select2('open');
+	        return false;
+	    }
+		var r = confirm("សូមត្រួតពិនិត្យទិន្នន័យ អោយបានត្រឹមត្រូវ !\nតើលោកអ្នកពិតជាចង់រក្សាទុកទិន្នន័យនេះមែនឫទេ?");
+		if (r == true) {
+		    return true;
+		} else {
+		   return false;
+		}
+	});
+</script>

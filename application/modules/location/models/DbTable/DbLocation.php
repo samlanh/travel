@@ -21,39 +21,29 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
     	}
     }
     
-	 function getAllLocationName($search=NULL){
+	 function getAllLocationName($search=null){
 		   	$db = $this->getAdapter();
 		   	$db->beginTransaction();
 		   	try{
 // 		   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
 // 		   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
-		   		 
-		   		$sql=" SELECT l.id,
-				       l.serviceId,
-				       l.locationName,
-				       l.countryId,
-				       l.status
-				       FROM `tp_locations` AS l 
-				       WHERE l.`status`=1
-		   		";
+		   		$sql="SELECT l.id,(SELECT ls.serviceName FROM `tp_location_service` AS ls WHERE ls.id=l.serviceId LIMIT 1) AS service_name,l.locationName,
+					      (SELECT c.countryName FROM `tp_country` AS c WHERE c.id=l.countryId LIMIT 1) AS country_name,
+					      (SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=l.status AND v.type=1 LIMIT 1) AS status_name
+						FROM `tp_locations` AS l 
+						WHERE l.`status`=1 ";
 		   		$where="";
 // 		   		$where.= " AND  ".$from_date." AND ".$to_date;
-// 		   		if(!empty($search['adv_search'])){
-// 		   			$s_where = array();
-// 		   			$s_search = addslashes(trim($search['adv_search']));
-// 		   			$s_where[] = " e.employeeCode LIKE '%{$s_search}%'";
-// 		   			$s_where[] = " e.sureName LIKE '%{$s_search}%'";
-// 		   			$s_where[] = " e.firstName LIKE '%{$s_search}%'";
-// 		   			$s_where[] = " e.latinName LIKE '%{$s_search}%'";
-// 		   			$s_where[] = " e.phoneNumber LIKE '%{$s_search}%'";
-// 		   			$where .=' AND ('.implode(' OR ',$s_where).')';
-// 		   		}
-// 		   		if($search['status']>-1){
-// 		   			$where.=" AND e.status=".$search['status'];
-// 		   		}
-// 		   		if(!empty($search['gender'])){
-// 		   			$where.=" AND e.gender= '".$search['gender']."'";
-// 		   		}
+		   		if(!empty($search['adv_search'])){
+		   			$s_where = array();
+		   			$s_search = addslashes(trim($search['adv_search']));
+		   			$s_search = str_replace(' ', '', $s_search);
+		   			$s_where[]="REPLACE(l.locationName,' ','')   LIKE '%{$s_search}%'";
+		   			$where .=' AND ('.implode(' OR ',$s_where).')';
+		   		}
+		   		if($search['status']>-1){
+		   			$where.=" AND status=".$search['status'];
+		   		}
 		   		$order=" ORDER BY l.`locationName` ASC";
 		   		return $db->fetchAll($sql.$where.$order);
 	   		}catch(exception $e){

@@ -1,8 +1,8 @@
 <?php
-class Location_LocationController extends Zend_Controller_Action {
+class Other_TermsController extends Zend_Controller_Action {
 	
-	const REDIRECT_URL = '/location/location';
-	const REDIRECT_URL_ADD = '/location/location/add';
+	const REDIRECT_URL = '/other/terms/';
+	const REDIRECT_URL_ADD = '/other/terms/add';
 public function init()
     {    	
      /* Initialize action controller here */
@@ -22,14 +22,14 @@ public function init()
 				);
 			}
 			$this->view->search=$search;
-	        $db=new Location_Model_DbTable_DbLocation();
-    		$result = $db->getAllLocationName($search);
+	        $db=new Other_Model_DbTable_DbTerms();
+    		$result = $db->getAllConditon($search);
     		$list = new Application_Form_Frmtable();
-    		$collumns = array("SERVICE_TYPE","LOCATION_NAME","COUNTRY_NAME","STATUS");
+    		$collumns = array("Terms Title","Create Date","Modify Date","STATUS");
     		$link=array(
-    				'module'=>'location','controller'=>'location','action'=>'edit',
+    				'module'=>'other','controller'=>'terms','action'=>'edit',
     		);
-    		$this->view->list=$list->getCheckList(0,$collumns, $result,array('serviceId'=>$link,'locationName'=>$link));
+    		$this->view->list=$list->getCheckList(0,$collumns, $result,array('conTitle'=>$link,'createdate'=>$link));
     		if (empty($result)){
     			$result = array('err'=>1, 'msg'=>'មិនទាន់មានទិន្នន័យនៅឡើយ!');
     		}		
@@ -45,9 +45,9 @@ public function init()
 	{
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();
-			$db = new Location_Model_DbTable_DbLocation();
+			$db = new Other_Model_DbTable_DbTerms();
 			try{
-				$id= $db->insertLocation($data);
+				$id= $db->addTerms($data);
 				if(isset($data['save_close'])){
 					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
 				} 
@@ -57,20 +57,16 @@ public function init()
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			}
 		}
-		$db_global=new Location_Model_DbTable_DbLocation();
-		$rs=$this->view->province=$db_global->getAllProvince();
-		$this->view->service_type=$db_global->getAllService();
-		 
 	}
 	
 	public function editAction(){
-		$db = new Location_Model_DbTable_DbLocation();
+		$db = new Other_Model_DbTable_DbTerms();
 		$id=$this->getRequest()->getParam('id');
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();
 			try{
 				$data['id']=$id;
-				$id= $db->updateLocation($data);
+				$id= $db->updateTerms($data);
 				if(isset($data["save_close"])){
 					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
 					$this->_redirect(self::REDIRECT_URL);
@@ -85,10 +81,7 @@ public function init()
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			}
 		}
-		$db_global=new Location_Model_DbTable_DbLocation();
-		$rs=$this->view->province=$db_global->getAllProvince();
-		$this->view->service_type=$db_global->getAllService();
-		$this->view->row=$db->getAllLocationById($id);
+		$this->view->row=$db->getTermsById($id);
 	}
 	
 	function updateAction(){
@@ -98,7 +91,7 @@ public function init()
 		$us_id = $this->getRequest()->getParam('id');
 		$us_id = (empty($us_id))? 0 : $us_id;
 		
-		$db_user = new Location_Model_DbTable_DbLocation();
+		$db_user = new Other_Model_DbTable_DbTerms();
 		$db = $db_user->updateStatus($us_id,$blocked);
 		$this->_redirect(self::REDIRECT_URL);
 	}

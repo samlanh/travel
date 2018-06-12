@@ -17,7 +17,7 @@ echo $this->headTitle();
     		</div>
     		
 			<div class="col-sm-8">
-				<form name="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+				<form id="frm" class="form-horizontal form-label-left" action=""  method="post" enctype="multipart/form-data">
 					<div class="form-group">
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Location Name')?> :
 	                   </label>
@@ -80,34 +80,18 @@ echo $this->headTitle();
 	</div>
 </div>
 <script type="text/javascript">
-
-$('#frm_location').submit(function() {
-	service_type = $("#service_type").val();
-    if(service_type=='' || service_type==-1){
-        alert("<?php echo $tr->translate('Select Service')?> ");
-        $('#service_type').select2('open');
-        return false;
-    }
-	var r = confirm("សូមត្រួតពិនិត្យទិន្នន័យ អោយបានត្រឹមត្រូវ !\nតើលោកអ្នកពិតជាចង់រក្សាទុកទិន្នន័យនេះមែនឫទេ?");
-	if (r == true) {
-	    return true;
-	} else {
-	   return false;
-	    
-	}
-});
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            
-            reader.onload = function (e) {
-                $('#profile-img-tag').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#profile-img").change(function(){
-        readURL(this);
-    });
+	$('#frm').submit(function() {
+		service_type = $("#service_type").val();
+	    if(service_type=='' || service_type==-1){
+	        alert("<?php echo $tr->translate('Select Service')?>");
+	        $('#service_type').select2('open');
+	        return false;
+	    }
+		var r = confirm("សូមត្រួតពិនិត្យទិន្នន័យ អោយបានត្រឹមត្រូវ !\nតើលោកអ្នកពិតជាចង់រក្សាទុកទិន្នន័យនេះមែនឫទេ?");
+		if (r == true) {
+		    return true;
+		} else {
+		   return false;
+		}
+	});
 </script>
