@@ -1,6 +1,6 @@
 <?php
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$this->headTitle($tr->translate("EMPLOYEE")); 
+	$this->headTitle($tr->translate("SUPPLYER")); 
 	echo $this->headTitle();
 	
 ?>   
@@ -26,13 +26,13 @@ span.select2.select2-container.select2-container--default {
     			</div>
     			<div class="col-sm-4 text-right">
     				<div class="buttun-block">
-						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/supplyer/index/add";?>"><?php echo $tr->translate("Add Supplyer")?></a>
+						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/supplyer/index/add";?>"><?php echo $tr->translate("Add Supplyer")?></a>
 					</div>
     			</div>
     		</div>
 			<div class="col-sm-12">
 				<div class="card-box">
-					<form name="frmlist_users" action=""  method="post">
+					<form name="frmlist_users" action=""  method="post" autocomplete="off">
 						<div class="form-group">
                             <div class="col-md-4">
                                 <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("Search by employee id");?>" value='<?php echo $this->search['adv_search'];?>'>

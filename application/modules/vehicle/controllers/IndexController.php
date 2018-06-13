@@ -26,18 +26,20 @@ public function init()
 						'end'			=> date('Y-m-d'));
 			}
 			
-			$this->view->adv_search=$search;
+			
 			$rs_rows= $db->getAllVehiclePrice($search);
 			$list = new Application_Form_Frmtable();
 			$collumns = array("Supplyer","Vehicle Type","isAvailable","Note","Date","User","Status");
 			$link=array(
 					'module'=>'vehicle','controller'=>'index','action'=>'edit',
 			);
-			$this->view->list=$list->getCheckList(2, $collumns, $rs_rows,array('supplyerName'=>$link,'title'=>$link,'isAvailable'=>$link));
+			$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('supplyerName'=>$link,'title'=>$link,'isAvailable'=>$link));
 		}catch (Exception $e){
 			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			echo $e->getMessage();
 		}
+		
+		$this->view->adv_search=$search;
 		
 		$this->view->supplyer = $db->getAllSupplyer();
 		$this->view->vehicle_type = $db->getAllVehicleType();

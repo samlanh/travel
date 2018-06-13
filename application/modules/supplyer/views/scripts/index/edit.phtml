@@ -1,6 +1,6 @@
 <?php 
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$this->headTitle($tr->translate('Edit Employee'));
+	$this->headTitle($tr->translate('Edit Supplyer'));
 	echo $this->headTitle();
 
 	$logo = $this->baseUrl()."/images/profile.jpg";
@@ -43,7 +43,7 @@ label#error {
     		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
-	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Edit Employee");?></h4>
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Edit Supplyer");?></h4>
 	    			</div>
 	    			<div class="col-sm-4 text-right">
 	    			</div>
@@ -211,6 +211,7 @@ label#error {
                 	<div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-center">
+	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'supplyer','controller'=>"index",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />
 								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('កែប្រែទិន្នន័យ');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
 			                </div>
 	                    </div>

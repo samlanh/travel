@@ -1,0 +1,132 @@
+<?php $tr = Application_Form_FrmLanguages::getCurrentlanguage();?>
+<style>
+	.form-group {
+	    margin-bottom: 5px;
+	}
+	.form-horizontal .control-label {
+	    text-align: left;
+	}
+	.thumb-xl {
+	    height: 180px;
+	    width: 150px;
+	}
+	div.browe_photo .input-group {
+	    display: block;
+	}
+	label#error {
+	    color: #F44336;
+	}
+</style>
+<title>About Us</title>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
+<!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+	    		<div class="col-sm-12 border-botom">
+	    			<div class="col-sm-8">
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("About Us")?></h4>
+	    			</div>
+	    			<div class="col-sm-4 text-right">
+	    			</div>
+	    		</div>
+    		
+				<div class="col-sm-12" style="white-space: nowrap;">
+					<div class="form-group"  style="white-space: nowrap;">
+						<label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							About Us &nbsp;&nbsp;&nbsp;:
+	                    </label>
+	                    <div class="col-md-10 col-sm-10 col-xs-10">
+	                    	<textarea class="ckeditor" rows="1" id="aboutUs" name="aboutUs">
+	                    		<?php echo $this->row['aboutUs'];?>
+	                    	</textarea>
+	                    </div>
+	                    <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							&nbsp;
+	                    </label>
+	                </div>
+	                <br />
+	                <div class="form-group">
+						<label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							Contact Us&nbsp;&nbsp;:
+	                    </label>
+	                    <div class="col-md-10 col-sm-10 col-xs-10">
+	                    	<input id="contactUs" name="contactUs" class="form-control" value="<?php echo $this->row['contactUs'];?>" />
+	                    </div>
+	                    <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							&nbsp;
+	                    </label>
+	                </div>
+	                
+	                <div class="form-group">
+						<label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+	                    </label>
+	                    <div class="col-md-10 col-sm-10 col-xs-10">
+	                    	<input id="email" name="email" class="form-control" value="<?php echo $this->row['email'];?>" />
+	                    </div>
+	                    <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							&nbsp;
+	                    </label>
+	                </div>
+	                
+	                <div class="form-group">
+						<label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							Facebook &nbsp;&nbsp;&nbsp;:
+	                    </label>
+	                    <div class="col-md-10 col-sm-10 col-xs-10">
+	                    	<input id="facebook" name="facebook" class="form-control" value="<?php echo $this->row['facebook'];?>" />
+	                    </div>
+	                    <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							&nbsp;
+	                    </label>
+	                </div>
+	                <div class="form-group">
+						<label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							Youtube &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+	                    </label>
+	                    <div class="col-md-10 col-sm-10 col-xs-10">
+	                    	<input id="youtube" name="youtube" class="form-control" value="<?php echo $this->row['youtube'];?>" />
+	                    </div>
+	                    <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							&nbsp;
+	                    </label>
+	                </div>
+	                <div class="form-group">
+						<label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							Instagram &nbsp;:
+	                    </label>
+	                    <div class="col-md-10 col-sm-10 col-xs-10">
+	                    	<input id="instagram" name="instagram" class="form-control" value="<?php echo $this->row['instagram'];?>" />
+	                    </div>
+	                    <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							&nbsp;
+	                    </label>
+	                </div>
+	                <div class="form-group">
+						<label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							Twitter &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+	                    </label>
+	                    <div class="col-md-10 col-sm-10 col-xs-10">
+	                    	<input id="twitter" name="twitter" class="form-control" value="<?php echo $this->row['twitter'];?>" />
+	                    </div>
+	                    <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name">
+							&nbsp;
+	                    </label>
+	                </div>
+	                
+	                <br />
+	                <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-center">
+	                    		<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'setting','controller'=>"aboutus",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('GO_EDIT');?>" /> 
+			                </div>
+	                    </div>
+                    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

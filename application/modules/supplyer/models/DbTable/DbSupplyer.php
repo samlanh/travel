@@ -25,8 +25,7 @@ class Supplyer_Model_DbTable_DbSupplyer extends Zend_Db_Table_Abstract
 		   				 s.website,
 		   				 s.createDate,
 		   				 (select first_name from rms_users where rms_users.id = s.userInsert) as user,
-		   				 (select name_kh from tp_view where tp_view.type=1 and tp_view.key_code = s.status) as status,
-		   				 'Delete'
+		   				 (select name_kh from tp_view where tp_view.type=1 and tp_view.key_code = s.status) as status
 					FROM 
 						tp_supplier AS s 
 					WHERE 
@@ -61,7 +60,7 @@ class Supplyer_Model_DbTable_DbSupplyer extends Zend_Db_Table_Abstract
     	try{
     		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
     		//////// for logo image /////////////////////////
-    		$part= PUBLIC_PATH.'/images/supplyerlogo/';
+    		$part= PUBLIC_PATH.'/images/all/supplyerlogo/';
     		if (!file_exists($part)) {
     			mkdir($part, 0777, true);
     		}
@@ -80,7 +79,7 @@ class Supplyer_Model_DbTable_DbSupplyer extends Zend_Db_Table_Abstract
     		}
     		//////// for activity photo /////////////////////////
     		$activity_photo = "";
-    		$part = PUBLIC_PATH.'/images/activityphoto/';
+    		$part = PUBLIC_PATH.'/images/all/supplyeractivityphoto/';
     		if (!file_exists($part)) {
     			mkdir($part, 0777, true);
     		}
@@ -164,7 +163,7 @@ class Supplyer_Model_DbTable_DbSupplyer extends Zend_Db_Table_Abstract
     	try{
     		$valid_formats = array("jpg", "png", "gif", "bmp","jpeg");
     		//////// for logo image /////////////////////////
-    		$part= PUBLIC_PATH.'/images/supplyerlogo/';
+    		$part= PUBLIC_PATH.'/images/all/supplyerlogo/';
     		if (!file_exists($part)) {
     			mkdir($part, 0777, true);
     		}
@@ -185,7 +184,7 @@ class Supplyer_Model_DbTable_DbSupplyer extends Zend_Db_Table_Abstract
     		}
     		//////// for activity photo /////////////////////////
     		$activity_photo = "";
-    		$part = PUBLIC_PATH.'/images/activityphoto/';
+    		$part = PUBLIC_PATH.'/images/all/supplyeractivityphoto/';
     		if (!file_exists($part)) {
     			mkdir($part, 0777, true);
     		}

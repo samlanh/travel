@@ -24,14 +24,14 @@ public function init()
 		$rs_rows = $db->getAllSupplyer($search);
 		
 		$list = new Application_Form_Frmtable();
-		$collumns = array("ឈ្មោះអ្នកផ្គត់ផ្គង់","លេខទូរសព្ទ","អ៊ីមែល","គេហទំព័រ","CREATE_DATE","USER","STATUS","DELETE");
+		$collumns = array("ឈ្មោះអ្នកផ្គត់ផ្គង់","លេខទូរសព្ទ","អ៊ីមែល","គេហទំព័រ","CREATE_DATE","USER","STATUS");
 		$link = array(
 				'module'=>'supplyer','controller'=>'index','action'=>'edit',
 		);
 		$link1=array(
 				'module'=>'supplyer','controller'=>'index','action'=>'delete',
 		);
-		$this->view->list=$list->getCheckList(2, $collumns, $rs_rows,array('supplyerName'=>$link,'tel'=>$link,'email'=>$link,'website'=>$link,'Delete'=>$link1));
+		$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('supplyerName'=>$link,'tel'=>$link,'email'=>$link,'website'=>$link));
 		
 		$this->view->search = $search;
 		

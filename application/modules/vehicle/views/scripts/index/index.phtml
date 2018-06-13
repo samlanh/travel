@@ -14,7 +14,7 @@
     			</div>
     			<div class="col-sm-4 text-right">
     				<div class="buttun-block">
-						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/vehicle/index/add";?>"><?php echo $tr->translate("Add Price")?></a>
+						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/vehicle/index/add";?>"><?php echo $tr->translate("Add Price")?></a>
 					</div>
     			</div>
     		</div>
@@ -29,7 +29,7 @@
                             	 <div class="form-group">
 					                <div class="col-md-3 text-left search">
 					                 	<select class="form-control select2" id="supplyerId"  name="supplyer"  > 
-					                 	 	<option value=""><?php echo $tr->translate('Supplyier')?></option>
+					                 	 	<option value=""><?php echo $tr->translate('Supplyer')?></option>
 					                 	 	<?php if(!empty($this->supplyer)){foreach ($this->supplyer as $sup){?>
 					                 	 	<option value="<?php echo $sup['id']?>" <?php if ($this->adv_search['supplyer']==$sup['id']){ echo 'selected="selected"';}?>><?php echo $sup['name']?></option>
 					                 	 	<?php }}?>
@@ -45,17 +45,13 @@
 				                    </div>
                                    	<div class="col-md-5 search">
                                      	<div class="input-daterange input-group" id="date-range">
-                                          	<input type="text" class="form-control" name="start" data-date-format="dd-mm-yyyy" value="<?php if (!empty($this->search['start'])){ echo date("d-m-Y",strtotime($this->adv_search['start']));}?>" />
+                                          	<input type="text" class="form-control" name="start" data-date-format="dd-mm-yyyy" value="<?php if (!empty($this->adv_search['start'])){ echo date("m-d-Y",strtotime($this->adv_search['start']));}?>" />
                                             <span class="input-group-addon b-0"><?php echo $tr->translate("to");?></span>
-                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("d/m/Y",strtotime($this->adv_search['end']));}?>" />
+                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->adv_search['end'])){ echo date("m/d/Y",strtotime($this->adv_search['end']));}?>" />
                                        </div>
                                    	</div>
                                     <div class="col-md-1 search">
                                    		<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
-                                   	</div>
-                                   	
-                                   	<div class="col-md-3 search">
-                                   		<input type="text" class="form-control date-picker" name="start" value="<?php echo date("d-m-Y")?>" data-date-format="dd-mm-yyyy" />
                                    	</div>
                                  </div>
                            </div>
