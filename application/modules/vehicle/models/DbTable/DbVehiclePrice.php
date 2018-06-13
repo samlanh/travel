@@ -49,7 +49,7 @@ class Vehicle_Model_DbTable_DbVehiclePrice extends Zend_Db_Table_Abstract
     	}
     	$order=" ORDER BY p.id DESC";
     	
-    	echo $sql.$where.$order;
+    	//echo $sql.$where.$order;
     	
     	return $db->fetchAll($sql.$where.$order);
     }

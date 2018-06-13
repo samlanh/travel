@@ -1,6 +1,6 @@
 <?php 
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	print_r($this->adv_search);exit();
+	//print_r($this->adv_search);exit();
 ?>
 
 <title>Vehicle Price</title>
@@ -20,7 +20,7 @@
     		</div>
     		<div class="col-sm-12">
     			<div class="card-box">
-					<form name="frmlist_users" action=""  method="post" autocomplete="off">
+					<form name="frmlist_users" id="frm" action=""  method="post" autocomplete="off">
 						<div class="form-group">
                             <div class="col-md-3">
                                 <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("Search here...");?>" value='<?php echo $this->adv_search['adv_search'];?>'>
@@ -45,13 +45,17 @@
 				                    </div>
                                    	<div class="col-md-5 search">
                                      	<div class="input-daterange input-group" id="date-range">
-                                          	<input type="text" class="form-control" name="start" value="<?php if (!empty($this->search['start'])){ echo date("m-d-Y",strtotime($this->adv_search['start']));}?>" />
+                                          	<input type="text" class="form-control" name="start" data-date-format="dd-mm-yyyy" value="<?php if (!empty($this->search['start'])){ echo date("d-m-Y",strtotime($this->adv_search['start']));}?>" />
                                             <span class="input-group-addon b-0"><?php echo $tr->translate("to");?></span>
-                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("m-d-Y",strtotime($this->adv_search['end']));}?>" />
+                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("d/m/Y",strtotime($this->adv_search['end']));}?>" />
                                        </div>
                                    	</div>
                                     <div class="col-md-1 search">
                                    		<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
+                                   	</div>
+                                   	
+                                   	<div class="col-md-3 search">
+                                   		<input type="text" class="form-control date-picker" name="start" value="<?php echo date("d-m-Y")?>" data-date-format="dd-mm-yyyy" />
                                    	</div>
                                  </div>
                            </div>
