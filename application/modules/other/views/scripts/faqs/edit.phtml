@@ -1,6 +1,6 @@
-<?php 
+<?php
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('Edit Terms'));
+$this->headTitle($tr->translate('Add FAQS'));
 echo $this->headTitle();
 //print_r($this->row);exit();
 $row=$this->row;
@@ -11,21 +11,31 @@ $row=$this->row;
     	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Edit Terms")?></h4>
+    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Add FAQS")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
-    			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/other/condition/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
+    			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/other/faqs/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
     			</div>
     		</div>
     		
 			<div class="col-sm-12">
 				<form id="frm" class="form-horizontal form-label-left" action=""  method="post" enctype="multipart/form-data">
 					 
+					<div class="form-group">
+	                    <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name"><?php echo $tr->translate('Question')?> 
+	                   </label>
+	                   <div class="col-md-11 col-sm-11 col-xs-11">
+	                    	<input class="form-control"  type="text"  name="question" id="question" placeholder="<?php echo $tr->translate('question ?')?>" value="<?php echo $row['question']?>" required/>
+	                   </div>
+	                    
+	                   
+	                </div>
+					 
 	                <div class="form-group">
 	                   <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name"><?php echo $tr->translate('DESCRIPTION')?>:
 	                   </label>
 	                   <div class="col-md-12 col-sm-12 col-xs-12">
-	                   		<textarea class="form-control" rows="18" id="condition" name="condition" required> <?php echo $row['conTitle']?></textarea>
+	                   		<textarea class="form-control" rows="18" id="answer" name="answer" required><?php echo $row['answer']?></textarea>
 	                   </div>
 	                </div>
 	                 
@@ -33,14 +43,14 @@ $row=$this->row;
 	                   <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php echo $tr->translate('ORDER_BY')?> :
 	                   </label>
 	                   <div class="col-md-4 col-sm-4 col-xs-4">
-	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" placeholder="<?php echo $tr->translate('ORDER_BY')?>" value=" <?php echo $row['orderBy']?>"/>
+	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" placeholder="<?php echo $tr->translate('ORDER_BY')?>" value="<?php echo $row['orderBy']?>"/>
 	                   </div>
 	                   <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php echo $tr->translate('STATUS')?> :
 	                   </label>
 	                   <div class="col-md-4 col-sm-4 col-xs-4">
 	                    	<select class="form-control select2" id="status"  name="status"  > 
-	                   			<option value="1" <?php if ($row['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('ACTIVE')?></option>
-	                   			<option value="0"   <?php if ($row['status']==0){ echo 'selected="selected"';}?> ><?php echo $tr->translate('DEACTIVE')?></option>
+	                   			<option value="1" <?php if($row['status']==1) echo "selected='selected'"?> ><?php echo $tr->translate('ACTIVE')?></option>
+	                   			<option value="0" <?php if($row['status']==0) echo "selected='selected'"?>  ><?php echo $tr->translate('DEACTIVE')?></option>
 							</select>
 	                   </div>
 	                </div>

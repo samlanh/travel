@@ -1,8 +1,8 @@
 <?php
 class Other_FaqsController extends Zend_Controller_Action {
 	
-	const REDIRECT_URL = '/other/terms/';
-	const REDIRECT_URL_ADD = '/other/terms/add';
+	const REDIRECT_URL = '/other/faqs/';
+	const REDIRECT_URL_ADD = '/other/faqs/add';
 public function init()
     {    	
      /* Initialize action controller here */
@@ -23,13 +23,13 @@ public function init()
 			}
 			$this->view->search=$search;
 	        $db=new Other_Model_DbTable_DbFaqs();
-    		$result = $db->getAllConditon($search);
+	        $result = $db->getAllFaqs($search);
     		$list = new Application_Form_Frmtable();
     		$collumns = array("Terms Title","Create Date","Modify Date","STATUS");
     		$link=array(
-    				'module'=>'other','controller'=>'terms','action'=>'edit',
+    				'module'=>'other','controller'=>'faqs','action'=>'edit',
     		);
-    		$this->view->list=$list->getCheckList(0,$collumns, $result,array('conTitle'=>$link,'createdate'=>$link));
+    		$this->view->list=$list->getCheckList(0,$collumns, $result,array('question'=>$link,'answer'=>$link));
     		if (empty($result)){
     			$result = array('err'=>1, 'msg'=>'មិនទាន់មានទិន្នន័យនៅឡើយ!');
     		}		

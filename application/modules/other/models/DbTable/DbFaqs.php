@@ -21,22 +21,23 @@ class Other_Model_DbTable_DbFaqs extends Zend_Db_Table_Abstract
     	}
     }
     
-	 function getAllConditon($search=null){
+	 function getAllFaqs($search=null){
 		   	$db = $this->getAdapter();
 		   	$db->beginTransaction();
 		   	try{
 // 		   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
 // 		   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
-		   		$sql="SELECT id,`conTitle`,DATE_FORMAT( `createDate`, '%d-%b-%Y') AS createdate,DATE_FORMAT( `modifyDate`,'%d-%b-%Y') AS modifydate,
-						(SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=tp_condition.status AND v.type=1 LIMIT 1) AS status_name
-					  FROM `tp_condition` WHERE `type`=2 AND `conTitle`!='' ";
+		   		$sql="SELECT id,`question`,`answer`,DATE_FORMAT(`createDate`, '%d-%M-%Y'),DATE_FORMAT(`modifyDate` , '%d-%M-%Y')
+                      FROM `tp_faqs` WHERE `status`=1
+                      AND `question`!='' ";
 		   		$where="";
 // 		   		$where.= " AND  ".$from_date." AND ".$to_date;
 		   		if(!empty($search['adv_search'])){
 		   			$s_where = array();
 		   			$s_search = addslashes(trim($search['adv_search']));
 		   			$s_search = str_replace(' ', '', $s_search);
-		   			$s_where[]="REPLACE(conTitle,' ','')   LIKE '%{$s_search}%'";
+		   			$s_where[]="REPLACE(question,' ','')   LIKE '%{$s_search}%'";
+		   			$s_where[]="REPLACE(answer,' ','')   LIKE '%{$s_search}%'";
 		   			$where .=' AND ('.implode(' OR ',$s_where).')';
 		   		}
 		   		if($search['status']>-1){
@@ -56,15 +57,15 @@ class Other_Model_DbTable_DbFaqs extends Zend_Db_Table_Abstract
     	$db->beginTransaction();
     	try{
     		$_arr=array(
-    				'conTitle'		 => $_data['condition'],
-    				'type'      	 => 2,
+    				'question'		 => $_data['question'],
+    		        'answer'      	 => $_data['answer'],
     				'createDate'	 => date("Y-m-d H:i:s"),
     				'modifyDate'	 => date("Y-m-d H:i:s"),
     				'orderBy'		 => $_data['order_by'],	
     				'status'         => 1,
     				'user_id'         => $this->getUserId(),
     		);
-    		$this->_name="tp_condition";
+    		$this->_name="tp_faqs";
     		$pro_id =$this->insert($_arr);
     		$db->commit();
     	}catch(exception $e){
@@ -78,16 +79,15 @@ class Other_Model_DbTable_DbFaqs extends Zend_Db_Table_Abstract
     	$db = $this->getAdapter();
     	$db->beginTransaction();
     	try{
-    		$_arr=array(
-    				'conTitle'		 => $_data['condition'],
-    				'type'      	 => 2,
-    				'createDate'	 => date("Y-m-d H:i:s"),
-    				'modifyDate'	 => date("Y-m-d H:i:s"),
-    				'orderBy'		 => $_data['order_by'],
-    				'status'         => $_data['status'],
-    				'user_id'         => $this->getUserId(),
-    		);
-    		$this->_name="tp_condition";
+    	    $_arr=array(
+    	        'question'		 => $_data['question'],
+    	        'answer'      	 => $_data['answer'],
+    	        'modifyDate'	 => date("Y-m-d H:i:s"),
+    	        'orderBy'		 => $_data['order_by'],
+    	        'status'         => $_data['status'],
+    	        'user_id'         => $this->getUserId(),
+    	    );
+    		$this->_name="tp_faqs";
     		$where=" id=".$_data['id'];
     		$this->update($_arr, $where);
     		$db->commit();
@@ -108,7 +108,7 @@ class Other_Model_DbTable_DbFaqs extends Zend_Db_Table_Abstract
 	
 	function getTermsById($id){
 		$db = $this->getAdapter();
-		$sql="  SELECT * FROM `tp_condition` WHERE id=$id AND `type`=2";
+		$sql="  SELECT * FROM `tp_faqs` WHERE id=$id";
 		return $db->fetchRow($sql);
 	}
 	
