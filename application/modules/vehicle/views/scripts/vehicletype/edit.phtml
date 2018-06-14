@@ -76,7 +76,18 @@ $row=$this->row;
 	                    	<input class="form-control"  type="text" value="<?php echo $this->row['amountSeat']?>" name="amountSmallCase" id="amountSmallCase" placeholder="<?php echo $tr->translate('ចំនួនវាលីតូច')?>"/>
 	                   </div>
 	                </div>
-		             
+	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('STATUS')?> :
+	                   </label>
+	                   <div class="col-md-8 col-sm-8 col-xs-8">
+							<select class="form-control select2" id="status"  name="status"  > 
+	                   			<option value="1"  <?php if($this->row['status']==1) echo "selected='selected'"?>><?php echo $tr->translate('ACTIVE')?></option>
+	                   			<option value="0"  <?php if($this->row['status']==0) echo "selected='selected'"?>><?php echo $tr->translate('DEACTIVE')?></option>
+							</select>
+	                   </div>
+	                </div>
+	                 
 	                <div class="col-md-8 col-sm-8 col-xs-8">
 	                <br/><br/>
 	                  </div>

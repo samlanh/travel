@@ -1,13 +1,13 @@
 <?php
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$this->headTitle($tr->translate("Location List")); 
+	$this->headTitle($tr->translate("Privacy List")); 
 	echo $this->headTitle();
 ?>	
 
 <?php 
-	$url_new = $this->url(array('module'=>'product','controller'=>'index','action'=>'add',));
-	$url_edit = $this->url(array('module'=>'product','controller'=>'index','action'=>'edit',));
-	$url_delete = $this->url(array('module'=>'product','controller'=>'index','action'=>'delete',));
+	$url_new = $this->url(array('module'=>'other','controller'=>'privacy','action'=>'add',));
+	$url_edit = $this->url(array('module'=>'other','controller'=>'privacy','action'=>'edit',));
+	$url_delete = $this->url(array('module'=>'other','controller'=>'privacy','action'=>'delete',));
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	$formFilter = $this->formFilter;
 ?>
@@ -27,11 +27,11 @@
     	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-user"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Location List")?></h4>
+    				<h4 class="m-t-0"><i class="ti-user"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Privacy List")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
     				<div class="buttun-block">
-						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/location/location/add";?>"><?php echo $tr->translate("Add Location")?></a>
+						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/other/privacy/add";?>"><?php echo $tr->translate("Add Privacy")?></a>
 					</div>
     			</div>
     		</div>

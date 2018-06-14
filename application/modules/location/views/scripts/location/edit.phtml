@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('Add Position'));
+$this->headTitle($tr->translate('Edit Location'));
 echo $this->headTitle();
 $row=$this->row;
 ?>
@@ -10,7 +10,7 @@ $row=$this->row;
     	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Add Location")?></h4>
+    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Edit Location")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
     			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/location/location/index";?>"><?php echo $tr->translate("GO_BACK")?></a>

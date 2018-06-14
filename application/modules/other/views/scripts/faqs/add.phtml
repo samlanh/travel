@@ -4,6 +4,7 @@ $this->headTitle($tr->translate('Add FAQS'));
 echo $this->headTitle();
 ?>
  <!-- START PAGE CONTENT -->
+ <script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
  <div id="page-right-content">
  	<div class="container">
     	<div class="row">
@@ -33,7 +34,7 @@ echo $this->headTitle();
 	                   <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name"><?php echo $tr->translate('DESCRIPTION')?>:
 	                   </label>
 	                   <div class="col-md-12 col-sm-12 col-xs-12">
-	                   		<textarea class="form-control" rows="18" id="answer" name="answer" required></textarea>
+	                   		<textarea class="ckeditor"  rows="1"   id="answer" name="answer"></textarea>
 	                   </div>
 	                </div>
 	                 

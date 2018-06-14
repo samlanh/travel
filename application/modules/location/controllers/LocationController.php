@@ -29,7 +29,7 @@ public function init()
     		$link=array(
     				'module'=>'location','controller'=>'location','action'=>'edit',
     		);
-    		$this->view->list=$list->getCheckList(0,$collumns, $result,array('serviceId'=>$link,'locationName'=>$link));
+    		$this->view->list=$list->getCheckList(0,$collumns, $result,array('service_name'=>$link,'locationName'=>$link));
     		if (empty($result)){
     			$result = array('err'=>1, 'msg'=>'មិនទាន់មានទិន្នន័យនៅឡើយ!');
     		}		

@@ -28,28 +28,24 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
 // 		   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
 // 		   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
 		   		 
-		   		$sql=" SELECT v.*,v.`title`,
-				       (SELECT s.serviceName FROM `tp_location_service` AS s WHERE s.id=v.`serviceType` AND s.status=1 LIMIT 1)AS service_name,
-				        v.`amountSeat`,v.`amountCase`,v.`amountSmallCase`,v.`description`,v.`images`,`status`       
+		   		$sql=" SELECT v.id,v.*,
+				       (SELECT s.serviceName FROM `tp_location_service` AS s WHERE s.id=v.`serviceType`  LIMIT 1)AS service_name
 				     FROM  `tp_vehicletype` AS v ";
-		   		$where="";
+		   		$where=" Where 1 ";
 // 		   		$where.= " AND  ".$from_date." AND ".$to_date;
-// 		   		if(!empty($search['adv_search'])){
-// 		   			$s_where = array();
-// 		   			$s_search = addslashes(trim($search['adv_search']));
-// 		   			$s_where[] = " e.employeeCode LIKE '%{$s_search}%'";
-// 		   			$s_where[] = " e.sureName LIKE '%{$s_search}%'";
-// 		   			$s_where[] = " e.firstName LIKE '%{$s_search}%'";
-// 		   			$s_where[] = " e.latinName LIKE '%{$s_search}%'";
-// 		   			$s_where[] = " e.phoneNumber LIKE '%{$s_search}%'";
-// 		   			$where .=' AND ('.implode(' OR ',$s_where).')';
-// 		   		}
-// 		   		if($search['status']>-1){
-// 		   			$where.=" AND e.status=".$search['status'];
-// 		   		}
-// 		   		if(!empty($search['gender'])){
-// 		   			$where.=" AND e.gender= '".$search['gender']."'";
-// 		   		}
+		   		if(!empty($search['adv_search'])){
+		   			$s_where = array();
+		   			$s_search = addslashes(trim($search['adv_search']));
+		   			$s_where[] = " v.title LIKE '%{$s_search}%'";
+		   			$s_where[] = " v.description LIKE '%{$s_search}%'";
+		   			$s_where[] = " v.amountCase LIKE '%{$s_search}%'";
+		   			$s_where[] = " v.amountSmallCase LIKE '%{$s_search}%'";
+		   			$s_where[] = " v.amountSeat LIKE '%{$s_search}%'";
+		   			$where .=' AND ('.implode(' OR ',$s_where).')';
+		   		}
+		   		if($search['status']>-1){
+		   			$where.=" AND v.status=".$search['status'];
+		   		}
 		   		$order=" ORDER BY v.`id` DESC";
 		   		return $db->fetchAll($sql.$where.$order);
 	   		}catch(exception $e){
@@ -137,7 +133,7 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
     				'amountSeat'      	=> $_data['amount_sit'],
     				'images'      		=> $photo,
     				'modifyDate'	 	=> date("Y-m-d H:i:s"),
-    				'status'         	=> 1,
+    		        'status'         	=> $_data['status'],
     				'userId'         	=> $this->getUserId(),
     		);
     		$this->_name="tp_vehicletype";
@@ -161,7 +157,7 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
 	
 	function getVehicleTypeBydid($id){
 		$db = $this->getAdapter();
-		$sql="SELECT v.*  FROM  `tp_vehicletype` AS v WHERE v.`status`=1 AND v.`id`=$id";
+		$sql="SELECT v.*  FROM  `tp_vehicletype` AS v WHERE   v.`id`=$id";
 		return $db->fetchRow($sql);
 	}
 	
