@@ -43,9 +43,9 @@ span.select2.select2-container.select2-container--default {
                             	 <div class="form-group">
                                    	<div class="col-md-6 search">
                                      	<div class="input-daterange input-group" id="date-range">
-                                          	<input type="text" class="form-control" name="start" value="<?php if (!empty($this->search['start'])){ echo date("m/d/Y",strtotime($this->search['start']));}?>" />
+                                          	<input type="text" class="form-control" name="start" value="<?php if (!empty($this->search['start'])){ echo date("d-m-Y",strtotime($this->search['start']));}?>" />
                                             <span class="input-group-addon b-0"><?php echo $tr->translate("to");?></span>
-                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("m/d/Y",strtotime($this->search['end']));}?>" />
+                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("d-m-Y",strtotime($this->search['end']));}?>" />
                                        </div>
                                    	</div>
                                    	<div class="col-md-3 text-left search">

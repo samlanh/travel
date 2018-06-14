@@ -22,7 +22,7 @@ public function init()
 						'user'			=> '',
 						'vehicleType'	=> '',
 						'supplyerId'	=> '',
-						'start'			=> date('Y-m-d'),
+						'start'			=> '',
 						'end'			=> date('Y-m-d'));
 			}
 			
