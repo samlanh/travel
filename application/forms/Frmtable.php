@@ -196,10 +196,10 @@ class Application_Form_Frmtable
     		$col_str .= '<th></th>';
     	}
     	
-    	$col_str .= '<th>'.$tr->translate("NUM").'</th>';
+    	$col_str .= '<th style="text-align:center;">'.$tr->translate("NUM").'</th>';
     	//add columns
     	foreach($columns as $column){
-    		$col_str=$col_str.'<th>'.$tr->translate($column).'</th>';
+    		$col_str=$col_str.'<th style="text-align:center;">'.$tr->translate($column).'</th>';
     	}
     	if($delete==3 || $delete==4){
     		$col_str .= '<th></td>';

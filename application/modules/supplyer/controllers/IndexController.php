@@ -24,7 +24,7 @@ public function init()
 		$rs_rows = $db->getAllSupplyer($search);
 		
 		$list = new Application_Form_Frmtable();
-		$collumns = array("ឈ្មោះអ្នកផ្គត់ផ្គង់","លេខទូរសព្ទ","អ៊ីមែល","គេហទំព័រ","CREATE_DATE","USER","STATUS");
+		$collumns = array("ឈ្មោះអ្នកផ្គត់ផ្គង់","លេខទូរសព្ទ","អ៊ីមែល","គេហទំព័រ","ថ្ងៃបង្កើត","អ្នកបង្កើត","ស្ថានការណ៍");
 		$link = array(
 				'module'=>'supplyer','controller'=>'index','action'=>'edit',
 		);

@@ -45,7 +45,7 @@ class Supplyer_Model_DbTable_DbSupplyer extends Zend_Db_Table_Abstract
 	   			$where.=" AND s.status=".$search['status'];
 	   		}
 	   		
-	   		$order=" ORDER BY s.`createDate` DESC";
+	   		$order=" ORDER BY s.`id` DESC";
 	   		
 	   		return $db->fetchAll($sql.$where.$order);
    		}catch(exception $e){

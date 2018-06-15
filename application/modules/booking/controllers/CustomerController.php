@@ -26,14 +26,14 @@ public function init()
 		$rs_rows = $db->getAllEmployee($search);
 		
 		$list = new Application_Form_Frmtable();
-		$collumns = array("ឈ្មោះអតិថិជន","ភេទ","លេខទូរសព្ទ","អ៊ីមែល","របៀបចុះឈ្មោះ","Is Verify","CREATE_DATE","STATUS","ប្តូរ");
+		$collumns = array("ឈ្មោះអតិថិជន","ភេទ","លេខទូរសព្ទ","អ៊ីមែល","របៀបចុះឈ្មោះ","Is Verify","ថ្ងៃបង្កើត","ស្ថានភាព","ប្តូរ");
 		$link = array(
 				'module'=>'booking','controller'=>'customer','action'=>'edit',
 		);
 		$link1=array(
 				'module'=>'booking','controller'=>'customer','action'=>'changepassword',
 		);
-		$this->view->list=$list->getCheckList(2, $collumns, $rs_rows,array('customerName'=>$link,'gender'=>$link,'tel'=>$link,'email'=>$link,'website'=>$link,'Password'=>$link1));
+		$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('customerName'=>$link,'gender'=>$link,'tel'=>$link,'email'=>$link,'website'=>$link,'លេខសម្ងាត់'=>$link1));
 		
 		$this->view->search = $search;
 		

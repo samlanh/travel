@@ -1,13 +1,13 @@
 <?php 
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$this->headTitle($tr->translate('Edit Supplyer'));
+	$this->headTitle($tr->translate('កែប្រែអ្នកផ្គត់ផ្គង់'));
 	echo $this->headTitle();
 
 	$logo = $this->baseUrl()."/images/profile.jpg";
 	$supplyer = $this->supplyer;
 	$file="";
 	if (!empty($supplyer['logo'])){
-		$logo = $this->baseUrl()."/images/supplyerlogo/".$supplyer['logo'];
+		$logo = $this->baseUrl()."/images/all/supplyerlogo/".$supplyer['logo'];
 		$file= $supplyer['logo'];
 	}
 ?>
@@ -40,10 +40,10 @@ label#error {
  <div id="page-right-content">
  	<div class="container">
     	<div class="row">
-    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
-	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Edit Supplyer");?></h4>
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("កែប្រែអ្នកផ្គត់ផ្គង់");?></h4>
 	    			</div>
 	    			<div class="col-sm-4 text-right">
 	    			</div>
@@ -211,8 +211,8 @@ label#error {
                 	<div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-center">
-	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'supplyer','controller'=>"index",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />
-								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('កែប្រែទិន្នន័យ');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
+	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'supplyer','controller'=>"index",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('ត្រលប់ក្រោយ');?>" />
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('កែប្រែទិន្នន័យ');?>" id="submitButton" /> 
 			                </div>
 	                    </div>
                     </div>

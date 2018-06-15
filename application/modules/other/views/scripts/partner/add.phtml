@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('បន្ថែមអតិថិជន'));
+$this->headTitle($tr->translate('បន្ថែមដៃគូ'));
 echo $this->headTitle();
 ?>
 <style>
@@ -29,7 +29,7 @@ label#error {
     		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
-	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("បន្ថែមអតិថិជន")?></h4>
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("បន្ថែមដៃគូ")?></h4>
 	    			</div>
 	    			<div class="col-sm-4 text-right">
 	    			</div>
@@ -39,66 +39,30 @@ label#error {
 					<div class="form-group">
 						<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">
-	                   		<?php echo $tr->translate('ឈ្មោះអតិថិជន')?> :
+	                   		<?php echo $tr->translate('ឈ្មោះដៃគូ')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                    	<input class="form-control" type="text"  name="customerName" id="customerName" placeholder="<?php echo $tr->translate('ឈ្មោះអតិថិជន')?>"/>
-	                   </div>
-	                </div>
-	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ភេទ')?> :
-	                   </label>
-	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                      <select class="form-control select2me" name="gender" id="gender" placeholder="<?php echo $tr->translate('ភេទ')?>" >
-								<option value="1">ប្រុស</option>
-								<option value="2">ស្រី</option>
-	                      </select>
-	                   </div>
-	                </div>
-	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អាយុ')?> :
-	                   </label>
-	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="age" id="age" placeholder="<?php echo $tr->translate('អាយុ');?>" />
-	                   </div>
-	                </div>
-	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខទូរសព្ទ')?> :
-	                   </label>
-	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="tel" id="tel" placeholder="<?php echo $tr->translate('លេខទូរសព្ទ');?>" />
-	                   </div>
-	                </div>
-	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អ៊ីមែល')?> :
-	                   </label>
-	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="email" id="email" placeholder="<?php echo $tr->translate('អ៊ីមែល');?>" />
+	                    	<input class="form-control" type="text"  name="partnerName" id="partnerName" placeholder="<?php echo $tr->translate('ឈ្មោះដៃគូ')?>"/>
 	                   </div>
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខសម្ងាត់')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខរៀង')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="password" id="password" placeholder="<?php echo $tr->translate('Password');?>" />
+	                     <input type="text" class="form-control" name="ordering" id="ordering" placeholder="<?php echo $tr->translate('លេខរៀង');?>" />
 	                   </div>
 	                </div>
 	                
-	               <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Is Verify')?> :
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('សម្គាល់')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                      <select class="form-control select2me" name="isVerify" id="isVerify" placeholder="<?php echo $tr->translate('Is Verify')?>" >
-								<option value="1">Verified</option>
-								<option value="0">Not Verified</option>
-	                      </select>
+	                     <input type="text" class="form-control" name="note" id="note" placeholder="<?php echo $tr->translate('សម្គាល់');?>" />
 	                   </div>
 	                </div>
-	                
-	                
-	                
 				</div>
+				
 				<div class="col-sm-4">
 					<div class="form-group">
 						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
@@ -122,7 +86,7 @@ label#error {
                 	<div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-center">
-	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'booking','controller'=>"customer",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('ត្រលប់ក្រោយ');?>" />
+	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'other','controller'=>"partner",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('ត្រលប់ក្រោយ');?>" />
 								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('រក្សាទុក');?>" id="submitButton" /> 
 			                </div>
 	                    </div>

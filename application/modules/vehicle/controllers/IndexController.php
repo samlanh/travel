@@ -29,7 +29,7 @@ public function init()
 			
 			$rs_rows= $db->getAllVehiclePrice($search);
 			$list = new Application_Form_Frmtable();
-			$collumns = array("Supplyer","Vehicle Type","isAvailable","Note","Date","User","Status");
+			$collumns = array("អ្នកផ្គត់ផ្គង់","ប្រភេទរថយន្ត","isAvailable","សម្គាល់","ថ្ងៃបង្កើត","អ្នកបង្កើត","ស្ថានការណ៍");
 			$link=array(
 					'module'=>'vehicle','controller'=>'index','action'=>'edit',
 			);

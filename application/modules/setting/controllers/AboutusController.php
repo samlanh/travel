@@ -16,7 +16,8 @@ class Setting_AboutusController extends Zend_Controller_Action {
 			$link=array(
 					'module'=>'setting','controller'=>'aboutus','action'=>'edit',
 			);
-			$this->view->list=$list->getCheckList(0, $collumns,$rs_rows,array('aboutUs'=>$link,'status'=>$link));
+			$this->view->list=$list->getCheckList(0, $collumns,$rs_rows,array('aboutUs'=>$link,'contactUs'=>$link,'email'=>$link,
+					'facebook'=>$link,'youtube'=>$link,'instagram'=>$link,'twitter'=>$link));
 		}catch (Exception $e){
 			Application_Form_FrmMessage::message("Application Error");
 			echo $e->getMessage();
@@ -24,7 +25,7 @@ class Setting_AboutusController extends Zend_Controller_Action {
 		}
 	}
 	function addAction(){
-		$this->_redirect('/setting/aboutus');
+		//$this->_redirect('/setting/aboutus');
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();
 			$db = new Setting_Model_DbTable_DbAboutUs();

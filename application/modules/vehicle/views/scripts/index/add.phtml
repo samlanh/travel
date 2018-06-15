@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('រថយន្ត និង តម្លៃ'));
+$this->headTitle($tr->translate('បន្ថែមកំណត់តម្លៃរថយន្ត'));
 echo $this->headTitle();
 ?>
 <style>
@@ -35,7 +35,7 @@ label#error {
     		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
-	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;រថយន្ត និង តម្លៃ</h4>
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;បន្ថែមកំណត់តម្លៃរថយន្ត</h4>
 	    			</div>
 	    			<div class="col-sm-4 text-right">
 	    			</div>
@@ -76,9 +76,9 @@ label#error {
 	                   </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ពណ៍នា </label>
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">សម្គាល់ </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                  		<textarea class="form-control" rows="" cols="" name="note" id="note" placeholder="ពណ៍នា"></textarea>
+	                  		<textarea class="form-control" rows="" cols="" name="note" id="note" placeholder="សម្គាល់"></textarea>
 	                   </div>
 	                </div>
 				</div>
@@ -156,14 +156,14 @@ label#error {
 		template+='<td width="2%">'+index+'</td>';
 		
 		template+='<td width="20%"><select class="form-control select2me" id="from_location_'+index+'" name="from_location_'+index+'" >';
-		template+='<option value="">Select</option>';
+		template+='<option value="">from location</option>';
 			<?php foreach($this->location as $location){?>
 				template+='<option value="'+<?php echo $location['id']?>+'"><?php echo $location['name'];?></option>';
 			<?php }?>
 		template+='</select></td>';
 		
 		template+='<td width="20%"><select class="form-control select2me" id="to_location_'+index+'" name="to_location_'+index+'" >';
-		template+='<option value="">Select</option>';
+		template+='<option value="">to location</option>';
 			<?php foreach($this->location as $location){?>
 				template+='<option value="'+<?php echo $location['id']?>+'"><?php echo $location['name'];?></option>';
 			<?php }?>

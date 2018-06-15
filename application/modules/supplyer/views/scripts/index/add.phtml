@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('Add Supplyer'));
+$this->headTitle($tr->translate('បន្ថែមអ្នកផ្គត់ផ្គង់'));
 echo $this->headTitle();
 ?>
 <style>
@@ -26,10 +26,10 @@ label#error {
  <div id="page-right-content">
  	<div class="container">
     	<div class="row">
-    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
-	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Add Supplyer")?></h4>
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("បន្ថែមអ្នកផ្គត់ផ្គង់")?></h4>
 	    			</div>
 	    			<div class="col-sm-4 text-right">
 	    			</div>
@@ -180,8 +180,8 @@ label#error {
                 	<div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-center">
-	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'supplyer','controller'=>"index",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />                    
-								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('SAVE');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
+	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'supplyer','controller'=>"index",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('ត្រលប់ក្រោយ');?>" />                    
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('រក្សាទុក');?>" id="submitButton" /> 
 			                </div>
 	                    </div>
                     </div>

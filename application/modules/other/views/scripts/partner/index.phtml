@@ -1,6 +1,6 @@
 <?php
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$this->headTitle($tr->translate("អតិថិជន")); 
+	$this->headTitle($tr->translate("ដៃគូសេវាកម្ម")); 
 	echo $this->headTitle();
 ?>   
 <style>
@@ -21,11 +21,11 @@ span.select2.select2-container.select2-container--default {
     	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("អតិថិជន")?></h4>
+    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("ដៃគូសេវាកម្ម")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
     				<div class="buttun-block">
-						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/booking/customer/add";?>"><?php echo $tr->translate("បន្ថែមថ្មី")?></a>
+						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/other/partner/add";?>"><?php echo $tr->translate("បន្ថែមថ្មី")?></a>
 					</div>
     			</div>
     		</div>
@@ -36,35 +36,17 @@ span.select2.select2-container.select2-container--default {
                             <div class="col-md-3">
                                 <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("ស្វែងរកទីនេះ...");?>" value='<?php echo $this->search['adv_search'];?>'>
 							</div>
-                             <div class="col-md-9 text-right">
-                            	 <div class="form-group">
-					                   <div class="col-md-2 text-left search">
-					                 	  <select class="form-control select2" id="isVerify"  name="isVerify"  > 
-					                 	  	<option value=""><?php echo $tr->translate('Is Verify')?></option>
-					                   			<option value="1" <?php if ($this->search['isVerify']=="1"){ echo 'selected="selected"';}?>><?php echo $tr->translate('Verified')?></option>
-					                   			<option value="0" <?php if ($this->search['isVerify']=="0"){ echo 'selected="selected"';}?>><?php echo $tr->translate('Not Verified')?></option>
-											</select> 
-					                   </div>
-                                   	<div class="col-md-6 search">
-                                     	<div class="input-daterange input-group" id="date-range">
-                                          	<input type="text" class="form-control" name="start" value="<?php if (!empty($this->search['start'])){ echo date("d-m-Y",strtotime($this->search['start']));}?>" />
-                                            <span class="input-group-addon b-0"><?php echo $tr->translate("to");?></span>
-                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("d-m-Y",strtotime($this->search['end']));}?>" />
-                                       </div>
-                                   	</div>
-                                   	<div class="col-md-3 text-left search">
-					                 	  <select class="form-control select2" id="status"  name="status"  > 
-					                 	  		<option value="-1"><?php echo $tr->translate('STATUS')?></option>
-					                   			<option value="1" <?php if ($this->search['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('ACTIVE')?></option>
-					                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE')?></option>
-											</select> 
-					                   </div>
-                                   <div class="col-md-1 search">
-                                   	<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
-                                   	 </div>
-                                 </div>
+							<div class="col-md-3 text-left search">
+		                 	  	<select class="form-control select2" id="status"  name="status"  > 
+		                 	  		<option value="-1"><?php echo $tr->translate('STATUS')?></option>
+		                   			<option value="1" <?php if ($this->search['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('ប្រើប្រាស់')?></option>
+		                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('មិនប្រើប្រាស់')?></option>
+								</select> 
+		                    </div>
+							<div class="col-md-2 search">
+                            	<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
                             </div>
-                       </div>
+                        </div>
 					</form>
 					<div class="clearfix"></div>
 				</div>

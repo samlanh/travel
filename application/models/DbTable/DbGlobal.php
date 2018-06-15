@@ -7,7 +7,7 @@ class Application_Model_DbTable_DbGlobal extends Zend_Db_Table_Abstract
 	}
 	
 	public static function getUserId(){
-		$session_user=new Zend_Session_Namespace('authcar');
+		$session_user=new Zend_Session_Namespace('auth_travel');
 		return $session_user->user_id;
 	}
 	

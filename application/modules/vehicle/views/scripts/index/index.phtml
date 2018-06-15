@@ -3,7 +3,7 @@
 	//print_r($this->adv_search);//exit();
 ?>
 
-<title>Vehicle Price</title>
+<title>កំណត់តម្លៃរថយន្ត</title>
 <script>
 //window.location.reload(true);
 </script>
@@ -13,11 +13,11 @@
     	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Vehicle Price")?></h4>
+    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("កំណត់តម្លៃរថយន្ត")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
     				<div class="buttun-block">
-						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/vehicle/index/add";?>"><?php echo $tr->translate("Add Price")?></a>
+						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/vehicle/index/add";?>"><?php echo $tr->translate("បន្ថែមថ្មី")?></a>
 					</div>
     			</div>
     		</div>
@@ -27,13 +27,13 @@
 					<form name="frmlist_users" id="frm" action=""  method="post" autocomplete="off">
 						<div class="form-group">
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("Search here...");?>" value='<?php echo $this->adv_search['adv_search'];?>'>
+                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("ស្វែងរកទីនេះ...");?>" value='<?php echo $this->adv_search['adv_search'];?>'>
 							</div>
                             <div class="col-md-9 text-right">
                             	<div class="form-group">
 					                <div class="col-md-3 text-left search">
 					                 	<select class="form-control select2" id="supplyerId"  name="supplyerId"  > 
-					                 	 	<option value=""><?php echo $tr->translate('Supplyer')?></option>
+					                 	 	<option value=""><?php echo $tr->translate('អ្នកផ្គត់ផ្គង់')?></option>
 					                 	 	<?php if(!empty($this->supplyer)){foreach ($this->supplyer as $sup){?>
 					                 	 	<option value="<?php echo $sup['id']?>" <?php if ($this->adv_search['supplyerId']==$sup['id']){ echo 'selected="selected"';}?>><?php echo $sup['name']?></option>
 					                 	 	<?php }}?>
@@ -41,7 +41,7 @@
 					                </div>
 					                <div class="col-md-3 text-left search">
 				                 	    <select class="form-control select2" id="vehicleType"  name="vehicleType"  > 
-				                 	  		<option value=""><?php echo $tr->translate('Vehicle Type')?></option>
+				                 	  		<option value=""><?php echo $tr->translate('ប្រភេទរថយន្ត')?></option>
 					                 	 	<?php if(!empty($this->vehicle_type)){foreach ($this->vehicle_type as $veh){?>
 					                 	 	<option value="<?php echo $veh['id']?>" <?php if($this->adv_search['vehicleType']==$veh['id']){ echo 'selected="selected"';}?>><?php echo $veh['name']?></option>
 					                 	 	<?php }}?>
@@ -55,7 +55,7 @@
                                        </div>
                                    	</div>
                                     <div class="col-md-1 search">
-                                   		<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
+                                   		<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("ស្វែងរក");?></button>
                                    	</div>
                                 </div>
                            </div>
