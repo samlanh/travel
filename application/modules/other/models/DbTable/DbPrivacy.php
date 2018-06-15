@@ -21,30 +21,17 @@ class Other_Model_DbTable_DbPrivacy extends Zend_Db_Table_Abstract
     	}
     }
     
-	 function getAllPrivacy($search=null){
+	 function getAllPrivacy($type){
 		   	$db = $this->getAdapter();
 		   	$db->beginTransaction();
 		   	try{
 // 		   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
 // 		   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
 		   		$sql="SELECT id,`description`,DATE_FORMAT(`createDate`, '%d-%M-%Y'),DATE_FORMAT(`modifyDate`,'%d-%M-%Y'),
-                        (SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=tp_privacy_n_testimonials.`status` AND v.type=1 LIMIT 1) AS `status`
-                        FROM `tp_privacy_n_testimonials`
-                        WHERE `description`!='' ";
-		   		$where="";
-// 		   		$where.= " AND  ".$from_date." AND ".$to_date;
-		   		if(!empty($search['adv_search'])){
-		   			$s_where = array();
-		   			$s_search = addslashes(trim($search['adv_search']));
-		   			$s_search = str_replace(' ', '', $s_search);
-		   			$s_where[]="REPLACE(description,' ','')   LIKE '%{$s_search}%'";
-		   			$where .=' AND ('.implode(' OR ',$s_where).')';
-		   		}
-		   		if($search['status']>-1){
-		   			$where.=" AND status=".$search['status'];
-		   		}
-		   		$order=" AND type=1 ORDER BY id DESC";
-		   		return $db->fetchAll($sql.$where.$order);
+                        (SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=tp_privacy.`status` AND v.type=1 LIMIT 1) AS `status`
+                        FROM `tp_privacy`
+                        WHERE `description`!='' AND type=$type LIMIT 1";
+		   		return $db->fetchRow($sql);
 	   		}catch(exception $e){
 	   			Application_Form_FrmMessage::message("Application Error");
 	   			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
@@ -65,7 +52,7 @@ class Other_Model_DbTable_DbPrivacy extends Zend_Db_Table_Abstract
     		        'type'           => 1,
     				'user_id'        => $this->getUserId(),
     		);
-    		$this->_name="tp_privacy_n_testimonials";
+    		$this->_name="tp_privacy";
     		$pro_id =$this->insert($_arr);
     		$db->commit();
     	}catch(exception $e){
@@ -76,19 +63,19 @@ class Other_Model_DbTable_DbPrivacy extends Zend_Db_Table_Abstract
     }
     
     function editPrivacy($_data){
+        
     	$db = $this->getAdapter();
     	$db->beginTransaction();
     	try{
     	    $_arr=array(
     	        'description'    => $_data['disciption'],
-    	        'createDate'	 => date("Y-m-d H:i:s"),
     	        'modifyDate'	 => date("Y-m-d H:i:s"),
     	        'orderBy'		 => $_data['order_by'],
     	        'status'         => $_data['status'],
     	        'type'           => 1,
     	        'user_id'        => $this->getUserId(),
     	    );
-    		$this->_name="tp_privacy_n_testimonials";
+    		$this->_name="tp_privacy";
     		$where=" id=".$_data['id'];
     		$this->update($_arr, $where);
     		$db->commit();
@@ -109,7 +96,7 @@ class Other_Model_DbTable_DbPrivacy extends Zend_Db_Table_Abstract
 	
 	function getTermsById($id){
 		$db = $this->getAdapter();
-		$sql=" SELECT * FROM `tp_privacy_n_testimonials` WHERE `type`=1 AND id=$id";
+		$sql=" SELECT * FROM `tp_privacy` WHERE `type`=1 AND id=$id";
 		return $db->fetchRow($sql);
 	}
 	

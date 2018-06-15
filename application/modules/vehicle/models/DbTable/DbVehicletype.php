@@ -118,7 +118,7 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
     			if(move_uploaded_file($tmp, $part.$image_name)){
     				$photo = $image_name;
     			}else{
-    				$photo = "Image Upload failed";
+    			    $photo=$_data['old_pic'];
     			}
     		}else{
     			$photo=$_data['old_pic'];

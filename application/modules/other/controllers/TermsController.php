@@ -9,7 +9,7 @@ public function init()
     	header('content-type: text/html; charset=utf8');
 	}
 	
-	public function indexAction()
+	public function oldindexAction()
 	{
 		try {
 			if($this->getRequest()->isPost()){
@@ -41,22 +41,25 @@ public function init()
 //     	$this->view->formFilter = $frm->filter();
     }
     
-	public function addAction()
+	public function indexAction()
 	{
+	    $db = new Other_Model_DbTable_DbTerms();
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();
-			$db = new Other_Model_DbTable_DbTerms();
 			try{
-				$id= $db->addTerms($data);
+			    $id= $db->updateTerms($data);
 				if(isset($data['save_close'])){
-					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
+					Application_Form_FrmMessage::Sucessfull("UPDATE_SUCCESS",self::REDIRECT_URL);
 				} 
-				Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL_ADD);
+				Application_Form_FrmMessage::Sucessfull("UPDATE_SUCCESS",self::REDIRECT_URL);
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			}
 		}
+		$db = new Other_Model_DbTable_DbCondition();
+		$row=$db->getAllConditon(2);
+		$this->view->row=$row;
 	}
 	
 	public function editAction(){

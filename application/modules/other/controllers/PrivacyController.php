@@ -9,7 +9,7 @@ public function init()
     	header('content-type: text/html; charset=utf8');
 	}
 	
-	public function indexAction()
+	public function oldindexAction()
 	{
 		try {
 			if($this->getRequest()->isPost()){
@@ -41,22 +41,23 @@ public function init()
 //     	$this->view->formFilter = $frm->filter();
     }
     
-	public function addAction()
+	public function indexAction()
 	{
+	    $db = new Other_Model_DbTable_DbPrivacy();
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getPost();
-			$db = new Other_Model_DbTable_DbPrivacy();
 			try{
-			    $id= $db->addPrivacy($data);
+			    $id= $db->editPrivacy($data);
 				if(isset($data['save_close'])){
 					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
 				} 
-				Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL_ADD);
+				Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			}
 		}
+		$this->view->row=$db->getAllPrivacy(1);
 	}
 	
 	public function editAction(){

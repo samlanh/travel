@@ -1,63 +1,76 @@
-<?php
-	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$this->headTitle($tr->translate("Condition List")); 
-	echo $this->headTitle();
-?>	
-
 <?php 
-	$url_new = $this->url(array('module'=>'product','controller'=>'condition','action'=>'add',));
-	$url_edit = $this->url(array('module'=>'product','controller'=>'condition','action'=>'edit',));
-	$url_delete = $this->url(array('module'=>'product','controller'=>'condition','action'=>'delete',));
-	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$formFilter = $this->formFilter;
+$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+$this->headTitle($tr->translate('Update Condition'));
+echo $this->headTitle();
 ?>
-
-<style>
-	#grid{
-		margin: 0 auto;
-	}
-	.dojoxGridSortNode{
-		text-align: center;	
-		height: 30px;		
-	}
-</style>
+<script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
  <!-- START PAGE CONTENT -->
  <div id="page-right-content">
  	<div class="container">
     	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-user"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Condition List")?></h4>
+    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Update Condition")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
-    				<div class="buttun-block">
-						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/other/condition/add";?>"><?php echo $tr->translate("Add Condition")?></a>
-					</div>
+    			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/other/condition/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
     			</div>
     		</div>
+    		
 			<div class="col-sm-12">
-				<div class="card-box">
-					<form name="frmlist_users" action=""  method="post">
-						<div class="form-group">
-                            <div class="col-md-3">
-                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("SEARCH_INFO");?>" value='<?php echo $this->search['adv_search'];?>'>
-							</div>
-                            <div class="col-md-3">
-                                <select class="form-control select2" id="status"  name="status"  > 
-		                 	  		<option value="-1"><?php echo $tr->translate('STATUS')?></option>
-		                   			<option value="1" <?php if ($this->search['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('ACTIVE')?></option>
-		                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE')?></option>
-								</select> 
-							</div>
-							<div class="col-md-3">
-                                <button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
-							</div>
-                       </div>
-					</form>
-					<div class="clearfix"></div>
-					<?php echo $this->list;?>
-				</div>
+				<form id="frm" class="form-horizontal form-label-left" action=""  method="post" enctype="multipart/form-data">
+					 
+	                <div class="form-group">
+	                   <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name"><?php echo $tr->translate('DESCRIPTION')?>:
+	                   </label>
+	                   <div class="col-md-12 col-sm-12 col-xs-12">
+	                   		<textarea class="ckeditor"  rows="1"   id="condition" name="condition" required><?php echo $this->row['conTitle']?></textarea>
+	                   		<input type="hidden" id="id" name="id" value="<?php echo $this->row['id']?>" />
+	                   </div>
+	                </div>
+	           <!--      
+	                 <div class="form-group">
+	                   <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php echo $tr->translate('ORDER_BY')?> :
+	                   </label>
+	                   <div class="col-md-4 col-sm-4 col-xs-4">
+	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" placeholder="<?php echo $tr->translate('ORDER_BY')?>"/>
+	                   </div>
+	                   <label class="control-label col-md-2 col-sm-2 col-xs-2" for="first-name"><?php echo $tr->translate('STATUS')?> :
+	                   </label>
+	                   <div class="col-md-4 col-sm-4 col-xs-4">
+	                    	<select class="form-control select2" id="status"  name="status"  > 
+	                   			<option value="1"  ><?php echo $tr->translate('ACTIVE')?></option>
+	                   			<option value="0"  ><?php echo $tr->translate('DEACTIVE')?></option>
+							</select>
+	                   </div>
+	                </div>
+	                  --> 
+                    <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-right">
+								<input class="btn btn-primary black save" name="save_new"  id="save_new" type="submit" value="<?php echo $tr->translate('SAVE_NEW');?>" label="<?php echo $tr->translate('SAVE_NEW');?>" id="submitButton" /> 
+			                </div>
+	                    </div>
+                    </div>
+	               
+	              </form>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$('#frm').submit(function() {
+		service_type = $("#service_type").val();
+	    if(service_type=='' || service_type==-1){
+	        alert("<?php echo $tr->translate('Select Service')?>");
+	        $('#service_type').select2('open');
+	        return false;
+	    }
+		var r = confirm("សូមត្រួតពិនិត្យទិន្នន័យ អោយបានត្រឹមត្រូវ !\nតើលោកអ្នកពិតជាចង់រក្សាទុកទិន្នន័យនេះមែនឫទេ?");
+		if (r == true) {
+		    return true;
+		} else {
+		   return false;
+		}
+	});
+</script>

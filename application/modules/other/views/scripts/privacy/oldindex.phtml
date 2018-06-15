@@ -1,0 +1,63 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle($tr->translate("Privacy List")); 
+	echo $this->headTitle();
+?>	
+
+<?php 
+	$url_new = $this->url(array('module'=>'other','controller'=>'privacy','action'=>'add',));
+	$url_edit = $this->url(array('module'=>'other','controller'=>'privacy','action'=>'edit',));
+	$url_delete = $this->url(array('module'=>'other','controller'=>'privacy','action'=>'delete',));
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$formFilter = $this->formFilter;
+?>
+
+<style>
+	#grid{
+		margin: 0 auto;
+	}
+	.dojoxGridSortNode{
+		text-align: center;	
+		height: 30px;		
+	}
+</style>
+ <!-- START PAGE CONTENT -->
+ <div id="page-right-content">
+ 	<div class="container">
+    	<div class="row">
+    		<div class="col-sm-12 border-botom">
+    			<div class="col-sm-8">
+    				<h4 class="m-t-0"><i class="ti-user"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Privacy List")?></h4>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    				<div class="buttun-block">
+						<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/other/privacy/add";?>"><?php echo $tr->translate("Add Privacy")?></a>
+					</div>
+    			</div>
+    		</div>
+			<div class="col-sm-12">
+				<div class="card-box">
+					<form name="frmlist_users" action=""  method="post">
+						<div class="form-group">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("SEARCH_INFO");?>" value='<?php echo $this->search['adv_search'];?>'>
+							</div>
+                            <div class="col-md-3">
+                                <select class="form-control select2" id="status"  name="status"  > 
+		                 	  		<option value="-1"><?php echo $tr->translate('STATUS')?></option>
+		                   			<option value="1" <?php if ($this->search['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('ACTIVE')?></option>
+		                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE')?></option>
+								</select> 
+							</div>
+							<div class="col-md-3">
+                                <button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
+							</div>
+                       </div>
+					</form>
+					<div class="clearfix"></div>
+					<?php echo $this->list;?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

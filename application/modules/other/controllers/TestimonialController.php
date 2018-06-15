@@ -25,11 +25,11 @@ public function init()
 			$db=new Other_Model_DbTable_DbTestimonial();
 			$result = $db->getAllTestimonial($search);
     		$list = new Application_Form_Frmtable();
-    		$collumns = array("Description","Create Date","Modify Date","STATUS");
+    		$collumns = array("Person Name","Description","Create Date","Modify Date","STATUS");
     		$link=array(
     				'module'=>'other','controller'=>'testimonial','action'=>'edit',
     		);
-    		$this->view->list=$list->getCheckList(0,$collumns, $result,array('description'=>$link));
+    		$this->view->list=$list->getCheckList(0,$collumns, $result,array('description'=>$link,'person_naem'=>$link));
     		if (empty($result)){
     			$result = array('err'=>1, 'msg'=>'មិនទាន់មានទិន្នន័យនៅឡើយ!');
     		}		

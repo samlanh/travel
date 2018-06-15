@@ -21,29 +21,14 @@ class Other_Model_DbTable_DbCondition extends Zend_Db_Table_Abstract
     	}
     }
     
-	 function getAllConditon($search=null){
+	 function getAllConditon($type){
 		   	$db = $this->getAdapter();
 		   	$db->beginTransaction();
 		   	try{
-// 		   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
-// 		   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
 		   		$sql="SELECT id,`conTitle`,DATE_FORMAT( `createDate`, '%d-%b-%Y') AS createdate,DATE_FORMAT( `modifyDate`,'%d-%b-%Y') AS modifydate,
 						(SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=tp_condition.status AND v.type=1 LIMIT 1) AS status_name
-					  FROM `tp_condition` WHERE `type`=1 AND `conTitle`!='' ";
-		   		$where="";
-// 		   		$where.= " AND  ".$from_date." AND ".$to_date;
-		   		if(!empty($search['adv_search'])){
-		   			$s_where = array();
-		   			$s_search = addslashes(trim($search['adv_search']));
-		   			$s_search = str_replace(' ', '', $s_search);
-		   			$s_where[]="REPLACE(conTitle,' ','')   LIKE '%{$s_search}%'";
-		   			$where .=' AND ('.implode(' OR ',$s_where).')';
-		   		}
-		   		if($search['status']>-1){
-		   			$where.=" AND status=".$search['status'];
-		   		}
-		   		$order=" ORDER BY id DESC";
-		   		return $db->fetchAll($sql.$where.$order);
+					  FROM `tp_condition` WHERE `type`=$type AND `conTitle`!='' LIMIT 1";
+		   		return $db->fetchRow($sql);
 	   		}catch(exception $e){
 	   			Application_Form_FrmMessage::message("Application Error");
 	   			Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
@@ -75,6 +60,7 @@ class Other_Model_DbTable_DbCondition extends Zend_Db_Table_Abstract
     }
     
     function updateCondition($_data){
+        //print_r($_data['id']);exit();
     	$db = $this->getAdapter();
     	$db->beginTransaction();
     	try{
