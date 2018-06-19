@@ -86,6 +86,21 @@
         <link href="<?php echo $this->baseUrl()."/templates/";?>assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
     
     <script src="<?php echo $this->baseUrl()."/templates/";?>assets/js/jquery-2.1.4.min.js"></script>
+    <style type="text/css">
+        .navbar-default .navbar-nav>li>a {
+            color: #fff;
+        }
+        .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+            color: #fff;
+        }
+        .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+            color: #fff;
+        }
+        
+        #page-right-content {
+            background-color: #FBFCFC;
+        }
+    </style>
 </head>
 
   <body>
@@ -96,7 +111,7 @@
 
                 <!-- Top navbar -->
                 <div class="navbar navbar-default" role="navigation">
-                    <div class="container">
+                    <div class="container" style="background: #5a5a5a   !important;">
                     	<div class="col-lg-2 col-sm-2 text-center">
 	                        <a href="<?php echo $this->baseUrl()."/employee";?>" class="logo">
 	                            <img src="<?php echo $this->baseUrl()."/images/lang/logo.png";?>" alt="logo" class="logo-lg" />
@@ -149,7 +164,7 @@
             </div>
             <!-- Top Bar End -->
             <!-- Page content start -->
-            <div class="page-contentbar">
+            <div class="page-contentbar" style="background: #f5c368c4;">
             <?php echo $this->render('menuleft.phtml')?> 
               <?php 
               	/*
