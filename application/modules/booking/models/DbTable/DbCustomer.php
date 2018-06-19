@@ -152,7 +152,6 @@ class Booking_Model_DbTable_DbCustomer extends Zend_Db_Table_Abstract
     				'age'	    	=> $_data['age'],
     				'tel'      		=> $_data['tel'],
     				'email'      	=> $_data['email'],
-    				'password'      => $_data['password'],// MD5($_data['password']),
     				'isVerify'      => $_data['isVerify'],
     				'photo'	  		=> $photo,
     				

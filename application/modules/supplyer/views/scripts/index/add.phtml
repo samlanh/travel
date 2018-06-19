@@ -26,7 +26,7 @@ label#error {
  <div id="page-right-content">
  	<div class="container">
     	<div class="row">
-    		<form  class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
+    		<form id="frm" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
 	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("បន្ថែមអ្នកផ្គត់ផ្គង់")?></h4>
@@ -78,7 +78,7 @@ label#error {
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អ៊ីមែល')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="email" id="email" placeholder="<?php echo $tr->translate('អ៊ីមែល');?>" />
+	                     <input type="email" class="form-control" name="email" id="email" placeholder="<?php echo $tr->translate('អ៊ីមែល');?>" />
 	                   </div>
 	                </div>
 	                <div class="form-group">
@@ -192,6 +192,37 @@ label#error {
 	</div>
 </div>
 <script type="text/javascript">
+
+	$('#frm').submit(function() {
+		supplyerName=$("#supplyerName").val();
+		if(supplyerName==''){
+			$('#supplyerName').focus();
+			return false;	
+		}
+		tel=$("#tel").val();
+		if(tel==""){
+			$('#tel').focus();
+			return false;	
+		}
+		email=$("#email").val();
+		if(email==""){
+			$('#email').focus();
+			return false;	
+		}
+		cancelPolicy=$("#cancelPolicy").val();
+		if(cancelPolicy==""){
+			$('#cancelPolicy').focus();
+			return false;	
+		}
+		var r = confirm("សូមត្រួតពិនិត្យទិន្នន័យ អោយបានត្រឹមត្រូវ !\nតើលោកអ្នកពិតជាចង់រក្សាទុកទិន្នន័យនេះមែនឫទេ?");
+		if (r == true) {
+			$("#submitButton").attr("disabled", true);
+			return true;
+		} else {
+		   return false;	    
+		}
+	});
+	
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
