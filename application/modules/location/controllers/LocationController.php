@@ -58,7 +58,7 @@ public function init()
 			}
 		}
 		$db_global=new Location_Model_DbTable_DbLocation();
-		$rs=$this->view->province=$db_global->getAllProvince();
+		//$rs=$this->view->province=$db_global->getAllProvince();
 		$this->view->service_type=$db_global->getAllService();
 		 
 	}
@@ -86,7 +86,6 @@ public function init()
 			}
 		}
 		$db_global=new Location_Model_DbTable_DbLocation();
-		$rs=$this->view->province=$db_global->getAllProvince();
 		$this->view->service_type=$db_global->getAllService();
 		$this->view->row=$db->getAllLocationById($id);
 	}

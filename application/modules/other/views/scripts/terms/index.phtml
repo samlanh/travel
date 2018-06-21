@@ -23,8 +23,8 @@ echo $this->headTitle();
 	                <div class="form-group">
 	                   <label class="control-label col-md-1 col-sm-1 col-xs-1" for="first-name"><?php echo $tr->translate('DESCRIPTION')?>:
 	                   </label>
-	                   <div class="col-md-12 col-sm-12 col-xs-12">
-	                   		<textarea class="ckeditor"  rows="1"   id="condition" name="condition" required><?php echo $this->row['conTitle']?></textarea>
+	                   <div class="col-md-12 col-sm-12 col-xs-12" style="height: 350px;">
+	                   		<textarea class="ckeditor"   rows="1"   id="condition" name="condition" required><?php echo $this->row['conTitle']?></textarea>
 	                   		<input type="hidden" id="id" name="id" value="<?php echo $this->row['id']?>" />
 	                   </div>
 	                </div>

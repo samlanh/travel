@@ -44,7 +44,7 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 		   		if($search['status']>-1){
 		   			$where.=" AND status=".$search['status'];
 		   		}
-		   		$order=" ORDER BY l.`locationName` ASC";
+		   		$order=" ORDER BY service_name ASC";
 		   		return $db->fetchAll($sql.$where.$order);
 	   		}catch(exception $e){
 	   			Application_Form_FrmMessage::message("Application Error");
@@ -162,13 +162,7 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 		}
 	}
 	
-	function getAllProvince(){
-		$lang= $this->getCurrentLang();
-		$array = array(1=>"province_en_name",2=>"province_kh_name");
-		$db = $this->getAdapter();
-		$sql=" SELECT p.province_id AS id,$array[$lang] As name  FROM `rms_province` AS p WHERE p.status=1";
-		return $db->fetchAll($sql);
-	}
+	
 	
 	function getAllService(){
 		$lang= $this->getCurrentLang();
