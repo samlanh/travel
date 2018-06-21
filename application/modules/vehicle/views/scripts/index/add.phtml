@@ -32,7 +32,7 @@ label#error {
  <div id="page-right-content">
  	<div class="container">
     	<div class="row">
-    		<form id="frm" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
+    		<form name="frmlist_users" id="frm" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
 	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;បន្ថែមកំណត់តម្លៃរថយន្ត</h4>
@@ -46,8 +46,8 @@ label#error {
 						<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ឈ្មោះអ្នកផ្គត់ផ្គង់
 	                   </label>
-	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                    	<select class="form-control select2me" name="supplyerId" id="supplyerId" placeholder="ប្រភេទរថយន្ត" >
+	                   <div class="col-md-7 col-sm-7 col-xs-7">
+	                    	<select class="form-control select2" name="supplyerId" id="supplyerId" placeholder="ប្រភេទរថយន្ត" >
 	                      		<option value="">ជ្រើសរើសអ្នកផ្គត់ផ្គង់</option>
 	                      		<?php if(!empty($this->supplyer)){foreach ($this->supplyer as $rs){?>
 								<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
@@ -58,7 +58,7 @@ label#error {
 	                <div class="form-group">
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ប្រភេទរថយន្ត </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                      <select class="form-control select2me" name="vehicleType" id="vehicleType" placeholder="ប្រភេទរថយន្ត" >
+	                      <select class="form-control select2" name="vehicleType" id="vehicleType" placeholder="ប្រភេទរថយន្ត" >
 	                      		<option value="">ជ្រើសរើសប្រភេទរថយន្ត</option>
 	                      		<?php if(!empty($this->vehicle_type)){foreach ($this->vehicle_type as $rs){?>
 								<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
@@ -69,7 +69,7 @@ label#error {
 	                <div class="form-group">
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ទំនេរ(is available) </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                      <select class="form-control select2me" name="isAvailable" id="isAvailable" placeholder="" >
+	                      <select class="form-control select2" name="isAvailable" id="isAvailable" placeholder="" >
 								<option value="1">ទំនេរ</option>
 								<option value="0">មិនទំនេរ</option>
 						  </select>
@@ -83,14 +83,7 @@ label#error {
 	                </div>
 				</div>
 				
-				<div class="col-xs-12">
-					<div class="row">
-						<div class="col-md-12">
-							<input type="button" id="addrow" value="<?php echo $tr->translate('Add Row');?>" class="btn btn-primary black save" onclick="addRow();" />
-							<input type="hidden" name="identity" id="identity" />
-						</div>
-					</div>
-				</div>
+				
 				
 				<div class="col-xs-12">
 					<div class="row">
@@ -101,7 +94,7 @@ label#error {
 										<th class="aligncenter">#</th>
 										<th class="aligncenter">ពីទីតាំង</th>
 										<th class="aligncenter">ទៅទីតាំង</th>
-										<th class="aligncenter">រយះពេលធ្វើដំណើរ</th>
+										<th class="aligncenter">រយៈពេលធ្វើដំណើរ</th>
 										<th class="aligncenter">តម្លៃទិញចូល</th>
 										<th class="aligncenter">តម្លៃជួល</th>
 										<th class="aligncenter">បញ្ចុះតម្លៃ(%)</th>
@@ -114,6 +107,24 @@ label#error {
 						</div>
 					</div>
 				</div>
+				
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-md-12">
+							&nbsp;
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-md-12">
+							<input type="button" id="addrow" value="<?php echo $tr->translate('បន្ថែមតម្លៃជួល');?>" class="btn btn-primary black save" onclick="addRow();" />
+							<input type="hidden" name="identity" id="identity" />
+						</div>
+					</div>
+				</div>
+				
 				<div class="col-xs-12">
 					<div class="row">
 						<div class="col-md-12">
@@ -185,14 +196,14 @@ label#error {
 		template='<tr align="center" id="row_price_'+index+'">';
 		template+='<td width="2%">'+index+'</td>';
 		
-		template+='<td width="20%"><select class="form-control select2me" id="from_location_'+index+'" name="from_location_'+index+'" >';
+		template+='<td width="20%"><select class="form-control select2" id="from_location_'+index+'" name="from_location_'+index+'" >';
 		template+='<option value="">from location</option>';
 			<?php foreach($this->location as $location){?>
 				template+='<option value="'+<?php echo $location['id']?>+'"><?php echo $location['name'];?></option>';
 			<?php }?>
-		template+='</select></td>';
+		template+='</select>';
 		
-		template+='<td width="20%"><select class="form-control select2me" id="to_location_'+index+'" name="to_location_'+index+'" >';
+		template+='<td width="20%"><select class="form-control select2" id="to_location_'+index+'" name="to_location_'+index+'" >';
 		template+='<option value="">to location</option>';
 			<?php foreach($this->location as $location){?>
 				template+='<option value="'+<?php echo $location['id']?>+'"><?php echo $location['name'];?></option>';
@@ -211,6 +222,9 @@ label#error {
 			var identity = $('#identity').val();
 			$('#identity').val(identity+','+index);
 		} else {$('#identity').val(index);}
+		
+		$("#from_location_"+index).select2();
+		$("#to_location_"+index).select2();
 	}
 	function deleteRecord(index) {
 		var identity = $('#identity').val();
@@ -239,17 +253,18 @@ label#error {
 			for(var n = 0; n < rowIDArray.length; n++) {
 				from_location = $('#from_location_'+rowIDArray[n]).val();
 				to_location = $('#to_location_'+rowIDArray[n]).val();
-				cost = $('#cost_'+rowIDArray[n]).val();
-				price = $('#price_'+rowIDArray[n]).val();
-				if(to_location=='' || from_location=='' || cost=='' || price==''){
+				cost = parseFloat($('#cost_'+rowIDArray[n]).val());
+				cost = isNaN(cost)?0:cost;
+				price = parseFloat($('#price_'+rowIDArray[n]).val());
+				price = isNaN(price)?0:price;
+				//alert(cost+" , "+price);
+				if((to_location=='' || from_location=='' || cost=='' || price=='' || cost==0 || price==0) || (to_location==from_location) || (cost>price) ){
 					return false;
 				}
-				
 			}
 		}else{
 			return false;
 		}
-		
 		return true;
 	}
 	

@@ -83,14 +83,6 @@ label#error {
 	                </div>
 				</div>
 				
-				<div class="col-xs-12">
-					<div class="row">
-						<div class="col-md-12">
-							<input type="button" id="addrow" value="<?php echo $tr->translate('Add Row');?>" class="btn btn-primary black save" onclick="addRow();" />
-							<input type="hidden" name="identity" id="identity" />
-						</div>
-					</div>
-				</div>
 				
 				<div class="col-xs-12">
 					<div class="row">
@@ -101,7 +93,7 @@ label#error {
 										<th class="aligncenter">#</th>
 										<th class="aligncenter">ពីទីតាំង</th>
 										<th class="aligncenter">ទៅទីតាំង</th>
-										<th class="aligncenter">រយះពេលធ្វើដំណើរ</th>
+										<th class="aligncenter">រយៈពេលធ្វើដំណើរ</th>
 										<th class="aligncenter">តម្លៃទិញចូល</th>
 										<th class="aligncenter">តម្លៃជួល</th>
 										<th class="aligncenter">បញ្ចុះតម្លៃ(%)</th>
@@ -121,6 +113,16 @@ label#error {
 						</div>
 					</div>
 				</div>
+				
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-md-12">
+							<input type="button" id="addrow" value="<?php echo $tr->translate('បន្ថែមតម្លៃជួល');?>" class="btn btn-primary black save" onclick="addRow();" />
+							<input type="hidden" name="identity" id="identity" />
+						</div>
+					</div>
+				</div>
+				
 				<div class="col-xs-12">
 					<div class="row">
 						<div class="col-md-12">
@@ -213,9 +215,12 @@ label#error {
 			var identity = $('#identity').val();
 			$('#identity').val(identity+','+index);
 		} else {$('#identity').val(index);}
-
-		$('#from_location_'+index).val(<?php echo $rs['from_location'];?>);
-		$('#to_location_'+index).val(<?php echo $rs['to_location'];?>);
+		
+		$("#from_location_"+index).select2();
+		$("#to_location_"+index).select2();
+		
+		$('#from_location_'+index).val(<?php echo $rs['from_location'];?>).select2();
+		$('#to_location_'+index).val(<?php echo $rs['to_location'];?>).select2();
 		$('#duration_'+index).val("<?php echo $rs['duration'];?>");
 		$('#cost_'+index).val(<?php echo $rs['cost'];?>);
 		$('#price_'+index).val(<?php echo $rs['price'];?>);
@@ -255,6 +260,9 @@ label#error {
 			var identity = $('#identity').val();
 			$('#identity').val(identity+','+index);
 		} else {$('#identity').val(index);}
+		
+		$("#from_location_"+index).select2();
+		$("#to_location_"+index).select2();
 	}
 
 	function deleteRecord(index) {
@@ -284,9 +292,12 @@ label#error {
 			for(var n = 0; n < rowIDArray.length; n++) {
 				from_location = $('#from_location_'+rowIDArray[n]).val();
 				to_location = $('#to_location_'+rowIDArray[n]).val();
-				cost = $('#cost_'+rowIDArray[n]).val();
-				price = $('#price_'+rowIDArray[n]).val();
-				if(to_location=='' || from_location=='' || cost=='' || price==''){
+				cost = parseFloat($('#cost_'+rowIDArray[n]).val());
+				cost = isNaN(cost)?0:cost;
+				price = parseFloat($('#price_'+rowIDArray[n]).val());
+				price = isNaN(price)?0:price;
+				//alert(cost+" , "+price);
+				if((to_location=='' || from_location=='' || cost=='' || price=='' || cost==0 || price==0) || (to_location==from_location) || (cost>price) ){
 					return false;
 				}
 			}
