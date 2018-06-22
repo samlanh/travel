@@ -264,7 +264,7 @@ background-color: #2b2b2b;
 #page-right-content {
   background-color: #ffffff;
   border-left: 6px solid #f5f5f5;
-  padding: 90px 5px 50px 5px;
+  padding: 18px 5px 50px 5px;
   margin-top: -70px;
   margin-left: 240px;
   min-height: 1050px;
@@ -272,7 +272,9 @@ background-color: #2b2b2b;
   -moz-transition: margin-left 0.3s;
   -o-transition: margin-left 0.3s;
   -webkit-transition: margin-left 0.3s;
-  transition: margin-left 0.3s; }
+  transition: margin-left 0.3s; 
+  top:82px;
+  }
 
 .footer {
   border-top: 2px solid #f5f5f5;
@@ -1170,7 +1172,7 @@ textarea.form-control {
 
 .form-control {
   border: 1px solid gainsboro;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 7px 12px;
   height: 38px;
   max-width: 100%;
@@ -2366,14 +2368,14 @@ h3.timeline-title {
     background: #fac31a !important;
     border: solid 1px #e6af06 !important;
     border-radius: 5px;
-    padding: 10px 38px;
+    padding: 10px 56px;
     font-size: 15px;
     font-weight: 600;
 }
 .btn.btn-primary.black {
     background: #000 !important;
     border: solid 1px #000 !important;
-    border-radius: 5px;
+    border-radius: 2px;
     min-width: 140px;
 }
 
@@ -2429,8 +2431,11 @@ a.btn.btn-default.buttons-excel.buttons-html5.btn-sm:hover {
 }
 
 .btn.btn-primary.black.save {
-    background: #23b195 !important;
-    border: solid 1px #23b195 !important;
+  background: #fac31a !important;
+  border: solid 1px #d8bb64 !important	
+}
+.buttun-block{
+	margin-top:-10px;
 }
 /*---------Pop loading---------------*/
 .hover:hover{background: #eee;}
@@ -2448,3 +2453,4 @@ a.btn.btn-default.buttons-excel.buttons-html5.btn-sm:hover {
     background-repeat: no-repeat;       
 }
 .overlay-msg{margin-bottom: 10px;bottom: 0px;position: absolute;font-style: italic;color: rgb(19, 19, 19);}
+.table>tbody>tr>td{padding: 6px 2px !import;}

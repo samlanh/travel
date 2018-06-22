@@ -738,10 +738,10 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   text-align: center;
 }
 .input-daterange input:first-child {
-  border-radius: 3px 0 0 3px;
+  border-radius: 2px 0 0 2px;
 }
 .input-daterange input:last-child {
-  border-radius: 0 3px 3px 0;
+  border-radius: 0 2px 2px 0;
 }
 .input-daterange .input-group-addon {
   width: auto;
