@@ -166,23 +166,28 @@
             <!-- Page content start -->
             <div class="page-contentbar" style="background: #f5f5f5;">
             <?php echo $this->render('menuleft.phtml')?> 
-              <?php 
-              	/*
-	              	$db = new Application_Model_DbTable_DbUsers();
-            		$rs = $db->getAccessUrl($module,$controller,$action);
-            		echo $this->layout()->content;
-            		if(!empty($rs) OR $action=='changepassword'){
-            				
-             			//echo $this->layout()->content;
-            		}else{
-            			//echo $this->render('pagenotfund.phtml');
-            		}
-            	*/	
-              	echo $this->layout()->content;
-			?>
-
-  
-   			 </div>
+               <div id="page-right-content">
+			 	 <div class="container">
+			    	<div class="row">
+		              <?php 
+		              	/*
+			              	$db = new Application_Model_DbTable_DbUsers();
+		            		$rs = $db->getAccessUrl($module,$controller,$action);
+		            		echo $this->layout()->content;
+		            		if(!empty($rs) OR $action=='changepassword'){
+		            				
+		             			//echo $this->layout()->content;
+		            		}else{
+		            			//echo $this->render('pagenotfund.phtml');
+		            		}
+		            	*/	
+		              
+		              	echo $this->layout()->content;
+					?>
+							</div>
+						</div>
+					</div>   			 
+				</div>
             <!-- end .page-contentbar -->
     </div>
     <!-- End #page-wrapper -->

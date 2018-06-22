@@ -19,6 +19,9 @@ public function init()
 // 		$this->view->totalCustomer = $db->getTotalCustomer();
 		
 	}
+	function addAction(){
+		
+	}
 	
 }
 
