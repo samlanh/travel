@@ -83,10 +83,9 @@ class IndexController extends Zend_Controller_Action
 						$employee = $dbemployee->getEmployeeByCode($information);
 						if (!empty($employee)){
 							$this->_redirect("/employee/index/edit/id/".$employee['id']);
-							//$this->_redirect($url."/index/employee?information=".$employee['employeeCode']);
 						}
 					}else{
-						Application_Form_FrmMessage::redirectUrl("/employee");	
+						Application_Form_FrmMessage::redirectUrl("/home");	
 					}
 					exit();
 				}
@@ -100,7 +99,7 @@ class IndexController extends Zend_Controller_Action
 		$this->_helper->layout()->disableLayout();
 	}
     protected function sortMenu($menus){
-    	$menus_order = Array ( 'home','employee','booking','rsvacl','setting','location','vehicle','other');
+    	$menus_order = Array ( 'home','booking','vehicle','location','other','setting','rsvacl',);
     	$temp_menu = Array();
     	$menus=array_unique($menus);
     	foreach ($menus_order as $i => $val){

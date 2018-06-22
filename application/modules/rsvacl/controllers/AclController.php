@@ -1,5 +1,5 @@
 <?php
-class RsvAcl_AclController extends Zend_Controller_Action
+class Rsvacl_AclController extends Zend_Controller_Action
 {
 
 	const REDIRECT_URL = '/rsvacl/acl';
