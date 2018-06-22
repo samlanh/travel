@@ -41,6 +41,11 @@ class Other_Model_DbTable_DbTestimonial extends Zend_Db_Table_Abstract
 		   			$s_where[]="REPLACE(person_naem,' ','')   LIKE '%{$s_search}%'";
 		   			$where .=' AND ('.implode(' OR ',$s_where).')';
 		   		}
+		   		
+		   		$from_date =(empty($search['start']))? '1': " `createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
+		   		$to_date = (empty($search['end']))? '1': " `createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
+		   		$where="";
+		   		$where.= " AND  ".$from_date." AND ".$to_date;
 		   		if($search['status']>-1){
 		   			$where.=" AND status=".$search['status'];
 		   		}

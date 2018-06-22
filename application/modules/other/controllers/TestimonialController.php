@@ -19,6 +19,7 @@ public function init()
 				$search = array(
 						'adv_search' => '',
 						'status'=>1,
+				         'end'=>date('Y-m-d'),
 				);
 			}
 			$this->view->search=$search;

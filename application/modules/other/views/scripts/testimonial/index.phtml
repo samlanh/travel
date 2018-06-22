@@ -42,6 +42,13 @@
                             <div class="col-md-3">
                                 <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("SEARCH_INFO");?>" value='<?php echo $this->search['adv_search'];?>'>
 							</div>
+							<div class="col-md-6 search">
+                                     	<div class="input-daterange input-group" id="date-range">
+                                          	<input type="text" class="form-control" name="start" value="<?php if (!empty($this->search['start'])){ echo date("d-m-Y",strtotime($this->search['start']));}?>" />
+                                            <span class="input-group-addon b-0"><?php echo $tr->translate("to");?></span>
+                                            <input type="text" class="form-control" name="end" value="<?php if (!empty($this->search['end'])){ echo date("d-m-Y",strtotime($this->search['end']));}?>" />
+                                       </div>
+                                   	</div>
                             <div class="col-md-3">
                                 <select class="form-control select2" id="status"  name="status"  > 
 		                 	  		<option value="-1"><?php echo $tr->translate('STATUS')?></option>
