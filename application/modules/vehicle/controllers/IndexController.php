@@ -29,7 +29,7 @@ public function init()
 			
 			$rs_rows= $db->getAllVehiclePrice($search);
 			$list = new Application_Form_Frmtable();
-			$collumns = array("អ្នកផ្គត់ផ្គង់","ប្រភេទរថយន្ត","isAvailable","សម្គាល់","ថ្ងៃបង្កើត","អ្នកបង្កើត","ស្ថានការណ៍");
+			$collumns = array("Supplier Name","Vehicle Type","Is Available","Description","Create Date","Modify Date","USER","STATUS");
 			$link=array(
 					'module'=>'vehicle','controller'=>'index','action'=>'edit',
 			);
@@ -43,15 +43,6 @@ public function init()
 		
 		$this->view->supplyer = $db->getAllSupplyer();
 		$this->view->vehicle_type = $db->getAllVehicleType();
-		
-// 		$data = new Accounting_Model_DbTable_DbRegister();
-// 		$this->view->rows_degree=$data->getDegree();
-		 
-// 		$form=new Registrar_Form_FrmSearchInfor();
-// 		$form->FrmSearchRegister();
-// 		Application_Model_Decorator::removeAllDecorator($form);
-// 		$this->view->form_search=$form;
-	
 	}
 	
 	public function addAction()
@@ -101,5 +92,23 @@ public function init()
 		$this->view->location = $db->getAllLocation();
 	}
 	
+	function addSupplyerpopupAction(){
+		if($this->getRequest()->isPost()){
+			$data=$this->getRequest()->getPost();
+			$db = new Vehicle_Model_DbTable_DbVehiclePrice();
+			$supplyer = $db->addNewSupplyer($data);
+			print_r(Zend_Json::encode($supplyer));
+			exit();
+		}
+	}
+	function addVehicletypepopupAction(){
+		if($this->getRequest()->isPost()){
+			$data=$this->getRequest()->getPost();
+			$db = new Vehicle_Model_DbTable_DbVehiclePrice();
+			$vehicleType = $db->addNewVehicleType($data);
+			print_r(Zend_Json::encode($vehicleType));
+			exit();
+		}
+	}
 }
 

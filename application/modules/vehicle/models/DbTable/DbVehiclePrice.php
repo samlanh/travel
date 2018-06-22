@@ -141,6 +141,44 @@ class Vehicle_Model_DbTable_DbVehiclePrice extends Zend_Db_Table_Abstract
     	}
     }
     
+    function addNewSupplyer($data){
+    	try{
+    		$_arr=array(
+    			'supplyerName'	=> $data['supplyerName'],
+    			'tel'	 		=> $data['tel'],
+    			'email'      	=> $data['email'],
+    			'createDate'	=> date("Y-m-d H:i:s"),
+    			'modifyDate'	=> date("Y-m-d H:i:s"),
+    			'userInsert'    => $this->getUserId(),
+    		);
+    		$this->_name="tp_supplier";
+    		return $this->insert($_arr);
+    	}catch(exception $e){
+    		Application_Form_FrmMessage::message("Application Error");
+    		echo $e->getMessage();
+    	}
+    }
+    function addNewVehicleType($data){
+    	try{
+    		$_arr=array(
+    				'title'			=> $data['title'],
+    				'serviceType'	=> $data['serviceType'],
+    				'amountCase'    => $data['amountCase'],
+    				'amountSmallCase'=> $data['amountSmallCase'],
+    				'amountSeat'    => $data['amountSeat'],
+    				'createDate'	=> date("Y-m-d H:i:s"),
+    				'modifyDate'	=> date("Y-m-d H:i:s"),
+    				'userId'    	=> $this->getUserId(),
+    				'status'        => 1,
+    		);
+    		$this->_name="tp_vehicletype";
+    		return $this->insert($_arr);
+    	}catch(exception $e){
+    		Application_Form_FrmMessage::message("Application Error");
+    		echo $e->getMessage();
+    	}
+    }
+    
     function getAllPriceById($id){
     	$db = $this->getAdapter();
     	$sql="SELECT * FROM tp_price where id=$id limit 1";

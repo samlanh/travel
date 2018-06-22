@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('បន្ថែមកំណត់តម្លៃរថយន្ត'));
+$this->headTitle($tr->translate('Add Vehicle Price'));
 echo $this->headTitle();
 ?>
 <style>
@@ -28,132 +28,134 @@ label#error {
 }
 
 </style>
- <!-- START PAGE CONTENT -->
- <div id="page-right-content">
- 	<div class="container">
-    	<div class="row">
-    		<form name="frmlist_users" id="frm" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
-	    		<div class="col-sm-12 border-botom">
-	    			<div class="col-sm-8">
-	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;បន្ថែមកំណត់តម្លៃរថយន្ត</h4>
-	    			</div>
-	    			<div class="col-sm-4 text-right">
-	    			</div>
-	    		</div>
-				<div class="col-xs-2"></div>
-				<div class="col-xs-8">
-					<div class="form-group">
-						<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ឈ្មោះអ្នកផ្គត់ផ្គង់
-	                   </label>
-	                   <div class="col-md-7 col-sm-7 col-xs-7">
-	                    	<select class="form-control select2" name="supplyerId" id="supplyerId" placeholder="ប្រភេទរថយន្ត" >
-	                      		<option value="">ជ្រើសរើសអ្នកផ្គត់ផ្គង់</option>
-	                      		<?php if(!empty($this->supplyer)){foreach ($this->supplyer as $rs){?>
-								<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
-								<?php }}?>
-						    </select>
-	                   </div>
-	                </div>
-	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ប្រភេទរថយន្ត </label>
-	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                      <select class="form-control select2" name="vehicleType" id="vehicleType" placeholder="ប្រភេទរថយន្ត" >
-	                      		<option value="">ជ្រើសរើសប្រភេទរថយន្ត</option>
-	                      		<?php if(!empty($this->vehicle_type)){foreach ($this->vehicle_type as $rs){?>
-								<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
-								<?php }}?>
-						  </select>
-	                   </div>
-	                </div>
-	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">ទំនេរ(is available) </label>
-	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                      <select class="form-control select2" name="isAvailable" id="isAvailable" placeholder="" >
-								<option value="1">ទំនេរ</option>
-								<option value="0">មិនទំនេរ</option>
-						  </select>
-	                   </div>
-	                </div>
-	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">សម្គាល់ </label>
-	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                  		<textarea class="form-control" rows="" cols="" name="note" id="note" placeholder="សម្គាល់"></textarea>
-	                   </div>
-	                </div>
-				</div>
-				
-				
-				
-				<div class="col-xs-12">
-					<div class="row">
-						<div class="col-md-12">
-							<table width="100%" id="table_row" border="1px" style="margin-top:5px; border-collapse: collapse; border:1px solid #ccc;width:100%;">
-								<thead>
-									<tr id="head-title" align="right" style="font-size:15px; height: 40px; border:1px solid #4c6184 !important;white-space: nowrap;">
-										<th class="aligncenter">#</th>
-										<th class="aligncenter">ពីទីតាំង</th>
-										<th class="aligncenter">ទៅទីតាំង</th>
-										<th class="aligncenter">រយៈពេលធ្វើដំណើរ</th>
-										<th class="aligncenter">តម្លៃទិញចូល</th>
-										<th class="aligncenter">តម្លៃជួល</th>
-										<th class="aligncenter">បញ្ចុះតម្លៃ(%)</th>
-										<th class="aligncenter">លុប</th>
-									</tr>
-								</thead>
-								<tbody id="lbl_price">
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-xs-12">
-					<div class="row">
-						<div class="col-md-12">
-							&nbsp;
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-xs-12">
-					<div class="row">
-						<div class="col-md-12">
-							<input type="button" id="addrow" value="<?php echo $tr->translate('បន្ថែមតម្លៃជួល');?>" class="btn btn-primary black save" onclick="addRow();" />
-							<input type="hidden" name="identity" id="identity" />
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-xs-12">
-					<div class="row">
-						<div class="col-md-12">
-							&nbsp;
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12">
-					<div class="row">
-						<div class="col-md-12">
-							&nbsp;
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="text-center">
-								<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'vehicle','controller'=>"index",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />
-								<input type="submit" value="<?php echo $tr->translate('SAVE');?>" class="btn btn-primary black save" />
-							</div>
-						</div>
-					</div>
-				</div>
-				
-			</form>
+<form name="frmlist_users" id="frm" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
+	<div class="col-sm-12 border-botom">
+		<div class="col-sm-8">
+			<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Add Vehicle Price");?></h4>
+		</div>
+		<div class="col-sm-4 text-right">
+			<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'vehicle','controller'=>"index",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />
 		</div>
 	</div>
-</div>
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		<div class="form-group">
+			<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
+		   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">
+				<?php echo $tr->translate("Supplier Name");?>
+		   </label>
+		   <div class="col-md-7 col-sm-7 col-xs-7">
+				<select class="form-control select2" name="supplyerId" id="supplyerId" onchange="getPopupSupplyer();" placeholder="ប្រភេទរថយន្ត" >
+					<option value=""><?php echo $tr->translate("Supplier Name");?></option>
+					<option value="-1"><?php echo $tr->translate("Add New")?></option>
+					<?php if(!empty($this->supplyer)){foreach ($this->supplyer as $rs){?>
+					<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
+					<?php }}?>
+				</select>
+		   </div>
+		</div>
+		<div class="form-group">
+		   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">
+				<?php echo $tr->translate("Vehicle Type");?>
+		   </label>
+		  <div class="col-md-7 col-sm-7 col-xs-7">
+			  <select class="form-control select2" name="vehicleType" id="vehicleType" placeholder="ប្រភេទរថយន្ត" onchange="getPopupVehicleType();" >
+					<option value=""><?php echo $tr->translate("Vehicle Type");?></option>
+					<option value="-1"><?php echo $tr->translate("Add New")?></option>
+					<?php if(!empty($this->vehicle_type)){foreach ($this->vehicle_type as $rs){?>
+					<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
+					<?php }}?>
+			  </select>
+		   </div>
+		</div>
+		<div class="form-group">
+		   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">
+				<?php echo $tr->translate("Is Available");?>
+		   </label>
+		  <div class="col-md-7 col-sm-7 col-xs-7">
+			  <select class="form-control select2" name="isAvailable" id="isAvailable" placeholder="" >
+					<option value="1"><?php echo $tr->translate("Available");?></option>
+					<option value="0"><?php echo $tr->translate("Not Available");?></option>
+			  </select>
+		   </div>
+		</div>
+		<div class="form-group">
+		   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">
+				<?php echo $tr->translate("Description");?>
+		   </label>
+		  <div class="col-md-7 col-sm-7 col-xs-7">
+				<textarea class="form-control" rows="" cols="" name="note" id="note" placeholder="<?php echo $tr->translate("Description");?>"></textarea>
+		   </div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-md-12">
+				<table width="100%" id="table_row" border="1px" style="margin-top:5px; border-collapse: collapse; border:1px solid #ccc;width:100%;">
+					<thead>
+						<tr id="head-title" align="right" style="font-size:15px; height: 40px; border:1px solid #4c6184 !important;white-space: nowrap;">
+							<th class="aligncenter">#</th>
+							<th class="aligncenter"><?php echo $tr->translate("From Location");?></th>
+							<th class="aligncenter"><?php echo $tr->translate("To Location");?></th>
+							<th class="aligncenter"><?php echo $tr->translate("Duration");?></th>
+							<th class="aligncenter"><?php echo $tr->translate("Cost Price");?></th>
+							<th class="aligncenter"><?php echo $tr->translate("Sell Price");?></th>
+							<th class="aligncenter"><?php echo $tr->translate("Discount");?>(%)</th>
+							<th class="aligncenter"><?php echo $tr->translate("Delete");?></th>
+						</tr>
+					</thead>
+					<tbody id="lbl_price">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-md-12">
+				&nbsp;
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-md-12">
+				<input type="button" id="addrow" value="<?php echo $tr->translate('Add Price Row');?>" class="btn btn-primary black save" onclick="addRow();" />
+				<input type="hidden" name="identity" id="identity" />
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-md-12">
+				&nbsp;
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-md-12">
+				&nbsp;
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="text-center">
+					<input id="submitButton" type="submit" value="<?php echo $tr->translate('SAVE');?>" class="btn btn-primary black save" />
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</form>
 <script type="text/javascript">
 
 	$('#frm').submit(function() {
@@ -197,14 +199,14 @@ label#error {
 		template+='<td width="2%">'+index+'</td>';
 		
 		template+='<td width="20%"><select class="form-control select2" id="from_location_'+index+'" name="from_location_'+index+'" >';
-		template+='<option value="">from location</option>';
+		template+='<option value=""><?php echo $tr->translate("From Location");?></option>';
 			<?php foreach($this->location as $location){?>
 				template+='<option value="'+<?php echo $location['id']?>+'"><?php echo $location['name'];?></option>';
 			<?php }?>
 		template+='</select>';
 		
 		template+='<td width="20%"><select class="form-control select2" id="to_location_'+index+'" name="to_location_'+index+'" >';
-		template+='<option value="">to location</option>';
+		template+='<option value=""><?php echo $tr->translate("To Location");?></option>';
 			<?php foreach($this->location as $location){?>
 				template+='<option value="'+<?php echo $location['id']?>+'"><?php echo $location['name'];?></option>';
 			<?php }?>
@@ -214,7 +216,7 @@ label#error {
 		template+='<td><input style="text-align:center;" onkeypress="return isNumberKey(event);" type="text" id="cost_'+index+'" name="cost_'+index+'"  value="" class="form-control"></td>';
 		template+='<td><input style="text-align:center;" onkeypress="return isNumberKey(event);" type="text" id="price_'+index+'" name="price_'+index+'"  value="" class="form-control"></td>';
 		template+='<td><input style="text-align:center;" onkeypress="return isNumberKey(event);" onkeyup="checkAmount('+index+');" type="text" id="discount_'+index+'" name="discount_'+index+'"  value="" class="form-control"></td>';
-		template+='<td><button style="background: #ff3b3b;color: #fff;" type="button" onClick="deleteRecord('+index+')" name="deleteSale" class="btn default red">លុប</button></td>';
+		template+='<td><button style="background: #ff3b3b;color: #fff;" type="button" onClick="deleteRecord('+index+')" name="deleteSale" class="btn default red"><?php echo $tr->translate("Delete");?></button></td>';
 		
 		template+='</tr>';
 		$('#lbl_price').append(template);
@@ -278,4 +280,226 @@ label#error {
 	  	}
 	}
 	
+	function getPopupSupplyer(){
+		val = $('#supplyerId').val();
+		if(val==-1){
+			$('#supplyerpopup').modal('show');
+		}
+	}
+	
+	<?php $url_add_customer =  $this->url(array('module'=>'vehicle','controller'=>'index','action'=>'add-supplyerpopup')); ?>
+	function addNewSupplyer(){
+		supplyerName = $("#supplyerName").val();
+		if(supplyerName==''){
+			$("#supplyerName").focus();
+			return false;
+		} 
+		tel = $("#tel").val();
+		if(tel==''){
+			$("#tel").focus();
+			return false;
+		} 
+		email = $("#email").val();
+		if(email==''){
+			$("#email").focus();
+			return false;
+		} 
+		$('#saveSupplyer').attr("disabled", true);
+		$.ajax({
+			url: "<?php echo $url_add_customer;?>",
+			type: "post",
+			data: $('#frmsupplyer').serialize(),
+			success: function(data){
+				rs = $.parseJSON(data);
+				//alert(rs);
+				$('#supplyerId').append($("<option></option>").attr("value",rs).attr("selected",true).text(supplyerName));                       
+				$("#supplyerId").select2();
+				
+				$('#supplyerpopup').modal('hide');
+				$('#saveSupplyer').attr("disabled", false);
+			},
+			error:function(err){
+				alert("faile insert");
+			}
+		});
+	}
+	
+	function getPopupVehicleType(){
+		val = $('#vehicleType').val();
+		if(val==-1){
+			$('#vehicletypepopup').modal('show');
+		}
+	}
+	
+	<?php $url_add_customer =  $this->url(array('module'=>'vehicle','controller'=>'index','action'=>'add-vehicletypepopup')); ?>
+	function addNewVehicleType(){
+		title = $("#title").val();
+		if(title==''){
+			$("#title").focus();
+			return false;
+		} 
+		amountSeat = $("#amountSeat").val();
+		if(amountSeat==''){
+			$("#amountSeat").focus();
+			return false;
+		} 
+		serviceType = $("#serviceType").val();
+		if(serviceType==-1){
+			alert("Please select service type !!! ");
+			return false;
+		} 
+		$('#saveVehicleType').attr("disabled", true);
+		$.ajax({
+			url: "<?php echo $url_add_customer;?>",
+			type: "post",
+			data: $('#frmvehicletype').serialize(),
+			success: function(data){
+				rs = $.parseJSON(data);
+				//alert(rs);
+				$('#vehicleType').append($("<option></option>").attr("value",rs).attr("selected",true).text(title));                       
+				$("#vehicleType").select2();
+				
+				$('#vehicletypepopup').modal('hide');
+				$('#saveVehicleType').attr("disabled", false);
+			},
+			error:function(err){
+				alert("faile insert");
+			}
+		});
+	}
 </script>
+
+<div id="supplyerpopup" class="modal fade" tabindex="-1" data-width="1000">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="portlet-title">
+				<div class="col-sm-12 border-botom">
+					<div class="col-sm-12">
+						<h4 class="m-t-0" style="text-align:center;"><?php echo $tr->translate("Add Supplier");?></h4>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<form id="frmsupplyer" name="frmsupplyer" dojoType="dijit.form.Form" autoComplete="off" enctype="application/x-www-form-urlencoded" class="form-horizontal" enctype="multipart/form-data" method="post">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								<?php echo $tr->translate("Supplier Name");?>
+							</label>
+							<div class="col-md-9">
+								<div class="input-icon right">
+									<input name="supplyerName" id="supplyerName" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								<?php echo $tr->translate("Phone");?>
+							</label>
+							<div class="col-md-9">
+								<div class="input-icon right">
+									<input name="tel" id="tel" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								<?php echo $tr->translate("Email");?>
+							</label>
+							<div class="col-md-9">
+								<div class="input-icon right">
+									<input type="email" name="email" id="email" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label  class="col-md-12 " style="text-align:center;">
+								<button type="button" id="saveSupplyer" name="save_receiver" onclick="addNewSupplyer();" class="btn btn-primary"><i class="fa fa-save"></i> <?php echo $tr->translate("រក្សាទុក")?> </button>
+							</label>
+						</div>
+					</div>
+				</form>
+			</div>
+        </div>
+    </div>
+ </div>
+ 
+ 
+ <div id="vehicletypepopup" class="modal fade" tabindex="-1" data-width="1000">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="portlet-title">
+				<div class="col-sm-12 border-botom">
+					<div class="col-sm-12">
+						<h4 class="m-t-0" style="text-align:center;"><?php echo $tr->translate("Add Vehicle Type");?></h4>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<form id="frmvehicletype" name="frmvehicletype" dojoType="dijit.form.Form" autoComplete="off" enctype="application/x-www-form-urlencoded" class="form-horizontal" enctype="multipart/form-data" method="post">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="control-label col-md-4">
+								<?php echo $tr->translate("Vehicle Type Name");?>
+							</label>
+							<div class="col-md-8">
+								<div class="input-icon right">
+									<input name="title" id="title" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">
+								<?php echo $tr->translate("Service Type");?>
+							</label>
+							<div class="col-md-8">
+								<div class="input-icon right">
+									<select name="serviceType" id="serviceType" class="form-control " >
+										<option value="-1">Select Service</option>
+										<option value="1">Taxi</option>
+										<option value="2">Ferries</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">
+								<?php echo $tr->translate("Amount Seat");?>
+							</label>
+							<div class="col-md-8">
+								<div class="input-icon right">
+									<input name="amountSeat" id="amountSeat" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">
+								<?php echo $tr->translate("Amount Big Luggage");?>
+							</label>
+							<div class="col-md-8">
+								<div class="input-icon right">
+									<input name="amountCase" id="amountCase" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">
+								<?php echo $tr->translate("Amount Small Luggage");?>
+							</label>
+							<div class="col-md-8">
+								<div class="input-icon right">
+									<input name="amountSmallCase" id="amountSmallCase" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label  class="col-md-12 " style="text-align:center;">
+								<button type="button" id="saveVehicleType" name="save_receiver" onclick="addNewVehicleType();" class="btn btn-primary"><i class="fa fa-save"></i> <?php echo $tr->translate("រក្សាទុក")?> </button>
+							</label>
+						</div>
+					</div>
+				</form>
+			</div>
+        </div>
+    </div>
+ </div>
