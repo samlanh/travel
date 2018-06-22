@@ -50,7 +50,7 @@ $row=$this->row;
 	                </div>
 	                
 	                 <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('DESCRIPTION')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Description')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
 	                   		<textarea class="form-control" rows="5" id="description" name="description"><?php echo $row['description']?></textarea>
@@ -58,10 +58,10 @@ $row=$this->row;
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"> <?php echo $tr->translate('ORDER_BY')?> :  
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"> <?php echo $tr->translate('Order By')?> :  
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-							<input class="form-control"  type="text"  name="order_by" id="order_by" placeholder="<?php echo $tr->translate('ORDER_BY')?>" value="<?php echo $row['orderBy']?>"/>
+							<input class="form-control"  type="text"  name="order_by" id="order_by" placeholder="<?php echo $tr->translate('Order By')?>" value="<?php echo $row['orderBy']?>"/>
 	                   </div>
 	                </div>
 	                <div class="form-group">
@@ -75,19 +75,17 @@ $row=$this->row;
 	                   </div>
 	                </div>
 	                 <input type="hidden" name="old_pic" id="old_pic" value="<?php echo $row['image']?>" >
-	                <div class="col-md-8 col-sm-8 col-xs-8">
-	                <br/><br/>
-	                  </div>
-                    <div class="form-group">
-	                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit" value="<?php echo $tr->translate('SAVE_CLOSE');?>" label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="submitButton" />
-								<input class="btn btn-primary black save" name="save_new"  id="save_new" type="submit" value="<?php echo $tr->translate('SAVE_NEW');?>" label="<?php echo $tr->translate('SAVE_NEW');?>" id="submitButton" /> 
+	                 <div class="form-group">
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                    	 <div class="text-right">
+								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit" value="<?php echo $tr->translate('Save Close');?>"   id="submitButton" />
+			                </div>
 	                    </div>
                     </div>
 			</div>
 			<div class="col-sm-4">
 				<div class="form-group col-md-12 col-sm-12 col-xs-12 ">
-					<label class="control-label " for="first-name"><?php echo $tr->translate('រូបភាពតំណាង')?> </label>
+					<label class="control-label " for="first-name"><?php echo $tr->translate('Image')?> </label>
 				</div>
 				<div class="form-group">
 				 	

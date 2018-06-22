@@ -32,7 +32,6 @@ $row=$this->row;
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
 	                    	 <select class="form-control select2" id="service_type"  name="service_type"  > 
-		                 	  		<option value="-1" ><?php echo $tr->translate('Select Service')?></option>
 		                 	  		<?php if(!empty($this->service_type)) foreach ($this->service_type As $servic){?>
 		                   			<option value="<?php echo $servic['id']?>" <?php if($servic['id']==$row['serviceId']) echo "selected='selected'"?>><?php echo $servic['name']?></option>
 								    <?php }?>
@@ -41,7 +40,7 @@ $row=$this->row;
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('COUNTRY_NAME')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Country Name')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
 	                    	 <select class="form-control select2" id="country_name"  name="country_name"  > 
@@ -51,10 +50,10 @@ $row=$this->row;
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ORDER_BY')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Order By')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" value='<?php echo $row['orderRing']?>' placeholder="<?php echo $tr->translate('ORDER_BY')?>"/>
+	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" value='<?php echo $row['orderRing']?>' placeholder="<?php echo $tr->translate('Order By')?>"/>
 	                   </div>
 	                </div>
 	             <!-- 
@@ -69,7 +68,7 @@ $row=$this->row;
                     <div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-right">
-								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit"  label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="submitButton" />
+								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit"  label="<?php echo $tr->translate('SAVE_CLOSE');?>" value="<?php echo $tr->translate('SAVE_CLOSE');?>" id="submitButton" />
 			                </div>
 	                    </div>
                     </div>

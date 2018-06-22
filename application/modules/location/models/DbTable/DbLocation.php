@@ -28,7 +28,7 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 // 		   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
 // 		   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
 		   		$sql="SELECT l.id,(SELECT ls.serviceName FROM `tp_location_service` AS ls WHERE ls.id=l.serviceId LIMIT 1) AS service_name,l.locationName,
-					      (SELECT c.countryName FROM `tp_country` AS c WHERE c.id=l.countryId LIMIT 1) AS country_name,
+					      (SELECT c.countryName FROM `tp_country` AS c WHERE c.id=l.countryId LIMIT 1) AS country_name,orderRing,
 					      (SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=l.status AND v.type=1 LIMIT 1) AS status_name
 						FROM `tp_locations` AS l 
 						WHERE l.`status`=1 ";
@@ -44,7 +44,10 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 		   		if($search['status']>-1){
 		   			$where.=" AND status=".$search['status'];
 		   		}
-		   		$order=" ORDER BY service_name ASC";
+		   		if(!empty($search['service_type'])){
+		   		    $where.=" AND l.serviceId=".$search['service_type'];
+		   		}
+		   		$order=" ORDER BY l.locationName ASC";
 		   		return $db->fetchAll($sql.$where.$order);
 	   		}catch(exception $e){
 	   			Application_Form_FrmMessage::message("Application Error");
@@ -166,10 +169,10 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 	
 	function getAllService(){
 		$lang= $this->getCurrentLang();
-		$array = array(1=>"province_en_name",2=>"province_kh_name");
 		$db = $this->getAdapter();
 		$sql="  SELECT id,`serviceName` AS `name` FROM `tp_location_service` WHERE `status`=1";
-		return $db->fetchAll($sql);
+		$order=" ORDER BY id DESC";
+		return $db->fetchAll($sql.$order);
 	}
 	
 }

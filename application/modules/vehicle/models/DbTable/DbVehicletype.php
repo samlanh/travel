@@ -46,7 +46,10 @@ class Vehicle_Model_DbTable_DbVehicletype extends Zend_Db_Table_Abstract
 		   		if($search['status']>-1){
 		   			$where.=" AND v.status=".$search['status'];
 		   		}
-		   		$order=" ORDER BY v.`id` DESC";
+		   		if(!empty($search['service_type'])){
+		   		    $where.=" AND v.serviceType=".$search['service_type'];
+		   		}
+		   		$order=" ORDER BY service_name ASC";
 		   		return $db->fetchAll($sql.$where.$order);
 	   		}catch(exception $e){
 	   			Application_Form_FrmMessage::message("Application Error");

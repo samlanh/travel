@@ -27,7 +27,7 @@ class Other_Model_DbTable_DbTestimonial extends Zend_Db_Table_Abstract
 		   	try{
 // 		   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
 // 		   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
-		   		$sql="SELECT id,`person_naem`,`description`,DATE_FORMAT(`createDate`, '%d-%M-%Y'),DATE_FORMAT(`modifyDate`,'%d-%M-%Y'),
+		   		$sql="SELECT id,`person_naem`,DATE_FORMAT(`createDate`, '%d-%M-%Y'),DATE_FORMAT(`modifyDate`,'%d-%M-%Y'),`description`,
                         (SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=tp_testimonial.`status` AND v.type=1 LIMIT 1) AS `status`
                         FROM `tp_testimonial`
                         WHERE `description`!=''";

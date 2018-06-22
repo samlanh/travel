@@ -42,6 +42,14 @@
                             <div class="col-md-3">
                                 <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("SEARCH_INFO");?>" value='<?php echo $this->search['adv_search'];?>'>
 							</div>
+							<div class="col-md-3">
+							     <select class="form-control select2" id="service_type"  name="service_type" required > 
+							        <option value="0"><?php echo $tr->translate('Select Service')?></option>
+		                 	  		<?php if(!empty($this->service_type)) foreach ($this->service_type As $servic){?>
+		                   			<option value="<?php echo $servic['id']?>" <?php if($this->search['service_type']==$servic['id']) echo 'selected="selected"';?>><?php echo $servic['name']?></option>
+								    <?php }?>
+								</select> 
+							</div>
                             <div class="col-md-3">
                                 <select class="form-control select2" id="status"  name="status"  > 
 		                 	  		<option value="-1"><?php echo $tr->translate('STATUS')?></option>

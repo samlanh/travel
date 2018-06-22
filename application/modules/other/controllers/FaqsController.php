@@ -25,7 +25,7 @@ public function init()
 	        $db=new Other_Model_DbTable_DbFaqs();
 	        $result = $db->getAllFaqs($search);
     		$list = new Application_Form_Frmtable();
-    		$collumns = array("Terms Title","Create Date","Modify Date","STATUS");
+    		$collumns = array("Terms Title","Create Date","Modify Date","Order By","STATUS");
     		$link=array(
     				'module'=>'other','controller'=>'faqs','action'=>'edit',
     		);

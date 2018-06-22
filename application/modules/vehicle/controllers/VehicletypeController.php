@@ -19,6 +19,7 @@ public function init()
     	    }else{
     	        $search = array(
     	            'adv_search' => '',
+    	            'service_type'=>'',
     	            'status'=>1,
     	        );
     	    }
@@ -30,6 +31,8 @@ public function init()
     	} catch (Exception $e) {
     		$result = Application_Model_DbTable_DbGlobal::getResultWarning();
     	}
+    	$db_global=new Location_Model_DbTable_DbLocation();
+    	$this->view->service_type=$db_global->getAllService();
     }
     
 	public function addAction()
@@ -48,7 +51,7 @@ public function init()
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
 			}
 		}
-		$db_global=new Vehicle_Model_DbTable_DbVehicletype();
+		$db_global=new Location_Model_DbTable_DbLocation();
 		$this->view->service_type=$db_global->getAllService();
 		 
 	}

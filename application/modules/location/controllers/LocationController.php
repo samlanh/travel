@@ -19,13 +19,14 @@ public function init()
 				$search = array(
 						'adv_search' => '',
 						'status'=>1,
+				        'service_type'=>''
 				);
 			}
 			$this->view->search=$search;
 	        $db=new Location_Model_DbTable_DbLocation();
     		$result = $db->getAllLocationName($search);
     		$list = new Application_Form_Frmtable();
-    		$collumns = array("SERVICE_TYPE","LOCATION_NAME","COUNTRY_NAME","STATUS");
+    		$collumns = array("Service Type","Location Name","Country Name","Order By","Status");
     		$link=array(
     				'module'=>'location','controller'=>'location','action'=>'edit',
     		);
@@ -36,9 +37,8 @@ public function init()
     	} catch (Exception $e) {
     		$result = Application_Model_DbTable_DbGlobal::getResultWarning();
     	}
-//     	$frm = new Booking_Form_FrmSearchInfomation();
-//     	Application_Model_Decorator::removeAllDecorator($frm);
-//     	$this->view->formFilter = $frm->filter();
+    	$db_global=new Location_Model_DbTable_DbLocation();
+    	$this->view->service_type=$db_global->getAllService();
     }
     
 	public function addAction()
@@ -58,7 +58,6 @@ public function init()
 			}
 		}
 		$db_global=new Location_Model_DbTable_DbLocation();
-		//$rs=$this->view->province=$db_global->getAllProvince();
 		$this->view->service_type=$db_global->getAllService();
 		 
 	}

@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('EDIT_VEHICLE_TYPE'));
+$this->headTitle($tr->translate('Edit Vehicle Type'));
 echo $this->headTitle();
 $row=$this->row;
 ?>
@@ -16,13 +16,13 @@ $row=$this->row;
     	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("EDIT_VEHICLE_TYPE")?></h4>
+    				<h4 class="m-t-0"><i class="ti-star	"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Edit Vehicle Type")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
     			<a class="btn btn-primary block" href="<?php echo $this->baseUrl()."/vehicle/vehicletype/index";?>"><?php echo $tr->translate("GO_BACK")?></a>
     			</div>
     		</div>
-    		<form name="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
+    		<form id="frm_location" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data">
 			<div class="col-sm-8">
 					<div class="form-group">
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Vehicle Type Name')?> :
@@ -54,26 +54,26 @@ $row=$this->row;
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនកៅអី')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Chairs Number')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text"  value="<?php echo $this->row['amountCase']?>" name="amount_sit" id="amount_sit" placeholder="<?php echo $tr->translate('Amount Sits')?>"/>
+	                    	<input class="form-control"  type="text"  value="<?php echo $this->row['amountCase']?>" name="amount_sit" id="amount_sit" placeholder="<?php echo $tr->translate('Chairs Number')?>"/>
 	                   </div>
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនវាលីធំ')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Vali Big Number')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text" value="<?php echo $this->row['amountSmallCase']?>" name="amountCase" id="amountCase" placeholder="<?php echo $tr->translate('ចំនួនវាលីធំ')?>"/>
+	                    	<input class="form-control"  type="text" value="<?php echo $this->row['amountSmallCase']?>" name="amountCase" id="amountCase" placeholder="<?php echo $tr->translate('Vali Big Number')?>"/>
 	                   </div>
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ចំនួនវាលីតូច')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Vali Small Number')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text" value="<?php echo $this->row['amountSeat']?>" name="amountSmallCase" id="amountSmallCase" placeholder="<?php echo $tr->translate('ចំនួនវាលីតូច')?>"/>
+	                    	<input class="form-control"  type="text" value="<?php echo $this->row['amountSeat']?>" name="amountSmallCase" id="amountSmallCase" placeholder="<?php echo $tr->translate('Vali Small Number')?>"/>
 	                   </div>
 	                </div>
 	                
@@ -87,19 +87,15 @@ $row=$this->row;
 							</select>
 	                   </div>
 	                </div>
-	                 
-	                <div class="col-md-8 col-sm-8 col-xs-8">
-	                <br/><br/>
-	                  </div>
                     <div class="form-group">
-	                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+	                        <div class="text-right">
 								<input class="btn btn-primary black save" name="save_close"  id="save_close" type="submit" value="<?php echo $tr->translate('SAVE_CLOSE');?>" label="<?php echo $tr->translate('SAVE_CLOSE');?>" id="submitButton" />
-	                    </div>
+			                </div>
                     </div>
 			</div>
 			<div class="col-sm-4">
 				<div class="form-group col-md-12 col-sm-12 col-xs-12 ">
-					<label class="control-label " for="first-name"><?php echo $tr->translate('រូបភាពតំណាង')?> </label>
+					<label class="control-label " for="first-name"><?php echo $tr->translate('Image')?> </label>
 				</div>
 				<div class="form-group">
 	                   <div class="col-md-12 col-sm-12 col-xs-12">

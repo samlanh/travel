@@ -31,7 +31,6 @@ echo $this->headTitle();
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
 	                    	 <select class="form-control select2" id="service_type"  name="service_type" required > 
-		                 	  		<option value="-1"><?php echo $tr->translate('Select Service')?></option>
 		                 	  		<?php if(!empty($this->service_type)) foreach ($this->service_type As $servic){?>
 		                   			<option value="<?php echo $servic['id']?>"><?php echo $servic['name']?></option>
 								    <?php }?>
@@ -40,7 +39,7 @@ echo $this->headTitle();
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('COUNTRY_NAME')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Country Name')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
 	                    	 <select class="form-control select2" id="country_name"  name="country_name"  > 
@@ -50,10 +49,10 @@ echo $this->headTitle();
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('ORDER_BY')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Order By')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" placeholder="<?php echo $tr->translate('ORDER_BY')?>"/>
+	                    	<input class="form-control"  type="text"  name="order_by" id="order_by" placeholder="<?php echo $tr->translate('Order By')?>"/>
 	                   </div>
 	                </div>
 	                <!-- 

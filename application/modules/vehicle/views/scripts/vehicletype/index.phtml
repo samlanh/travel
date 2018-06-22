@@ -30,6 +30,14 @@ img.status_icon {
                             <div class="col-md-3">
                                 <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("SEARCH_INFO");?>" value='<?php echo $this->search['adv_search'];?>'>
 							</div>
+							<div class="col-md-3">
+							     <select class="form-control select2" id="service_type"  name="service_type" required > 
+							        <option value="0"><?php echo $tr->translate('Select Service')?></option>
+		                 	  		<?php if(!empty($this->service_type)) foreach ($this->service_type As $servic){?>
+		                   			<option value="<?php echo $servic['id']?>" <?php if($this->search['service_type']==$servic['id']) echo 'selected="selected"';?>><?php echo $servic['name']?></option>
+								    <?php }?>
+								</select> 
+							</div>
                             <div class="col-md-3">
                                 <select class="form-control select2" id="status"  name="status"  > 
 		                 	  		<option value="-1"><?php echo $tr->translate('STATUS')?></option>
@@ -37,6 +45,7 @@ img.status_icon {
 		                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE')?></option>
 								</select> 
 							</div>
+							
 							<div class="col-md-3">
                                 <button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
 							</div>
@@ -49,9 +58,9 @@ img.status_icon {
     						<th><?php echo $tr->translate("NUM");?></th>
     						<th><?php echo $tr->translate("Service Type");?></th>
     						<th><?php echo $tr->translate("Vehicle Type Name");?></th>
-    						<th><?php echo $tr->translate("Amount Sit");?></th>
-    						<th><?php echo $tr->translate("ចំនួនវាលីធំ");?></th>
-    						<th><?php echo $tr->translate("ចំនួនវាលីតូច");?></th>
+    						<th><?php echo $tr->translate("Chairs Number");?></th>
+    						<th><?php echo $tr->translate("Vali Big Number");?></th>
+    						<th><?php echo $tr->translate("Vali Small Number");?></th>
     						<th><?php echo $tr->translate("Description");?></th>
     						<th><?php echo $tr->translate("Image");?></th>
     						<th><?php echo $tr->translate("Create Date");?></th>
