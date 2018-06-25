@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('បន្ថែមអតិថិជន'));
+$this->headTitle($tr->translate('Add Customer'));
 echo $this->headTitle();
 ?>
 <style>
@@ -26,9 +26,10 @@ label#error {
     	<form id="frm" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
-	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("បន្ថែមអតិថិជន")?></h4>
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Add Customer")?></h4>
 	    			</div>
 	    			<div class="col-sm-4 text-right">
+	    				<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'booking','controller'=>"customer",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />
 	    			</div>
 	    		</div>
     		
@@ -36,52 +37,58 @@ label#error {
 					<div class="form-group">
 						<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">
-	                   		<?php echo $tr->translate('ឈ្មោះអតិថិជន')?> :
+	                   		<?php echo $tr->translate('Customer Name')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                    	<input class="form-control" type="text"  name="customerName" id="customerName" placeholder="<?php echo $tr->translate('ឈ្មោះអតិថិជន')?>"/>
+	                    	<input class="form-control" type="text"  name="customerName" id="customerName" placeholder="<?php echo $tr->translate('Customer Name')?>"/>
 	                   </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ភេទ')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Sex')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                      <select class="form-control select2me" name="gender" id="gender" placeholder="<?php echo $tr->translate('ភេទ')?>" >
-								<option value="1">ប្រុស</option>
-								<option value="2">ស្រី</option>
+	                      <select class="form-control select2me" name="gender" id="gender" placeholder="<?php echo $tr->translate('Sex')?>" >
+								<option value="1"><?php echo $tr->translate('Male')?></option>
+								<option value="2"><?php echo $tr->translate('Female')?></option>
 	                      </select>
 	                   </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អាយុ')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Age')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="age" id="age" placeholder="<?php echo $tr->translate('អាយុ');?>" />
+	                     <input type="text" class="form-control"   name="age" id="age" placeholder="<?php echo $tr->translate('Age');?>" />
 	                   </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខទូរសព្ទ')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Phone')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="tel" id="tel" placeholder="<?php echo $tr->translate('លេខទូរសព្ទ');?>" />
+	                     <input type="text" class="form-control"   name="tel" id="tel" placeholder="<?php echo $tr->translate('Phone');?>" />
 	                   </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អ៊ីមែល')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Email')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="email" class="form-control"   name="email" id="email" placeholder="<?php echo $tr->translate('អ៊ីមែល');?>" />
+	                     <input type="email" class="form-control"   name="email" id="email" placeholder="<?php echo $tr->translate('Email');?>" />
 	                   </div>
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខសម្ងាត់')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Password')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="password" class="form-control"   name="password" id="password" placeholder="<?php echo $tr->translate('Password');?>" />
+	                     <input type="password" class="form-control" name="password" id="password" placeholder="<?php echo $tr->translate('Password');?>" />
 	                   </div>
 	                </div>
-	                
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Confirm Password')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="<?php echo $tr->translate('Password');?>" />
+	                   </div>
+	                </div>
 	               <div class="form-group">
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Is Verify')?> :
 	                   </label>
@@ -106,7 +113,7 @@ label#error {
 	             	</div>
                 	<div class="form-group">
 	                     <div class="col-md-12 col-sm-12 col-xs-12 m-t-10 text-center browe_photo">
-	                     	<input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('រូបភាព')?>">
+	                     	<input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('Photo')?>">
 	                  	 </div>
                  	</div>
 				</div>
@@ -119,8 +126,7 @@ label#error {
                 	<div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-center">
-	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'booking','controller'=>"customer",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('ត្រលប់ក្រោយ');?>" />
-								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('រក្សាទុក');?>" /> 
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('Save');?>" /> 
 			                </div>
 	                    </div>
                     </div>
@@ -150,6 +156,15 @@ label#error {
 			$('#password').focus();
 			return false;	
 		}
+
+		if($("#password").val() != $("#confirmPassword").val() ){
+			alert('សូម​ពិនិត្រ ពាក្យ​​សំងាត់​ទាំង​ 2 របស់​អ្នក មិន​ដូច​គ្នា​ទេ, សូម​បញ្ចូល ​ម្តង​ទៀត..');
+			$("#password").val('');
+			$("#confirmPassword").val('');
+			$("#password").focus();
+			return false;
+		}		
+		
 		var r = confirm("សូមត្រួតពិនិត្យទិន្នន័យ អោយបានត្រឹមត្រូវ !\nតើលោកអ្នកពិតជាចង់រក្សាទុកទិន្នន័យនេះមែនឫទេ?");
 		if (r == true) {
 			$("#btnsubmit").attr("disabled", true);
@@ -173,16 +188,5 @@ label#error {
     $("#profile-img").change(function(){
         readURL(this);
     });
-
-    function isNumber(evt) {
-        evt = (evt) ? evt : window.event;
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-            var msg='You can input only number.';
-    		alert(msg);
-    		return false;
-        }
-        return true;
-    }
 
 </script>

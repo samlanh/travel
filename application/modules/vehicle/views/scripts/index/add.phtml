@@ -97,7 +97,7 @@ label#error {
 				<table width="100%" id="table_row" border="1px" style="margin-top:5px; border-collapse: collapse; border:1px solid #ccc;width:100%;">
 					<thead>
 						<tr id="head-title" align="right" style="font-size:15px; height: 40px; border:1px solid #4c6184 !important;white-space: nowrap;">
-							<th class="aligncenter">#</th>
+							<th class="aligncenter"><?php echo $tr->translate("NUM");?></th>
 							<th class="aligncenter"><?php echo $tr->translate("From Location");?></th>
 							<th class="aligncenter"><?php echo $tr->translate("To Location");?></th>
 							<th class="aligncenter"><?php echo $tr->translate("Duration");?></th>
@@ -149,7 +149,7 @@ label#error {
 		<div class="row">
 			<div class="col-md-12">
 				<div class="text-center">
-					<input id="submitButton" type="submit" value="<?php echo $tr->translate('SAVE');?>" class="btn btn-primary black save" />
+					<input id="submitButton" type="submit" value="<?php echo $tr->translate('Save');?>" class="btn btn-primary black save" />
 				</div>
 			</div>
 		</div>

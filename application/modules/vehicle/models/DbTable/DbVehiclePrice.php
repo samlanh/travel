@@ -17,6 +17,7 @@ class Vehicle_Model_DbTable_DbVehiclePrice extends Zend_Db_Table_Abstract
 			    	(select name_en from tp_view as v where v.type=4 and v.key_code = p.isAvailable) as isAvailable,
 			    	note,
 			    	p.createDate,
+			    	p.modifyDate,
 			    	(select first_name from rms_users as u where u.id = p.userId) as user,
 			    	(select name_en from tp_view as v where v.type=1 and v.key_code = p.status) as status
     			FROM

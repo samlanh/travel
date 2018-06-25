@@ -27,7 +27,7 @@ class Booking_Model_DbTable_DbCustomer extends Zend_Db_Table_Abstract
 	   					(select name_en from tp_view where type=3 and key_code = isVerify) as isVerify,
 	   					createDate,
 	   					(select name_en from tp_view where type=1 and key_code = status) as status,
-	   					'លេខសម្ងាត់'
+	   					'Password'
 	   				from 
 	   					tp_customer
 	   				where

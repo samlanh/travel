@@ -1,6 +1,6 @@
 <?php 
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
-$this->headTitle($tr->translate('បន្ថែមអ្នកផ្គត់ផ្គង់'));
+$this->headTitle($tr->translate('Add Supplier'));
 echo $this->headTitle();
 ?>
 <style>
@@ -22,16 +22,13 @@ label#error {
 }
 
 </style>
- <!-- START PAGE CONTENT -->
- <div id="page-right-content">
- 	<div class="container">
-    	<div class="row">
     		<form id="frm" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
-	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("បន្ថែមអ្នកផ្គត់ផ្គង់")?></h4>
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Add Supplier")?></h4>
 	    			</div>
 	    			<div class="col-sm-4 text-right">
+	    				<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'supplyer','controller'=>"index",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />  
 	    			</div>
 	    		</div>
     		
@@ -39,28 +36,28 @@ label#error {
 					<div class="form-group">
 						<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">
-	                   		<?php echo $tr->translate('ឈ្មោះអ្នកផ្គត់ផ្គង់')?> :
+	                   		<?php echo $tr->translate('Supplier Name')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                    	<input class="form-control" type="text"  name="supplyerName" id="supplyerName" placeholder="<?php echo $tr->translate('ឈ្មោះអ្នកផ្គត់ផ្គង់')?>"/>
+	                    	<input class="form-control" type="text"  name="supplyerName" id="supplyerName" placeholder="<?php echo $tr->translate('Supplier Name')?>"/>
 	                   </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ប្រភេទសាខា')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Type')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                      <select class="form-control select2me" name="isMainBranch" id="isMainBranch" placeholder="<?php echo $tr->translate('ប្រភេទសាខា')?>" >
-								<option value="1">សាខាមេ</option>
-								<option value="0">សាខាកូន</option>
+	                      <select class="form-control select2me" name="isMainBranch" id="isMainBranch" placeholder="<?php echo $tr->translate('Type')?>" >
+								<option value="1"><?php echo $tr->translate('Main Branch')?></option>
+								<option value="0"><?php echo $tr->translate('Sub Branch')?></option>
 	                      </select>
 	                   </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ជ្រើសរើសសាខាមេ')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Main Branch')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
 	                  	 <select class="form-control select2me" name="parent" id="parent"  >
-							<option value="">ជ្រើសរើសសាខាមេ</option>
+							<option value="">Main Branch</option>
 							<?php if(!empty($this->mainSupplyer)){foreach ($this->mainSupplyer as $rs){?>
 								<option value="<?php echo $rs['id']?>"><?php echo $rs['name']?></option>
 							<?php }}?>
@@ -68,29 +65,29 @@ label#error {
 	                  </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខទូរសព្ទ')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Phone')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="tel" id="tel" placeholder="<?php echo $tr->translate('លេខទូរសព្ទ');?>" />
+	                     <input type="text" class="form-control"   name="tel" id="tel" placeholder="<?php echo $tr->translate('Phone');?>" />
 	                   </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អ៊ីមែល')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Email')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="email" class="form-control" name="email" id="email" placeholder="<?php echo $tr->translate('អ៊ីមែល');?>" />
+	                     <input type="email" class="form-control" name="email" id="email" placeholder="<?php echo $tr->translate('Email');?>" />
 	                   </div>
 	                </div>
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('គេហទំព័រ')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Website')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control"   name="website" id="website" placeholder="<?php echo $tr->translate('គេហទំព័រ');?>" />
+	                     <input type="text" class="form-control"   name="website" id="website" placeholder="<?php echo $tr->translate('Website');?>" />
 	                   </div>
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អំពីយើង')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('About Us')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
 	                     <textarea type="text" class="form-control"   name="aboutUs" id="aboutUs" ></textarea>
@@ -98,7 +95,7 @@ label#error {
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('គោលការណ៍បោះបង់')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Cancel Policy')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
 	                     <textarea type="text" class="form-control" name="cancelPolicy" id="cancelPolicy" ></textarea>
@@ -106,7 +103,7 @@ label#error {
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('អាសយដ្ឋានលើ Map')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Map')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
 	                     <textarea type="text" class="form-control" name="map" id="map" ></textarea>
@@ -123,7 +120,7 @@ label#error {
 	             	</div>
                 	<div class="form-group">
 	                     <div class="col-md-12 col-sm-12 col-xs-12 m-t-10 text-center browe_photo">
-	                     	<input type="file" id="profile-img" class="filestyle" data-input="false" name="logo" data-buttontext="<?php echo $tr->translate('រូបភាព(Logo)')?>">
+	                     	<input type="file" id="profile-img" class="filestyle" data-input="false" name="logo" data-buttontext="<?php echo $tr->translate('Photo')?>(Logo)">
 	                  	 </div>
                  	</div>
                     <div class="form-group">
@@ -166,7 +163,7 @@ label#error {
                     
                     <div class="form-group">
 	                     <div class="col-md-12 col-sm-12 col-xs-12 m-t-10 text-center browe_photo">
-	                     	<input type="file" multiple id="photo" class="filestyle" data-input="false" name="photo[]" data-buttontext="<?php echo $tr->translate('រូបភាព(សកម្មភាព)')?>">
+	                     	<input type="file" multiple id="photo" class="filestyle" data-input="false" name="photo[]" data-buttontext="<?php echo $tr->translate('Photo')?>(<?php echo $tr->translate('Activity')?>)">
 	                  	 </div>
                  	</div>
                     
@@ -180,17 +177,13 @@ label#error {
                 	<div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-center">
-	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'supplyer','controller'=>"index",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('ត្រលប់ក្រោយ');?>" />                    
-								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('រក្សាទុក');?>" id="submitButton" /> 
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('Save');?>" id="submitButton" /> 
 			                </div>
 	                    </div>
                     </div>
 				</div>
 				
 			</form>
-		</div>
-	</div>
-</div>
 <script type="text/javascript">
 
 	$('#frm').submit(function() {

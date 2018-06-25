@@ -29,7 +29,7 @@ public function init()
 			
 			$rs_rows= $db->getAllVehiclePrice($search);
 			$list = new Application_Form_Frmtable();
-			$collumns = array("Supplier Name","Vehicle Type","Is Available","Description","Create Date","Modify Date","USER","STATUS");
+			$collumns = array("Supplier Name","Vehicle Type","Is Available","Description","Create Date","Modify Date","User","Status");
 			$link=array(
 					'module'=>'vehicle','controller'=>'index','action'=>'edit',
 			);
@@ -54,9 +54,9 @@ public function init()
 			try{
 				$id= $db->insertPrice($data);
 				if(isset($data['save_close'])){
-					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS", '/vehicle/index/index');
+					Application_Form_FrmMessage::Sucessfull("Insert Success", '/vehicle/index/index');
 				}else{
-					Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS", '/vehicle/index/add');
+					Application_Form_FrmMessage::Sucessfull("Insert Success", '/vehicle/index/add');
 				}
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");
@@ -77,7 +77,7 @@ public function init()
 			$data = $this->getRequest()->getPost();
 			try{
 				$db->updatePrice($data,$id);
-				Application_Form_FrmMessage::Sucessfull("EDIT_SUCCESS", '/vehicle/');
+				Application_Form_FrmMessage::Sucessfull("Edit Success", '/vehicle/');
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");
 				Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());

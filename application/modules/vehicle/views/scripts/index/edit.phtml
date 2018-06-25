@@ -96,7 +96,7 @@ label#error {
 				<table width="100%" id="table_row" border="1px" style="margin-top:5px; border-collapse: collapse; border:1px solid #ccc;width:100%;">
 					<thead>
 						<tr id="head-title" align="right" style="font-size:15px; height: 40px; border:1px solid #4c6184 !important;white-space: nowrap;">
-							<th class="aligncenter">#</th>
+							<th class="aligncenter"><?php echo $tr->translate("NUM");?></th>
 							<th class="aligncenter"><?php echo $tr->translate("From Location");?></th>
 							<th class="aligncenter"><?php echo $tr->translate("To Location");?></th>
 							<th class="aligncenter"><?php echo $tr->translate("Duration");?></th>
@@ -140,7 +140,7 @@ label#error {
 		<div class="row">
 			<div class="col-md-12">
 				<div class="text-center">
-					<input type="submit" value="<?php echo $tr->translate('GO_EDIT');?>" class="btn btn-primary black save" />
+					<input type="submit" value="<?php echo $tr->translate('Edit');?>" class="btn btn-primary black save" />
 				</div>
 			</div>
 		</div>
@@ -206,9 +206,9 @@ label#error {
 		template+='</select></td>';
 		
 		template+='<td><input style="text-align:center;" type="text" id="duration_'+index+'" name="duration_'+index+'"  value="" class="form-control"></td>';
-		template+='<td><input style="text-align:center;" type="text" id="cost_'+index+'" name="cost_'+index+'"  value="" class="form-control"></td>';
-		template+='<td><input style="text-align:center;" type="text" id="price_'+index+'" name="price_'+index+'"  value="" class="form-control"></td>';
-		template+='<td><input style="text-align:center;" type="text" id="discount_'+index+'" name="discount_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><input style="text-align:center;" type="text" onkeypress="return isNumberKey(event);" id="cost_'+index+'" name="cost_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><input style="text-align:center;" type="text" onkeypress="return isNumberKey(event);" id="price_'+index+'" name="price_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><input style="text-align:center;" type="text" onkeypress="return isNumberKey(event);" id="discount_'+index+'" name="discount_'+index+'"  value="" class="form-control"></td>';
 		template+='<td><button style="background: #ff3b3b;color: #fff;" type="button" onClick="deleteRecord('+index+')" name="deleteSale" class="btn default red"><?php echo $tr->translate("Delete");?></button></td>';
 		
 		template+='</tr>';
@@ -251,9 +251,9 @@ label#error {
 		template+='</select></td>';
 		
 		template+='<td><input style="text-align:center;" type="text" id="duration_'+index+'" name="duration_'+index+'"  value="" class="form-control"></td>';
-		template+='<td><input style="text-align:center;" type="text" id="cost_'+index+'" name="cost_'+index+'"  value="" class="form-control"></td>';
-		template+='<td><input style="text-align:center;" type="text" id="price_'+index+'" name="price_'+index+'"  value="" class="form-control"></td>';
-		template+='<td><input style="text-align:center;" type="text" id="discount_'+index+'" name="discount_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><input style="text-align:center;" type="text" onkeypress="return isNumberKey(event);" id="cost_'+index+'" name="cost_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><input style="text-align:center;" type="text" onkeypress="return isNumberKey(event);" id="price_'+index+'" name="price_'+index+'"  value="" class="form-control"></td>';
+		template+='<td><input style="text-align:center;" type="text" onkeypress="return isNumberKey(event);" id="discount_'+index+'" name="discount_'+index+'"  value="" class="form-control"></td>';
 		template+='<td><button style="background: #ff3b3b;color: #fff;" type="button" onClick="deleteRecord('+index+')" name="deleteSale" class="btn default red"><?php echo $tr->translate("Delete");?></button></td>';
 		
 		template+='</tr>';

@@ -1,6 +1,6 @@
 <?php
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$this->headTitle($tr->translate("អ្នកផ្គត់ផ្គង់")); 
+	$this->headTitle($tr->translate("Supplier")); 
 	echo $this->headTitle();
 	
 ?>   
@@ -17,16 +17,13 @@ span.select2.select2-container.select2-container--default {
 }
 </style> 
  <!-- START PAGE CONTENT -->
- <div id="page-right-content">
- 	<div class="container">
-    	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("អ្នកផ្គត់ផ្គង់")?></h4>
+    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Supplier")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
     				<div class="buttun-block">
-						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/supplyer/index/add";?>"><?php echo $tr->translate("បន្ថែមថ្មី")?></a>
+						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/supplyer/index/add";?>"><?php echo $tr->translate("Add New")?></a>
 					</div>
     			</div>
     		</div>
@@ -35,7 +32,7 @@ span.select2.select2-container.select2-container--default {
 					<form name="frmlist_users" action=""  method="post" autocomplete="off">
 						<div class="form-group">
                             <div class="col-md-4">
-                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("ស្វែងរកទីនេះ...");?>" value='<?php echo $this->search['adv_search'];?>'>
+                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("Search Here");?>" value='<?php echo $this->search['adv_search'];?>'>
 								 </div>
                             <div class="col-md-1">
                             </div>
@@ -50,13 +47,13 @@ span.select2.select2-container.select2-container--default {
                                    	</div>
                                    	<div class="col-md-3 text-left search">
 					                 	  <select class="form-control select2" id="status"  name="status"  > 
-					                 	  		<option value="-1"><?php echo $tr->translate('ស្ថានភាព')?></option>
-					                   			<option value="1" <?php if ($this->search['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('ប្រើប្រាស់')?></option>
-					                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('មិនប្រើប្រាស់')?></option>
+					                 	  		<option value="-1"><?php echo $tr->translate('Status')?></option>
+					                   			<option value="1" <?php if ($this->search['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('Active')?></option>
+					                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('Deactive')?></option>
 											</select> 
 					                   </div>
                                    <div class="col-md-1 search">
-                                   	<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
+                                   	<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("Search");?></button>
                                    	 </div>
                                  </div>
                             </div>
@@ -68,7 +65,4 @@ span.select2.select2-container.select2-container--default {
 				   echo $this->list;
 				?>
 			</div>
-		</div>
-	</div>
-</div>
 <!-- END PAGE CONTENT -->

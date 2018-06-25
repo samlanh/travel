@@ -17,7 +17,7 @@
 	    color: #F44336;
 	}
 </style>
-<title>About Us</title>
+<title><?php echo $tr->translate("About Us")?></title>
 <script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
 <!-- START PAGE CONTENT -->
  <div id="page-right-content">
@@ -29,6 +29,7 @@
 	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("About Us")?></h4>
 	    			</div>
 	    			<div class="col-sm-4 text-right">
+	    				<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'setting','controller'=>"aboutus",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />
 	    			</div>
 	    		</div>
     		
@@ -120,8 +121,7 @@
 	                <div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	<div class="text-center">
-	                    		<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'setting','controller'=>"aboutus",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />
-								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('SAVE');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('Save');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
 			                </div>
 	                    </div>
                     </div>

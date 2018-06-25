@@ -1,6 +1,6 @@
 <?php 
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
-	$this->headTitle($tr->translate('កែប្រែដៃគូ'));
+	$this->headTitle($tr->translate('Edit Partner'));
 	echo $this->headTitle();
 
 	$photo = $this->baseUrl()."/images/profile.jpg";
@@ -37,15 +37,13 @@ label#error {
 }
 </style>
  <!-- START PAGE CONTENT -->
- <div id="page-right-content">
- 	<div class="container">
-    	<div class="row">
     		<form id="frm" class="form-horizontal form-label-left" action="" dojoType="dijit.form.Form" method="post" enctype="multipart/form-data" autocomplete="off">
 	    		<div class="col-sm-12 border-botom">
 	    			<div class="col-sm-8">
-	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("កែប្រែដៃគូ");?></h4>
+	    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Edit Partner");?></h4>
 	    			</div>
 	    			<div class="col-sm-4 text-right">
+	    				<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'other','controller'=>"partner",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('GO_BACK');?>" />
 	    			</div>
 	    		</div>
     		
@@ -53,36 +51,44 @@ label#error {
 					<div class="form-group">
 						<label id="error" class="col-md-12 col-sm-12 col-xs-12 text-center" ></label>
 	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name">
-	                   		<?php echo $tr->translate('ឈ្មោះដៃគូ')?> :
+	                   		<?php echo $tr->translate('Partner Name')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                    	<input class="form-control" type="text"  name="partnerName" id="partnerName" value="<?php echo $partner['partnerName']?>" placeholder="<?php echo $tr->translate('ឈ្មោះដៃគូ')?>"/>
+	                    	<input class="form-control" type="text"  name="partnerName" id="partnerName" value="<?php echo $partner['partnerName']?>" placeholder="<?php echo $tr->translate('Partner Name')?>"/>
 	                   </div>
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('លេខរៀង')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Ordering')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control" name="ordering" id="ordering" value="<?php echo $partner['ordering']?>" placeholder="<?php echo $tr->translate('លេខរៀង');?>" />
+	                     <input type="text" class="form-control" name="ordering" id="ordering" value="<?php echo $partner['ordering']?>" placeholder="<?php echo $tr->translate('Ordering');?>" />
+	                   </div>
+	                </div>
+
+	                <div class="form-group">
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Website')?> :
+	                   </label>
+	                  <div class="col-md-7 col-sm-7 col-xs-7">
+	                     <input type="text" class="form-control" name="website" id="website" value="<?php echo $partner['website']?>" placeholder="<?php echo $tr->translate('Website');?>" />
 	                   </div>
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('សម្គាល់')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Note')?> :
 	                   </label>
 	                  <div class="col-md-7 col-sm-7 col-xs-7">
-	                     <input type="text" class="form-control" name="note" id="note" value="<?php echo $partner['note']?>" placeholder="<?php echo $tr->translate('សម្គាល់');?>" />
+	                     <input type="text" class="form-control" name="note" id="note" value="<?php echo $partner['note']?>" placeholder="<?php echo $tr->translate('Note');?>" />
 	                   </div>
 	                </div>
 	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('ស្ថានភាព')?> :
+	                   <label class="control-label col-md-5 col-sm-5 col-xs-5" for="first-name"><?php echo $tr->translate('Status')?> :
 	                   </label>
 	                   <div class="col-md-7 col-sm-7 col-xs-7">
-						  <select class="form-control select2me" name="status" id="status" placeholder="<?php echo $tr->translate('ស្ថានភាព')?>" >
-								<option value="1" <?php if($partner['status']==1){echo "selected='selected'";}?>>ប្រើប្រាស់</option>
-								<option value="0" <?php if($partner['status']==0){echo "selected='selected'";}?>>មិនប្រើប្រាស់</option>
+						  <select class="form-control select2me" name="status" id="status" placeholder="<?php echo $tr->translate('Status')?>" >
+								<option value="1" <?php if($partner['status']==1){echo "selected='selected'";}?>><?php echo $tr->translate('Active')?></option>
+								<option value="0" <?php if($partner['status']==0){echo "selected='selected'";}?>><?php echo $tr->translate('Deactive')?></option>
 	                      </select>
 					   </div>
 	                </div>
@@ -98,7 +104,7 @@ label#error {
 	                 </div>
 	                 <div class="form-group">
 	                       <div class="col-md-12 col-sm-12 col-xs-12 m-t-10 text-center browe_photo">
-	                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('រូបភាព')?>">
+	                        <input type="file" id="profile-img" class="filestyle" data-input="false" name="photo" data-buttontext="<?php echo $tr->translate('Photo')?>">
 	                  	  </div>
 					 </div>
 					 
@@ -122,21 +128,30 @@ label#error {
                 	<div class="form-group">
 	                    <div class="col-md-12 col-sm-12 col-xs-12">
 	                    	 <div class="text-center">
-	                    	 	<input id="backbutton" class="btn btn-primary block" type="button" onclick="window.location = '<?php echo $this->url(array('module'=>'other','controller'=>"partner",'action'=>'index'),null,true); ?>';" value="<?php echo $tr->translate('ត្រលប់ក្រោយ');?>" />
-								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('កែប្រែទិន្នន័យ');?>" label="<?php echo $tr->translate('SAVE');?>" id="submitButton" /> 
+								<input id="btnsubmit" class="btn btn-primary black save" type="submit" value="<?php echo $tr->translate('Edit');?>" id="submitButton" /> 
 			                </div>
 	                    </div>
                     </div>
 				</div>
 				
 			</form>
-		</div>
-	</div>
-</div>
-<?php // benchmark
-    //QRtools::timeBenchmark();    
-?>
 <script type="text/javascript">
+	
+	$('#frm').submit(function() {
+		partnerName=$("#partnerName").val();
+		if(partnerName==''){
+			$('#partnerName').focus();
+			return false;	
+		}
+		ordering=$("#ordering").val();
+		if(ordering==""){
+			$('#ordering').focus();
+			return false;	
+		}
+		$("#btnsubmit").attr("disabled", true);
+		return true;
+	});
+
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -150,16 +165,5 @@ label#error {
     $("#profile-img").change(function(){
         readURL(this);
     });
-
-    function isNumber(evt) {
-        evt = (evt) ? evt : window.event;
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-            var msg='You can input only number.';
-    		alert(msg);
-    		return false;
-        }
-        return true;
-    }
 
 </script>

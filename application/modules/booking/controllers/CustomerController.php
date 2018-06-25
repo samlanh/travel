@@ -26,14 +26,14 @@ public function init()
 		$rs_rows = $db->getAllEmployee($search);
 		
 		$list = new Application_Form_Frmtable();
-		$collumns = array("ឈ្មោះអតិថិជន","ភេទ","លេខទូរសព្ទ","អ៊ីមែល","របៀបចុះឈ្មោះ","Is Verify","ថ្ងៃបង្កើត","ស្ថានភាព","ប្តូរ");
+		$collumns = array("Customer","Sex","Phone","Email","Register By","Is Verify","Create Date","Status","Change");
 		$link = array(
 				'module'=>'booking','controller'=>'customer','action'=>'edit',
 		);
 		$link1=array(
 				'module'=>'booking','controller'=>'customer','action'=>'changepassword',
 		);
-		$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('customerName'=>$link,'gender'=>$link,'tel'=>$link,'email'=>$link,'website'=>$link,'លេខសម្ងាត់'=>$link1));
+		$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('customerName'=>$link,'gender'=>$link,'tel'=>$link,'email'=>$link,'website'=>$link,'Password'=>$link1));
 		
 		$this->view->search = $search;
 		
@@ -46,7 +46,7 @@ public function init()
 			$data = $this->getRequest()->getPost();
 			try{
 				$id= $db->addSupplyer($data);
-				Application_Form_FrmMessage::Sucessfull("INSERT_SUCCESS",self::REDIRECT_URL);
+				Application_Form_FrmMessage::Sucessfull("Insert Success",self::REDIRECT_URL);
 // 				$this->_redirect(self::REDIRECT_URL);
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");
@@ -62,7 +62,7 @@ public function init()
 			$data = $this->getRequest()->getPost();
 			try{
 				$db->editSupplyer($data,$id);
-				Application_Form_FrmMessage::Sucessfull("UPDATE_SUCCESS",self::REDIRECT_URL);
+				Application_Form_FrmMessage::Sucessfull("Edit Success",self::REDIRECT_URL);
 // 				$this->_redirect(self::REDIRECT_URL);
 			}catch (Exception $e){
 				Application_Form_FrmMessage::message("Application Error");

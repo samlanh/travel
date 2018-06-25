@@ -15,17 +15,13 @@ span.select2.select2-container.select2-container--default {
     width: 100% !important;
 }
 </style> 
- <!-- START PAGE CONTENT -->
- <div id="page-right-content">
- 	<div class="container">
-    	<div class="row">
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
-    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("អតិថិជន")?></h4>
+    				<h4 class="m-t-0"><i class="ti-id-badge"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Customer")?></h4>
     			</div>
     			<div class="col-sm-4 text-right">
     				<div class="buttun-block">
-						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/booking/customer/add";?>"><?php echo $tr->translate("បន្ថែមថ្មី")?></a>
+						<a class="btn btn-primary black save" href="<?php echo $this->baseUrl()."/booking/customer/add";?>"><?php echo $tr->translate("Add New")?></a>
 					</div>
     			</div>
     		</div>
@@ -34,15 +30,15 @@ span.select2.select2-container.select2-container--default {
 					<form name="frmlist_users" action=""  method="post" autocomplete="off">
 						<div class="form-group">
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("ស្វែងរកទីនេះ...");?>" value='<?php echo $this->search['adv_search'];?>'>
+                                <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("Search here");?>" value='<?php echo $this->search['adv_search'];?>'>
 							</div>
                              <div class="col-md-9 text-right">
                             	 <div class="form-group">
 					                   <div class="col-md-2 text-left search">
 					                 	  <select class="form-control select2" id="isVerify"  name="isVerify"  > 
 					                 	  	<option value=""><?php echo $tr->translate('Is Verify')?></option>
-					                   			<option value="1" <?php if ($this->search['isVerify']=="1"){ echo 'selected="selected"';}?>><?php echo $tr->translate('Verified')?></option>
-					                   			<option value="0" <?php if ($this->search['isVerify']=="0"){ echo 'selected="selected"';}?>><?php echo $tr->translate('Not Verified')?></option>
+			                   			<option value="1" <?php if ($this->search['isVerify']=="1"){ echo 'selected="selected"';}?>><?php echo $tr->translate('Verified')?></option>
+			                   			<option value="0" <?php if ($this->search['isVerify']=="0"){ echo 'selected="selected"';}?>><?php echo $tr->translate('Not Verified')?></option>
 											</select> 
 					                   </div>
                                    	<div class="col-md-6 search">
@@ -54,13 +50,13 @@ span.select2.select2-container.select2-container--default {
                                    	</div>
                                    	<div class="col-md-3 text-left search">
 					                 	  <select class="form-control select2" id="status"  name="status"  > 
-					                 	  		<option value="-1"><?php echo $tr->translate('STATUS')?></option>
-					                   			<option value="1" <?php if ($this->search['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('ACTIVE')?></option>
-					                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE')?></option>
+					                 	  		<option value="-1"><?php echo $tr->translate('Status')?></option>
+			                   			<option value="1" <?php if ($this->search['status']==1){ echo 'selected="selected"';}?>><?php echo $tr->translate('Active')?></option>
+			                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('Deactive')?></option>
 											</select> 
 					                   </div>
                                    <div class="col-md-1 search">
-                                   	<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
+                                   	<button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("Search");?></button>
                                    	 </div>
                                  </div>
                             </div>
@@ -72,63 +68,3 @@ span.select2.select2-container.select2-container--default {
 				   echo $this->list;
 				?>
 			</div>
-		</div>
-	</div>
-</div>
-<!-- END PAGE CONTENT -->
-<!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center"><?php echo $tr->translate("Would you want to delete this record");?></h4>
-        </div>
-        <div class="modal-body text-center">
-          	<button type="button" class="btn btn-primary block" onclick="deleteRecord('<?php echo $url_delete;?>')" ><?php echo $tr->translate("Delete Now");?></button>
-          	<button type="button" class="btn btn-primary unblock"  data-dismiss="modal"><?php echo $tr->translate("Close");?></button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-<script>
-var timeout ='<?php echo $timeload;?>';
-function PrintDiv() {
-	loading();
-    var contents = document.getElementById("divPrint").innerHTML;
-    var frame1 = document.createElement('iframe');
-    frame1.name = "frame1";
-    frame1.style.position = "absolute";
-    frame1.style.top = "-1000000px";
-    document.body.appendChild(frame1);
-    var frameDoc = (frame1.contentWindow) ? frame1.contentWindow : (frame1.contentDocument.document) ? frame1.contentDocument.document : frame1.contentDocument; frameDoc.document.open();
-    frameDoc.document.write('<html><head><title>Employee ID</title>');
-    frameDoc.document.write('</head><body>');
-    frameDoc.document.write(contents);
-    frameDoc.document.write('</body></html>');
-    frameDoc.document.close();
-    setTimeout(function () {
-        window.frames["frame1"].focus();
-        window.frames["frame1"].print();
-        document.body.removeChild(frame1);
-        closeloading();
-    }, timeout);
-   return false;
-}
-var recordid ='';
-function deleteRecord(url){
-	loading();
-	 id = recordid;
-	 window.location.href = url+'/id/'+id;
-}
-function showDeleteForm(id){
-	if(id==''){
-		recordid='';
-	}else{
-		recordid = id;
-	}
-}
-</script>

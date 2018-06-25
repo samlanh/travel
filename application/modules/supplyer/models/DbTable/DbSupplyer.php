@@ -227,7 +227,7 @@ class Supplyer_Model_DbTable_DbSupplyer extends Zend_Db_Table_Abstract
     				
     				'userEdit'    	=> $this->getUserId(),
     				'modifyDate'	=> date("Y-m-d H:i:s"),
-    				'status'      	=> 1,
+    				'status'      	=> $_data['status'],
     		);
     		$where = " id = $id ";
     		$this->_name="tp_supplier";
