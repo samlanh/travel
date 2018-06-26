@@ -26,7 +26,7 @@ class Other_Model_DbTable_DbTestimonial extends Zend_Db_Table_Abstract
 		   	$db->beginTransaction();
 		   	try{
 		   		
-		   		$sql="SELECT id,`person_naem`,email,DATE_FORMAT(`createDate`, '%d-%M-%Y'),DATE_FORMAT(`modifyDate`,'%d-%M-%Y'),`description`,
+		   		$sql="SELECT id,`person_naem`,email,DATE_FORMAT(`createDate`, '%d-%M-%Y'),DATE_FORMAT(`modifyDate`,'%d-%M-%Y'),`description`,orderBy,
                         (SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=tp_testimonial.`status` AND v.type=1 LIMIT 1) AS `status`
                         FROM `tp_testimonial`
                         WHERE `description`!=''";
