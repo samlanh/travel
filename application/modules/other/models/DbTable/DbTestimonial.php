@@ -26,7 +26,7 @@ class Other_Model_DbTable_DbTestimonial extends Zend_Db_Table_Abstract
 		   	$db->beginTransaction();
 		   	try{
 		   		
-		   		$sql="SELECT id,`person_naem`,DATE_FORMAT(`createDate`, '%d-%M-%Y'),DATE_FORMAT(`modifyDate`,'%d-%M-%Y'),`description`,
+		   		$sql="SELECT id,`person_naem`,email,DATE_FORMAT(`createDate`, '%d-%M-%Y'),DATE_FORMAT(`modifyDate`,'%d-%M-%Y'),`description`,
                         (SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=tp_testimonial.`status` AND v.type=1 LIMIT 1) AS `status`
                         FROM `tp_testimonial`
                         WHERE `description`!=''";
@@ -39,6 +39,7 @@ class Other_Model_DbTable_DbTestimonial extends Zend_Db_Table_Abstract
 		   			$s_search = addslashes(trim($search['adv_search']));
 		   			$s_search = str_replace(' ', '', $s_search);
 		   			$s_where[]="REPLACE(description,' ','')   LIKE '%{$s_search}%'";
+		   			$s_where[]="REPLACE(email,' ','')   LIKE '%{$s_search}%'";
 		   			$s_where[]="REPLACE(person_naem,' ','')   LIKE '%{$s_search}%'";
 		   			$where .=' AND ('.implode(' OR ',$s_where).')';
 		   		}
@@ -84,10 +85,10 @@ class Other_Model_DbTable_DbTestimonial extends Zend_Db_Table_Abstract
     	    
     		$_arr=array(
     		    'person_naem'    => $_data['name_person'],
-    		    'positon'        => $_data['position'],
+    		    'email'          => $_data['email'],
     		    'description'    => $_data['description'],
-    			'createDate'	 => date("Y-m-d H:i:s"),
-    			'modifyDate'	 => date("Y-m-d H:i:s"),
+    		    'createDate'	 => date("Y-m-d H:i:s",strtotime($_data["post_date"])),
+    		    'modifyDate'	 => date("Y-m-d H:i:s",strtotime($_data["post_date"])),
     			'orderBy'		 => $_data['order_by'],	
     		    'image'          => $photo,
     			'status'         => 1,
@@ -131,9 +132,9 @@ class Other_Model_DbTable_DbTestimonial extends Zend_Db_Table_Abstract
             
             $_arr=array(
                 'person_naem'    => $_data['name_person'],
-                'positon'        => $_data['position'],
+                'email'          => $_data['email'],
                 'description'    => $_data['description'],
-                'modifyDate'	 => date("Y-m-d H:i:s"),
+                'modifyDate'	 => date("Y-m-d H:i:s",strtotime($_data["post_date"])),
                 'orderBy'		 => $_data['order_by'],
                 'image'          => $photo,
                 'status'         => $_data['status'],

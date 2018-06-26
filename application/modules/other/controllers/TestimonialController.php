@@ -26,7 +26,7 @@ public function init()
 			$db=new Other_Model_DbTable_DbTestimonial();
 			$result = $db->getAllTestimonial($search);
     		$list = new Application_Form_Frmtable();
-    		$collumns = array("Person Name","Create Date","Modify Date","Description","STATUS");
+    		$collumns = array("Person Name","Email","Create Date","Modify Date","Description","STATUS");
     		$link=array(
     				'module'=>'other','controller'=>'testimonial','action'=>'edit',
     		);

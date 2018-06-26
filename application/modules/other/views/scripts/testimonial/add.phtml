@@ -28,8 +28,19 @@ echo $this->headTitle();
 	                    	<input class="form-control"  type="text" required="true" name="name_person" id="name_person" placeholder="<?php echo $tr->translate('Name Of Person')?> "/>
 	                   </div>
 	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Post Date')?> :
+	                   </label>
+	                   <div class="col-md-8 col-sm-8 col-xs-8">
+	                   		 <div class="input-group">
+                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="post_date" value="<?php echo  date("d-m-Y")?>">
+                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
+                            </div> 
+	                   </div>
+	                </div>
 	                
 	                <div class="form-group">
+	                   <!-- 
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Position')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
@@ -42,6 +53,12 @@ echo $this->headTitle();
 		                   			<option value="5"><?php echo $tr->translate('IT Programmer')?>  </option>
 		                   			<option value="6"><?php echo $tr->translate('Other')?>  </option>
 								</select> 
+	                   </div>
+	                    -->
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Email')?> :
+	                   </label>
+	                  <div class="col-md-8 col-sm-8 col-xs-8">
+	                     <input type="email" class="form-control"   name="email" id="email" placeholder="<?php echo $tr->translate('Email');?>" />
 	                   </div>
 	                </div>
 	                

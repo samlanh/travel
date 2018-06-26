@@ -30,20 +30,21 @@ $row=$this->row;
 	                    	<input class="form-control"  type="text" required="true" name="name_person" id="name_person" placeholder="<?php echo $tr->translate('Name Of Person')?> " value="<?php echo $row['person_naem']?>"/>
 	                   </div>
 	                </div>
-	                
 	                <div class="form-group">
-	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Position')?> :
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Modify Date')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	 <select class="form-control select2" id="position"  name="position" required > 
-		                 	  		<option value="-1"><?php echo $tr->translate('Select Position')?></option>
-		                   			<option value="1"  <?php if($row['status']==1) echo "selected='selected'"?>><?php echo $tr->translate('Designer Leader')?>  </option>
-		                   			<option value="2">  <?php if($row['status']==2) echo "selected='selected'"?><?php echo $tr->translate('Arti Derector')?>  </option>
-		                   			<option value="3"  <?php if($row['status']==3) echo "selected='selected'"?>><?php echo $tr->translate('Seo & Marketing')?>  </option>
-		                   			<option value="4"  <?php if($row['status']==4) echo "selected='selected'"?>><?php echo $tr->translate('Web Development')?>  </option>
-		                   			<option value="5"  <?php if($row['status']==5) echo "selected='selected'"?>><?php echo $tr->translate('IT Programmer')?>  </option>
-		                   			<option value="6"  <?php if($row['status']==6) echo "selected='selected'"?>><?php echo $tr->translate('Other')?>  </option>
-								</select> 
+	                   		 <div class="input-group">
+                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="post_date"  value="<?php echo date("d-m-Y",strtotime($row['modifyDate']))?>">
+                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
+                            </div> 
+	                   </div>
+	                </div>
+	                <div class="form-group">
+	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Email')?> :
+	                   </label>
+	                   <div class="col-md-8 col-sm-8 col-xs-8">
+	                     <input type="email" class="form-control"   name="email" id="email" placeholder="<?php echo $tr->translate('Email');?>" value="<?php echo $row['email']?>"/>
 	                   </div>
 	                </div>
 	                
