@@ -25,14 +25,15 @@ class Other_Model_DbTable_DbTestimonial extends Zend_Db_Table_Abstract
 		   	$db = $this->getAdapter();
 		   	$db->beginTransaction();
 		   	try{
-// 		   		$from_date =(empty($search['start']))? '1': " e.`createDate` >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
-// 		   		$to_date = (empty($search['end']))? '1': " e.`createDate` <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
+		   		
 		   		$sql="SELECT id,`person_naem`,DATE_FORMAT(`createDate`, '%d-%M-%Y'),DATE_FORMAT(`modifyDate`,'%d-%M-%Y'),`description`,
                         (SELECT v.name_en FROM `tp_view` AS v WHERE v.key_code=tp_testimonial.`status` AND v.type=1 LIMIT 1) AS `status`
                         FROM `tp_testimonial`
                         WHERE `description`!=''";
 		   		$where="";
-// 		   		$where.= " AND  ".$from_date." AND ".$to_date;
+		   		$from_date =(empty($search['start']))? '1': " createDate >= '".date("Y-m-d",strtotime($search['start']))." 00:00:00'";
+		   		$to_date = (empty($search['end']))? '1': " createDate <= '".date("Y-m-d",strtotime($search['end']))." 23:59:59'";
+		   		$where.= " AND  ".$from_date." AND ".$to_date;
 		   		if(!empty($search['adv_search'])){
 		   			$s_where = array();
 		   			$s_search = addslashes(trim($search['adv_search']));

@@ -69,8 +69,8 @@ class Other_Model_DbTable_DbCondition extends Zend_Db_Table_Abstract
     				'type'      	 => 1,
     				'createDate'	 => date("Y-m-d H:i:s"),
     				'modifyDate'	 => date("Y-m-d H:i:s"),
-    				'orderBy'		 => $_data['order_by'],
-    				'status'         => $_data['status'],
+    				//'orderBy'		 => $_data['order_by'],
+    				'status'         => 1,
     				'user_id'         => $this->getUserId(),
     		);
     		$this->_name="tp_condition";

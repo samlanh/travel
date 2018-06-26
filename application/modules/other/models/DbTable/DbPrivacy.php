@@ -70,8 +70,8 @@ class Other_Model_DbTable_DbPrivacy extends Zend_Db_Table_Abstract
     	    $_arr=array(
     	        'description'    => $_data['disciption'],
     	        'modifyDate'	 => date("Y-m-d H:i:s"),
-    	        'orderBy'		 => $_data['order_by'],
-    	        'status'         => $_data['status'],
+    	        //'orderBy'		 => $_data['order_by'],
+    	        'status'         => 1,
     	        'type'           => 1,
     	        'user_id'        => $this->getUserId(),
     	    );

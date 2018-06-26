@@ -22,9 +22,7 @@
 	}
 </style>
  <!-- START PAGE CONTENT -->
- <div id="page-right-content">
- 	<div class="container">
-    	<div class="row">
+ 
     		<div class="col-sm-12 border-botom">
     			<div class="col-sm-8">
     				<h4 class="m-t-0"><i class="ti-user"></i>&nbsp;&nbsp;&nbsp;<?php echo $tr->translate("Testimonial List")?></h4>
@@ -42,7 +40,7 @@
                             <div class="col-md-3">
                                 <input type="text" class="form-control" name="adv_search" id="adv_search"  placeholder="<?php echo $tr->translate("SEARCH_INFO");?>" value='<?php echo $this->search['adv_search'];?>'>
 							</div>
-							<div class="col-md-6 search">
+							<div class="col-md-5 search">
                                      	<div class="input-daterange input-group" id="date-range">
                                           	<input type="text" class="form-control" name="start" value="<?php if (!empty($this->search['start'])){ echo date("d-m-Y",strtotime($this->search['start']));}?>" />
                                             <span class="input-group-addon b-0"><?php echo $tr->translate("to");?></span>
@@ -56,7 +54,7 @@
 		                   			<option value="0" <?php if ($this->search['status']==0){ echo 'selected="selected"';}?>><?php echo $tr->translate('DEACTIVE')?></option>
 								</select> 
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-1">
                                 <button class="btn btn-primary " showLabel="true" type="submit"><?php echo $tr->translate("SEARCH");?></button>
 							</div>
                        </div>
@@ -65,6 +63,4 @@
 					<?php echo $this->list;?>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
+	 
