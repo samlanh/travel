@@ -3,6 +3,12 @@ $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 $this->headTitle($tr->translate('Update Condition'));
 echo $this->headTitle();
 ?>
+
+<style>
+        #cke_1_contents{
+        	height: 500px !important;
+        }
+</style>
 <script src="<?php echo $this->baseUrl();?>/ckeditor/ckeditor.js"></script>
  <!-- START PAGE CONTENT -->
  
