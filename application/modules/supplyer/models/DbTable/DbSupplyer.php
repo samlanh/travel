@@ -55,6 +55,7 @@ class Supplyer_Model_DbTable_DbSupplyer extends Zend_Db_Table_Abstract
    		}
    	}
     function addSupplyer($_data){
+		//print_r($_data);exit();
     	$db = $this->getAdapter();
     	$db->beginTransaction();
     	try{

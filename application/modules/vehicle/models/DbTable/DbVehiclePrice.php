@@ -38,15 +38,16 @@ class Vehicle_Model_DbTable_DbVehiclePrice extends Zend_Db_Table_Abstract
     	if(!empty($search['adv_search'])){
 	    	$s_where=array();
 	    	$s_search=addslashes(trim($search['adv_search']));
-	    	$s_where[]= " stu_code LIKE '%{$s_search}%'";
-	    	$s_where[]=" receipt_number LIKE '%{$s_search}%'";
-	    	$s_where[]= " stu_khname LIKE '%{$s_search}%'";
-	    	$s_where[]= " stu_enname LIKE '%{$s_search}%'";
-	    	$s_where[]= " sp.grade LIKE '%{$s_search}%'";
+	    	$s_where[]= " supplyerName LIKE '%{$s_search}%'";
+	    	$s_where[]=" title LIKE '%{$s_search}%'";
+	    	$s_where[]= " (select name_en from tp_view as v where v.type=4 and v.key_code = p.isAvailable) LIKE '%{$s_search}%'";
 	    	$where.=' AND ('.implode(' OR ', $s_where).')';
     	}
-    	if(!empty($search['user'])){
-    		$where.=" AND sp.user_id=".$search['user'];
+    	if(!empty($search['vehicleType'])){
+    		$where.=" AND v.id=".$search['vehicleType'];
+    	}
+    	if(!empty($search['supplyerId'])){
+    		$where.=" AND s.id=".$search['supplyerId'];
     	}
     	$order=" ORDER BY p.id DESC";
     	

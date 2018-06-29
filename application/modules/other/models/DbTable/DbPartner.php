@@ -10,7 +10,7 @@ class Other_Model_DbTable_DbPartner extends Zend_Db_Table_Abstract
     	return $session_user->user_id;
     }
     
-	 function getAllEmployee($search=NULL){
+	 function getAllPartner($search=NULL){
 	   	$db = $this->getAdapter();
 	   	$db->beginTransaction();
 	   	try{
@@ -18,12 +18,13 @@ class Other_Model_DbTable_DbPartner extends Zend_Db_Table_Abstract
 	   					id,
 	   					partnerName,
 	   					ordering,
+	   					website,
 	   					note,
 	   					createDate,
 	   					(select first_name from rms_users where rms_users.id = userID) as user,
-	   					(select name_kh from tp_view where type=1 and key_code = status) as status
+	   					(select name_kh from tp_view where type=1 and key_code = p.status) as status
 	   				from 
-	   					tp_partner
+	   					tp_partner as p
 	   				where
 	   					partnerName !=''	
 	   			";
@@ -39,6 +40,7 @@ class Other_Model_DbTable_DbPartner extends Zend_Db_Table_Abstract
 	   			$s_search = addslashes(trim($search['adv_search']));
 	   			$s_where[] = " partnerName LIKE '%{$s_search}%'";
 	   			$s_where[] = " ordering LIKE '%{$s_search}%'";
+	   			$s_where[] = " website LIKE '%{$s_search}%'";
 	   			$s_where[] = " note LIKE '%{$s_search}%'";
 	   			$where .=' AND ('.implode(' OR ',$s_where).')';
 	   		}
@@ -83,6 +85,7 @@ class Other_Model_DbTable_DbPartner extends Zend_Db_Table_Abstract
     				'partnerName'	=> $_data['partnerName'],
     				'ordering'		=> $_data['ordering'],
     				'note'	    	=> $_data['note'],
+    				'website'	    => $_data['website'],
     				'photo'	  		=> $photo,
     				
     				'userID'    	=> $this->getUserId(),
@@ -145,6 +148,7 @@ class Other_Model_DbTable_DbPartner extends Zend_Db_Table_Abstract
     				'partnerName'	=> $_data['partnerName'],
     				'ordering'		=> $_data['ordering'],
     				'note'	    	=> $_data['note'],
+    				'website'	    => $_data['website'],
     				'photo'	  		=> $photo,
     				
     				'userID'    	=> $this->getUserId(),

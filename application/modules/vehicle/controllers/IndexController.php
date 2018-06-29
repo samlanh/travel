@@ -13,7 +13,7 @@ public function init()
 		try{
 			if($this->getRequest()->isPost()){
 				$search=$this->getRequest()->getPost();
-				$search['start']=date("Y-m-d",strtotime($search['start']));
+				if(!empty($search['start'])){$search['start']=date("Y-m-d",strtotime($search['start']));}
 				$search['end']=date("Y-m-d",strtotime($search['end']));
 			}
 			else{

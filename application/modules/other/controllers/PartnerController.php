@@ -22,14 +22,14 @@ public function init()
 		}
 		
 		$db = new Other_Model_DbTable_DbPartner();
-		$rs_rows = $db->getAllEmployee($search);
+		$rs_rows = $db->getAllPartner($search);
 		
 		$list = new Application_Form_Frmtable();
-		$collumns = array("ឈ្មោះដៃគូ","លេខរៀង","សម្គាល់","ថ្ងៃបង្កើត","អ្នកបង្កើត","ស្ថានភាព");
+		$collumns = array("Partner Name","Ordering","Website","Note","Create Date","User","Status");
 		$link = array(
 				'module'=>'other','controller'=>'partner','action'=>'edit',
 		);
-		$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('partnerName'=>$link,'ordering'=>$link,'note'=>$link));
+		$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('partnerName'=>$link,'ordering'=>$link,'website'=>$link,'note'=>$link));
 		
 		$this->view->search = $search;
 		
