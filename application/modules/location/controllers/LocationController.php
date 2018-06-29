@@ -100,5 +100,33 @@ public function init()
 		$db = $db_user->updateStatus($us_id,$blocked);
 		$this->_redirect(self::REDIRECT_URL);
 	}
+	
+// 	public function checkedLocationAction(){
+// 	    if($this->getRequest()->isPost()){
+// 	        try {
+// 	            $post=$this->getRequest()->getPost();
+// 	            $db = new Location_Model_DbTable_DbLocation();
+// 	            $id =$db->getCheckLocationName($post['location_name']);
+// 	           // $result = array('id'=>$id);
+// 	            echo Zend_Json::encode($id);
+// 	            exit();
+// 	        }catch (Exception $e){
+// 	            $result = array('err'=>$e->getMessage());
+// 	            echo Zend_Json::encode($result);
+// 	            exit();
+// 	        }
+// 	    }
+// 	}
+	
+	function checkedLocationAction(){
+	    if($this->getRequest()->isPost()){
+	        $data = $this->getRequest()->getPost();
+	        $db = new Location_Model_DbTable_DbLocation();
+	        $row =$db->getCheckLocationName($data['location_name']);
+	        print_r(Zend_Json::encode($row));
+	        exit();
+	    }
+	}
+	
 }
 

@@ -21,7 +21,7 @@ $row=$this->row;
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Location Name')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text" required="true" name="location_name" id="location_name" placeholder="<?php echo $tr->translate('location name')?>" value="<?php echo $row['locationName']?>"/>
+	                    	<input class="form-control"  type="text" required="true" name="location_name" id="location_name" placeholder="<?php echo $tr->translate('location name')?>" value="<?php echo $row['locationName']?>" onchange="checkLocationName()"/>
 	                   </div>
 	                </div>
 	                
@@ -89,4 +89,30 @@ $row=$this->row;
 		   return false;
 		}
 	});
+
+	<?php $url_loca =  $this->url(array('module'=>'location','controller'=>'location','action'=>'checked-location')); ?>
+	function checkLocationName(){
+		var str ="";  
+		var title  = $("#location_name").val();
+			str = title.replace(/\s/g,''); 
+		$.ajax({
+			url: "<?php echo $url_loca;?>",
+			type: "post",
+			data: $('#frm').serialize(),
+			success: function(data){
+				rs = $.parseJSON(data);
+				if(rs['id']){
+					alert('Location Name Have Already !');
+					$("#location_name").val('');
+					return false;
+				}else{
+				}
+			},
+			error:function(err){
+				alert("faile insert");
+			}
+		});
+	}
+	
+	
 </script>

@@ -2,7 +2,26 @@
 $tr = Application_Form_FrmLanguages::getCurrentlanguage();
 $this->headTitle($tr->translate('Add Location'));
 echo $this->headTitle();
+
 ?>
+<style>
+.alert {
+    padding:5px;
+    background-color: #ff9800;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+</style>
  <!-- START PAGE CONTENT -->
   
     		<div class="col-sm-12 border-botom">
@@ -16,11 +35,15 @@ echo $this->headTitle();
     		
 			<div class="col-sm-8">
 				<form id="frm" class="form-horizontal form-label-left" action=""  method="post" enctype="multipart/form-data">
+					<div id="showdivms" class="alert" align="center" style="display: none">
+                      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                      <strong>Location Name Have Already !</strong> 
+                    </div>
 					<div class="form-group">
 	                   <label class="control-label col-md-4 col-sm-4 col-xs-4" for="first-name"><?php echo $tr->translate('Location Name')?> :
 	                   </label>
 	                   <div class="col-md-8 col-sm-8 col-xs-8">
-	                    	<input class="form-control"  type="text" required="true" name="location_name" id="location_name" placeholder="<?php echo $tr->translate('location name')?>"/>
+	                    	<input class="form-control"  type="text" required="true" name="location_name" id="location_name" placeholder="<?php echo $tr->translate('location name')?>" onmouseover="checkLocationName()" onchange="checkLocationName()"/>
 	                   </div>
 	                </div>
 	                
@@ -89,4 +112,31 @@ echo $this->headTitle();
 		   return false;
 		}
 	});
+
+
+	<?php $url_loca =  $this->url(array('module'=>'location','controller'=>'location','action'=>'checked-location')); ?>
+	function checkLocationName(){
+		var str ="";  
+		var title  = $("#location_name").val();
+			str = title.replace(/\s/g,''); 
+		$.ajax({
+			url: "<?php echo $url_loca;?>",
+			type: "post",
+			data: $('#frm').serialize(),
+			success: function(data){
+				rs = $.parseJSON(data);
+				if(rs['id']){
+					$("#showdivms").css("display", "block");
+					$("#location_name").val('');
+					return false;
+				}else{
+					$("#showdivms").css("display", "none");
+				}
+			},
+			error:function(err){
+				alert("faile insert");
+			}
+		});
+	}
+	
 </script>

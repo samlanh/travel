@@ -78,6 +78,14 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 //     			else
 //     				$string = "Image Upload failed";
 //     		}
+            if(!empty($_data['location_name'])){
+                $row=$this->getCheckLocationName($_data['location_name']);
+                if(!empty($row['id'])){
+                    Application_Form_FrmMessage::message('This location name have already!');
+                    return true;
+                }
+            }
+ 
     		$_arr=array(
     				'serviceId'		 => $_data['service_type'],
     				'locationName'	 => $_data['location_name'],
@@ -175,5 +183,15 @@ class Location_Model_DbTable_DbLocation extends Zend_Db_Table_Abstract
 		return $db->fetchAll($sql.$order);
 	}
 	
+	function getCheckLocationName($name){
+	    $s_search=addslashes(trim($name));
+	    $name_new = str_replace(' ', '', $s_search);
+	    $db = $this->getAdapter();
+	    $sql="SELECT id,REPLACE(`locationName`,' ','') AS `name` 
+              FROM  `tp_locations` 
+              WHERE REPLACE(`locationName`,' ','')='$name_new'";
+	    $order=" LIMIT 1";
+	    return $db->fetchRow($sql.$order);
+	}
 }
 
